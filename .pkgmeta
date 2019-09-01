@@ -1,0 +1,31 @@
+package-as: TotemTimers
+
+license-output: license.txt
+
+manual-changelog: changes.txt
+
+enable-nolib-creation: no
+
+externals:
+ libs/LibStub:
+  url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+ libs/CallbackHandler-1.0:
+  url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
+ libs/AceLocale-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
+ libs/AceConfig-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
+ libs/AceGUI-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
+ libs/LibSharedMedia-3.0:
+  url: svn://svn.wowace.com/wow/libsharedmedia-3-0/mainline/trunk
+ libs/AceGUI-3.0-SharedMediaWidgets:
+  url: svn://svn.wowace.com/wow/ace-gui-3-0-shared-media-widgets/mainline/trunk
+ libs/LibSpellRange-1.0:
+  url: https://github.com/ascott18/LibSpellRange-1.0.git
+ libs/LibDialog-1.0:
+  url: http://hg.wowace.com/wow/libdialog-1-0/mainline
+ libs/HereBeDragons:
+  url: https://repos.wowace.com/wow/herebedragons
+
+

@@ -1,0 +1,63 @@
+## Interface: 11302
+## Title: TotemTimers
+## Author:  Xianghar
+## Version: 11.1.15
+## SavedVariables: TotemTimers_GlobalSettings, TotemTimers_Profiles
+## OptionalDeps: cyCircled, Masque, !ClassColors, rActionButtonStyler
+## LoadManagers: AddonLoader
+## X-LoadOn-Class: Shaman
+## X-Curse-Packaged-Version: 11.1.15
+## X-Curse-Project-Name: TotemTimers
+## X-Curse-Project-ID: totemtimers
+## X-Curse-Repository-ID: wow/totemtimers/mainline
+
+embeds.xml
+
+TotemData.lua
+localization\localization.lua
+localization\localization.ge.lua
+localization\localization.fr.lua
+localization\localization.es.lua
+localization\localization.ru.lua
+localization\localization.cn.lua
+localization\localization.tw.lua
+localization\localization.ko.lua
+localization\localization.br.lua
+localization\localization.it.lua
+localization\localization.esmx.lua
+Animation.lua
+Bindings.lua
+XiTimers.lua
+XiTimers.xml
+ToolTips.lua
+ToolTips.lua
+TotemSets.xml
+TotemSets.lua
+TTActionBars.lua
+DefaultSettings.lua
+Settings.lua
+Spells.lua
+SetupTimers.lua
+SetupTrackers.lua
+TotemTimers.xml
+TotemTimers.lua
+ButtonFacade.lua
+Warnings.lua
+GUI\localization.lua
+GUI\localization.ge.lua
+GUI\localization.ru.lua
+GUI\localization.tw.lua
+GUI\localization.cn.lua
+GUI\localization.ko.lua
+GUI\localization.fr.lua
+GUI\localization.es.lua
+GUI\localization.br.lua
+GUI\localization.it.lua
+GUI\localization.esmx.lua
+GUI\General.lua
+GUI\Timers.lua
+GUI\Trackers.lua
+GUI\Messages.lua
+GUI\Totems.lua
+GUI\Profiles.lua
+

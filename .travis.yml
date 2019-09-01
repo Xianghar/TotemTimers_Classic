@@ -1,0 +1,16 @@
+sudo: false
+language: c
+
+install: echo -e "[alias]\nclone = clone --insecure" > ~/.hgrc
+ 
+addons:
+  apt:
+    packages:
+    - pandoc
+ 
+script: curl -sO https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh
+after_script: bash release.sh
+ 
+branches:
+  only:
+  - /^\d+\.\d+(\.\d+)?(-\S*)?$/
