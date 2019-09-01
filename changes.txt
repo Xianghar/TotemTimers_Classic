@@ -1,3 +1,5 @@
+1.0
+	- Fixes for WoW Classic
 11.1.15
 	- Fixes for 6.2
 11.1.14
