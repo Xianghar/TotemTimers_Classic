@@ -308,6 +308,50 @@ TotemTimers.options.args.trackers = {
                 --        },
                 --    },
                 --},
+                weapons = {
+                    order = 4,
+                    name = L["Weapon Buff Tracker"],
+                    desc = L["WeaponDesc"],
+                    type = "group",
+                    args = {
+                        enable = {
+                            order = 0,
+                            type = "toggle",
+                            name = L["Enable"],
+                            set = function(info, val) TotemTimers.ActiveProfile.WeaponTracker = val
+                                TotemTimers.ProcessSetting("WeaponTracker") end,
+                            get = function(info) return TotemTimers.ActiveProfile.WeaponTracker end,
+                        },
+                        openright = {
+                            order = 4,
+                            type = "toggle",
+                            name = L["Open On Rightclick"],
+                            set = function(info, val)
+                                TotemTimers.ActiveProfile.WeaponMenuOnRightclick = val  TotemTimers.ProcessSetting("WeaponMenuOnRightclick")
+                                TotemTimers.InitializeBindings()
+                            end,
+                            get = function(info) return TotemTimers.ActiveProfile.WeaponMenuOnRightclick end,
+                        },
+                        menudirection = {
+                            order = 5,
+                            type = "select",
+                            name = L["Menu Direction"],
+                            values = function()
+                                if TotemTimers.ActiveProfile.TrackerArrange == "horizontal" then
+                                    return {auto=L["Automatic"], up=L["Up"], down=L["Down"],}
+                                elseif TotemTimers.ActiveProfile.TrackerArrange == "vertical" then
+                                    return {auto=L["Automatic"], left=L["Left"], right=L["Right"],}
+                                else
+                                    return {auto=L["Automatic"], left=L["Left"], right=L["Right"], up=L["Up"], down=L["Down"],}
+                                end
+                            end,
+                            set = function(info, val)
+                                TotemTimers.ActiveProfile.WeaponBarDirection = val  TotemTimers.ProcessSetting("WeaponBarDirection")
+                            end,
+                            get = function(info) return TotemTimers.ActiveProfile.WeaponBarDirection end,
+                        },
+                    },
+                },
             },
         },
     },

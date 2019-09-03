@@ -185,7 +185,7 @@ SettingsFunctions = {
     WeaponTracker =
     function(value, Timers)
         Timers[8].ActiveWhileHidden = TotemTimers.ActiveProfile.ActivateHiddenTimers and not value
-        if (value or TotemTimers.ActiveProfile.ActivateHiddenTimers) and AvailableSpells[SpellIDs.FlametongueWeapon] then
+        if (value or TotemTimers.ActiveProfile.ActivateHiddenTimers) and AvailableSpells[SpellIDs.RockbiterWeapon] then
             Timers[8]:Activate()
         else
             Timers[8]:Deactivate()

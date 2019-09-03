@@ -27,5 +27,7 @@ externals:
   url: http://hg.wowace.com/wow/libdialog-1-0/mainline
  libs/HereBeDragons:
   url: https://repos.wowace.com/wow/herebedragons
+ libs/LibSink-2.0:
+  url: https://repos.wowace.com/wow/libsink-2-0/trunk
 
 

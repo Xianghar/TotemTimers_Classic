@@ -1,3 +1,7 @@
+1.01
+    - Weapon buff tracker now shows as soon as Rockbiter Weapon is learned
+    - Added weapon buff tracker options
+    - Fixed missing lib
 1.0
 	- Fixes for WoW Classic
 11.1.15

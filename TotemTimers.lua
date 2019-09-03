@@ -76,7 +76,8 @@ local function TotemTimers_OnEvent(self, event, ...)
     elseif event == "UPDATE_BINDINGS" then
         ClearOverrideBindings(TotemTimersFrame)
         TotemTimers.InitializeBindings()
-	end   
+	end
+
 end
 
 TotemTimersFrame:SetScript("OnEvent", TotemTimers_OnEvent)
@@ -125,7 +126,7 @@ function TotemTimers.SetupGlobals()
 		
         TotemTimersFrame:RegisterEvent("SPELLS_CHANGED")
         TotemTimersFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
-        TotemTimersFrame:RegisterEvent("PLAYER_ALIVE")
+        TotemTimersFrame:RegisterEvent("ADDON_LOADED")
         TotemTimersFrame:RegisterEvent("LEARNED_SPELL_IN_TAB")
         TotemTimersFrame:RegisterEvent("CHARACTER_POINTS_CHANGED")
 		-- TotemTimersFrame:RegisterEvent("PLAYER_TALENT_UPDATE")
