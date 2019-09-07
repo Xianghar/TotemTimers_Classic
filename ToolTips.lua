@@ -15,8 +15,10 @@ local b = 1
 
 
 local function SetTooltipSpellID(id)
+    local name = GetSpellInfo(id)
+    local _,_,_,_,_,_,maxSpellID = GetSpellInfo(name)
     if GetCVar("UberTooltips") == "1" then
-         GameTooltip:SetSpellByID(id)
+         GameTooltip:SetSpellByID(maxSpellID)
     else
         GameTooltip:ClearLines()
         GameTooltip:AddLine(SpellNames[id],1,1,1)
@@ -135,7 +137,7 @@ function TotemTimers.WeaponButtonTooltip(self)
         s = self:GetAttribute("spell3")
         GameTooltip:AddLine(format(L["Middleclick to cast %s"],s),r,g,b,1)
     end --]]
-    GameTooltip:AddLine(L["Ctrl-Leftclick to remove weapon buffs"],r,g,b,1)
+    --GameTooltip:AddLine(L["Ctrl-Leftclick to remove weapon buffs"],r,g,b,1)
     GameTooltip:Show()
 end
 

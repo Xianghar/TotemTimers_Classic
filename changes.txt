@@ -1,3 +1,5 @@
+1.03
+    - Tooltips show correct spell ranks
 1.02
     - Shield tracker can show charges instead of timer
     - Fixed localization issues
