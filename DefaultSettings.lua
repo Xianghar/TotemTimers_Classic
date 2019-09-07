@@ -102,6 +102,7 @@ TotemTimers.DefaultProfile = {
         ESMainTankMenuDirection = "auto",
         ESChargesOnly = false,
         Tracker_Clickthrough = false,
+        ShieldChargesOnly = true,
         
     --Warnings
         ActivateHiddenTimers = false,

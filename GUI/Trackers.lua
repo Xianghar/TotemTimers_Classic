@@ -142,7 +142,15 @@ TotemTimers.options.args.trackers = {
                             name = L["Enable"],
                             set = function(info, val) TotemTimers.ActiveProfile.ShieldTracker = val  TotemTimers.ProcessSetting("ShieldTracker") end,
                             get = function(info) return TotemTimers.ActiveProfile.ShieldTracker end,
-                        },  
+                        },
+                        ShieldChargesOnly = {
+                            order = 1,
+                            type = "toggle",
+                            name = L["Show Charges Only"],
+                            desc = L["Shows shield charges in place of the timer"],
+                            set = function(info, val) TotemTimers.ActiveProfile.ShieldChargesOnly = val  TotemTimers.ProcessSetting("ShieldChargesOnly") end,
+                            get = function(info) return TotemTimers.ActiveProfile.ShieldChargesOnly end
+                        }
                         --LeftButton = {
                         --    order = 2,
                         --    type = "select",

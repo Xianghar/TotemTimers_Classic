@@ -1,3 +1,7 @@
+1.02
+    - Shield tracker can show charges instead of timer
+    - Fixed localization issues
+    - Can choose between timer formats again
 1.01
     - Weapon buff tracker now shows as soon as Rockbiter Weapon is learned
     - Added weapon buff tracker options

@@ -116,7 +116,7 @@ TotemTimers.options = {
                     desc = L["Shows key bindings on totem timers"],
                     set = function(info, val) TotemTimers.ActiveProfile.ShowKeybinds = val TotemTimers.ProcessSetting("ShowKeybinds") end,
                     get = function(info) return TotemTimers.ActiveProfile.ShowKeybinds end,
-                },                  
+                },
                 --[[h3 = {
                     order = 10,
                     type = "header",
@@ -158,6 +158,18 @@ TotemTimers.options = {
                     order = 20,
                     type = "header",
                     name = "",
+                },
+                time = {
+                    order = 21,
+                    type = "select",
+                    name = L["Time Style"],
+                    desc = L["Sets the format in which times are displayed"],
+                    values = {["mm:ss"] = "mm:ss", blizz = L["Blizz Style"], },
+                    set = function(info, val)
+                        TotemTimers.ActiveProfile.TimeStyle = val  TotemTimers.ProcessSetting("TimeStyle")
+                        TotemTimers.ActiveProfile.TimeStyle = val  TotemTimers.ProcessSetting("TimeStyle")
+                    end,
+                    get = function(info) return TotemTimers.ActiveProfile.TimeStyle end,
                 },
                 TimerBarTexture = {
                     order = 35,

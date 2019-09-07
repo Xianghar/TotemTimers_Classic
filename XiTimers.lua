@@ -50,11 +50,11 @@ local function FormatTime(frame, sec, format)
 end
 
 
-local function SetButtonTime(fontstring, sec)
+local function SetButtonTime(fontstring, sec, format)
     if sec > 600 then
         FormatTime(fontstring, sec, "blizz")
     elseif sec > 60 then
-        FormatTime(fontstring, sec)
+        FormatTime(fontstring, sec, format)
     else
         FormatTime(fontstring, sec, "sec")
     end
@@ -269,7 +269,7 @@ function XiTimers:Update(elapsed)
 							FormatTime(self.timerBars[i].time, timers[i], self.timeStyle)
 						end
 					else 
-						SetButtonTime(button.time, timers[1])
+						SetButtonTime(button.time, timers[1], self.timeStyle)
 					end
 					if self.visibleTimerBars and (not self.timerOnButton or self.forceBar or i>1) then
 						self.timerBars[i]:SetValue(timers[i])

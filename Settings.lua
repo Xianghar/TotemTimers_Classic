@@ -66,6 +66,15 @@ SettingsFunctions = {
                 timer.flashRed = value
             end
         end,
+
+    TimeStyle =
+        function(value, Timers)
+            for k,timer in pairs(Timers) do
+                if ((k<6 or not TotemTimers.ActiveProfile.ShieldChargesOnly) or k>7) then
+                    timer.timeStyle = value
+                end
+            end
+        end,
         
     TimerSize = 
         function(value, Timers)
@@ -169,6 +178,11 @@ SettingsFunctions = {
     			Timers[6]:Deactivate()
     		end            
     		TotemTimers.OrderTrackers()		
+        end,
+
+    ShieldChargesOnly =
+        function(value, Timers)
+            TotemTimers.SetShieldUpdate()
         end,
         
     --[[ EarthShieldTracker =

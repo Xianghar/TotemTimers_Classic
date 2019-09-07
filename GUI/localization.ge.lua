@@ -139,6 +139,8 @@ L["Shield Tracker"] = "Schild-Tracker"
 L["Trackers"] = "Tracker"
 L["Weapon Buff Tracker"] = "Waffenbuff-Tracker"
 L["WeaponDesc"] = "Zeigt die verbleibende Zeit deiner Waffenbuffs an. Ein Rechtsklick öffnet ein Menü mit den vorhandenen Waffenbuffs, ein weiterer Rechtsklick auf einen Waffenbuff selektiert diesen. Danach kann der Buff mit einem Linksklick auf den Waffenbuff-Tracker gezaubert werden."
+L["Show Charges Only"] = "Nur Aufladungen"
+L["Shows shield charges in place of the timer"] = "Zeigt die Aufladungen des Schilds anstelle des Timers"
 
 L["Color"] = "Farbe"
 L["disabled warnings desc"] = "Auch wenn ein Tracker deaktiviert wurde, wird vor dem Auslaufen des zugehörigen Zaubers gewarnt"

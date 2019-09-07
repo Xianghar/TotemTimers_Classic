@@ -201,6 +201,7 @@ end
 
 --local shieldtable = {SpellNames[SpellIDs.LightningShield], SpellNames[SpellIDs.WaterShield], SpellNames[SpellIDs.EarthShield]}
 local LightningShield = SpellNames[SpellIDs.LightningShield]
+local ShieldChargesOnly = false
 
 function TotemTimers.ShieldEvent(self, event, unit)
 	if event=="UNIT_SPELLCAST_SUCCEEDED" and unit=="player" then
@@ -224,12 +225,18 @@ function TotemTimers.ShieldEvent(self, event, unit)
                     self.timer.warningIcons[1] = texture
                     self.timer.warningSpells[1] = name
                     self.shield = name
-                    self.timer:Start(1, timeleft, duration)
+                    if not ShieldChargesOnly then
+                        self.timer:Start(1, timeleft, duration)
+                    else
+                        self.timer:Start(1, count, 3)
+                    end
                 end
-                if count and count > 0 then
-                    self.count:SetText(count)
-                else
-                    self.count:SetText("")
+                if not ShieldChargesOnly then
+                    if count and count > 0 then
+                        self.count:SetText(count)
+                    else
+                        self.count:SetText("")
+                    end
                 end
                 break
             end
@@ -238,6 +245,23 @@ function TotemTimers.ShieldEvent(self, event, unit)
 			self.timer:Stop(1)
 		end
 	end  
+end
+
+local function EmptyUpdate() end
+
+function TotemTimers.SetShieldUpdate()
+    ShieldChargesOnly = TotemTimers.ActiveProfile.ShieldChargesOnly
+    if ShieldChargesOnly then
+        Timers[6].Update = EmptyUpdate
+        Timers[6].prohibitCooldown = true
+        Timers[6].timeStyle = "sec"
+        Timers[6].button.count:SetText("")
+    else
+        Timers[6].Update = nil
+        Timers[6].prohibitCooldown = false
+        Timers[6].timeStyle = TotemTimers.ActiveProfile.TimeStyle --"blizz"
+    end
+    TotemTimers.ShieldEvent(Timers[6].button, "UNIT_AURA", "player")
 end
 
 

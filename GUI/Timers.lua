@@ -103,7 +103,7 @@ TotemTimers.options.args.timers = {
                   end,
             get = function(info) return TotemTimers.ActiveProfile.Arrange end,
         },
-        time = {
+       --[[ time = {
             order = 8,
             type = "select",
             name = L["Time Style"],
@@ -114,7 +114,7 @@ TotemTimers.options.args.timers = {
                         TotemTimers.ActiveProfile.TimeStyle = val  TotemTimers.ProcessSetting("TimeStyle")
                   end,
             get = function(info) return TotemTimers.ActiveProfile.TimeStyle end,
-        },
+        },]]
         timepos = {
             order = 9,
             type = "select",
