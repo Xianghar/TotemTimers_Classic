@@ -1,3 +1,5 @@
+1.04
+    - Show air timer when learned either Grounding, Nature Resistance or Windfury Totem
 1.03
     - Tooltips show correct spell ranks
 1.02

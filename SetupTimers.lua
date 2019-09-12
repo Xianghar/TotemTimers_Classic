@@ -135,6 +135,8 @@ end
 local Cooldowns = {
     [EARTH_TOTEM_SLOT] = {
         [2] = SpellIDs.EarthBind,
+        [3] = SpellIDs.Tremor,
+        [4] = SpellIDs.Stoneclaw,
     },
     [WATER_TOTEM_SLOT] = {
         [2] = SpellIDs.ManaTide,
