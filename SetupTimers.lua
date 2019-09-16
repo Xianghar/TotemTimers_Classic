@@ -170,6 +170,7 @@ function TotemTimers:TotemEvent(event, arg1, arg2)
                 if TotemData[totem].flashInterval then
                     self.bar:SetMinMaxValues(0,TotemData[totem].flashInterval)
                     self.timer.bar = TotemData[totem].flashInterval
+                    self.timer.barDelay = TotemData[totem].flashDelay or 0
                 else
                     self.timer.bar = nil
                 end

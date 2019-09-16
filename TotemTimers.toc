@@ -41,7 +41,6 @@ SetupTimers.lua
 SetupTrackers.lua
 TotemTimers.xml
 TotemTimers.lua
-ButtonFacade.lua
 Warnings.lua
 GUI\localization.lua
 GUI\localization.ge.lua

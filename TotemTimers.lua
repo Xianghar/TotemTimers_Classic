@@ -135,7 +135,7 @@ function TotemTimers.SetupGlobals()
         -- TotemTimersFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 
         --TotemTimers_UpdateRaid()
-		TotemTimers.InitButtonFacade()
+		--TotemTimers.InitButtonFacade()
 		-- TotemTimers.RangeFrame:RegisterEvent("GROUP_ROSTER_UPDATE")
         -- TotemTimers.RangeFrame:Show()
         TotemTimers.SetCastButtonSpells()

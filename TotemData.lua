@@ -183,10 +183,12 @@ TotemData = {
     [TotemTimers.SpellIDs.PoisonCleansing] = {
         element = WATER_TOTEM_SLOT,
         noRangeCheck = true,
+        flashInterval = 5,
     },
     [TotemTimers.SpellIDs.DiseaseCleansing] = {
         element = WATER_TOTEM_SLOT,
         noRangeCheck = true,
+        flashInterval = 5,
     },
     [TotemTimers.SpellIDs.ManaSpring] = {
         element = WATER_TOTEM_SLOT,

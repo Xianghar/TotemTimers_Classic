@@ -1,3 +1,6 @@
+1.05
+    - Removed Masque support for now
+    - Fix pulse for Earthbind Totem, add pulse for Poison and Disease Cleansing Totems
 1.04
     - Show air timer when learned either Grounding, Nature Resistance or Windfury Totem
 1.03

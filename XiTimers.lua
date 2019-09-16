@@ -287,11 +287,11 @@ function XiTimers:Update(elapsed)
                                 self.button.icons[i].animation:Play()
                             end
                         end
-                    end 
+                    end
                     if self.nr < 8 and self.timers[1] <= 10 then button.time:SetTextColor(1,0,0) end
                     
                     if self.procFlash and timers[1] > 0 and self.bar then
-                        button.bar:SetValue(self.bar - mod(timers[1], self.bar))
+                        button.bar:SetValue(self.bar - mod(timers[1] + self.barDelay, self.bar))
                         button.bar:Show()
                     end
                 end
@@ -378,7 +378,7 @@ function XiTimers:Start(timer, time, duration)
         else
             self.button.cooldown:Hide()
         end
-        if self.procFlash then 
+        if self.procFlash then
             self.button.bar:Show()
             self.button.bar:SetValue(0)            
         elseif self.barTimer <= 0 then
