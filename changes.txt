@@ -1,3 +1,5 @@
+1.06
+    - Fixed Frostbrand Weapon for weapon tracker
 1.05
     - Removed Masque support for now
     - Fix pulse for Earthbind Totem, add pulse for Poison and Disease Cleansing Totems

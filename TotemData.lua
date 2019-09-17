@@ -47,7 +47,7 @@ TotemTimers.SpellIDs = {
 
     RockbiterWeapon = 8017,
     FlametongueWeapon = 8024,
-    FrostbrandWeapon = 8038,
+    FrostbrandWeapon = 8033,
     WindfuryWeapon = 8232,
     --[[ WaterShield = 52127,
     EarthShield = 974,
