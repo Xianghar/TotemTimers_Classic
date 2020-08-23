@@ -1,3 +1,5 @@
+10.7 Beta 1
+    - Added support for Enamored Water Spirit trinket, needs testing, can't test it myself
 1.06
     - Fixed Frostbrand Weapon for weapon tracker
 1.05

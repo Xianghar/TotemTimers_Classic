@@ -49,6 +49,8 @@ TotemTimers.SpellIDs = {
     FlametongueWeapon = 8024,
     FrostbrandWeapon = 8033,
     WindfuryWeapon = 8232,
+
+    EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
     EarthShield = 974,
     TotemicCall = 36936,
@@ -128,6 +130,7 @@ TotemData = {
 	[TotemTimers.SpellIDs.Tremor] = {
         element = EARTH_TOTEM_SLOT,
         noRangeCheck = true,
+        flashInterval = 4,
         warningPoint = 2,
     },
     [TotemTimers.SpellIDs.Stoneskin] = {

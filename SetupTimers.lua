@@ -31,8 +31,9 @@ function TotemTimers.CreateTimers()
 		tt.events[1] = "PLAYER_TOTEM_UPDATE"
         tt.events[2] = "SPELL_UPDATE_COOLDOWN"
         tt.events[3] = "PLAYER_ENTERING_WORLD"
-        tt.events[4] = "UNIT_SPELLCAST_SUCCEEDED"
-        tt.events[5] = "PLAYER_REGEN_ENABLED"
+        --tt.events[4] = "UNIT_SPELLCAST_SUCCEEDED"
+        tt.events[4] = "PLAYER_REGEN_ENABLED"
+        tt.playerEvents[1] = "UNIT_SPELLCAST_SUCCEEDED"
         --tt.events[6] = "UNIT_AURA"
         --tt.events[7] = "RAID_ROSTER_UPDATE"
         
@@ -53,6 +54,7 @@ function TotemTimers.CreateTimers()
                     TotemTimers.TotemEvent(self, "SPELL_UPDATE_COOLDOWN", self.timer.nr)
                     self.timer.manaCheck = t
                     TotemTimers.ActiveProfile.LastTotems[self.timer.nr] = spell
+                    -- add update macro here
 				end
 			end
         tt.button.ShowTooltip = TotemTimers.timerTooltip
@@ -152,7 +154,7 @@ local TotemicCall = TotemTimers.SpellNames[TotemTimers.SpellIDs.TotemicCall]
 local LightningBolt = TotemTimers.SpellNames[TotemTimers.SpellIDs.LightningBolt]
 local FireElemental = TotemTimers.SpellNames[TotemTimers.SpellIDs.FireElemental]
 
-function TotemTimers:TotemEvent(event, arg1, arg2)
+function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
     local settings = TotemTimers.ActiveProfile
     if event == "PLAYER_TOTEM_UPDATE" then
     	if self.element == arg1 then
@@ -221,11 +223,13 @@ function TotemTimers:TotemEvent(event, arg1, arg2)
                 self.timer:Stop(i)
             end
         end
-    elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player" and arg2 == TotemicCall)
+    elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg2 == TotemicCall)
         or event == "PLAYER_ENTERING_WORLD" then
         self.timer.StopQuiet = true
         self.timer:Stop(1)
         --self.rangeCount:SetText("")
+    elseif event == "UNIT_SPELLCAST_SUCCEEDED" and self.timer.nr == 3 and arg3 == SpellIDs.EnamoredWaterSpirit then
+        self.timer:Start(1,24,24)
     end
 end
 

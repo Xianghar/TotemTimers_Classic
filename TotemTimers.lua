@@ -355,3 +355,29 @@ function TotemTimers.ThrowWarning(wtype, object, icon)
             nil,nil,nil,nil,nil,icon)        
     end
 end
+
+function TotemTimers.UpdateMacro()
+    --if TotemTimers.Settings.Style == "buff" then return end
+    if not InCombatLockdown() then
+        local _, free = GetNumMacros()
+        local nr = GetMacroIndexByName("TT Cast")
+        if free==18 and nr==0 then return end
+        local sequence = "/castsequence reset=combat/60  "
+        for i=1,4 do
+            if TotemTimers.Timers[i].active then
+                if TimerButtons[settings.Order[i]].spell then
+                    sequence = sequence .. TimerButtons[settings.Order[i]].spell..", "
+                end
+            end
+        end
+        sequence = strsub(sequence, 1, strlen(sequence)-2)
+        local nr = GetMacroIndexByName("TT Cast")
+        if nr == 0 then
+            CreateMacro("TT Cast", 1, sequence, 0, 1)
+        else
+            EditMacro(nr, "TT Cast", 1, sequence, 0, 1)
+        end
+    else
+        TotemTimers.MacroNeedsUpdate = true
+    end
+end
