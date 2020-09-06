@@ -24,6 +24,8 @@ local PlayerName = UnitName("player")
 local zoning = false
 local updateAfterCombat = false
 
+local macroNeedsUpdate = false
+
 local function TotemTimers_OnEvent(self, event, ...)
     if zoning and event ~= "PLAYER_ENTERING_WORLD" then return
 	elseif event == "PLAYER_ENTERING_WORLD" then 
@@ -44,6 +46,9 @@ local function TotemTimers_OnEvent(self, event, ...)
 		if updateAfterCombat then
 			TotemTimers.ChangedTalents()
 			updateAfterCombat = false
+		end
+		if macroNeedsUpdate then
+		    TotemTimers.UpdateMacro()
 		end
     --elseif event == "PLAYER_ALIVE" then
         -- TotemTimers.ProcessSetting("EnhanceCDs")
@@ -159,6 +164,7 @@ function TotemTimers.SetupGlobals()
 	else
 		TotemTimersFrame:Hide()
 	end
+	TotemTimers.UpdateMacro()
 	TotemTimers_IsSetUp = true
     TotemTimersFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end
@@ -359,25 +365,30 @@ end
 function TotemTimers.UpdateMacro()
     --if TotemTimers.Settings.Style == "buff" then return end
     if not InCombatLockdown() then
+        macroNeedsUpdate = false
         local _, free = GetNumMacros()
         local nr = GetMacroIndexByName("TT Cast")
         if free==18 and nr==0 then return end
         local sequence = "/castsequence reset=combat/60  "
+        local timers = XiTimers.timers
+        local order = TotemTimers.ActiveProfile.Order
         for i=1,4 do
-            if TotemTimers.Timers[i].active then
-                if TimerButtons[settings.Order[i]].spell then
-                    sequence = sequence .. TimerButtons[settings.Order[i]].spell..", "
+        local timer = timers[order[i]]
+            if timer.active then
+                local spell = timer.button:GetAttribute("*spell1")
+                if spell then
+                    sequence = sequence .. spell..", "
                 end
             end
         end
         sequence = strsub(sequence, 1, strlen(sequence)-2)
         local nr = GetMacroIndexByName("TT Cast")
         if nr == 0 then
-            CreateMacro("TT Cast", 1, sequence, 0, 1)
+            CreateMacro("TT Cast", "INV_MISC_QUESTIONMARK", sequence, 1)
         else
-            EditMacro(nr, "TT Cast", 1, sequence, 0, 1)
+            EditMacro(nr, "TT Cast", nil, sequence)
         end
     else
-        TotemTimers.MacroNeedsUpdate = true
+        macroNeedsUpdate = true
     end
 end

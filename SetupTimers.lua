@@ -54,8 +54,8 @@ function TotemTimers.CreateTimers()
                     TotemTimers.TotemEvent(self, "SPELL_UPDATE_COOLDOWN", self.timer.nr)
                     self.timer.manaCheck = t
                     TotemTimers.ActiveProfile.LastTotems[self.timer.nr] = spell
-                    -- add update macro here
 				end
+				TotemTimers.UpdateMacro()
 			end
         tt.button.ShowTooltip = TotemTimers.timerTooltip
         tt.button.HideTooltip = function(self) GameTooltip:Hide() end
