@@ -1,3 +1,7 @@
+1.08
+    - Fixed Reincarnation maximum duration display
+    - Added pulse for Grounding Totem
+    - Changed pulse color to be more opaque and more visible
 1.07
     - Added support for Enamored Water Spirit trinket, still needs testing
     - Added castsequence macro

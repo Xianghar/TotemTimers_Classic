@@ -45,7 +45,7 @@ function TotemTimers.CreateTimers()
 		tt.button:SetAttribute("*macrotext2", "/cast Totemic Recall")
 		tt.button:SetAttribute("*macrotext3", "/cast Totemic Recall")
 		tt.button:SetAttribute("*type1", "spell")
-        tt.button.bar:SetStatusBarColor(0.7,1,0.7,0.5)
+        tt.button.bar:SetStatusBarColor(0.7,1,0.7,0.8)
 		tt.button.UpdateMiniIconAndProfile = function(self)
                 local spell = self:GetAttribute("*spell1")
                 if spell and spell ~= 0 then

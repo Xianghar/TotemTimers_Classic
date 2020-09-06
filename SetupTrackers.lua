@@ -199,7 +199,7 @@ function TotemTimers.AnkhEvent(self, event)
         if duration == 0 then
             self.timer:Stop(1)
         elseif self.timer.timers[1]<=0 and duration>2 then
-            self.timer:Start(1,start+duration-floor(GetTime()),1800)
+            self.timer:Start(1,start+duration-floor(GetTime()),duration)
         end
     else
         self.count:SetText(GetItemCount(AnkhItem))

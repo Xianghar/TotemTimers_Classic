@@ -206,6 +206,7 @@ TotemData = {
         partyOnly = true,
         range = 100,
 		warningPoint = 5,
+		flashInterval = 10,
 	},
     [TotemTimers.SpellIDs.NatureResistance] = {
         element = AIR_TOTEM_SLOT,
