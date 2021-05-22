@@ -56,7 +56,7 @@ TotemTimers.SpellIDs = {
     FrostbrandWeapon = 8033,
     WindfuryWeapon = 8232,
 
-    EnamoredWaterSpirit = 24854 -- Water Totem trinket
+    --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
     EarthShield = 974,
     TotemicCall = 36936,

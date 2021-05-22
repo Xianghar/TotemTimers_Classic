@@ -1,3 +1,5 @@
+1.09.1
+    - Bugfix for Mana Spring Totem
 1.09
     - Added Spells for TBC Classic
     - Changed spell detection, boosted shamans should work
