@@ -159,10 +159,8 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
     if event == "PLAYER_TOTEM_UPDATE" then
     	if self.element == arg1 then
     		local _, totem, startTime, duration, icon = GetTotemInfo(arg1)
-    		print(totem)
             totem = string.gsub(totem, " [IV]*$", "") -- strip spell rank from name
             totem = NameToSpellID[totem]
-            print(totem)
     		if duration > 0 and totem and TotemData[totem] then
     			self.icons[1]:SetTexture(icon)
                 self.timer.activeTotem = totem
