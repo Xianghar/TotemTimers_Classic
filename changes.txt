@@ -1,3 +1,6 @@
+1.09
+    - Added Spells for TBC Classic
+    - Changed spell detection, boosted shamans should work
 1.08
     - Fixed Reincarnation maximum duration display
     - Added pulse for Grounding Totem

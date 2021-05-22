@@ -19,12 +19,15 @@ TotemTimers.SpellIDs = {
     Stoneclaw = 5730, --
     StrengthOfEarth = 8075, --
     EarthBind = 2484, --
+    EarthElemental = 2062,
 
     Searing = 3599, --
     FireNova = 1535, --
     Magma = 8190, --
     FrostResistance = 8181, --
     Flametongue = 8227, --
+    FireElemental = 2894,
+    Wrath = 30706,
     
     HealingStream = 5394, --
     ManaTide = 16190, --
@@ -40,10 +43,13 @@ TotemTimers.SpellIDs = {
     Windwall = 15107, --
     GraceOfAir = 8835, --
     TranquilAir = 25908, --
+    WrathOfAir = 3738,
 	
     
     Ankh = 20608,
+    TotemicCall = 36936,
     LightningShield = 324,
+    WaterShield = 24398,
 
     RockbiterWeapon = 8017,
     FlametongueWeapon = 8024,
@@ -153,6 +159,10 @@ TotemData = {
         flashDelay = 1,
         warningPoint = 5,
     },
+    [TotemTimers.SpellIDs.EarthElemental] = {
+        element = EARTH_TOTEM_SLOT,
+        noRangeCheck = true,
+    },
 	[TotemTimers.SpellIDs.Searing] = {
 		element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
@@ -171,6 +181,14 @@ TotemData = {
         noRangeCheck = true,
     },
     [TotemTimers.SpellIDs.Flametongue] = {
+        element = FIRE_TOTEM_SLOT,
+        noRangeCheck = true,
+    },
+    [TotemTimers.SpellIDs.FireElemental] = {
+        element = FIRE_TOTEM_SLOT,
+        noRangeCheck = true,
+    },
+    [TotemTimers.SpellIDs.Wrath] = {
         element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
     },
@@ -232,6 +250,11 @@ TotemData = {
         element = AIR_TOTEM_SLOT,
         noRangeCheck = true,
     },
+    [TotemTimers.SpellIDs.WrathOfAir] = {
+        element = AIR_TOTEM_SLOT,
+        noRangeCheck = true,
+    },
+
 }
 
 TotemTimers.NameToSpellID = {}

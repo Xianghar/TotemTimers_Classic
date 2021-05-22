@@ -245,7 +245,7 @@ SettingsFunctions = {
             end
         end, ]]
             
-    --[[ ShieldLeftButton =
+     ShieldLeftButton =
         function(value, Timers)
     		Timers[6].button:SetAttribute("*spell1",value)
         end,
@@ -258,7 +258,7 @@ SettingsFunctions = {
     ShieldMiddleButton =
         function(value, Timers)
     		Timers[6].button:SetAttribute("*spell3", value)
-        end, ]]
+        end,
 
 
 
