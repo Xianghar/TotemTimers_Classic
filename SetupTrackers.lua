@@ -124,6 +124,7 @@ function TotemTimers.CreateTrackers()
                 end
             end
         end
+	TotemTimers.UpdateMacro()
     end
     weapon.button:SetAttribute("_onattributechanged", [[ if name=="hide" then
                                                              control:ChildUpdate("show", false)
@@ -206,23 +207,25 @@ function TotemTimers.AnkhEvent(self, event)
     end
 end
 
---local shieldtable = {SpellNames[SpellIDs.LightningShield], SpellNames[SpellIDs.WaterShield], SpellNames[SpellIDs.EarthShield]}
-local LightningShield = SpellNames[SpellIDs.LightningShield]
+local shieldtable = {SpellNames[SpellIDs.LightningShield], SpellNames[SpellIDs.WaterShield]} --, SpellNames[SpellIDs.EarthShield]}
+
 local ShieldChargesOnly = false
 
 function TotemTimers.ShieldEvent(self, event, unit)
 	if event=="UNIT_SPELLCAST_SUCCEEDED" and unit=="player" then
-		local start, duration, enable = GetSpellCooldown(SpellIDs.LightningShield)
+		for i=1,2 do
+			local start, duration, enable = GetSpellCooldown(shieldtable[i])
 		if start and duration and (not self.timer.timerOnButton or self.timer.timers[1]<=0) then
             CooldownFrame_Set(self.cooldown, start, duration, enable)
         end
+	end
 	elseif unit=="player" then
 		self.count:SetText("")
 		local name, texture, count, duration, endtime
         local hasBuff = false
         for i=1,40 do
             name,texture,count,_,duration,endtime = UnitBuff("player", i)
-            if name == LightningShield then
+            if name == shieldtable[1] or name == shieldtable[2] then
                 hasBuff = true
                 local timeleft = endtime - GetTime()
                 if name ~= self.shield or timeleft>self.timer.timers[1] then

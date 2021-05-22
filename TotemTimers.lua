@@ -367,15 +367,19 @@ function TotemTimers.UpdateMacro()
     if not InCombatLockdown() then
         macroNeedsUpdate = false
         local _, free = GetNumMacros()
-        local nr = GetMacroIndexByName("TT Cast")
-        if free==18 and nr==0 then return end
+        local nrCast = GetMacroIndexByName("TT Cast")
+		local nrBuff = GetMacroIndexByName("TT Buff")
+		
+        if  nrCast~=0 or free<18 then
         local sequence = "/castsequence reset=combat/60  "
         local timers = XiTimers.timers
-        local order = TotemTimers.ActiveProfile.Order
+		
+     --   local order = TotemTimers.ActiveProfile.Order
+		
         for i=1,4 do
-        local timer = timers[order[i]]
-            if timer.active then
-                local spell = timer.button:GetAttribute("*spell1")
+			--_G.DevTools_Dump()
+				if timers[i].active then
+					local spell = timers[i].button:GetAttribute("*spell1")
                 if spell then
                     sequence = sequence .. spell..", "
                 end
@@ -388,6 +392,19 @@ function TotemTimers.UpdateMacro()
         else
             EditMacro(nr, "TT Cast", nil, sequence)
         end
+		end 
+		_, free = GetNumMacros()
+		if nrBuff~=0 or free<18 then
+			local sequence = "/castsequence reset=combat/3  " .. TotemTimers.ActiveProfile.ShieldLeftButton .. ", " .. TotemTimers.ActiveProfile.LastWeaponEnchant
+			local nr = GetMacroIndexByName("TT Buff")
+			if nr == 0 then
+				CreateMacro("TT Buff", "INV_MISC_QUESTIONMARK", sequence, 1)
+			else
+				EditMacro(nr, "TT Buff", nil, sequence)
+			end
+			
+			
+		end
     else
         macroNeedsUpdate = true
     end

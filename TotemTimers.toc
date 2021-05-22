@@ -1,7 +1,7 @@
-## Interface: 11305
+## Interface: 20501
 ## Title: TotemTimers
 ## Author:  Xianghar
-## Version: @project-version@
+## Version: 1.10.tbcc
 ## SavedVariables: TotemTimers_GlobalSettings, TotemTimers_Profiles
 ## OptionalDeps: cyCircled, Masque, !ClassColors, rActionButtonStyler
 ## LoadManagers: AddonLoader

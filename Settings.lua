@@ -245,7 +245,7 @@ SettingsFunctions = {
             end
         end, ]]
             
-    --[[ ShieldLeftButton =
+    ShieldLeftButton =
         function(value, Timers)
     		Timers[6].button:SetAttribute("*spell1",value)
         end,
@@ -258,7 +258,7 @@ SettingsFunctions = {
     ShieldMiddleButton =
         function(value, Timers)
     		Timers[6].button:SetAttribute("*spell3", value)
-        end, ]]
+        end, 
 
 
 
@@ -317,11 +317,11 @@ SettingsFunctions = {
         
     Show =
         function(value, Timers)
-            if value then 
-                for i=1,4 do 
-                    if (Timers[i].nr == FIRE_TOTEM_SLOT and AvailableSpells[SpellIDs.Searing])
-                      or (Timers[i].nr == EARTH_TOTEM_SLOT and (AvailableSpells[SpellIDs.Stoneskin] or AvailableSpells[SpellIDs.Earthbind] or AvailableSpells[SpellIDs.StoneBulwark]))
-                      or (Timers[i].nr == WATER_TOTEM_SLOT and AvailableSpells[SpellIDs.HealingStream])
+            if value then
+                for i=1,4 do
+                   if (Timers[i].nr == FIRE_TOTEM_SLOT and (AvailableSpells[SpellIDs.Searing] or AvailableSpells[SpellIDs.SearingR2]))
+                      or (Timers[i].nr == EARTH_TOTEM_SLOT and (AvailableSpells[SpellIDs.Stoneskin] or AvailableSpells[SpellIDs.StoneskinR2] or AvailableSpells[SpellIDs.Earthbind] or AvailableSpells[SpellIDs.StoneBulwark]))
+                      or (Timers[i].nr == WATER_TOTEM_SLOT and (AvailableSpells[SpellIDs.HealingStream] or AvailableSpells[SpellIDs.HealingStreamR2]))
                       or (Timers[i].nr == AIR_TOTEM_SLOT and (AvailableSpells[SpellIDs.Grounding] or AvailableSpells[SpellIDs.NatureResistance] or AvailableSpells[SpellIDs.Windfury])) then
                         Timers[i]:Activate()
                     end

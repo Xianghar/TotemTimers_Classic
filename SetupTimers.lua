@@ -145,6 +145,7 @@ local Cooldowns = {
     },
     [FIRE_TOTEM_SLOT] = {
         [2] = SpellIDs.FireNova,
+	[3] = SpellIDs.FireElemental,
     },
     [AIR_TOTEM_SLOT] = {
     },
@@ -214,7 +215,7 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
                         self.timer:Start(nr,start+duration-floor(GetTime()),duration)
                         self.timer.timerBars[nr].icon:SetTexture(TotemTimers.SpellTextures[spell])
                     end
-                elseif self.timer.timers[nr] > 0 then
+                elseif self.timer.timers[nr] and self.timer.timers[nr] > 0 then
                     self.timer:Stop(nr)
                 end 
             end
@@ -284,8 +285,8 @@ local BarMiniIconPos = {
 
 function TotemTimers.CreateCastButtons()
     for i = 1,4 do 
-        TTActionBars:new(7, XiTimers.timers[i].button, _G["TotemTimers_CastBar"..i], TotemTimersFrame)
-        for j = 1,7 do
+        TTActionBars:new(8, XiTimers.timers[i].button, _G["TotemTimers_CastBar"..i], TotemTimersFrame)
+        for j = 1,8 do
             local button = _G["TT_ActionButton"..i..j]
             XiTimers.timers[i].button:SetFrameRef("f"..j, button)
             button.ChangeTotemOrder = function(self,_,_,totem1)
