@@ -326,7 +326,17 @@ TotemTimers.options.args.timers = {
             desc = L["RR Tooltip Desc"],
             set = function(info, val) TotemTimers.ActiveProfile.ShowRaidRangeTooltip = val  TotemTimers.ProcessSetting("ShowRaidRangeTooltip") end,
             get = function(info) return TotemTimers.ActiveProfile.ShowRaidRangeTooltip end,                          
-        },                                               
+        },
+        TotemStompModifier = {
+            order = 42,
+            type = "select",
+            name = L["Dismiss Single Totem"],
+            desc = L["Select Click-modifier for dismissing an element totem"],
+            set = function(info, val) TotemTimers.ActiveProfile.TotemStompMod = val  TotemTimers.ProcessSetting("TotemStompMod") end,
+            get = function(info) return TotemTimers.ActiveProfile.TotemStompMod end,
+            values = { ["alt-"]=_G.ALT_KEY, ["ctrl-"]=_G.CTRL_KEY, ["shift-"]=_G.SHIFT_KEY},
+            sorting = {"alt-", "ctrl-", "shift-"},
+        },
     },
 }
 

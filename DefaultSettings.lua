@@ -74,6 +74,7 @@ TotemTimers.DefaultProfile = {
         CheckRaidRange = true,	
         ShowRaidRangeTooltip = true,
         Timer_Clickthrough = false,
+        TotemStompMod = "ctrl-",
         
     --Trackers
         TrackerArrange = "horizontal",

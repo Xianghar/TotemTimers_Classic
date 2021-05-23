@@ -36,15 +36,16 @@ function TotemTimers.CreateTimers()
         tt.playerEvents[1] = "UNIT_SPELLCAST_SUCCEEDED"
         --tt.events[6] = "UNIT_AURA"
         --tt.events[7] = "RAID_ROSTER_UPDATE"
-        
+        local modifier = TotemTimers.ActiveProfile.TotemStompMod or "ctrl-"
 		tt.button.anchorframe = TotemTimersFrame
 		tt.button:RegisterForClicks("AnyDown")
 		tt.button:SetAttribute("*type2", "macro")
 		tt.button:SetAttribute("*type3", "macro")
-		--tt.button:SetAttribute("*macrotext2", "/script DestroyTotem("..e..")")		
 		tt.button:SetAttribute("*macrotext2", "/cast Totemic Recall")
 		tt.button:SetAttribute("*macrotext3", "/cast Totemic Recall")
 		tt.button:SetAttribute("*type1", "spell")
+        tt.button:SetAttribute(string.format("%stype1",modifier),"destroytotem")
+        tt.button:SetAttribute(string.format("%stotem-slot1",modifier),e)
         tt.button.bar:SetStatusBarColor(0.7,1,0.7,0.8)
 		tt.button.UpdateMiniIconAndProfile = function(self)
                 local spell = self:GetAttribute("*spell1")
