@@ -35,6 +35,7 @@ TotemSets.xml
 TotemSets.lua
 TTActionBars.lua
 DefaultSettings.lua
+Masque.lua
 Settings.lua
 Spells.lua
 SetupTimers.lua
