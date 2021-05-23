@@ -44,4 +44,6 @@ L["Totem Destroyed"] = "%s has been destroyed."
 L["Totem Expired"] = "%s has expired"
 L["Totem Expiring"] = "%s about to expire"
 L["Water Button"] = true
+L["Dismiss Single Totem"] = true
+L["Select Click-modifier for dismissing an element totem"] = true
 

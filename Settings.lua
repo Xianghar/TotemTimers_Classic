@@ -655,6 +655,14 @@ SettingsFunctions = {
                 Timers[i].button:EnableMouse(not value)
             end
         end,
+
+    TotemStompMod =
+        function(value, Timers)
+            for i = 1,4 do
+                Timers[i].button:SetAttribute(string.format("%stype1",value),"destroytotem")
+                Timers[i].button:SetAttribute(string.format("%stotem-slot1",value),i)
+            end
+        end,
         
     --[[ ESChargesOnly =
         function(value, Timers)
