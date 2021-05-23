@@ -1,3 +1,8 @@
+1.10
+    - Added Totemic Call and destroying single totems to totem timer buttons
+      Destroy a totem on rightclick, Totemic Call on middleclick
+      If totem menus are opened on rightclick, middleclick destroys a totem, no Totemic Call
+    - Suppress totem destroyed warning when using Totemic Call
 1.09.1
     - Bugfix for Mana Spring Totem
 1.09
