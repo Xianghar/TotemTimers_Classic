@@ -273,14 +273,15 @@ SettingsFunctions = {
             for i = 1,4 do
                 if value and not TotemTimers.ActiveProfile.MenusAlwaysVisible then 
                     Timers[i].button:SetAttribute("OpenMenu", "RightButton")
-                    --Timers[i].button:SetAttribute("*macrotext3", "/script XiTimers.timers["..i.."].stopQuiet = true DestroyTotem("..Timers[i].nr..")")
-					Timers[i].button:SetAttribute("*macrotext3", "/cast Totemic Recall")
+                    Timers[i].button:SetAttribute("*type3", "macro")
+                    Timers[i].button:SetAttribute("*macrotext3", "/script XiTimers.timers["..i.."].stopQuiet = true DestroyTotem("..Timers[i].nr..")")
                     Timers[i].button:SetAttribute("*macrotext2", "")
                 else
                     Timers[i].button:SetAttribute("OpenMenu", "mouseover")
-                    Timers[i].button:SetAttribute("*macrotext3", "/cast Totemic Recall")
-					Timers[i].button:SetAttribute("*macrotext2", "/cast Totemic Recall")
-                    --Timers[i].button:SetAttribute("*macrotext2", "/script XiTimers.timers["..i.."].stopQuiet = true DestroyTotem("..Timers[i].nr..")")
+                    Timers[i].button:SetAttribute("*type2", "macro")
+                    Timers[i].button:SetAttribute("*macrotext2", "/script XiTimers.timers["..i.."].stopQuiet = true DestroyTotem("..Timers[i].nr..")")
+                    Timers[i].button:SetAttribute("*type3", "spell")
+                    Timers[i].button:SetAttribute("*spell3", SpellIDs.TotemicCall)
                 end
             end
         end,
@@ -319,9 +320,9 @@ SettingsFunctions = {
         function(value, Timers)
             if value then
                 for i=1,4 do
-                   if (Timers[i].nr == FIRE_TOTEM_SLOT and (AvailableSpells[SpellIDs.Searing] or AvailableSpells[SpellIDs.SearingR2]))
-                      or (Timers[i].nr == EARTH_TOTEM_SLOT and (AvailableSpells[SpellIDs.Stoneskin] or AvailableSpells[SpellIDs.StoneskinR2] or AvailableSpells[SpellIDs.Earthbind] or AvailableSpells[SpellIDs.StoneBulwark]))
-                      or (Timers[i].nr == WATER_TOTEM_SLOT and (AvailableSpells[SpellIDs.HealingStream] or AvailableSpells[SpellIDs.HealingStreamR2]))
+                    if (Timers[i].nr == FIRE_TOTEM_SLOT and AvailableSpells[SpellIDs.Searing])
+                      or (Timers[i].nr == EARTH_TOTEM_SLOT and (AvailableSpells[SpellIDs.Stoneskin] or AvailableSpells[SpellIDs.Earthbind] or AvailableSpells[SpellIDs.StoneBulwark]))
+                      or (Timers[i].nr == WATER_TOTEM_SLOT and AvailableSpells[SpellIDs.HealingStream])
                       or (Timers[i].nr == AIR_TOTEM_SLOT and (AvailableSpells[SpellIDs.Grounding] or AvailableSpells[SpellIDs.NatureResistance] or AvailableSpells[SpellIDs.Windfury])) then
                         Timers[i]:Activate()
                     end

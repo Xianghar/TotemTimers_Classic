@@ -16,20 +16,20 @@ TotemTimers.SpellIDs = {
 
     Tremor = 8143, --
     Stoneskin = 8071, --
-    StoneskinR2 = 8154, -- For boosted shamans missing r1
     Stoneclaw = 5730, --
     StrengthOfEarth = 8075, --
     EarthBind = 2484, --
+    EarthElemental = 2062,
 
     Searing = 3599, --
-    SearingR2 = 6363, -- For boosted shamans missing r1
     FireNova = 1535, --
     Magma = 8190, --
     FrostResistance = 8181, --
     Flametongue = 8227, --
+    FireElemental = 2894,
+    Wrath = 30706,
     
     HealingStream = 5394, --
-    HealingStreamR2 = 6375, -- For boosted shamans missing r1
     ManaTide = 16190, --
     PoisonCleansing = 8166, --
     DiseaseCleansing = 8170, --
@@ -43,30 +43,23 @@ TotemTimers.SpellIDs = {
     Windwall = 15107, --
     GraceOfAir = 8835, --
     TranquilAir = 25908, --
+    WrathOfAir = 3738,
 	
     
     Ankh = 20608,
+    TotemicCall = 36936,
     LightningShield = 324,
+    WaterShield = 24398,
 
     RockbiterWeapon = 8017,
     FlametongueWeapon = 8024,
     FrostbrandWeapon = 8033,
     WindfuryWeapon = 8232,
 
---    EnamoredWaterSpirit = 24854, -- Water Totem trinket
-	
-	FireElemental = 2894,
-	EarthElemental = 2062,
-	Wrath = 30706,
-	WrathOfAir = 3738,
-	
-	
-	
-    WaterShield = 33736,
---	EarthShield = 974,
+    --EnamoredWaterSpirit = 24854 -- Water Totem trinket
+    --[[ WaterShield = 52127,
+    EarthShield = 974,
     TotemicCall = 36936,
---[[
-    
     
     StormStrike = 17364,
     PrimalStrike = 73899,
@@ -150,11 +143,6 @@ TotemData = {
         element = EARTH_TOTEM_SLOT,
         noRangeCheck = true,
     },
-    [TotemTimers.SpellIDs.StoneskinR2] = {
-        element = EARTH_TOTEM_SLOT,
-        noRangeCheck = true,
-    },
-
     [TotemTimers.SpellIDs.Stoneclaw] = {
         element = EARTH_TOTEM_SLOT,
         noRangeCheck = true,
@@ -171,17 +159,15 @@ TotemData = {
         flashDelay = 1,
         warningPoint = 5,
     },
-	[TotemTimers.SpellIDs.Searing] = {
-		element = FIRE_TOTEM_SLOT,
+    [TotemTimers.SpellIDs.EarthElemental] = {
+        element = EARTH_TOTEM_SLOT,
         noRangeCheck = true,
-        warningPoint = 5,
 	},
-        [TotemTimers.SpellIDs.SearingR2] = {
+	[TotemTimers.SpellIDs.Searing] = {
            element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
         warningPoint = 5,
 	},
-
     [TotemTimers.SpellIDs.FireNova] = {
         element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
@@ -198,26 +184,19 @@ TotemData = {
         element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
     },
-	[TotemTimers.SpellIDs.Wrath] = {
+    [TotemTimers.SpellIDs.FireElemental] = {
         element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
     },
-	[TotemTimers.SpellIDs.FireElemental] = {
+    [TotemTimers.SpellIDs.Wrath] = {
         element = FIRE_TOTEM_SLOT,
         noRangeCheck = true,
     },
-	
-	
     [TotemTimers.SpellIDs.HealingStream] = {
 		element = WATER_TOTEM_SLOT,
         range = 1600,
 		warningPoint = 4,
 	},
-    [TotemTimers.SpellIDs.HealingStreamR2] = {
-       element = WATER_TOTEM_SLOT,
-       range = 1600,
-       warningPoint = 4,
-    },
     [TotemTimers.SpellIDs.ManaTide] = {
         element = WATER_TOTEM_SLOT,
         warningPoint = 2,
@@ -275,10 +254,7 @@ TotemData = {
         element = AIR_TOTEM_SLOT,
         noRangeCheck = true,
     }, 
-	[TotemTimers.SpellIDs.EarthElemental] = {
-        element = EARTH_TOTEM_SLOT,
-        noRangeCheck = true,
-    },
+	
 }
 
 TotemTimers.NameToSpellID = {}
@@ -287,3 +263,4 @@ for k,v in pairs(TotemTimers.SpellIDs) do
         TotemTimers.NameToSpellID[TotemTimers.SpellNames[v]] = v
     end
 end
+
