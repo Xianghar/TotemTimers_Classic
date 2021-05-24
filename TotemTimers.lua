@@ -373,7 +373,7 @@ function TotemTimers.UpdateMacro()
         local timers = XiTimers.timers
         local order = TotemTimers.ActiveProfile.Order
         for i=1,4 do
-        local timer = timers[order[i]]
+        local timer = timers[i]
             if timer.active then
                 local spell = timer.button:GetAttribute("*spell1")
                 if spell then
