@@ -1,3 +1,9 @@
+1.11
+    - Weapon tracker shows main and offhand enchants
+    - Fixed not hiding blizzard totem timers
+    - Removed border from buttons
+    - Added support for Masque
+    - Fixed totem order in macro
 1.10
     - Added Totemic Call and destroying single totems to totem timer buttons
       Destroy a totem on rightclick, Totemic Call on middleclick

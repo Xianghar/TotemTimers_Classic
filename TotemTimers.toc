@@ -3,7 +3,7 @@
 ## Author:  Xianghar
 ## Version: @project-version@
 ## SavedVariables: TotemTimers_GlobalSettings, TotemTimers_Profiles
-## OptionalDeps: cyCircled, Masque, !ClassColors, rActionButtonStyler
+## OptionalDeps: Masque
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Class: Shaman
 ## X-Curse-Project-ID: 339602
@@ -42,6 +42,7 @@ SetupTrackers.lua
 TotemTimers.xml
 TotemTimers.lua
 Warnings.lua
+Masque.lua
 GUI\localization.lua
 GUI\localization.ge.lua
 GUI\localization.ru.lua
