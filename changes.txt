@@ -1,3 +1,5 @@
+1.12
+    - Moved key binds in Key Bindings menu from category "Other" to "TotemTimers"
 1.11
     - Weapon tracker shows main and offhand enchants
     - Fixed not hiding blizzard totem timers
