@@ -62,6 +62,8 @@ L["Timers On Buttons"] = "Timer auf Buttons"
 L["Timers on Buttons is now set in Game Options -> Actionbars -> Show Numbers on Cooldowns"] = "Timers on Buttons is now set in Game Options -> Actionbars -> Show Numbers on Cooldowns" -- Requires localization
 L["Tooltips At Buttons"] = "Tooltips an Knöpfen"
 L["Tooltips At Buttons Desc"] = "Zeigt die Tooltips rechts an den Knöpfen von TT an."
+L["Cooldown Opacity"] = "Cooldown-Transparenz"
+L["Opacity of the cooldown swirls"] = "Transparenz der Cooldown-Animationen"
 
 L["Advanced Options"] = "Erweiterte Optionen"
 L["Always Visible Desc"] = "Die Totemmenüs werden dauerhaft angezeigt und können wie Aktionsleiten plaziert werden."

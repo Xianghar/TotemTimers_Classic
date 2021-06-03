@@ -370,7 +370,7 @@ function TotemTimers.UpdateMacro()
         local _, free = GetNumMacros()
         local nr = GetMacroIndexByName("TT Cast")
         if free==18 and nr==0 then return end
-        local sequence = "/castsequence reset=combat/60  "
+        local sequence = "/castsequence reset=combat/15  "
         local timers = XiTimers.timers
         for i=1,4 do
             local timer = timers[i]

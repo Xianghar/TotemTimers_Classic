@@ -41,6 +41,7 @@ TotemTimers.DefaultProfile = {
         LavaSurgeGlow = true,
         FulminationAura = true,
         FulminationGlow = true,
+        CooldownAlpha = 0.8,
         
         LastTotems = {
             [WATER_TOTEM_SLOT] = SpellNames[SpellIDs.HealingStream],

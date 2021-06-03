@@ -410,7 +410,7 @@ function TotemTimers.WeaponUpdate(self, elapsed)
         if v[1] then
             if v[2]/1000 > self.timers[k] then
                 local texture, spell
-                self:Start(k, v[2]/1000, 300)
+                self:Start(k, v[2]/1000, 1800)
                 if WeaponEnchants[v[3]] then
                     texture = SpellTextures[WeaponEnchants[v[3]]]
                     spell = SpellNames[WeaponEnchants[v[3]]]

@@ -223,6 +223,19 @@ TotemTimers.options = {
                                                 TotemTimers.ActiveProfile.TimerBarColor.a
                           end,
                 },
+                CooldownAlpha = {
+                    order = 11,
+                    type = "range",
+                    name = L["Cooldown Opacity"],
+                    desc = L["Opacity of the cooldown swirls"],
+                    min = 0,
+                    max = 1,
+                    step = 0.1,
+                    set = function(info, val)
+                                TotemTimers.ActiveProfile.CooldownAlpha = val  TotemTimers.ProcessSetting("CooldownAlpha")
+                          end,
+                    get = function(info) return TotemTimers.ActiveProfile.CooldownAlpha end,
+                },
                 h2 = {
                     order = 70,
                     type = "header",
