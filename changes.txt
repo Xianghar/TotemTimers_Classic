@@ -1,3 +1,6 @@
+1.13.1
+    - Fixed error message
+    - Added one more button for air totems
 1.13
     - Fixed weapon tracker cooldown swirl
     - Added option to set opacity of cooldown swirls

@@ -718,11 +718,11 @@ SettingsFunctions = {
         function(value, Timers)
             for i=1,#Timers do
                 Timers[i].button.cooldown:SetAlpha(value)
-                local bar = Timers[i].bar
-                if (bar) then
-                    for i = 1, #bar.buttons do
-                        bar.buttons[i]:SetAlpha(value)
-                    end
+            end
+            for i=1, #TTActionBars.bars do
+                local bar = TTActionBars.bars[i]
+                for j = 1, #bar.buttons do
+                    bar.buttons[i].cooldown:SetAlpha(value)
                 end
             end
         end

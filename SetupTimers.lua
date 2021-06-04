@@ -279,7 +279,7 @@ local BarMiniIconPos = {
 
 function TotemTimers.CreateCastButtons()
     for i = 1,4 do 
-        TTActionBars:new(7, XiTimers.timers[i].button, _G["TotemTimers_CastBar"..i], TotemTimersFrame)
+        TTActionBars:new(8, XiTimers.timers[i].button, _G["TotemTimers_CastBar"..i], TotemTimersFrame)
         for j = 1,7 do
             local button = _G["TT_ActionButton"..i..j]
             XiTimers.timers[i].button:SetFrameRef("f"..j, button)
