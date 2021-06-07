@@ -22,13 +22,14 @@ BINDING_NAME_TOTEMTIMERSSET8 = "Set 8"
 BINDING_NAME_TOTEMTIMERSSTORMSTRIKE = "Stormstrike"
 BINDING_NAME_TOTEMTIMERSLAVALASH = "Lava Lash"
 BINDING_NAME_TOTEMTIMERSEARTHSHOCK = "Earth Shock"
+BINDING_NAME_TOTEMTIMERSCLOSE = "Close All Menus"
 
 local _G = getfenv()
 
 for i=1,4 do
     local e
     if i==1 then e = L["Fire Button"] elseif i==2 then e=L["Earth Button"] elseif i==3 then e=L["Water Button"] else e=L["Air Button"] end
-    for j=1,7 do
+    for j=1,8 do
         _G["BINDING_NAME_TOTEMTIMERSCAST"..i..j] = e.." "..j
     end
 end
@@ -151,6 +152,9 @@ local TotemTimers_Bindings = {
 	["TOTEMTIMERSSET8"] = function(key)
 		SetOverrideBindingClick(TotemTimersFrame, false, key, "TotemTimers_SetButton8")
 	end,
+    ["TOTEMTIMERSCLOSE"] = function(key)
+        SetOverrideBindingClick(TotemTimersFrame, false, key, "XiTimers_Timer1", "Button5")
+    end,
 }
 
 
@@ -186,7 +190,7 @@ function TotemTimers.InitializeBindings()
 		if key1 then TotemTimers_Bindings[binding](key1) end
 	end
     for i=1,4 do
-        for j=1,7 do
+        for j=1,8 do
             key1, key2 = GetBindingKey("TOTEMTIMERSCAST"..i..j)
             if key2 then SetOverrideBindingClick(TotemTimersFrame, false, key2, "TT_ActionButton"..i..j) end
             if key1 then SetOverrideBindingClick(TotemTimersFrame, false, key1, "TT_ActionButton"..i..j) end

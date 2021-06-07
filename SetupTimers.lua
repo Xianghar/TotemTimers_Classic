@@ -17,9 +17,9 @@ local BuffNames = TotemTimers.BuffNames
 local SpellNames = TotemTimers.SpellNames
 local TextureToName = TotemTimers.TextureToName
 local NameToSpellID = TotemTimers.NameToSpellID
+local TextureToSpellID = TotemTimers.TextureToSpellID
 local SpellIDs = TotemTimers.SpellIDs
 local AvailableSpells = TotemTimers.AvailableSpells
-
 
 function TotemTimers.CreateTimers()
 	for e = 1,4 do
@@ -79,7 +79,11 @@ function TotemTimers.CreateTimers()
                                                           local open = self:GetAttribute("open")
                                                           control:ChildUpdate("show", not open)
 														  self:SetAttribute("open", not open)
-                                                      end ]])
+                                                      elseif button == "close" or button == "Button5" then
+                                                          control:ChildUpdate("show", false)
+                                                          self:SetAttribute("open", false)
+                                                      end
+                                                       ]])
         tt.Activate = function(self)
             XiTimers.Activate(self)
             TotemTimers.TotemEvent(self.button, "PLAYER_TOTEM_UPDATE", self.nr)
@@ -127,6 +131,14 @@ function TotemTimers.CreateTimers()
             end)
 			            
 	end
+	XiTimers.timers[1].button:SetAttribute("*type5", "macro")
+	XiTimers.timers[1].button:SetAttribute("macrotext5",
+[[/click XiTimers_Timer1 close
+/click XiTimers_Timer2 close
+/click XiTimers_Timer3 close
+/click XiTimers_Timer4 close
+/click XiTimers_Timer8 close]]
+	)
 	TotemTimers.CreateCastButtons()
 end
 
@@ -153,9 +165,13 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
     local settings = TotemTimers.ActiveProfile
     if event == "PLAYER_TOTEM_UPDATE" then
     	if self.element == arg1 then
-    		local _, totem, startTime, duration, icon = GetTotemInfo(arg1)
-            totem = string.gsub(totem, " [IV]*$", "") -- strip spell rank from name
-            totem = NameToSpellID[totem]
+
+    		local _, totemName, startTime, duration, icon = GetTotemInfo(arg1)
+    		local totem = TextureToSpellID[icon]
+    		if not totem then
+                totemName = string.gsub(totemName, " [IV]*$", "") -- strip spell rank from name
+                totem = NameToSpellID[totemName]
+            end
     		if duration > 0 and totem and TotemData[totem] then
     			self.icons[1]:SetTexture(icon)
                 self.timer.activeTotem = totem

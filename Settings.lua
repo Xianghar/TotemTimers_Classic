@@ -185,7 +185,7 @@ SettingsFunctions = {
             TotemTimers.SetShieldUpdate()
         end,
         
-    --[[ EarthShieldTracker =
+     EarthShieldTracker =
         function(value, Timers)
             Timers[7].ActiveWhileHidden = TotemTimers.ActiveProfile.ActivateHiddenTimers and not value
     		if (value or TotemTimers.ActiveProfile.ActivateHiddenTimers) and AvailableSpells[SpellIDs.EarthShield] then
@@ -194,7 +194,7 @@ SettingsFunctions = {
     			Timers[7]:Deactivate()
     		end
     		TotemTimers.OrderTrackers()
-        end, --]]
+        end,
 
     WeaponTracker =
     function(value, Timers)
@@ -502,7 +502,7 @@ SettingsFunctions = {
     ActivateHiddenTimers =
         function(value, Timers)
             TotemTimers.ProcessSetting("ShieldTracker")
-            -- TotemTimers.ProcessSetting("EarthShieldTracker")
+            TotemTimers.ProcessSetting("EarthShieldTracker")
             TotemTimers.ProcessSetting("WeaponTracker")
         end,
         
@@ -529,7 +529,7 @@ SettingsFunctions = {
 
     WeaponBarDirection =
     function(value, Timers)
-        TTActionBars.bars[5]:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
+        TTActionBars.bars[6]:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
         --if #TTActionBars.bars > 5 then TotemTimers.ProcessSetting("MultiSpellBarDirection") end
     end,
 
@@ -543,11 +543,10 @@ SettingsFunctions = {
         TotemTimers.ProcessSetting("LastWeaponEnchant2")
     end,
         
-    --[[ ESMainTankMenuDirection =
+     ESMainTankMenuDirection =
         function(value, Timers) 
             TTActionBars.bars[5]:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
-            --if #TTActionBars.bars > 5 then TotemTimers.ProcessSetting("MultiSpellBarDirection") end
-        end,  --]]
+        end,
         
     --[[EnhanceCDsOOCAlpha =
         function(value)
@@ -620,14 +619,14 @@ SettingsFunctions = {
         end, --]]
         
         
-    --[[ EarthShieldTargetName =
+    EarthShieldTargetName =
         function(value, Timers)
             if value then
                 Timers[7].nameframe:Show()
             else
                 Timers[7].nameframe:Hide()
             end
-        end, ]]
+        end,
         
     --[[ EnhanceCDs_Clickthrough =
         function(value)
@@ -657,10 +656,10 @@ SettingsFunctions = {
             end
         end,
         
-    --[[ ESChargesOnly =
+     ESChargesOnly =
         function(value, Timers)
             TotemTimers.SetEarthShieldUpdate()
-        end, --]]
+        end,
         
     --[[ CrowdControlSize =
         function(value, Timers)
@@ -722,7 +721,7 @@ SettingsFunctions = {
             for i=1, #TTActionBars.bars do
                 local bar = TTActionBars.bars[i]
                 for j = 1, #bar.buttons do
-                    bar.buttons[i].cooldown:SetAlpha(value)
+                    bar.buttons[j].cooldown:SetAlpha(value)
                 end
             end
         end

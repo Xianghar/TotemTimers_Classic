@@ -1,3 +1,8 @@
+1.14
+    - Added Earth Shield tracker
+    - Fixed totem detection in spanish and probably other non-english clients
+    - Added keybind to close all open button menus
+    - Added more keybinds for totems
 1.13.1
     - Fixed error message
     - Added one more button for air totems

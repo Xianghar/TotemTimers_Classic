@@ -157,7 +157,7 @@ function TotemTimers.SetupGlobals()
         TotemTimersFrame:SetScript("OnUpdate", XiTimers.UpdateTimers)
 		TotemTimersFrame:EnableMouse(false)
         XiTimers.InitWarnings(TotemTimers.ActiveProfile.Warnings)
-        -- TotemTimers.SetEarthShieldButtons()
+        TotemTimers.SetEarthShieldButtons()
         -- TotemTimers.LayoutCrowdControl()
         --TotemTimers.ApplySkin()
         XiTimers.SaveFramePositions = TotemTimers.SaveFramePositions
