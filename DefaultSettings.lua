@@ -75,6 +75,8 @@ TotemTimers.DefaultProfile = {
         CheckRaidRange = true,	
         ShowRaidRangeTooltip = true,
         Timer_Clickthrough = false,
+        IncludeInMacro = {[1] = true, [2] = true, [3] = true, [4] = true,},
+        MacroReset = 15,
         
     --Trackers
         TrackerArrange = "horizontal",

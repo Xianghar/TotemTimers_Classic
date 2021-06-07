@@ -122,6 +122,7 @@ L["Totem Menu Key Bindings"] = "Tastenbelegung für Totems"
 L["Totem Menus Always Visible"] = "Totemmenüs ständig geöffnet"
 L["Totem Menu Spacing"] = "Totemmenüabstand"
 L["Totem Menu Spacing Desc"] = "Skaliert den Abstand der Knöpfe in den Totemmenüs zueinander. Hat nur einen Effekt, wenn die Menüs dauerhaft angzeiegt werden."
+L["Reset /castsequence after x seconds"] = "/castsequence nach x Sekunden zurücksetzen"
 
 L["Ankh Tracker"] = "Wiederbelebungstimer"
 L["Ankh Tracker Desc"] = "Zeigt die verbleibende Zeit des Cooldowns von Wiederbelebung (Ankh) an"

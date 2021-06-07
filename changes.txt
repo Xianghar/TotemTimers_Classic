@@ -1,3 +1,6 @@
+1.15
+    - Added options to choose which totem elements to include in castsequence macro
+    - Added option for after how many seconds the castsequence resets
 1.14
     - Added Earth Shield tracker
     - Fixed totem detection in spanish and probably other non-english clients
