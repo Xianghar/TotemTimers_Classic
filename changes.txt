@@ -1,3 +1,6 @@
+1.15.2
+    - Fixed error when using Earth Shield and focus targets
+    - Added cooldown for Grounding Totem
 1.15.1
     - Bugfix for Earth Shield tracker when in groups/raid
 1.15

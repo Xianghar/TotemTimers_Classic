@@ -7,8 +7,6 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers", true)
 
-local TimerCount = {[AIR_TOTEM_SLOT] = 7, [FIRE_TOTEM_SLOT] = 2, [EARTH_TOTEM_SLOT] = 6, [WATER_TOTEM_SLOT] = 4}
-
 local RaidMembers = {}
 
 local RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS
@@ -20,10 +18,29 @@ local NameToSpellID = TotemTimers.NameToSpellID
 local TextureToSpellID = TotemTimers.TextureToSpellID
 local SpellIDs = TotemTimers.SpellIDs
 local AvailableSpells = TotemTimers.AvailableSpells
+local SpellTextures = TotemTimers.SpellTextures
+
+local Cooldowns = {
+    [EARTH_TOTEM_SLOT] = {
+        SpellIDs.EarthBind,
+        SpellIDs.Stoneclaw,
+        SpellIDs.EarthElemental,
+    },
+    [WATER_TOTEM_SLOT] = {
+        SpellIDs.ManaTide,
+    },
+    [FIRE_TOTEM_SLOT] = {
+        SpellIDs.FireNova,
+        SpellIDs.FireElemental,
+    },
+    [AIR_TOTEM_SLOT] = {
+        SpellIDs.Grounding,
+    },
+}
 
 function TotemTimers.CreateTimers()
 	for e = 1,4 do
-		local tt = XiTimers:new(TimerCount[e])
+		local tt = XiTimers:new(#Cooldowns[e]  + 1)
 
         tt.manaCheckMini = true
 		tt.button:SetScript("OnEvent", TotemTimers.TotemEvent)
@@ -143,22 +160,6 @@ function TotemTimers.CreateTimers()
 end
 
 
-local Cooldowns = {
-    [EARTH_TOTEM_SLOT] = {
-        [2] = SpellIDs.EarthBind,
-        [3] = SpellIDs.Tremor,
-        [4] = SpellIDs.Stoneclaw,
-    },
-    [WATER_TOTEM_SLOT] = {
-        [2] = SpellIDs.ManaTide,
-    },
-    [FIRE_TOTEM_SLOT] = {
-        [2] = SpellIDs.FireNova,
-    },
-    [AIR_TOTEM_SLOT] = {
-    },
-}
-
 local TotemicCall = TotemTimers.SpellIDs.TotemicCall
 
 function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
@@ -213,7 +214,8 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
         end
         if settings.ShowCooldowns then
             for nr, spell in pairs(Cooldowns[self.timer.nr]) do
-                if TotemTimers.AvailableSpells[spell] then
+                nr = nr + 1
+                if AvailableSpells[spell] then
                     local start, duration, enable = GetSpellCooldown(spell)
 					if not start and not duration then
 						self.timer:stop(nr)
@@ -223,7 +225,7 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3)
                         self.timer:Stop(nr)
                     elseif duration > 2 then --and self.timer.timers[nr]<=0 then  -- update running cooldown timers for Ele T12-2pc
                         self.timer:Start(nr,start+duration-floor(GetTime()),duration)
-                        self.timer.timerBars[nr].icon:SetTexture(TotemTimers.SpellTextures[spell])
+                        self.timer.timerBars[nr].icon:SetTexture(SpellTextures[spell])
                     end
                 elseif self.timer.timers[nr] > 0 then
                     self.timer:Stop(nr)

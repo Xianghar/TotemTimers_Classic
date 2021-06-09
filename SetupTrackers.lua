@@ -675,7 +675,7 @@ local function checkESBuff(self)
     if UnitGUID("target") == earthShieldTargetGUID then
         unit = "target"
     elseif UnitGUID("focus") == earthShieldTargetGUID then
-        unit = focus
+        unit = "focus"
     end
 
     local hasBuff = false
