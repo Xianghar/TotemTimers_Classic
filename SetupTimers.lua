@@ -577,13 +577,16 @@ TotemTimers.UpdateParty = function()
         if UnitExists(unit) then
             partyGUIDs[UnitGUID(unit)] = unit
             local class = select(2, UnitClass(unit))
-            for element = 1,4 do
-                XiTimers.timers[element].button.partyRange[i]:SetVertexColor(
-                        RAID_CLASS_COLORS[class].r,
-                        RAID_CLASS_COLORS[class].g,
-                        RAID_CLASS_COLORS[class].b
-                )
-            end
+            if class and RAID_CLASS_COLORS[class] then
+
+                for element = 1,4 do
+                    XiTimers.timers[element].button.partyRange[i]:SetVertexColor(
+                RAID_CLASS_COLORS[class].r,
+                RAID_CLASS_COLORS[class].g,
+                    RAID_CLASS_COLORS[class].b
+                    )
+                    end
+                end
         else
             for element = 1,4 do XiTimers.timers[element].button.partyRange[i]:Hide() end
         end

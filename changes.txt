@@ -1,3 +1,5 @@
+1.16.1
+    - Fix error in groups and party range dots enabled
 1.16
     - Added player range dot again, range is checked by buffs for totem with buffs, by coordinates (not in instances) for totems without buffs like Tremor Totem
     - Added party range dots again
