@@ -422,7 +422,7 @@ function TotemTimers.OrderTrackers()
         Timers[e].button:ClearAllPoints()
     end
     if arrange == "free" then
-        for i = 5, 6 do
+        for i = 5,8 do
             Timers[i].savePos = true
             local pos = TotemTimers.ActiveProfile.TimerPositions[i]
             if not pos or not pos[1] then
@@ -480,48 +480,7 @@ end
 local mainMsg = ""
 local offMsg = ""
 
-local WeaponEnchants = {
-    [3] = SpellIDs.FlametongueWeapon,
-    [4] = SpellIDs.FlametongueWeapon,
-    [5] = SpellIDs.FlametongueWeapon,
-    [523] = SpellIDs.FlametongueWeapon,
-    [1665] = SpellIDs.FlametongueWeapon,
-    [1666] = SpellIDs.FlametongueWeapon,
-    [2634] = SpellIDs.FlametongueWeapon,
-    [3779] = SpellIDs.FlametongueWeapon,
-    [3780] = SpellIDs.FlametongueWeapon,
-    [3781] = SpellIDs.FlametongueWeapon,
-    [1] = SpellIDs.RockbiterWeapon,
-    [6] = SpellIDs.RockbiterWeapon,
-    [29] = SpellIDs.RockbiterWeapon,
-    [503] = SpellIDs.RockbiterWeapon,
-    [504] = SpellIDs.RockbiterWeapon,
-    [683] = SpellIDs.RockbiterWeapon,
-    [1663] = SpellIDs.RockbiterWeapon,
-    [1664] = SpellIDs.RockbiterWeapon,
-    [2632] = SpellIDs.RockbiterWeapon,
-    [2633] = SpellIDs.RockbiterWeapon,
-    [3018] = SpellIDs.RockbiterWeapon,
-    [283] = SpellIDs.WindfuryWeapon,
-    [284] = SpellIDs.WindfuryWeapon,
-    [525] = SpellIDs.WindfuryWeapon,
-    [1669] = SpellIDs.WindfuryWeapon,
-    [2636] = SpellIDs.WindfuryWeapon,
-    [3785] = SpellIDs.WindfuryWeapon,
-    [3786] = SpellIDs.WindfuryWeapon,
-    [3787] = SpellIDs.WindfuryWeapon,
-    [2] = SpellIDs.FrostbrandWeapon,
-    [12] = SpellIDs.FrostbrandWeapon,
-    [5244] = SpellIDs.FrostbrandWeapon,
-    [1667] = SpellIDs.FrostbrandWeapon,
-    [1668] = SpellIDs.FrostbrandWeapon,
-    [2635] = SpellIDs.FrostbrandWeapon,
-    [3782] = SpellIDs.FrostbrandWeapon,
-    [3783] = SpellIDs.FrostbrandWeapon,
-    [3784] = SpellIDs.FrostbrandWeapon,
-}
-
-for i = 3018, 3044 do WeaponEnchants[i] = SpellIDs.RockbiterWeapon end
+local WeaponEnchants = TotemTimers.WeaponEnchants
 
 local GetWeaponEnchantInfo = GetWeaponEnchantInfo
 

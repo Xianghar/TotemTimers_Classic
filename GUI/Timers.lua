@@ -142,7 +142,7 @@ TotemTimers.options.args.timers = {
                         end
                      end,
             set = function(info, val)
-                        TotemTimers.ActiveProfile.CastBarDirection = val  TotemTimers.ProcessSetting("CastBarDirection")
+                        TotemTimers.ActiveProfile.CastBarDirection = val  TotemTimers.PositionCastButtons()
                   end,
             get = function(info) return TotemTimers.ActiveProfile.CastBarDirection end,
         },
@@ -253,6 +253,7 @@ TotemTimers.options.args.timers = {
                       TotemTimers.ActiveProfile.MenusAlwaysVisible = val
                       TotemTimers.ProcessSetting("OpenOnRightclick")
                       TotemTimers.ProcessSetting("MenusAlwaysVisible")
+                      TotemTimers.ProcessSetting("BarBindings")
                   end,
             get = function(info) return TotemTimers.ActiveProfile.MenusAlwaysVisible end,
         },            
@@ -311,22 +312,41 @@ TotemTimers.options.args.timers = {
             desc = L["Player Range Desc"],
             set = function(info, val) TotemTimers.ActiveProfile.CheckPlayerRange = val  TotemTimers.ProcessSetting("CheckPlayerRange") end,
             get = function(info) return TotemTimers.ActiveProfile.CheckPlayerRange end,                          
-        },                                               
+        },
+        PartyRange = {
+            order = 40,
+            type = "toggle",
+            name = L["Party Range"],
+            desc = L["Party Range Desc"],
+            set = function(info, val) TotemTimers.ActiveProfile.CheckRaidRange = val  TotemTimers.ProcessSetting("CheckRaidRange") end,
+            get = function(info) return TotemTimers.ActiveProfile.CheckRaidRange end,
+        },
+        PartyRangePosition = {
+            order = 41,
+            type = "select",
+            name = L["Party Range Position"],
+            desc = L["Party Range Position Desc"],
+            values = {	["LEFT"] = L["Left"], ["RIGHT"] = L["Right"], ["TOP"] = L["Top"], ["BOTTOM"] = L["Bottom"],},
+            set = function(info, val)
+                TotemTimers.ActiveProfile.PartyRangePosition = val  TotemTimers.ProcessSetting("PartyRangePosition")
+            end,
+            get = function(info) return TotemTimers.ActiveProfile.PartyRangePosition end,
+        },
         --[[ RaidRange = {
             order = 40,
             type = "toggle",
             name = L["Raid Member Range"],
             desc = L["Range Desc"],
             set = function(info, val) TotemTimers.ActiveProfile.CheckRaidRange = val  TotemTimers.ProcessSetting("CheckRaidRange") end,
-            get = function(info) return TotemTimers.ActiveProfile.CheckRaidRange end,                          
-        },                                               
+            get = function(info) return TotemTimers.ActiveProfile.CheckRaidRange end,
+        },
         RaidRangeTooltip = {
             order = 41,
             type = "toggle",
             name = L["Raid Range Tooltip"],
             desc = L["RR Tooltip Desc"],
             set = function(info, val) TotemTimers.ActiveProfile.ShowRaidRangeTooltip = val  TotemTimers.ProcessSetting("ShowRaidRangeTooltip") end,
-            get = function(info) return TotemTimers.ActiveProfile.ShowRaidRangeTooltip end,                          
+            get = function(info) return TotemTimers.ActiveProfile.ShowRaidRangeTooltip end,
         }, ]]
          macro = {
              order = 50,
@@ -368,3 +388,4 @@ local frame = ACD:AddToBlizOptions("TotemTimers", L["Timers"], "TotemTimers", "t
 frame:SetScript("OnEvent", function(self) InterfaceOptionsFrame:Hide() end)
 frame:HookScript("OnShow", function(self) if InCombatLockdown() then InterfaceOptionsFrame:Hide() end TotemTimers.LastGUIPanel = self end)
 frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+TotemTimers.TimersGUIPanel = frame

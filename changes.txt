@@ -1,3 +1,10 @@
+1.16
+    - Added player range dot again, range is checked by buffs for totem with buffs, by coordinates (not in instances) for totems without buffs like Tremor Totem
+    - Added party range dots again
+    - Fixed Earth Shield keybinds
+    - Fixed /totemtimers and /tt slash command
+    - Fixed a bug when trying to move Earth Shield and weapon tracker with tracker arrangement set to loose
+    - Fixed totem menu direction applying only after reload
 1.15.2
     - Fixed error when using Earth Shield and focus targets
     - Added cooldown for Grounding Totem

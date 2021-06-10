@@ -259,7 +259,7 @@ local frame = ACD:AddToBlizOptions("TotemTimers", "TotemTimers", nil, "general")
 frame:SetScript("OnEvent", function(self) InterfaceOptionsFrame:Hide() end)
 frame:HookScript("OnShow", function(self) if InCombatLockdown() then InterfaceOptionsFrame:Hide() end TotemTimers.LastGUIPanel = self end)
 frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-TotemTimers.LastGUIPanel = frame
+
 
 
 

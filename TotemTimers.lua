@@ -94,6 +94,7 @@ function TotemTimers.SetupGlobals()
 	end
 	if select(2,UnitClass("player")) == "SHAMAN" then
 		TotemTimers.GetSpells()
+        TotemTimers.GetTalents()
 		TotemTimers.UpdateProfiles()
         TotemTimers.SelectActiveProfile()
         
@@ -179,9 +180,15 @@ function TotemTimers_Slash(msg)
     else
         InterfaceOptionsFrame_OpenToCategory(TotemTimers_LastGUIPane.name)
     end]]
-    if TotemTimers.LastGUIPanel then
-        InterfaceOptionsFrame_OpenToCategory(TotemTimers.LastGUIPanel)
+
+    local lastGUIPanel = TotemTimers.LastGUIPanel
+
+    InterfaceOptionsFrame_OpenToCategory("TotemTimers")
+
+    if lastGUIPanel then
+        InterfaceOptionsFrame_OpenToCategory(lastGUIPanel)
     else
+        InterfaceOptionsFrame_OpenToCategory(TotemTimers.TimersGUIPanel)
         InterfaceOptionsFrame_OpenToCategory("TotemTimers")
     end
 end
@@ -384,7 +391,7 @@ function TotemTimers.UpdateMacro()
         sequence = strsub(sequence, 1, strlen(sequence)-2)
         local nr = GetMacroIndexByName("TT Cast")
         if nr == 0 then
-            CreateMacro("TT Cast", "INV_MISC_QUESTIONMARK", sequence, 1)
+            CreateMacro("TT Cast", "INV_MISC_QUESTIONMARK", sequence, true)
         else
             EditMacro(nr, "TT Cast", nil, sequence)
         end

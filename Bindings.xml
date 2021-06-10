@@ -14,6 +14,7 @@
 	<Binding name="TOTEMTIMERSEARTHSHIELDLEFT" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSEARTHSHIELDRIGHT" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSEARTHSHIELDMIDDLE" category="TotemTimers ">--[[dummy]]</Binding>
+	<Binding name="TOTEMTIMERSEARTHSHIELDBUTTON4" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSWEAPONBUFF1" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSWEAPONBUFF2" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSEARTHSHOCK" category="TotemTimers ">--[[dummy]]</Binding>

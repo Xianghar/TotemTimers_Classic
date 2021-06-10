@@ -320,6 +320,7 @@ function TTActionBars:CalcDirection(dir, parentdir, freenotself)
     if dir == "auto" then
         local p,_,_,x,y = self.directionanchor:GetPoint()
         if parentdir == "free" and not freenotself then p,_,_,x,y = self.parent:GetPoint() end
+        if not p then return "up" end
 		if parentdir == "horizontal" then
             if ((p == "LEFT" or p == "RIGHT" or p == "CENTER") and y < 0)
               or (string.sub(p,1,6) == "BOTTOM") then
