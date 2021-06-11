@@ -430,6 +430,7 @@ function XiTimers:ShowTimer()
             self:ShowTimerBar(1)
             self.timerBars[1]:SetValue(self.timers[1])
         else
+            self.button.time:SetTextColor(self.timeColor.r, self.timeColor.g, self.timeColor.b, 1)
             self:HideTimerBar(1)
             self.button.time:Show()
             SetButtonTime(self.button.time, self.timers[1], nil)

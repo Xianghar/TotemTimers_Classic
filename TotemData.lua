@@ -259,6 +259,12 @@ TotemData = {
     },
 }
 
+local TotemCount = {}
+for k,v in pairs(TotemData) do
+    TotemCount[v.element] = (TotemCount[v.element] or 0) + 1
+end
+TotemTimers.TotemCount = TotemCount
+
 for k,v in pairs(TotemData) do
     if  v.buff then v.buffName = GetSpellInfo(v.buff) end
 end

@@ -235,6 +235,12 @@ SettingsFunctions = {
         end
     end,
 
+    LastWeaponEnchant2 = function(value, Timers)
+        if not value then return end
+        local type = "spell2"
+        if TotemTimers.ActiveProfile.WeaponMenuOnRightclick then type = "spell3" end
+        Timers[8].button:SetAttribute(type, value)
+    end,
 
 
     HideBlizzTimers =
@@ -396,7 +402,7 @@ SettingsFunctions = {
     BarBindings =
     function(value, Timers)
         for i=1,4 do
-            for j=1,5 do
+            for j=1,#Timers[i].actionBar.buttons do
                 local key = GetBindingKey("TOTEMTIMERSCAST"..i..j)
                 if TotemTimers.ActiveProfile.BarBindings and not TotemTimers.ActiveProfile.MenusAlwaysVisible then
                     if TotemTimers.ActiveProfile.ReverseBarBindings then

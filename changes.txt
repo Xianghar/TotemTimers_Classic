@@ -1,3 +1,8 @@
+1.17
+    - Changed code for showing/hiding button menus. Menus should not stay open any longer when dragging the mouse over them too fast
+    - Fixed weapon tracker tooltips
+    - Automatic totem bar bindings are set for all buttons instead of the first 5
+    - Shift-rightclick a weapon buff to set it to weapon tracker's rightclick
 1.16.1
     - Fix error in groups and party range dots enabled
 1.16
