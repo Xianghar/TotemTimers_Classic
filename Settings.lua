@@ -402,19 +402,22 @@ SettingsFunctions = {
     BarBindings =
     function(value, Timers)
         for i=1,4 do
-            for j=1,#Timers[i].actionBar.buttons do
-                local key = GetBindingKey("TOTEMTIMERSCAST"..i..j)
+            local actionBar = Timers[i].actionBar
+            local element = Timers[i].nr
+            for j=1,#actionBar.buttons do
+                local button = actionBar.buttons[j]
+                local key = GetBindingKey("TOTEMTIMERSCAST"..element..j)
                 if TotemTimers.ActiveProfile.BarBindings and not TotemTimers.ActiveProfile.MenusAlwaysVisible then
                     if TotemTimers.ActiveProfile.ReverseBarBindings then
-                        getglobal("TT_ActionButton"..i..j.."HotKey"):SetText(key or tostring(10-j))
-                        getglobal("TT_ActionButton"..i..j):SetAttribute("binding", tostring(10-j))
+                        button.hotkey:SetText(key or tostring(10-j))
+                        button:SetAttribute("binding", tostring(10-j))
                     else
-                        getglobal("TT_ActionButton"..i..j.."HotKey"):SetText(key or tostring(j))
-                        getglobal("TT_ActionButton"..i..j):SetAttribute("binding", tostring(j))
+                        button.hotkey:SetText(key or tostring(j))
+                        button:SetAttribute("binding", tostring(j))
                     end
                 else
-                    getglobal("TT_ActionButton"..i..j.."HotKey"):SetText(key or "")
-                    getglobal("TT_ActionButton"..i..j):SetAttribute("binding", nil)
+                    button.hotkey:SetText(key or "")
+                    button:SetAttribute("binding", nil)
                 end
             end
         end

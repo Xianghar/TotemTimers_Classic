@@ -53,23 +53,18 @@
     <Binding name="TOTEMTIMERSCAST15" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSCAST16" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSCAST17" category="TotemTimers ">--[[dummy]]</Binding>
-	<Binding name="TOTEMTIMERSCAST18" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST21" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST22" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST23" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST24" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST25" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSCAST26" category="TotemTimers ">--[[dummy]]</Binding>
-	<Binding name="TOTEMTIMERSCAST27" category="TotemTimers ">--[[dummy]]</Binding>
-	<Binding name="TOTEMTIMERSCAST28" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST31" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST32" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST33" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST34" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST35" category="TotemTimers ">--[[dummy]]</Binding>
 	<Binding name="TOTEMTIMERSCAST36" category="TotemTimers ">--[[dummy]]</Binding>
-	<Binding name="TOTEMTIMERSCAST37" category="TotemTimers ">--[[dummy]]</Binding>
-	<Binding name="TOTEMTIMERSCAST38" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST41" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST42" category="TotemTimers ">--[[dummy]]</Binding>
     <Binding name="TOTEMTIMERSCAST43" category="TotemTimers ">--[[dummy]]</Binding>

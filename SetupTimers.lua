@@ -430,9 +430,10 @@ function TotemTimers.CreateCastButtons()
     for i = 1, 4 do
         local timer = XiTimers.timers[i]
         local totemCount = TotemCount[timer.nr]
-        timer.actionBar = TTActionBars:new(totemCount, timer.button, _G["TotemTimers_CastBar" .. i], TotemTimersFrame)
+        local actionBar = TTActionBars:new(totemCount, timer.button, _G["TotemTimers_CastBar" .. i], TotemTimersFrame)
+        timer.actionBar = actionBar
         for j = 1, totemCount do
-            local button = _G["TT_ActionButton" .. i .. j]
+            local button = timer.actionBar.buttons[j]
             button.ChangeTotemOrder = TotemTimers.ChangeTotemOrder
 
             button:SetAttribute("SpellIDs", TotemTimers.NameToSpellID)
