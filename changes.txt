@@ -1,3 +1,5 @@
+1.17.3
+    - Fixed tooltip bug
 1.17.2
     - Fixed "Show Timer Bars" setting
 1.17.1

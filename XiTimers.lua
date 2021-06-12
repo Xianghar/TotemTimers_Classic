@@ -222,6 +222,9 @@ function XiTimers:new(nroftimers, unclickable)
     self.button.StartMove = XiTimers.StartMoving
     self.button.StopMove = XiTimers.StopMoving
 	self.button:RegisterForDrag("LeftButton")
+	self.button.ShowTooltip = function() end
+	self.button.HideTooltip = function() end
+
     
 	table.insert(Timers, self)
 
