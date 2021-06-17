@@ -275,6 +275,9 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3, ...)
                 self.timer.warningPoint = TotemData[totem].warningPoint or 10
                 self.timer:Start(1, startTime + duration - GetTime())
                 self.timer.totemPositionX, self.timer.totemPositionY = HBD:GetPlayerWorldPosition()
+                if self.timer.twisting and totem == SpellIDs.Windfury then
+                    self.timer:StartBarTimer(10.3)
+                end
                 --TotemTimers.SetTotemPosition(self.element)
                 --[[ TotemTimers.ResetRange(self.element)
                 self.timer:SetOutOfRange(false)
@@ -340,8 +343,19 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3, ...)
     elseif event == "GROUP_ROSTER_UPDATE" then
         TotemTimers.UpdateParty()
     elseif event == "CHAT_MSG_ADDON" and self.timer.timers[1] > 0 and arg1 == "WF_STATUS" then
-        local guid, enchantID = strsplit(':', arg2)
-        UpdatePartyRange(self.timer, nil, guid, tonumber(enchantID))
+        local guid, enchantID, duration, lag = strsplit(':', arg2)
+        if self.timer.twisting and duration then
+            duration = tonumber(duration)
+            if duration and duration > 0 then
+                local playerLag = select(3, GetNetStats())
+                duration = (duration - lag - playerLag) / 1000
+            else
+                duration = 0
+            end
+        else
+            duration = 0
+        end
+        UpdatePartyRange(self.timer, nil, guid, tonumber(enchantID), duration)
     end
 end
 
@@ -505,7 +519,7 @@ local partyGUIDs = {}
 
 local TotemWeaponEnchants = TotemTimers.TotemWeaponEnchants
 
-UpdatePartyRange = function(timer, unit, unitGUID, enchantID)
+UpdatePartyRange = function(timer, unit, unitGUID, enchantID, wfDuration)
     if unit and unit ~= "player" and (not strmatch(unit, "^party%d$") or not UnitExists(unit)) then
         return
     end
@@ -526,11 +540,13 @@ UpdatePartyRange = function(timer, unit, unitGUID, enchantID)
 
     if unitGUID then
         if enchantID and TotemWeaponEnchants[enchantID] == timer.activeTotem then
-            rangeDot:Show()
-        else
-            rangeDot:Hide()
+            inRange = true
+            if timer.twisting and wfDuration and wfDuration > 0
+              and timer.barTimer > 0 and math.abs(wfDuration - timer.barTimer) > 0.5 then
+                timer.barTimer = wfDuration
+            end
         end
-    elseif (timer.totemRange) then
+    elseif timer.totemRange then
         local x,y,zone = HBD:GetUnitWorldPosition(unit)
         if (not x or not y) then return end
         if HBD:GetWorldDistance(zone, timer.totemPositionX, timer.totemPositionY, x, y) < timer.totemRange then

@@ -1,3 +1,10 @@
+1.18
+    - Weapon buff tracker recognizes Windfury Totem and Flametongue Totem
+    - Added Windfury Totem twisting timer (disabled by default, can be enabled in Options -> Timers)
+    - Fixed time text color on buttons
+    - Time text color transparency can be set
+    - Timer bar color transparency can be set
+    - Removed "Show Timer Bars" setting, to hide timerbars set their color to transparent
 1.17.3
     - Fixed tooltip bug
 1.17.2
