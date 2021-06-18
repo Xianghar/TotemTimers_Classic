@@ -549,7 +549,8 @@ UpdatePartyRange = function(timer, unit, unitGUID, enchantID, wfDuration)
     elseif timer.totemRange then
         local x,y,zone = HBD:GetUnitWorldPosition(unit)
         if (not x or not y) then return end
-        if HBD:GetWorldDistance(zone, timer.totemPositionX, timer.totemPositionY, x, y) < timer.totemRange then
+        local distance = HBD:GetWorldDistance(zone, timer.totemPositionX, timer.totemPositionY, x, y)
+        if not distance or (distance and distance < timer.totemRange) then
             inRange = true
         end
     else
