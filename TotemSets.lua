@@ -107,6 +107,7 @@ function TotemTimers.SetButton_OnClick(self, button)
                 XiTimers.timers[i].button:SetAttribute("*spell1", set[XiTimers.timers[i].nr])
             end            
         end
+        TotemTimers.UpdateSpellRanks()
 	end
 end
 

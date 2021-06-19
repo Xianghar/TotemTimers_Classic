@@ -1,3 +1,5 @@
+1.18.3
+    - Fixed wrong totems loaded at first login
 1.18.2
     - Fixed weapon tracker double spells
     - Possible fix for downranked spells for boosted characters
