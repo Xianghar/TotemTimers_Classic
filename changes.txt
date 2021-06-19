@@ -1,3 +1,6 @@
+1.18.2
+    - Fixed weapon tracker double spells
+    - Possible fix for downranked spells for boosted characters
 1.18.1
     - Fix error message when totem player range is enabled and player is in instance
 1.18

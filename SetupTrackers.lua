@@ -189,7 +189,6 @@ function TotemTimers.CreateTrackers()
 
 
 
-
     weapon.button.icons[1]:SetTexture(SpellTextures[SpellIDs.RockbiterWeapon])
     if TotemTimers.ActiveProfile.LastWeaponEnchant == 5 or TotemTimers.ActiveProfile.LastWeaponEnchant == 6 then
         weapon.button.icons[1]:SetTexture(SpellTextures[SpellIDs.WindfuryWeapon])
@@ -244,19 +243,18 @@ function TotemTimers.CreateTrackers()
                                                              control:CallMethod("SaveLastEnchant", name)
                                                          end]])
 
--- choosing a weapon for a buff seems not to be working in tbc classic
---     weapon.button:WrapScript(weapon.button, "PostClick", [[ if button == "LeftButton" then
---                                                                 local ds1 = self:GetAttribute("doublespell1")
---                                                                 if ds1 then
---                                                                     if IsControlKeyDown() or self:GetAttribute("ds") ~= 1 then
---                                                                         self:SetAttribute("macrotext", "/cast "..ds1.."\n/use 16")
--- 																		self:SetAttribute("ds",1)
---                                                                     else
---                                                                         self:SetAttribute("macrotext", "/cast "..self:GetAttribute("doublespell2").."\n/use 17")
--- 																		self:SetAttribute("ds",2)
---                                                                     end
---                                                                 end
---                                                            end]])
+    weapon.button:WrapScript(weapon.button, "PostClick", [[ if button == "LeftButton" then
+                                                                 local ds1 = self:GetAttribute("doublespell1")
+                                                                 if ds1 then
+                                                                     if IsControlKeyDown() or self:GetAttribute("ds") ~= 1 then
+                                                                         self:SetAttribute("macrotext", "/cast "..ds1)
+ 																		self:SetAttribute("ds",1)
+                                                                     else
+                                                                         self:SetAttribute("macrotext", "/cast "..self:GetAttribute("doublespell2"))
+ 																		self:SetAttribute("ds",2)
+                                                                     end
+                                                                 end
+                                                            end]])
 
     weapon.button:SetAttribute("ctrl-type1", "cancelaura")
     weapon.button:SetAttribute("ctrl-target-slot1", GetInventorySlotInfo("MainHandSlot"))
@@ -506,13 +504,13 @@ function TotemTimers.SetEarthShieldButtons()
         if Settings[v] == "recast" then
             recastbutton = k
             earthShieldRecast = true
-            earthshieldTimer.button:SetAttribute("*spell"..k, SpellIDs.EarthShield)
+            earthshieldTimer.button:SetAttribute("*spell"..k, SpellNames[SpellIDs.EarthShield])
         elseif Settings[v] == "menu" and not menubutton then
             menubutton = k
             earthshieldTimer.button:SetAttribute("*spell"..k, nil)
         else
             earthshieldTimer.button:SetAttribute("*unit"..k, Settings[v])
-            earthshieldTimer.button:SetAttribute("*spell"..k, SpellIDs.EarthShield)
+            earthshieldTimer.button:SetAttribute("*spell"..k, SpellNames[SpellIDs.EarthShield])
         end
     end
 

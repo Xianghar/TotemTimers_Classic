@@ -112,35 +112,45 @@ TotemTimers.SpellIDs = {
 	
 }
 
-local SpellIDs = TotemTimers.SpellIDs
 
 TotemTimers.SpellTextures = {}
 TotemTimers.SpellNames = {}
 TotemTimers.NameToSpellID = {}
 TotemTimers.TextureToSpellID = {}
 
-for k,v in pairs(SpellIDs) do
-    local n,_,t = GetSpellInfo(v)
-    TotemTimers.SpellTextures[v] = t
-    TotemTimers.SpellNames[v] = n
-    if n then
-        TotemTimers.NameToSpellID[n] = v
-    end
-    if t then
-        TotemTimers.TextureToSpellID[t] = v
+local SpellIDs = TotemTimers.SpellIDs
+local AvailableSpells = TotemTimers.AvailableSpells
+local SpellNames = TotemTimers.SpellNames
+local SpellTextures = TotemTimers.SpellTextures
+local NameToSpellID = TotemTimers.NameToSpellID
+local TextureToSpellID = TotemTimers.TextureToSpellID
+
+
+function TotemTimers.GetSpells()
+    wipe(AvailableSpells)
+    for _, spellID in pairs(SpellIDs) do
+        local name,_,texture = GetSpellInfo(spellID)
+        local maxID = select(7, GetSpellInfo(name))
+        SpellTextures[spellID] = texture
+        SpellNames[spellID] = name
+        if name then
+            NameToSpellID[name] = spellID
+            local rank = GetSpellSubtext(name)
+            if rank and string.find(rank, "%d") then
+                local rankedName = name.."("..rank..")"
+                NameToSpellID[rankedName] = spellID
+                TotemTimers.SpellNames[spellID] = rankedName
+            else
+                TotemTimers.SpellNames[spellID] = name
+            end
+        end
+        if texture then
+            TextureToSpellID[texture] = spellID
+        end
+        AvailableSpells[spellID] = IsPlayerSpell(maxID or spellID)
     end
 end
-
-
-
---[[
-1 - Melee
-2 - Ranged
-3 - Caster
-4 - Healer
-5 - Hybrid (mostly Enh. Shaman)
-]]
-
+TotemTimers.GetSpells()
 
 TotemData = {
 	[SpellIDs.Tremor] = {
