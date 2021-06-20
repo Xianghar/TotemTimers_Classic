@@ -1,3 +1,5 @@
+1.18.5
+    - Fixed Water Shield
 1.18.4
     - Fixed Shield trackers not working after relog/reload
 1.18.3

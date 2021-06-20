@@ -308,7 +308,7 @@ end
 
 --local shieldtable = {SpellNames[SpellIDs.LightningShield], SpellNames[SpellIDs.WaterShield], SpellNames[SpellIDs.EarthShield]}
 local LightningShield = TotemTimers.StripRank(SpellNames[SpellIDs.LightningShield])
-local WaterShield = TotemTimers.StripRank(SpellNames[SpellIDs.LightningShield])
+local WaterShield = TotemTimers.StripRank(SpellNames[SpellIDs.WaterShield])
 local ShieldChargesOnly = false
 
 function TotemTimers.ShieldEvent(self, event, unit)
