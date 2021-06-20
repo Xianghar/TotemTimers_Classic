@@ -101,6 +101,7 @@ function TotemTimers.CreateTimers()
                                                       end ]])
 
         tt.Activate = function(self)
+            if self.active then return end
             local activeProfile = TotemTimers.ActiveProfile
 
             XiTimers.Activate(self)

@@ -65,12 +65,12 @@ function TotemTimers.CreateTrackers()
         XiTimers.Activate(self)
         TotemTimers.AnkhEvent(ankh.button, "SPELL_UPDATE_COOLDOWN")
         TotemTimers.AnkhEvent(ankh.button, "BAG_UPDATE")
-        TotemTimers.ProcessSetting("TimerSize")
+        --TotemTimers.ProcessSetting("TimerSize")
     end
     ankh.button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
     ankh.Deactivate = function(self)
         XiTimers.Deactivate(self)
-        TotemTimers.ProcessSetting("TimerSize")
+        --TotemTimers.ProcessSetting("TimerSize")
     end
     ankh.button.cooldown.noCooldownCount = true
     ankh.button.cooldown.noOCC = true
