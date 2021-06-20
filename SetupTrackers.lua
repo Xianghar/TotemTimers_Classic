@@ -307,8 +307,8 @@ function TotemTimers.AnkhEvent(self, event)
 end
 
 --local shieldtable = {SpellNames[SpellIDs.LightningShield], SpellNames[SpellIDs.WaterShield], SpellNames[SpellIDs.EarthShield]}
-local LightningShield = SpellNames[SpellIDs.LightningShield]
-local WaterShield = SpellNames[SpellIDs.WaterShield]
+local LightningShield = TotemTimers.StripRank(SpellNames[SpellIDs.LightningShield])
+local WaterShield = TotemTimers.StripRank(SpellNames[SpellIDs.LightningShield])
 local ShieldChargesOnly = false
 
 function TotemTimers.ShieldEvent(self, event, unit)
@@ -592,7 +592,7 @@ function TotemTimers.ChangeEarthShieldTarget()
     end
 end
 
-local EarthShieldSpellName = SpellNames[SpellIDs.EarthShield]
+local EarthShieldSpellName = TotemTimers.StripRank(SpellNames[SpellIDs.EarthShield])
 
 local ESChargesOnly = false
 

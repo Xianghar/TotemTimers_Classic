@@ -130,7 +130,7 @@ function TotemTimers.CreateTimers()
 
             if not lastTotem or
                     (not AvailableSpells[lastTotem] and not AvailableSpells[NameToSpellID[lastTotem]]
-                    and not AvailableSpells[NameToSpellID[gsub(lastTotem, "%(.*%)", "")]]) then
+                    and not AvailableSpells[NameToSpellID[TotemTimers.StripRank(lastTotem)]]) then
                 --[[when switching specs this part gets executed several times, once for switching and then for each talent (because of events fired)
                     so totems from talents are sometimes not available at this point.
                     lasttotem is saved and restored if not nil so that talent totems aren't replaced when switching specs ]]

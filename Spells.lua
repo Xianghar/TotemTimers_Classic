@@ -51,8 +51,10 @@ function TotemTimers.GetTalents()
     --if select(5, GetTalentInfo(1,13))>0 then TotemTimers.AvailableTalents.Fulmination = true end
 end
 
+local stripRank = TotemTimers.StripRank
+
 local function UpdateSpellNameRank(spell)
-    local spellNameWithoutRank = gsub(spell, "%(.*%)", "")
+    local spellNameWithoutRank = stripRank(spell)
     local spellID = NameToSpellID[spellNameWithoutRank]
     if spellID then
         local newRankName = SpellNames[spellID]

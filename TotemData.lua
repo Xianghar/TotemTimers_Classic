@@ -125,6 +125,10 @@ local SpellTextures = TotemTimers.SpellTextures
 local NameToSpellID = TotemTimers.NameToSpellID
 local TextureToSpellID = TotemTimers.TextureToSpellID
 
+local gsub = gsub
+function TotemTimers.StripRank(spell)
+    return gsub(spell, "%(.*%)", "")
+end
 
 function TotemTimers.GetSpells()
     wipe(AvailableSpells)
