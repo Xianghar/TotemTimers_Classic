@@ -144,8 +144,8 @@ function TotemTimers.CreateTimers()
                 -- restore saved totem if not nil
                 activeProfile.LastTotems[self.nr] = lastTotem or activeProfile.LastTotems[self.nr]
             else
-                self.button:SetAttribute("*spell1", activeProfile.LastTotems[self.nr])
-                self.button.icon:SetTexture(GetSpellTexture(activeProfile.LastTotems[self.nr]))
+                self.button:SetAttribute("*spell1", lastTotem)
+                self.button.icon:SetTexture(GetSpellTexture(TotemTimers.StripRank(lastTotem)))
             end
         end
 

@@ -15,6 +15,7 @@ local SpellIDs = TotemTimers.SpellIDs
 local SpellTextures = TotemTimers.SpellTextures
 local AvailableSpells = TotemTimers.AvailableSpells
 local AvailableTalents = TotemTimers.AvailableTalents
+local NameToSpellID = TotemTimers.NameToSpellID
 
 local earthShieldTarget = UnitName("player")
 local earthShieldTargetGUID = nil
@@ -195,7 +196,7 @@ function TotemTimers.CreateTrackers()
         weapon.button.icons[2]:SetTexture(SpellTextures[TotemTimers.ActiveProfile.LastWeaponEnchant == 5 and SpellIDs.FlametongueWeapon or SpellIDs.FrostbrandWeapon])
     else
         if TotemTimers.ActiveProfile.LastWeaponEnchant then
-            local texture = SpellTextures[TotemTimers.NameToSpellID[TotemTimers.ActiveProfile.LastWeaponEnchant]]
+            local texture = SpellTextures[NameToSpellID[TotemTimers.StripRank(TotemTimers.ActiveProfile.LastWeaponEnchant)]]
             weapon.button.icons[1]:SetTexture(texture)
             weapon.button.icons[2]:SetTexture(texture)
         end

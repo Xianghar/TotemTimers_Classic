@@ -127,7 +127,8 @@ local TextureToSpellID = TotemTimers.TextureToSpellID
 
 local gsub = gsub
 function TotemTimers.StripRank(spell)
-    return gsub(spell, "%(.*%)", "")
+    local stripped = gsub(spell, "%(.*%)", "")
+    return stripped
 end
 
 function TotemTimers.GetSpells()
