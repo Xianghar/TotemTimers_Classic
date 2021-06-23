@@ -1,3 +1,5 @@
+1.18.8
+    - Read spell ranks from spell book, hopefully fixes ranks for boosted characters
 1.18.7
     - Fixed totem timers changing when switching main hand weapons
 1.18.6

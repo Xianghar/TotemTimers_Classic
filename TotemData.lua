@@ -131,31 +131,41 @@ function TotemTimers.StripRank(spell)
     return stripped
 end
 
+
+-- populate SpellNames and NameToSpellID with unranked spells first
+-- TT inits with that info and upgrades ranks later when ranks are available
+
+for _, spellID in pairs(SpellIDs) do
+    local name,_,texture = GetSpellInfo(spellID)
+    if name then
+        NameToSpellID[name] = spellID
+        SpellNames[spellID] = name
+        SpellTextures[spellID] = texture
+        TextureToSpellID[texture] = spellID
+    end
+    AvailableSpells[spellID] = IsPlayerSpell(spellID)
+end
+
+-- get ranked spell names from spell book
 function TotemTimers.GetSpells()
     wipe(AvailableSpells)
-    for _, spellID in pairs(SpellIDs) do
-        local name,_,texture = GetSpellInfo(spellID)
-        local maxID = select(7, GetSpellInfo(name))
-        SpellTextures[spellID] = texture
-        SpellNames[spellID] = name
-        if name then
-            NameToSpellID[name] = spellID
-            local rank = GetSpellSubtext(name)
+    local index = 1
+    while true do
+        local name, rank = GetSpellBookItemName(index, BOOKTYPE_SPELL)
+        if not name then break end
+        local spellID = NameToSpellID[name]
+        if spellID then
+            AvailableSpells[spellID] = true
             if rank and string.find(rank, "%d") then
-                local rankedName = name.."("..rank..")"
-                NameToSpellID[rankedName] = spellID
-                TotemTimers.SpellNames[spellID] = rankedName
-            else
-                TotemTimers.SpellNames[spellID] = name
+                 local rankedName = name.."("..rank..")"
+                 NameToSpellID[rankedName] = spellID
+                 SpellNames[spellID] = rankedName
             end
         end
-        if texture then
-            TextureToSpellID[texture] = spellID
-        end
-        AvailableSpells[spellID] = IsPlayerSpell(maxID or spellID)
+        index = index + 1
     end
 end
-TotemTimers.GetSpells()
+--TotemTimers.GetSpells()
 
 TotemData = {
 	[SpellIDs.Tremor] = {
