@@ -327,7 +327,10 @@ function TotemTimers.ShieldEvent(self, event, unit)
             if name == LightningShield or name == WaterShield then
                 hasBuff = true
                 local timeleft = endtime - GetTime()
-                if name ~= self.shield or timeleft > self.timer.timers[1] then
+                if name ~= self.shield
+                 or (not ShieldChargesOnly and timeleft > self.timer.timers[1])
+                 or (ShieldChargesOnly and count > self.timer.timers[1])
+                  then
                     self.icons[1]:SetTexture(texture)
                     self.timer.expirationMsgs[1] = "Shield"
                     self.timer.earlyExpirationMsgs[1] = "Shield"
@@ -336,8 +339,10 @@ function TotemTimers.ShieldEvent(self, event, unit)
                     self.shield = name
                     if not ShieldChargesOnly then
                         self.timer:Start(1, timeleft, duration)
+                        self.timer.warningPoint = 10
                     else
                         self.timer:Start(1, count, 3)
+                        self.timer.warningPoint = 0
                     end
                 end
                 if not ShieldChargesOnly then
@@ -618,6 +623,8 @@ local function checkESBuff(self)
                 self.count:SetText(count)
             end
             if timeleft - self.timer.timers[1] > 0.1 then
+                self.timer.expirationMsgs[1] = "EarthShield"
+                self.timer.earlyExpirationMsgs[1] = "EarthShield"
                 if not ESChargesOnly then
                     self.timer:Start(1, timeleft, duration)
                 else
