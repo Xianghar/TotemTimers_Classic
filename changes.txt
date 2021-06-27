@@ -1,3 +1,5 @@
+1.18.10
+    - Fixed shield charges
 1.18.9
     - Possible fix for Earth Shield warning firing only once
 1.18.8

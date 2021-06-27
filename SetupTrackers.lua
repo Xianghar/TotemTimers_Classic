@@ -329,7 +329,7 @@ function TotemTimers.ShieldEvent(self, event, unit)
                 local timeleft = endtime - GetTime()
                 if name ~= self.shield
                  or (not ShieldChargesOnly and timeleft > self.timer.timers[1])
-                 or (ShieldChargesOnly and count > self.timer.timers[1])
+                 or ShieldChargesOnly
                   then
                     self.icons[1]:SetTexture(texture)
                     self.timer.expirationMsgs[1] = "Shield"
@@ -338,11 +338,11 @@ function TotemTimers.ShieldEvent(self, event, unit)
                     self.timer.warningSpells[1] = name
                     self.shield = name
                     if not ShieldChargesOnly then
-                        self.timer:Start(1, timeleft, duration)
                         self.timer.warningPoint = 10
+                        self.timer:Start(1, timeleft, duration)
                     else
-                        self.timer:Start(1, count, 3)
                         self.timer.warningPoint = 0
+                        self.timer:Start(1, count, 3)
                     end
                 end
                 if not ShieldChargesOnly then
@@ -622,7 +622,7 @@ local function checkESBuff(self)
             if not ESChargesOnly then
                 self.count:SetText(count)
             end
-            if timeleft - self.timer.timers[1] > 0.1 then
+            if timeleft - self.timer.timers[1] > 0.1 or ESChargesOnly then
                 self.timer.expirationMsgs[1] = "EarthShield"
                 self.timer.earlyExpirationMsgs[1] = "EarthShield"
                 if not ESChargesOnly then
