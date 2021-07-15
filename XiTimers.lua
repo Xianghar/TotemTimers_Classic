@@ -375,7 +375,7 @@ function XiTimers:Start(timer, time, duration)
     if self.reverseAlpha then self:SetIconAlpha(self.button.icons[timer], 0.4) end
 
     self.isAnimating = false
-    self.flashRed = TotemTimers.ActiveProfile.flashRed
+    --self.flashRed = TotemTimers.ActiveProfile.FlashRed
     --self.button.bar:SetValue(0)
     self:SetTimerBarPos(self.timerBarPos, true)
     if timer == 1 and self.hideInactive then

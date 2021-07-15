@@ -1,3 +1,7 @@
+1.19
+    - Fixed red flash for expiring timers
+    - Fixed big pulse animations for expired timers
+    - Readded debug window for copying addon settings, if you create an issue/post a comment
 1.18.10
     - Fixed shield charges
 1.18.9
