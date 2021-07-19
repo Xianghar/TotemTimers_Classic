@@ -14,8 +14,8 @@ function XiTimersAnimations:new(AnchoredButton)
     self.button =  CreateFrame("CheckButton", "XiTimers_Animation"..NumAnimations, UIParent, "ActionButtonTemplate")
     self.icon = _G["XiTimers_Animation"..NumAnimations.."Icon"]
 	self.button.normalTexture = _G["XiTimers_Animation"..NumAnimations.."NormalTexture"]
-    --self.button.normalTexture:Hide()
-    self.icon:SetTexCoord(0.07,0.93,0.07,0.93)
+    self.button.normalTexture:SetTexture(nil)
+    --self.icon:SetTexCoord(0.07,0.93,0.07,0.93)
     self.AnimGroup = self.button:CreateAnimationGroup()
     self.AnimGroup.button = self.button
     self.AnimGroup:SetLooping("NONE")

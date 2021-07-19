@@ -1,3 +1,6 @@
+1.19.1
+    - Changed Erathbind and Tremor Totems to pulse every 3 seconds
+    - Changed "Stop Pulse" option to be off by default
 1.19
     - Fixed red flash for expiring timers
     - Fixed big pulse animations for expired timers

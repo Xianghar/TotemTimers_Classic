@@ -9,6 +9,5 @@
     <Include file="libs\AceLocale-3.0\AceLocale-3.0.xml"/>
     <Include file="libs\LibSharedMedia-3.0\lib.xml"/>
     <Include file="libs\AceGUI-3.0-SharedMediaWidgets\widget.xml"/>
-    <Include file="libs\LibSpellRange-1.0\lib.xml"/>
     <Include file="libs\HereBeDragons\HereBeDragons-2.0.lua"/>
 </Ui>
