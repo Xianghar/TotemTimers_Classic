@@ -339,7 +339,7 @@ TotemTimers.options.args.timers = {
             order = 42,
             type = "toggle",
             name = L["Twisting Timer"],
-            desc = string.format(L["Shows twisting timer fpr %s"], SpellNames[SpellIDs.Windfury]),
+            desc = string.format(L["Shows twisting timer for %s"], SpellNames[SpellIDs.Windfury]),
             set = function(info, val) TotemTimers.ActiveProfile.TwistingTimer = val  TotemTimers.ProcessSetting("TwistingTimer") end,
             get = function(info) return TotemTimers.ActiveProfile.TwistingTimer end,
         },
