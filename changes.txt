@@ -1,3 +1,8 @@
+2.0
+    - Readded Combat Cooldowns/Buttons
+    - Fixed saving frame positions
+    - Stop Pulse animation can be enabled separately for totem timers, trackers and combat cooldowns
+    - Added #showtooltips to macro
 1.19.1
     - Changed Erathbind and Tremor Totems to pulse every 3 seconds
     - Changed "Stop Pulse" option to be off by default

@@ -39,6 +39,7 @@ Settings.lua
 Spells.lua
 SetupTimers.lua
 SetupTrackers.lua
+EnhanceCDs.lua
 TotemTimers.xml
 TotemTimers.lua
 Warnings.lua
@@ -57,6 +58,7 @@ GUI\localization.esmx.lua
 GUI\General.lua
 GUI\Timers.lua
 GUI\Trackers.lua
+GUI\EnhanceCDs.lua
 GUI\Messages.lua
 GUI\Totems.lua
 GUI\Profiles.lua
