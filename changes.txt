@@ -1,3 +1,5 @@
+2.0.2
+    - Fixed Earth Shield only casting rank 1
 2.0.1
     - Added option to hide Flame Shock duration in combat cooldowns
 2.0
