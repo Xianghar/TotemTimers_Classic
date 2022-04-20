@@ -223,6 +223,19 @@ TotemTimers.options = {
                           end,
                     get = function(info) return TotemTimers.ActiveProfile.CooldownAlpha end,
                 },
+                OOCAlpha = {
+                    order = 39,
+                    type="range",
+                    min = 0,
+                    max = 1,
+                    step = 0.1,
+                    name = L["OOC Opacity"],
+                    desc = L["OOC Opacity Desc"],
+                    set = function(info, val)
+                                TotemTimers.ActiveProfile.OOCAlpha = val  TotemTimers.ProcessSetting("OOCAlpha")
+                          end,
+                    get = function(info) return TotemTimers.ActiveProfile.OOCAlpha end,
+                },
                 h2 = {
                     order = -10,
                     type = "header",

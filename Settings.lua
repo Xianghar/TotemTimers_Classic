@@ -575,15 +575,15 @@ SettingsFunctions = {
         TTActionBars.bars[5]:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
     end,
 
-    --[[EnhanceCDsOOCAlpha =
-        function(value)
-			local Timers = TotemTimers.EnhanceCDs
+    OOCAlpha =
+        function(value, Timers)
+			--local Timers = TotemTimers.EnhanceCDs
             for i = 1,#Timers do
                 Timers[i].OOCAlpha = value
             end
-            TotemTimers.maelstrom:SetAlpha(value)
+            --TotemTimers.maelstrom:SetAlpha(value)
             XiTimers.invokeOOCFader()
-        end, --]]
+        end,
 
     TimersOnButtons =
     function(value, Timers)

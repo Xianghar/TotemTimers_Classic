@@ -172,8 +172,8 @@ L["Lava Surge Glow"] = "용암 쇄도 깜박임"
 L["Lava Surge Glow Desc"] = "용암 쇄도 효과 발동시 타이머와 행동 단축바의 용암 쇄도 아이콘에 깜박임 효과를 표시합니다." -- Needs review
 L["Long Cooldowns"] = "긴 재사용 대기시간" -- Needs review
 L["Maelstrom Bar Height"] = "소용돌이치는 무기 바 높이"
-L["OOC Alpha"] = "OOC 투명도"
-L["OOC Alpha Desc"] = "전투 상태시 버튼의 불투명도를 조절합니다, 0 = 투명, 1 = 불투명"
+L["OOC Opacity"] = "OOC 투명도"
+L["OOC Opacity Desc"] = "전투 상태시 버튼의 불투명도를 조절합니다, 0 = 투명, 1 = 불투명"
 L["Show OmniCC counters"] = "OmniCC 카운터 표시"
 L["Spells"] = "주문" -- Needs review
 

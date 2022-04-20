@@ -30,7 +30,6 @@ Bindings.lua
 XiTimers.lua
 XiTimers.xml
 ToolTips.lua
-ToolTips.lua
 TotemSets.xml
 TotemSets.lua
 TTActionBars.lua

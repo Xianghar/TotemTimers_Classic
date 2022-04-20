@@ -172,8 +172,8 @@ L["Lava Surge Glow"] = "Lava Surge Glow" -- Requires localization
 L["Lava Surge Glow Desc"] = "Lets the Lava Burst cooldown timer and action bar buttons containing Lava Burst glow if Lava Surge procs" -- Requires localization
 L["Long Cooldowns"] = "Long Cooldowns" -- Requires localization
 L["Maelstrom Bar Height"] = "Maelstrom Bar Height" -- Requires localization
-L["OOC Alpha"] = "OOC Alpha" -- Requires localization
-L["OOC Alpha Desc"] = "Controls the opacity of the buttons out of combat, 0 = transparent, 1 = opaque" -- Requires localization
+L["OOC Opacity"] = "OOC Opacity" -- Requires localization
+L["OOC Opacity Desc"] = "Controls the opacity of the buttons out of combat, 0 = transparent, 1 = opaque" -- Requires localization
 L["Show OmniCC counters"] = "Show OmniCC counters" -- Requires localization
 L["Spells"] = "Spells" -- Requires localization
 

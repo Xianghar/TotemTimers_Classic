@@ -70,19 +70,7 @@ TotemTimers.options.args.enhancecds = {
             set = function(info, val) TotemTimers.ActiveProfile.HideEnhanceCDsOOC = val  TotemTimers.ProcessSetting("HideEnhanceCDsOOC") end,
             get = function(info) return TotemTimers.ActiveProfile.HideEnhanceCDsOOC end,
         },]]
-        OOCAlpha = {
-            order = 8,
-            type="range",
-            min = 0,
-            max = 1,
-            step = 0.1,
-            name = L["OOC Alpha"], 
-            desc = L["OOC Alpha Desc"],
-            set = function(info, val)
-                        TotemTimers.ActiveProfile.EnhanceCDsOOCAlpha = val  TotemTimers.ProcessSetting("EnhanceCDsOOCAlpha")	
-                  end,
-            get = function(info) return TotemTimers.ActiveProfile.EnhanceCDsOOCAlpha end,
-        },
+
         scalingheader = {
             order = 10,
             type = "header",

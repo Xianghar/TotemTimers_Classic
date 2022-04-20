@@ -1,3 +1,6 @@
+2.1
+    - Set button tooltips show totems
+    - Fixed setting for out of combat opacity
 2.0.3
     - Fixed Chain Lightning Button for Elemental Shamans
 2.0.2
@@ -10,7 +13,7 @@
     - Stop Pulse animation can be enabled separately for totem timers, trackers and combat cooldowns
     - Added #showtooltips to macro
 1.19.1
-    - Changed Erthbind and Tremor Totems to pulse every 3 seconds
+    - Changed Earthbind and Tremor Totems to pulse every 3 seconds
     - Changed "Stop Pulse" option to be off by default
 1.19
     - Fixed red flash for expiring timers

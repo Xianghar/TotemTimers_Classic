@@ -120,6 +120,7 @@ TotemTimers.SpellTextures = {}
 TotemTimers.SpellNames = {}
 TotemTimers.NameToSpellID = {}
 TotemTimers.TextureToSpellID = {}
+TotemTimers.RankedNameToSpellID = {}
 
 local SpellIDs = TotemTimers.SpellIDs
 local AvailableSpells = TotemTimers.AvailableSpells
@@ -127,6 +128,7 @@ local SpellNames = TotemTimers.SpellNames
 local SpellTextures = TotemTimers.SpellTextures
 local NameToSpellID = TotemTimers.NameToSpellID
 local TextureToSpellID = TotemTimers.TextureToSpellID
+local RankedNameToSpellID = TotemTimers.RankedNameToSpellID
 
 local gsub = gsub
 function TotemTimers.StripRank(spell)
@@ -154,7 +156,7 @@ function TotemTimers.GetSpells()
     wipe(AvailableSpells)
     local index = 1
     while true do
-        local name, rank = GetSpellBookItemName(index, BOOKTYPE_SPELL)
+        local name, rank, rankedSpellID = GetSpellBookItemName(index, BOOKTYPE_SPELL)
         if not name then break end
         local spellID = NameToSpellID[name]
         if spellID then
@@ -163,6 +165,7 @@ function TotemTimers.GetSpells()
                  local rankedName = name.."("..rank..")"
                  NameToSpellID[rankedName] = spellID
                  SpellNames[spellID] = rankedName
+                 RankedNameToSpellID[rankedName] = rankedSpellID
             end
         end
         index = index + 1

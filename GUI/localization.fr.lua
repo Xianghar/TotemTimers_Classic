@@ -172,8 +172,8 @@ L["Lava Surge Glow"] = "Lueur Vague de lave"
 L["Lava Surge Glow Desc"] = "Lets the Lava Burst cooldown timer and action bar buttons containing Lava Burst glow if Lava Surge procs" -- Requires localization
 L["Long Cooldowns"] = "Temps de recharge longs" -- Needs review
 L["Maelstrom Bar Height"] = "Maelstrom hauteur de la barre"
-L["OOC Alpha"] = "Opacité"
-L["OOC Alpha Desc"] = "Contrôles de l'opacité des boutons hors de combat, 0 = transparent, 1= opaque|n|n|cffFFF8DCTraduction:|r |n|cff1E90FFVî|r |cffF0FFFFb|r |cff8B0000ë|r |cffFFF8DCserveur|r |cff7FFF00Dalaran|r |n"
+L["OOC Opacity"] = "Opacité"
+L["OOC Opacity Desc"] = "Contrôles de l'opacité des boutons hors de combat, 0 = transparent, 1= opaque|n|n|cffFFF8DCTraduction:|r |n|cff1E90FFVî|r |cffF0FFFFb|r |cff8B0000ë|r |cffFFF8DCserveur|r |cff7FFF00Dalaran|r |n"
 L["Show OmniCC counters"] = "Active OmniCC (addon)"
 L["Spells"] = "Sorts" -- Needs review
 

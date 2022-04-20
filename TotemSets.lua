@@ -26,10 +26,8 @@ function TotemTimers.InitSetButtons()
                                                             [[ if button == "LeftButton" then
                                                                 control:ChildUpdate("toggle")
                                                             end ]])
-    ankh.HideTooltip = TotemTimers.HideTooltip
-    ankh.ShowTooltip = TotemTimers.SetTooltip
-    ankh:SetAttribute("_onleave", [[ control:CallMethod("HideTooltip") ]])
-    ankh:SetAttribute("_onenter", [[ if self:GetAttribute("tooltip") then control:CallMethod("ShowTooltip") end ]])
+
+    ankh.tooltip = TotemTimers.Tooltips.SetAnchor:new(ankh)
     ankh:SetAttribute("_onattributechanged", [[ if name=="hide" then
                                                     control:ChildUpdate("show", false)
                                                     self:SetAttribute("open", false)
@@ -51,11 +49,12 @@ function TotemTimers.ProgramSetButtons()
             b = CreateFrame("Button", "TotemTimers_SetButton"..i, XiTimers.timers[5].button, "TotemTimers_SetButtonTemplate")
             b:SetAttribute("_childupdate-show", [[ if message and not self:GetAttribute("inactive") then self:Show() else self:Hide() end ]])
             b:SetAttribute("_childupdate-toggle", [[ if not self:GetAttribute("inactive") then if self:IsVisible() then self:Hide() else self:Show() end end ]])
-            b:SetAttribute("_onleave", [[ control:CallMethod("HideTooltip")  ]]) 
-            b:SetAttribute("_onenter", [[ control:CallMethod("ShowTooltip") ]])
             b.nr = i
-            b.HideTooltip = TotemTimers.HideTooltip
-            b.ShowTooltip = TotemTimers.SetButtonTooltip
+
+            b.tooltip = TotemTimers.Tooltips.SetButton:new(b)
+            XiTimers.HookTooltips(b)
+            b:SetAttribute("tooltip", true)
+
             b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
             b:SetParent(XiTimers.timers[5].button)
         end
