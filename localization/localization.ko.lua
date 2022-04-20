@@ -23,7 +23,7 @@ if not L then return end
 L["Air Button"] = "바람 버튼"
 L["Cooldown"] = "재사용 대기시간" -- Needs review
 L["Ctrl-Leftclick to remove weapon buffs"] = "Ctrl+왼쪽 클릭시 무기 버프 제거"
-L["Delete Set"] = "토템 %u 세트를 삭제합니까?"
+L["Delete Set"] = "토템 %s 세트를 삭제합니까?"
 L["Earth Button"] = "대지 버튼"
 L["Fire Button"] = "불 버튼"
 L["Leftclick to cast %s"] = "왼쪽 클릭시 %s 시전"

@@ -22,7 +22,7 @@ if not L then return end
 L["Air Button"] = "Air Button" -- Requires localization
 L["Cooldown"] = "Cooldown" -- Requires localization
 L["Ctrl-Leftclick to remove weapon buffs"] = "Crtl-botão esquerdo para remover buffs das armas" -- Needs review
-L["Delete Set"] = "Delete Totem Set %u?" -- Requires localization
+L["Delete Set"] = "Delete Totem Set %s?" -- Requires localization
 L["Earth Button"] = "Earth Button" -- Requires localization
 L["Fire Button"] = "Fire Button" -- Requires localization
 L["Leftclick to cast %s"] = "Leftclick to cast %s" -- Requires localization

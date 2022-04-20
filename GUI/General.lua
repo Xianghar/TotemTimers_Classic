@@ -270,7 +270,7 @@ TotemTimers.options = {
     },
 }
 
-ACR =	LibStub("AceConfigRegistry-3.0")
+local ACR =	LibStub("AceConfigRegistry-3.0")
 ACR:RegisterOptionsTable("TotemTimers", TotemTimers.options)
 local ACD = LibStub("AceConfigDialog-3.0")
 local frame = ACD:AddToBlizOptions("TotemTimers", "TotemTimers", nil, "general")

@@ -1,3 +1,5 @@
+2.1.1
+    - Added option to rename totem sets
 2.1
     - Set button tooltips show totems
     - Fixed setting for out of combat opacity

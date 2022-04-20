@@ -21,6 +21,8 @@ local ElementColors = {
     CreateColorFromHexString("FF76c7f3"),
     CreateColor(1,1,1),
 }
+TotemTimers.ElementColors = ElementColors
+
 local StripRank = TotemTimers.StripRank
 
 
@@ -133,12 +135,16 @@ TotemTimers.Tooltips.SetButton = SetButtonTooltip
 
 function SetButtonTooltip:SetText()
     local set = TotemTimers.ActiveProfile.TotemSets[self.button.nr]
+    
     if set then
+        GameTooltip:AddLine(not set.name and "Set " .. self.button.nr or set.name, 1, 1, 1)
+
         for i=1,4 do
            GameTooltip:AddLine(StripRank(set[i]), ElementColors[i].r, ElementColors[i].g, ElementColors[i].b)
         end
         GameTooltip:AddLine(" ")
     end
+
     GameTooltip:AddLine(L["Leftclick to load totem set"],r,g,b,1)
     GameTooltip:AddLine(L["Rightclick to delete totem set"],r,g,b,1)
 end

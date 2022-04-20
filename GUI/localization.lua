@@ -215,4 +215,4 @@ L["Solo"] = true
 L["You cannot delete the default profile."] = true
 L["You need to enter a profile name first."] = true
 
-
+L["Rename"] = true

@@ -23,7 +23,7 @@ if not L then return end
 L["Air Button"] = "bouton Totem de l'air"
 L["Cooldown"] = "Recharge" -- Needs review
 L["Ctrl-Leftclick to remove weapon buffs"] = "Ctrl-clic gauche pour supprimer les améliorations d'armes"
-L["Delete Set"] = "Supprimer l'ensemble des Totem %u?"
+L["Delete Set"] = "Supprimer l'ensemble des Totem %s?"
 L["Earth Button"] = "bouton Totem de la Terre"
 L["Fire Button"] = "Bouton feu"
 L["Leftclick to cast %s"] = "Clic gauche pour lancer %s"

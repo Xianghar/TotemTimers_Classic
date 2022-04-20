@@ -96,15 +96,16 @@ function TotemTimers.SetButton_OnClick(self, button)
     if InCombatLockdown() then return end
     --XiTimers.timers[5].button:SetAttribute("hide", true)
     self:GetParent():Execute([[ owner:ChildUpdate("show", false) ]])
+
+    local set = TotemTimers.ActiveProfile.TotemSets[self.nr]
+    if not set then return end
+
 	if button == "RightButton" then
-		local popup = StaticPopup_Show("TOTEMTIMERS_DELETESET", self.nr)
+		local popup = StaticPopup_Show("TOTEMTIMERS_DELETESET", not set.name and self.nr or set.name)
 		popup.data = self.nr
     elseif button == "LeftButton" then
-        local set = TotemTimers.ActiveProfile.TotemSets[self.nr]
-        if set then 
-            for i=1,4 do
-                XiTimers.timers[i].button:SetAttribute("*spell1", set[XiTimers.timers[i].nr])
-            end            
+        for i=1,4 do
+            XiTimers.timers[i].button:SetAttribute("*spell1", set[XiTimers.timers[i].nr])
         end
         TotemTimers.UpdateSpellRanks()
 	end

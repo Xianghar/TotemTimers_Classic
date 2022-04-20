@@ -23,7 +23,7 @@ if not L then return end
 L["Air Button"] = "Кнопки Воздуха"
 L["Cooldown"] = "Кулдаун" -- Needs review
 L["Ctrl-Leftclick to remove weapon buffs"] = "[Ctrl+Левый клик] - снять усиление с оружия"
-L["Delete Set"] = "Удалить набор тотемов %u?"
+L["Delete Set"] = "Удалить набор тотемов %s?"
 L["Earth Button"] = "Кнопки Земли"
 L["Fire Button"] = "Кнопки Огня"
 L["Leftclick to cast %s"] = "[Левый клик] - применить %s"

@@ -60,5 +60,7 @@ GUI\Trackers.lua
 GUI\EnhanceCDs.lua
 GUI\Messages.lua
 GUI\Totems.lua
+GUI\Sets.lua
 GUI\Profiles.lua
+
 
