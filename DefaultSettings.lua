@@ -293,11 +293,14 @@ TotemTimers.DefaultProfile = {
         EnhanceCDsMaelstromHeight = 14,
         ShowOmniCCOnEnhanceCDs = true,
         OOCAlpha = 0.4,
+        EnhanceCDsOOCAlpha = 0.4,
         CDTimersOnButtons = true,
         FlameShockDurationOnTop = false,
         EnhanceCDsClickthrough = false,
         EnhanceCDsFlameShockDuration = true,
         EnhanceCDsTotemTwisting = true,
+
+        WindfuryDownrank = false,
 		
 		
 		-- LongCooldowns = true,

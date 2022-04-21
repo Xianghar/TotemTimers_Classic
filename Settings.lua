@@ -577,7 +577,15 @@ SettingsFunctions = {
 
     OOCAlpha =
         function(value, Timers)
-			--local Timers = TotemTimers.EnhanceCDs
+            for i = 1,8 do
+                Timers[i].OOCAlpha = value
+            end
+            XiTimers.invokeOOCFader()
+        end,
+
+    EnhanceCDsOOCAlpha =
+        function(value)
+            local Timers = TotemTimers.EnhanceCDs
             for i = 1,#Timers do
                 Timers[i].OOCAlpha = value
             end
@@ -723,15 +731,17 @@ SettingsFunctions = {
             end
         end,
         
-    --[[ HideEnhanceCDsOOC =
+    HideEnhanceCDsOOC =
         function(value)
 			local Timers = TotemTimers.EnhanceCDs
             for i = 1,#Timers do
                 Timers[i].HideOOC = value
 				Timers[i].button:SetAttribute("HideOOC", value)
             end
+            TotemTimers.FlameShockDuration.HideOOC = value
+            TotemTimers.FlameShockDuration.button:SetAttribute("HideOOC", value)
             TotemTimers.ConfigEnhanceCDs()
-        end, --]]
+        end,
         
         
     EarthShieldTargetName =
@@ -839,8 +849,8 @@ SettingsFunctions = {
                     bar.buttons[j].cooldown:SetAlpha(value)
                 end
             end
-        end
-        
+        end,
+
 }
 
 SettingsFunctions.ReverseBarBindings = SettingsFunctions.BarBindings

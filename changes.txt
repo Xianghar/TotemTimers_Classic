@@ -1,3 +1,7 @@
+2.2
+    - Added option to downrank Windfury Totem to rank 1
+    - Added separate setting for out of combat opacity for combat cooldowns
+    - Added option to hide combat cooldowns out of combat
 2.1.1
     - Added option to rename totem sets
 2.1

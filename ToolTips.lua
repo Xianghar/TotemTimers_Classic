@@ -135,7 +135,7 @@ TotemTimers.Tooltips.SetButton = SetButtonTooltip
 
 function SetButtonTooltip:SetText()
     local set = TotemTimers.ActiveProfile.TotemSets[self.button.nr]
-    
+
     if set then
         GameTooltip:AddLine(not set.name and "Set " .. self.button.nr or set.name, 1, 1, 1)
 

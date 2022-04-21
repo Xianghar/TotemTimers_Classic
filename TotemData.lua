@@ -115,7 +115,6 @@ TotemTimers.SpellIDs = {
 	
 }
 
-
 TotemTimers.SpellTextures = {}
 TotemTimers.SpellNames = {}
 TotemTimers.NameToSpellID = {}
@@ -151,10 +150,13 @@ for _, spellID in pairs(SpellIDs) do
     AvailableSpells[spellID] = IsPlayerSpell(spellID)
 end
 
+local WindfuryName = GetSpellInfo(SpellIDs.Windfury)
+
 -- get ranked spell names from spell book
 function TotemTimers.GetSpells()
     wipe(AvailableSpells)
     local index = 1
+    local windfuryFound = false
     while true do
         local name, rank, rankedSpellID = GetSpellBookItemName(index, BOOKTYPE_SPELL)
         if not name then break end
@@ -166,6 +168,10 @@ function TotemTimers.GetSpells()
                  NameToSpellID[rankedName] = spellID
                  SpellNames[spellID] = rankedName
                  RankedNameToSpellID[rankedName] = rankedSpellID
+                 if not windfuryFound and name == WindfuryName then
+                    TotemTimers.WindfuryRank1 = rankedName
+                    windfuryFound = true
+                 end
             end
         end
         index = index + 1
