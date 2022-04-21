@@ -311,7 +311,7 @@ TotemTimers.options.args.timers = {
             set = function(info, val) TotemTimers.ActiveProfile.CheckPlayerRange = val  TotemTimers.ProcessSetting("CheckPlayerRange") end,
             get = function(info) return TotemTimers.ActiveProfile.CheckPlayerRange end,                          
         },                                               
-        RaidRange = {
+        --[[ RaidRange = {
             order = 40,
             type = "toggle",
             name = L["Raid Member Range"],
@@ -326,9 +326,41 @@ TotemTimers.options.args.timers = {
             desc = L["RR Tooltip Desc"],
             set = function(info, val) TotemTimers.ActiveProfile.ShowRaidRangeTooltip = val  TotemTimers.ProcessSetting("ShowRaidRangeTooltip") end,
             get = function(info) return TotemTimers.ActiveProfile.ShowRaidRangeTooltip end,                          
-        },                                               
+        },  ]]
+        macro = {
+            order = 60,
+            type = "header",
+            name = "Macro",
+        },
+        macroreset = {
+            order = 65,
+            type = "range",
+            name = L["Reset"],
+            desc = L["Reset /castsequence after x seconds"],
+            min = 10,
+            max = 60,
+            step = 5,
+            set = function(info, val)
+                TotemTimers.ActiveProfile.MacroReset = val
+                TotemTimers.UpdateMacro()
+            end,
+            get = function(info) return TotemTimers.ActiveProfile.MacroReset end,
+        },
     },
 }
+
+for i = 1,4 do
+    TotemTimers.options.args.timers.args['macro'..i] =
+    {
+        order = 60+i,
+        type = "toggle",
+        name = ElementValues[i],
+        arg = i,
+        width = 0.8,
+        set = function(info, val) TotemTimers.ActiveProfile.IncludeInMacro[info.arg] = val TotemTimers.UpdateMacro() end,
+        get = function(info) return TotemTimers.ActiveProfile.IncludeInMacro[info.arg] end,
+    }
+end
 
 local ACD = LibStub("AceConfigDialog-3.0")
 local frame = ACD:AddToBlizOptions("TotemTimers", L["Timers"], "TotemTimers", "timers")

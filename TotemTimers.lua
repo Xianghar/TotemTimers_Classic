@@ -369,12 +369,11 @@ function TotemTimers.UpdateMacro()
         local _, free = GetNumMacros()
         local nr = GetMacroIndexByName("TT Cast")
         if free==18 and nr==0 then return end
-        local sequence = "/castsequence reset=combat/60  "
+        local sequence = "#showtooltips\n/castsequence reset=combat/"..TotemTimers.ActiveProfile.MacroReset.." ";
         local timers = XiTimers.timers
-        local order = TotemTimers.ActiveProfile.Order
         for i=1,4 do
-        local timer = timers[order[i]]
-            if timer.active then
+            local timer = timers[i]
+            if timer.active and TotemTimers.ActiveProfile.IncludeInMacro[timer.nr] then
                 local spell = timer.button:GetAttribute("*spell1")
                 if spell then
                     sequence = sequence .. spell..", "
@@ -384,7 +383,7 @@ function TotemTimers.UpdateMacro()
         sequence = strsub(sequence, 1, strlen(sequence)-2)
         local nr = GetMacroIndexByName("TT Cast")
         if nr == 0 then
-            CreateMacro("TT Cast", "INV_MISC_QUESTIONMARK", sequence, 1)
+            CreateMacro("TT Cast", "INV_MISC_QUESTIONMARK", sequence, true)
         else
             EditMacro(nr, "TT Cast", nil, sequence)
         end
@@ -392,3 +391,4 @@ function TotemTimers.UpdateMacro()
         macroNeedsUpdate = true
     end
 end
+

@@ -886,10 +886,6 @@ local rangeManaFrame = CreateFrame("Frame")
 local lastRangeUpdate = 0
 local rangeManaCheckFrames = {}
 
-local SpellRange = LibStub("SpellRange-1.0")
-local IsSpellInRange = SpellRange.IsSpellInRange
-
-
 local function rangeManaUpdate(self, elapsed)
 	lastRangeUpdate = lastRangeUpdate + 1
 	if lastRangeUpdate > #rangeManaCheckFrames then lastRangeUpdate = 1 end

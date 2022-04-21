@@ -1,3 +1,8 @@
+1.20
+    - Added #showtooltips to macro
+    - Added options to choose which totem elements to include in castsequence macro
+    - Added option for after how many seconds the castsequence resets
+    - Fixed totem order in macro
 1.08
     - Fixed Reincarnation maximum duration display
     - Added pulse for Grounding Totem
