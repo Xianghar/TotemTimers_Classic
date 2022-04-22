@@ -1,3 +1,6 @@
+2.2.1
+    - Default out ouf combat opacity is now 1
+    - Set tooltips and colored timer bars use the same colors
 2.2
     - Added option to downrank Windfury Totem to rank 1
     - Added separate setting for out of combat opacity for combat cooldowns

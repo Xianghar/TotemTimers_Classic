@@ -17,12 +17,14 @@ local AvailableSpells = TotemTimers.AvailableSpells
 
 local LSM = LibStub:GetLibrary("LibSharedMedia-3.0", true)
 
-local TotemColors = {
-    [AIR_TOTEM_SLOT] = {0.7,0.7,1.0},
+--[[local TotemColors = {
+    --[AIR_TOTEM_SLOT] = {0.7,0.7,1.0},
+    [AIR_TOTEM_SLOT] = {1,1,1},
     [WATER_TOTEM_SLOT] = {0.4,0.4,1.0},
     [FIRE_TOTEM_SLOT] = {1.0,0.1,0.1},
     [EARTH_TOTEM_SLOT] = {0.7,0.5,0.3},
-}
+}]]
+local TotemColors = TotemTimers.ElementColors
 
 local SettingsFunctions
 
@@ -378,7 +380,7 @@ SettingsFunctions = {
     function(value, Timers)
         for i=1,#Timers do
             if value and i<5 then
-                Timers[i]:SetBarColor(TotemColors[Timers[i].nr][1], TotemColors[Timers[i].nr][2], TotemColors[Timers[i].nr][3],1)
+                Timers[i]:SetBarColor(TotemColors[Timers[i].nr].r, TotemColors[Timers[i].nr].g, TotemColors[Timers[i].nr].b,1)
             elseif i ~= 21 then
                 Timers[i]:SetBarColor(TotemTimers.ActiveProfile.TimerBarColor.r,TotemTimers.ActiveProfile.TimerBarColor.g,
                         TotemTimers.ActiveProfile.TimerBarColor.b,TotemTimers.ActiveProfile.TimerBarColor.a)

@@ -15,13 +15,7 @@ local r = 0
 local g = 0.9
 local b = 1
 
-local ElementColors = {
-    CreateColorFromHexString("FFFF7500"),
-    CreateColorFromHexString("FFCBA57B"),
-    CreateColorFromHexString("FF76c7f3"),
-    CreateColor(1,1,1),
-}
-TotemTimers.ElementColors = ElementColors
+local ElementColors = TotemTimers.ElementColors
 
 local StripRank = TotemTimers.StripRank
 
@@ -97,6 +91,9 @@ function XiTimersTooltip:SetSpell(spell)
         if not spellID then spellID = NameToSpellID[spell] end
     end
 
+    spellID = tonumber(spellID)
+    if not spellID then return end
+
     GameTooltip:SetSpellByID(spellID)
 end
 
@@ -111,7 +108,7 @@ function TotemTooltip:SetText()
     local spell = self.button:GetAttribute("*spell1")
     if not spell then return end
 
-    local spellID = self:SetSpell(spell)
+    self:SetSpell(spell)
 
     GameTooltip:AddLine(" ")
     GameTooltip:AddLine(L["Leftclick to cast spell"],r,g,b,1)

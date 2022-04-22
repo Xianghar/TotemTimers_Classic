@@ -7,10 +7,10 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local SpellIDs = TotemTimers.SpellIDs
 local SpellNames = TotemTimers.SpellNames
-local Version = 11.2
+local Version = 11.3
 
 TotemTimers.DefaultGlobalSettings = {
-	Version = 11.2,
+	Version = 11.3,
     Profiles = {},
     Sink = {}
 }
@@ -292,7 +292,7 @@ TotemTimers.DefaultProfile = {
         EnhanceCDsTimeHeight = 12,
         EnhanceCDsMaelstromHeight = 14,
         ShowOmniCCOnEnhanceCDs = true,
-        OOCAlpha = 0.4,
+        OOCAlpha = 1,
         EnhanceCDsOOCAlpha = 0.4,
         CDTimersOnButtons = true,
         FlameShockDurationOnTop = false,
@@ -425,6 +425,12 @@ local SettingsConverters = {
             profile.TrackerStopPulse = profile.StopPulse
         end
         TotemTimers_GlobalSettings.Version = 11.2
+    end,
+    [11.2] = function()
+        for k,profile in pairs(TotemTimers_Profiles) do
+            if profile.OOCAlpha == 0.4 then profile.OOCAlpha = 1 end
+        end
+        TotemTimers_GlobalSettings.Version = 11.3
     end,
 }
 

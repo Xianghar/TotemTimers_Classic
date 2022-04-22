@@ -7,6 +7,13 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 TotemTimers = {}
 
+TotemTimers.ElementColors = {
+    [FIRE_TOTEM_SLOT] = CreateColorFromHexString("FFFF7500"),
+    [EARTH_TOTEM_SLOT] = CreateColorFromHexString("FFCBA57B"),
+    [WATER_TOTEM_SLOT] = CreateColor(0.4,0.4,1), --CreateColorFromHexString("FF76c7f3"),
+    [AIR_TOTEM_SLOT] = CreateColor(1,1,1),
+}
+
 
 TotemTimers.AvailableSpells = {}
 TotemTimers.AvailableSpellIDs = {}
