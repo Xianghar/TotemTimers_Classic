@@ -62,7 +62,7 @@ function XiTimersTooltip:Show()
     if not self.button then return end
 
     if not TotemTimers.ActiveProfile.TooltipsAtButtons then
-        GameTooltip_SetDefaultAnchor(GameTooltip, self)
+        GameTooltip_SetDefaultAnchor(GameTooltip, self.button)
     else
         local left = self.button:GetLeft()
         if left<UIParent:GetWidth()/2 then
