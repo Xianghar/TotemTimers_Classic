@@ -1,0 +1,64 @@
+## Interface: 11403
+## Title: TotemTimers
+## Author:  Xianghar
+## Version: @project-version@
+## SavedVariables: TotemTimers_GlobalSettings, TotemTimers_Profiles
+## OptionalDeps: Masque
+## LoadManagers: AddonLoader
+## X-LoadOn-Class: Shaman
+## X-Curse-Project-ID: 339602
+## X-WoWI-ID: 25223
+
+
+
+embeds.xml
+
+vanilla\TotemData.lua
+localization\localization.lua
+localization\localization.ge.lua
+localization\localization.fr.lua
+localization\localization.es.lua
+localization\localization.ru.lua
+localization\localization.cn.lua
+localization\localization.tw.lua
+localization\localization.ko.lua
+localization\localization.br.lua
+localization\localization.it.lua
+localization\localization.esmx.lua
+Animation.lua
+Bindings.lua
+XiTimers.lua
+XiTimers.xml
+ToolTips.lua
+TotemSets.xml
+TotemSets.lua
+vanilla\TTActionBars.lua
+vanilla\DefaultSettings.lua
+vanilla\Settings.lua
+vanilla\Spells.lua
+vanilla\SetupTimers.lua
+vanilla\SetupTrackers.lua
+vanilla\TotemTimers.xml
+vanilla\TotemTimers.lua
+Warnings.lua
+Masque.lua
+GUI\localization.lua
+GUI\localization.ge.lua
+GUI\localization.ru.lua
+GUI\localization.tw.lua
+GUI\localization.cn.lua
+GUI\localization.ko.lua
+GUI\localization.fr.lua
+GUI\localization.es.lua
+GUI\localization.br.lua
+GUI\localization.it.lua
+GUI\localization.esmx.lua
+vanilla\GUI\General.lua
+vanilla\GUI\Timers.lua
+vanilla\GUI\Trackers.lua
+vanilla\GUI\Messages.lua
+vanilla\GUI\Totems.lua
+vanilla\GUI\Sets.lua
+vanilla\GUI\Profiles.lua
+
+
