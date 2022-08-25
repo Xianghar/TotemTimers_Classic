@@ -1,8 +1,3 @@
--- Copyright © 2008 - 2012 Xianghar  <xian@zron.de>
--- All Rights Reserved.
--- This code is not to be modified or distributed without written permission by the author.
--- Current distribution permissions only include curse.com, wowinterface.com and their respective addon updaters
-
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers")
@@ -13,7 +8,8 @@ local SpellIDs = TotemTimers.SpellIDs
 local SpellTextures = TotemTimers.SpellTextures
 local AvailableSpells = TotemTimers.AvailableSpells
 
-local earthShieldTarget = nil
+local ankh = nil
+local shield = nil
 
 local playerName = UnitName("player")
 
@@ -30,9 +26,11 @@ local function splitString(ustring)
     return s
 end
 
+
+
 function TotemTimers.CreateTrackers()
 	-- ankh tracker
-	local ankh = XiTimers:new(1)
+	ankh = XiTimers:new(1)
 	ankh.button:SetScript("OnEvent", TotemTimers.AnkhEvent)
 	ankh.button.icons[1]:SetTexture(SpellTextures[SpellIDs.Ankh])
 	ankh.events[1] = "SPELL_UPDATE_COOLDOWN"
@@ -56,7 +54,7 @@ function TotemTimers.CreateTrackers()
     ankh.button.cooldown.noCooldownCount = true
     ankh.button.cooldown.noOCC = true
 		
-	local shield = XiTimers:new(1)
+	shield = XiTimers:new(1)
 	shield.button.icons[1]:SetTexture(SpellTextures[SpellIDs.LightningShield])
 	shield.button.anchorframe = TotemTimers_TrackerFrame
 	shield.button:SetScript("OnEvent", TotemTimers.ShieldEvent)
@@ -81,95 +79,10 @@ function TotemTimers.CreateTrackers()
         XiTimers.StopMoving(self)
     end)
 
-    local earthshield = XiTimers:new(1) -- unused for classis, but necessary
-    local weapon = XiTimers:new(1)
-
-    weapon.button.icons[1]:SetTexture(SpellTextures[SpellIDs.RockbiterWeapon])
-    weapon.button.anchorframe = TotemTimers_TrackerFrame
-    weapon.button:SetScript("OnEvent", TotemTimers.WeaponEvent)
-    --weapon.events[1] = "COMBAT_LOG_EVENT_UNFILTERED"
-    --weapon.events[2] = "UNIT_INVENTORY_CHANGED"
-    --weapon.events[3] = "CHARACTER_POINTS_CHANGED"
-    weapon.events[5] = "UNIT_SPELLCAST_SUCCEEDED"
-    -- weapon.events[6] = "UNIT_AURA"
-    --weapon.events[7] = "PLAYER_TALENT_UPDATE"
-    weapon.timeStyle = "blizz"
-    weapon.button:SetAttribute("*type*", "spell")
-    weapon.button:SetAttribute("ctrl-spell1", ATTRIBUTE_NOOP)
-    weapon.button:RegisterEvent("PLAYER_ALIVE")
-    weapon.Update = TotemTimers.WeaponUpdate
-    weapon.button:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")
-    weapon.timerBars[1]:SetMinMaxValues(0,1800)
-    weapon.flashall = true
-    weapon.Activate = function(self)
-        XiTimers.Activate(self)
-        if not TotemTimers.ActiveProfile.WeaponTracker then self.button:Hide() end
-    end
-
-    WeaponBar = TTActionBars:new(7, weapon.button, nil, TotemTimers_TrackerFrame, "weapontimer")
-    weapon.bar = WeaponBar
-
-    weapon.button.tooltip = TotemTimers.Tooltips.WeaponTimer:new(weapon.button)
-
-    weapon.button.SaveLastEnchant = function(self, name)
-        if name == "spell1" then TotemTimers.ActiveProfile.LastWeaponEnchant = self:GetAttribute("spell1")
-        elseif name == "spell2" or name == "spell3" then
-            TotemTimers.ActiveProfile.LastWeaponEnchant2 = self:GetAttribute("spell2") or self:GetAttribute("spell3")
-        elseif name == "doublespell2" then
-            local ds2 = self:GetAttribute("doublespell2")
-            if ds2 then
-                if ds2 == SpellNames[SpellIDs.FlametongueWeapon] then
-                    TotemTimers.ActiveProfile.LastWeaponEnchant = 5
-                elseif ds2 == SpellNames[SpellIDs.FrostbrandWeapon] then
-                    TotemTimers.ActiveProfile.LastWeaponEnchant = 6
-                end
-            end
-        end
-    end
-    weapon.button:SetAttribute("_onattributechanged", [[ if name == "spell1" or name == "doublespell1" or name == "doublespell2" or name == "spell2" or name == "spell3"then
-                                                             control:CallMethod("SaveLastEnchant", name)
-                                                         end]])
-
-    weapon.button:WrapScript(weapon.button, "PostClick", [[ if button == "LeftButton" then
-                                                                local ds1 = self:GetAttribute("doublespell1")
-                                                                if ds1 then
-                                                                    if IsControlKeyDown() or self:GetAttribute("ds") ~= 1 then
-                                                                        self:SetAttribute("macrotext", "/cast "..ds1.."\n/use 16")
-																		self:SetAttribute("ds",1)
-                                                                    else
-                                                                        self:SetAttribute("macrotext", "/cast "..self:GetAttribute("doublespell2").."\n/use 17")
-																		self:SetAttribute("ds",2)
-                                                                    end
-                                                                end
-                                                           end]])
-
-    weapon.button:SetAttribute("ctrl-type1", "cancelaura")
-    weapon.button:SetAttribute("ctrl-target-slot1", GetInventorySlotInfo("MainHandSlot"))
-    weapon.button:SetAttribute("ctrl-type2", "cancelaura")
-    weapon.button:SetAttribute("ctrl-target-slot2", GetInventorySlotInfo("SecondaryHandSlot"))
-    weapon.button:SetScript("OnDragStop", function(self)
-        XiTimers.StopMoving(self)
-        if not InCombatLockdown() then self:SetAttribute("hide", true) end
-        TotemTimers.ProcessSetting("WeaponBarDirection")
-    end)
-    weapon.nobars = true
-    weapon.Stop = function(self,timer)
-        XiTimers.Stop(self,timer)
-        self.button.bar:Show()
-    end
-    weapon.button.bar:Show()
-    weapon.button.bar:SetStatusBarColor(0.7,1,0.7,0.7)
-
-    weapon.Start = function(self, ...)
-        XiTimers.Start(self, ...)
-        self.running = 1
-    end
-    weapon.Stop = function(self, ...)
-        XiTimers.Stop(self, ...)
-        self.running = 1
-    end
-    weapon.running = 1
+    local earthshield = XiTimers:new(1) -- unused for classic, but necessary
 end
+
+table.insert(TotemTimers.Modules, TotemTimers.CreateTrackers)
 
 local AnkhName = SpellNames[SpellIDs.Ankh]
 local AnkhID = SpellIDs.Ankh
@@ -274,7 +187,7 @@ function TotemTimers.OrderTrackers()
 		Timers[e].button:ClearAllPoints()
 	end
     if arrange == "free" then
-        for i=5,6 do
+        for i=5,8 do
             Timers[i].savePos = true
             local pos = TotemTimers.ActiveProfile.TimerPositions[i]            
             if not pos or not pos[1] then pos = {"CENTER", "UIParent", "CENTER", 0,0} end
@@ -300,142 +213,3 @@ function TotemTimers.OrderTrackers()
     end
 end
 
-
-
-function TotemTimers.SetWeaponTrackerSpells()
-    WeaponBar:ResetSpells()
-    if  AvailableSpells[SpellIDs.WindfuryWeapon] then
-        WeaponBar:AddSpell(SpellNames[SpellIDs.WindfuryWeapon])
-    end
-    if AvailableSpells[SpellIDs.RockbiterWeapon] then
-        WeaponBar:AddSpell(SpellNames[SpellIDs.RockbiterWeapon])
-    end
-    if  AvailableSpells[SpellIDs.FlametongueWeapon] then
-        WeaponBar:AddSpell(SpellNames[SpellIDs.FlametongueWeapon])
-    end
-    if  AvailableSpells[SpellIDs.FrostbrandWeapon] then
-        WeaponBar:AddSpell(SpellNames[SpellIDs.FrostbrandWeapon])
-    end
-
-   --[[ if  AvailableSpells[SpellIDs.WindfuryWeapon] and AvailableSpells[SpellIDs.FlametongueWeapon] then
-        WeaponBar:AddDoubleSpell(SpellNames[SpellIDs.WindfuryWeapon],SpellNames[SpellIDs.FlametongueWeapon])
-    end
-    if  AvailableSpells[SpellIDs.WindfuryWeapon] and AvailableSpells[SpellIDs.FrostbrandWeapon] then
-        WeaponBar:AddDoubleSpell(SpellNames[SpellIDs.WindfuryWeapon],SpellNames[SpellIDs.FrostbrandWeapon])
-    end --]]
-end
-
-local mainMsg = ""
-local offMsg = ""
-
-local GetWeaponEnchantInfo = GetWeaponEnchantInfo
-
-local Enchanted, CastEnchant, CastTexture
-
-
-local function SetWeaponEnchantTextureAndMsg(self, enchant, texture, nr)
-    if nr == 1 then TotemTimers.ActiveProfile.LastMainEnchants[mainHandWeapon] = {enchant, texture}
-    else TotemTimers.ActiveProfile.LastOffEnchants[offHandWeapon] = {enchant, texture} end
-    self.icons[nr]:SetTexture(texture)
-    self.timer.warningIcons[nr] = texture
-    self.timer.warningSpells[nr] = enchant
-    self.timer.expirationMsgs[nr] = "Weapon"
-end
-
-function TotemTimers.WeaponUpdate(self, elapsed)
-    local enchant, expiration = GetWeaponEnchantInfo()
-    if enchant then
-        if expiration/1000 > self.timers[1] then
-            self:Start(1, expiration/1000, 300)
-            if Enchanted then
-                Enchanted = nil
-                SetWeaponEnchantTextureAndMsg(self.button, CastEnchant, CastTexture, 1)
-            end
-        end
-        if expiration == 0 then
-            self:Stop(1)
-        else
-            self.timers[1] = expiration/1000
-        end
-    elseif self.timers[1] > 0 then
-        self:Stop(1)
-    end
-    XiTimers.Update(self, 0)
-end
-
-local function getWeapons()
-    lastMhWeapon = mainHandWeapon
-    mainHandWeapon = GetInventoryItemLink("player", 16)
-    if mainHandWeapon then  mainHandWeapon = tonumber(select(3,string.find(mainHandWeapon, "item:(%d+):"))) else mainHandWeapon = 0 end
-    TotemTimers.MainHand = mainHandWeapon
-end
-
-
--- local lastMaelstromCount = 0
-local WeaponBuffs = {SpellNames[SpellIDs.WindfuryWeapon], SpellNames[SpellIDs.RockbiterWeapon],
-                     SpellNames[SpellIDs.FlametongueWeapon], SpellNames[SpellIDs.FrostbrandWeapon], SpellNames[SpellIDs.EarthlivingWeapon]}
-local lastWeaponBuffCast
-
-function TotemTimers.WeaponEvent(self, event, ...)
-    --[[if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-        local _,eventtype,_,_,_,_,_,_,name,_,_,enchant,weapon = ...
-        if eventtype == "ENCHANT_APPLIED" and name == playerName and enchant then
-            print(enchant, weapon)
-            getWeapons()
-            CastEnchant = enchant
-            if lastWeaponBuffCast then
-                CastTexture = GetSpellTexture(lastWeaponBuffCast)
-            end
-            lastWeaponBuffCast = nil
-            if not CastTexture then
-                CastTexture = select(10,GetItemInfo(enchant))
-                if not CastTexture then CastTexture = select(10, GetItemInfo(weapon)) end
-            end
-            Enchanted = true
-        end
-    elseif event == "UNIT_INVENTORY_CHANGED" then
-        getWeapons()
-        if mainHandWeapon ~= lastMhWeapon and mainHandWeapon ~= 0 then
-            local enchant, texture
-            if not TotemTimers.ActiveProfile.LastMainEnchants[mainHandWeapon] then
-                enchant = ""
-                texture = SpellTextures[SpellIDs.RockbiterWeapon]
-            else
-                enchant = TotemTimers.ActiveProfile.LastMainEnchants[mainHandWeapon][1]
-                texture = TotemTimers.ActiveProfile.LastMainEnchants[mainHandWeapon][2]
-            end
-            SetWeaponEnchantTextureAndMsg(self, enchant, texture, 1)
-        end ]]
-    --[[ elseif event == "CHARACTER_POINTS_CHANGED" or event == "PLAYER_ALIVE" or event == "PLAYER_TALENT_UPDATE" then
-        TotemTimers.SetNumWeaponTimers()
-        if event == "PLAYER_ALIVE" then
-            Timers[8].button:UnregisterEvent("PLAYER_ALIVE")
-        end --]]
-    --else
-    if event == "UNIT_SPELLCAST_SUCCEEDED" and select(1,...) == "player" then
-        local spell = select(3, ...)
-        local spellName = GetSpellInfo(spell)
-        for k,v in pairs(WeaponBuffs) do
-            if v == spellName then
-                getWeapons()
-                lastWeaponBuffCast = v
-                CastTexture = GetSpellTexture(lastWeaponBuffCast)
-                CastEnchant = spellName
-                Enchanted = true
-                break
-            end
-        end
-        local start, duration, enable = GetSpellCooldown(SpellNames[SpellIDs.RockbiterWeapon])
-        if start and duration and (not self.timer.timerOnButton or self.timer.timers[1]<=0) then
-            CooldownFrame_Set(self.cooldown, start, duration, enable)
-        end
-    --[[ elseif event == "UNIT_AURA" and select(1,...) == "player" then
-        local name,_,_,count,_,duration,endtime = UnitBuff("player", SpellNames[SpellIDs.Maelstrom])
-        self.bar:SetValue(count or 0)
-        self.count:SetText(tostring(count or ""))
-        if count == 5 and lastMaelstromCount ~= 5 then
-            self.timer:PlayWarning("Maelstrom")
-        end
-        lastMaelstromCount = count or lastMaelstromCount --]]
-    end
-end

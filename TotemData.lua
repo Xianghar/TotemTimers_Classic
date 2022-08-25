@@ -1,23 +1,9 @@
--- Copyright © 2008 - 2012 Xianghar  <xian@zron.de>
--- All Rights Reserved.
--- This code is not to be modified or distributed without written permission by the author.
--- Current distribution permissions only include curse.com, wowinterface.com and their respective addon updaters
-
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
-TotemTimers = {}
+local addon, TotemTimers = ...
 
-TotemTimers.ElementColors = {
-    [FIRE_TOTEM_SLOT] = CreateColorFromHexString("FFFF7500"),
-    [EARTH_TOTEM_SLOT] = CreateColorFromHexString("FFCBA57B"),
-    [WATER_TOTEM_SLOT] = CreateColor(0.4,0.4,1), --CreateColorFromHexString("FF76c7f3"),
-    [AIR_TOTEM_SLOT] = CreateColor(1,1,1),
-}
+_G["TotemTimers"] = TotemTimers
 
-
-TotemTimers.AvailableSpells = {}
-TotemTimers.AvailableSpellIDs = {}
-TotemTimers.AvailableTalents = {}
 
 TotemTimers.SpellIDs = {
 
@@ -122,69 +108,8 @@ TotemTimers.SpellIDs = {
 	
 }
 
-TotemTimers.SpellTextures = {}
-TotemTimers.SpellNames = {}
-TotemTimers.NameToSpellID = {}
-TotemTimers.TextureToSpellID = {}
-TotemTimers.RankedNameToSpellID = {}
-
 local SpellIDs = TotemTimers.SpellIDs
-local AvailableSpells = TotemTimers.AvailableSpells
-local SpellNames = TotemTimers.SpellNames
-local SpellTextures = TotemTimers.SpellTextures
-local NameToSpellID = TotemTimers.NameToSpellID
-local TextureToSpellID = TotemTimers.TextureToSpellID
-local RankedNameToSpellID = TotemTimers.RankedNameToSpellID
 
-local gsub = gsub
-function TotemTimers.StripRank(spell)
-    local stripped = gsub(spell, "%(.*%)", "")
-    return stripped
-end
-
-
--- populate SpellNames and NameToSpellID with unranked spells first
--- TT inits with that info and upgrades ranks later when ranks are available
-
-for _, spellID in pairs(SpellIDs) do
-    local name,_,texture = GetSpellInfo(spellID)
-    if name then
-        NameToSpellID[name] = spellID
-        SpellNames[spellID] = name
-        SpellTextures[spellID] = texture
-        TextureToSpellID[texture] = spellID
-    end
-    AvailableSpells[spellID] = IsPlayerSpell(spellID)
-end
-
-local WindfuryName = GetSpellInfo(SpellIDs.Windfury)
-
--- get ranked spell names from spell book
-function TotemTimers.GetSpells()
-    wipe(AvailableSpells)
-    local index = 1
-    local windfuryFound = false
-    while true do
-        local name, rank, rankedSpellID = GetSpellBookItemName(index, BOOKTYPE_SPELL)
-        if not name then break end
-        local spellID = NameToSpellID[name]
-        if spellID then
-            AvailableSpells[spellID] = true
-            if rank and string.find(rank, "%d") then
-                 local rankedName = name.."("..rank..")"
-                 NameToSpellID[rankedName] = spellID
-                 SpellNames[spellID] = rankedName
-                 RankedNameToSpellID[rankedName] = rankedSpellID
-                 if not windfuryFound and name == WindfuryName then
-                    TotemTimers.WindfuryRank1 = rankedName
-                    windfuryFound = true
-                 end
-            end
-        end
-        index = index + 1
-    end
-end
---TotemTimers.GetSpells()
 
 TotemData = {
 	[SpellIDs.Tremor] = {
@@ -313,6 +238,24 @@ for k,v in pairs(TotemData) do
     if  v.buff then v.buffName = GetSpellInfo(v.buff) end
 end
 
+TotemTimers.TotemCooldowns = {
+    [EARTH_TOTEM_SLOT] = {
+        SpellIDs.EarthBind,
+        SpellIDs.Stoneclaw,
+        SpellIDs.EarthElemental,
+    },
+    [WATER_TOTEM_SLOT] = {
+        SpellIDs.ManaTide,
+    },
+    [FIRE_TOTEM_SLOT] = {
+        SpellIDs.FireNova,
+        SpellIDs.FireElemental,
+    },
+    [AIR_TOTEM_SLOT] = {
+        SpellIDs.Grounding,
+    },
+}
+
 
 TotemTimers.WeaponEnchants = {
     [3] = SpellIDs.FlametongueWeapon,
@@ -381,7 +324,4 @@ TotemTimers.TotemWeaponEnchants = {
     [1683] = SpellIDs.Flametongue,
     [2637] = SpellIDs.Flametongue,
 }
-
-
-
 

@@ -1,8 +1,3 @@
--- Copyright © 2008 - 2012 Xianghar  <xian@zron.de>
--- All Rights Reserved.
--- This code is not to be modified or distributed without written permission by the author.
--- Current distribution permissions only include curse.com, wowinterface.com and their respective addon updaters
-
 if select(2, UnitClass("player")) ~= "SHAMAN" then
     return
 end
@@ -27,29 +22,13 @@ local AvailableTalents = TotemTimers.AvailableTalents
 
 
 
-local Cooldowns = {
-    [EARTH_TOTEM_SLOT] = {
-        SpellIDs.EarthBind,
-        SpellIDs.Stoneclaw,
-        SpellIDs.EarthElemental,
-    },
-    [WATER_TOTEM_SLOT] = {
-        SpellIDs.ManaTide,
-    },
-    [FIRE_TOTEM_SLOT] = {
-        SpellIDs.FireNova,
-        SpellIDs.FireElemental,
-    },
-    [AIR_TOTEM_SLOT] = {
-        SpellIDs.Grounding,
-    },
-}
+local Cooldowns = TotemTimers.TotemCooldowns
 
 local UpdatePartyRange
 local TotemUpdate
 
 
-function TotemTimers.CreateTimers()
+ function TotemTimers.SetupTimers()
     for e = 1, 4 do
         local tt = XiTimers:new(#Cooldowns[e] + 1)
 
@@ -237,6 +216,8 @@ function TotemTimers.CreateTimers()
     TotemTimers.CreateCastButtons()
 end
 
+table.insert(TotemTimers.Modules, TotemTimers.SetupTimers)
+
 local TotemicCall = TotemTimers.SpellIDs.TotemicCall
 
 TotemUpdate = function(self, ...)
@@ -312,23 +293,23 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3, ...)
             end
         end
         if settings.ShowCooldowns then
-            for nr, spell in pairs(Cooldowns[self.timer.nr]) do
-                nr = nr + 1
+            for key, spell in pairs(Cooldowns[self.timer.nr]) do
+                local timerIndex = key + 1
                 if AvailableSpells[spell] then
                     local start, duration, enable = GetSpellCooldown(spell)
                     if not start and not duration then
-                        self.timer:stop(nr)
+                        self.timer:stop(timerIndex)
                         return
                     end
                     if duration == 0 then
-                        self.timer:Stop(nr)
+                        self.timer:Stop(timerIndex)
                     elseif duration > 2 then
                         --and self.timer.timers[nr]<=0 then  -- update running cooldown timers for Ele T12-2pc
-                        self.timer:Start(nr, start + duration - floor(GetTime()), duration)
-                        self.timer.timerBars[nr].icon:SetTexture(SpellTextures[spell])
+                        self.timer:Start(timerIndex, start + duration - floor(GetTime()), duration)
+                        self.timer.timerBars[timerIndex].icon:SetTexture(SpellTextures[spell])
                     end
-                elseif self.timer.timers[nr] > 0 then
-                    self.timer:Stop(nr)
+                elseif self.timer.timers[timerIndex] > 0 then
+                    self.timer:Stop(timerIndex)
                 end
             end
         else

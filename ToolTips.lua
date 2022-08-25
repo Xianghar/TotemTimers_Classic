@@ -1,8 +1,3 @@
--- Copyright © 2008 - 2012 Xianghar  <xian@zron.de>
--- All Rights Reserved.
--- This code is not to be modified or distributed without written permission by the author.
--- Current distribution permissions only include curse.com, wowinterface.com and their respective addon updaters
-
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers", true)
@@ -18,33 +13,6 @@ local b = 1
 local ElementColors = TotemTimers.ElementColors
 
 local StripRank = TotemTimers.StripRank
-
-
---[=====[ function TotemTimers.timerTooltip(self)
-    --[===[ if false and self.timer and self.element and not IsModifierKeyDown() and TotemTimers.ActiveProfile.ShowRaidRangeTooltip then
-        if self.timer.timers[1] <= 0 then return end
-        local count = TotemTimers.GetOutOfRange(self.element)
-        if count <= 0 then return end
-        local missingBuffGUIDs, names, classes = TotemTimers.GetOutOfRangePlayers(self.element)
-        GameTooltip:ClearLines()
-        TotemTimers.PositionTooltip(self)
-        for guid,_ in pairs(missingBuffGUIDs) do
-            GameTooltip:AddLine(names[guid], RAID_CLASS_COLORS[classes[guid]].r, RAID_CLASS_COLORS[classes[guid]].g, RAID_CLASS_COLORS[classes[guid]].b)
-        end
-        GameTooltip:Show()
-    else --]===]
-
-    if self:GetAttribute("tooltip") then
-        local spell = self:GetAttribute("*spell1")
-		if spell and type(spell) == "string" then spell = TotemTimers.NameToSpellID[spell] end
-        if spell and spell > 0 then
-            TotemTimers.PositionTooltip(self)
-            SetTooltipSpellID(spell)
-        end
-    end
-end
---]=====]
-
 
 XiTimersTooltip = {}
 

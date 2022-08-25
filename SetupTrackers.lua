@@ -1,4 +1,3 @@
--- Copyright © 2008 - 2012 Xianghar  <xian@zron.de>
 -- All Rights Reserved.
 -- This code is not to be modified or distributed without written permission by the author.
 -- Current distribution permissions only include curse.com, wowinterface.com and their respective addon updaters
@@ -10,6 +9,7 @@ end
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers")
 
 local Timers = XiTimers.timers
+
 local SpellNames = TotemTimers.SpellNames
 local SpellIDs = TotemTimers.SpellIDs
 local SpellTextures = TotemTimers.SpellTextures
@@ -188,6 +188,7 @@ function TotemTimers.CreateTrackers()
         end
     end)
 
+    TotemTimers.SetEarthShieldButtons()
 
 
     weapon.button.icons[1]:SetTexture(SpellTextures[SpellIDs.RockbiterWeapon])
@@ -285,7 +286,11 @@ function TotemTimers.CreateTrackers()
         self.running = 1
     end
     weapon.running = 1
+
+    TotemTimers.WeaponTracker = weapon
 end
+
+tables.insert(TotemTimers.Modules, TotemTimers.SetupTrackers)
 
 local AnkhName = SpellNames[SpellIDs.Ankh]
 local AnkhID = SpellIDs.Ankh

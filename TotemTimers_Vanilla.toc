@@ -10,10 +10,8 @@
 ## X-WoWI-ID: 25223
 
 
-
 embeds.xml
 
-vanilla\TotemData.lua
 localization\localization.lua
 localization\localization.ge.lua
 localization\localization.fr.lua
@@ -25,21 +23,28 @@ localization\localization.ko.lua
 localization\localization.br.lua
 localization\localization.it.lua
 localization\localization.esmx.lua
-Animation.lua
-Bindings.lua
+
 XiTimers.lua
 XiTimers.xml
+
+TotemTimers.xml
+TotemTimers.lua
+
+vanilla\TotemData.lua
+
+Spells.lua
+
+Animation.lua
+Bindings.lua
 ToolTips.lua
 TotemSets.xml
 TotemSets.lua
-vanilla\TTActionBars.lua
-vanilla\DefaultSettings.lua
-vanilla\Settings.lua
-vanilla\Spells.lua
-vanilla\SetupTimers.lua
+TTActionBars.lua
+DefaultSettings.lua
+Settings.lua
+SetupTimers.lua
 vanilla\SetupTrackers.lua
-vanilla\TotemTimers.xml
-vanilla\TotemTimers.lua
+vanilla\WeaponTracker.lua
 Warnings.lua
 Masque.lua
 GUI\localization.lua
