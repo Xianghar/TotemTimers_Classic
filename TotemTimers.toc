@@ -28,7 +28,6 @@ XiTimers.xml
 
 TotemData.lua
 TotemTimers.xml
-tbc\TotemTimers.lua
 TotemTimers.lua
 
 Spells.lua
@@ -43,6 +42,10 @@ DefaultSettings.lua
 Settings.lua
 SetupTimers.lua
 SetupTrackers.lua
+Ankh.lua
+Shield.lua
+EarthShield.lua
+Weapon.lua
 EnhanceCDs.lua
 Warnings.lua
 Masque.lua

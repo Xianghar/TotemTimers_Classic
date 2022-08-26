@@ -325,3 +325,13 @@ TotemTimers.TotemWeaponEnchants = {
     [2637] = SpellIDs.Flametongue,
 }
 
+TotemTimers.ShieldButtons = {
+    SpellIDs.LightningShield,
+    SpellIDs.WaterShield,
+    SpellIDs.TotemicCall,
+}
+
+TotemTimers.ShieldSpells = {
+    SpellIDs.LightningShield,
+    SpellIDs.WaterShield,
+}

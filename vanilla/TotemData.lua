@@ -240,3 +240,80 @@ TotemTimers.TotemCooldowns = {
     [AIR_TOTEM_SLOT] = {
     },
 }
+
+TotemTimers.WeaponEnchants = {
+    [3] = SpellIDs.FlametongueWeapon,
+    [4] = SpellIDs.FlametongueWeapon,
+    [5] = SpellIDs.FlametongueWeapon,
+    [523] = SpellIDs.FlametongueWeapon,
+    [1665] = SpellIDs.FlametongueWeapon,
+    [1666] = SpellIDs.FlametongueWeapon,
+    [2634] = SpellIDs.FlametongueWeapon,
+    [3779] = SpellIDs.FlametongueWeapon,
+    [3780] = SpellIDs.FlametongueWeapon,
+    [3781] = SpellIDs.FlametongueWeapon,
+    [1] = SpellIDs.RockbiterWeapon,
+    [6] = SpellIDs.RockbiterWeapon,
+    [29] = SpellIDs.RockbiterWeapon,
+    [503] = SpellIDs.RockbiterWeapon,
+    [504] = SpellIDs.RockbiterWeapon,
+    [683] = SpellIDs.RockbiterWeapon,
+    [1663] = SpellIDs.RockbiterWeapon,
+    [1664] = SpellIDs.RockbiterWeapon,
+    [2632] = SpellIDs.RockbiterWeapon,
+    [2633] = SpellIDs.RockbiterWeapon,
+    [3018] = SpellIDs.RockbiterWeapon,
+    [283] = SpellIDs.WindfuryWeapon,
+    [284] = SpellIDs.WindfuryWeapon,
+    [525] = SpellIDs.WindfuryWeapon,
+    [1669] = SpellIDs.WindfuryWeapon,
+    [2636] = SpellIDs.WindfuryWeapon,
+    [3785] = SpellIDs.WindfuryWeapon,
+    [3786] = SpellIDs.WindfuryWeapon,
+    [3787] = SpellIDs.WindfuryWeapon,
+    [2] = SpellIDs.FrostbrandWeapon,
+    [12] = SpellIDs.FrostbrandWeapon,
+    [5244] = SpellIDs.FrostbrandWeapon,
+    [1667] = SpellIDs.FrostbrandWeapon,
+    [1668] = SpellIDs.FrostbrandWeapon,
+    [2635] = SpellIDs.FrostbrandWeapon,
+    [3782] = SpellIDs.FrostbrandWeapon,
+    [3783] = SpellIDs.FrostbrandWeapon,
+    [3784] = SpellIDs.FrostbrandWeapon,
+    [563] = SpellIDs.Windfury,
+    [564] = SpellIDs.Windfury,
+    [1783] = SpellIDs.Windfury,
+    [2638] = SpellIDs.Windfury,
+    [2639] = SpellIDs.Windfury,
+    [3014] = SpellIDs.Windfury,
+    [124] = SpellIDs.Flametongue,
+    [285] = SpellIDs.Flametongue,
+    [543] = SpellIDs.Flametongue,
+    [1683] = SpellIDs.Flametongue,
+    [2637] = SpellIDs.Flametongue,
+}
+
+for i = 3018, 3044 do TotemTimers.WeaponEnchants[i] = SpellIDs.RockbiterWeapon end
+
+TotemTimers.TotemWeaponEnchants = {
+    [563] = SpellIDs.Windfury,
+    [564] = SpellIDs.Windfury,
+    [1783] = SpellIDs.Windfury,
+    [2638] = SpellIDs.Windfury,
+    [2639] = SpellIDs.Windfury,
+    [3014] = SpellIDs.Windfury,
+    [124] = SpellIDs.Flametongue,
+    [285] = SpellIDs.Flametongue,
+    [543] = SpellIDs.Flametongue,
+    [1683] = SpellIDs.Flametongue,
+    [2637] = SpellIDs.Flametongue,
+}
+
+
+TotemTimers.ShieldButtons = {
+    SpellIDs.LightningShield,
+}
+
+TotemTimers.ShieldSpells = {
+    SpellIDs.LightningShield,
+}

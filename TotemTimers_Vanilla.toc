@@ -43,8 +43,10 @@ TTActionBars.lua
 DefaultSettings.lua
 Settings.lua
 SetupTimers.lua
-vanilla\SetupTrackers.lua
-vanilla\WeaponTracker.lua
+SetupTrackers.lua
+Ankh.lua
+Shield.lua
+Weapon.lua
 Warnings.lua
 Masque.lua
 GUI\localization.lua

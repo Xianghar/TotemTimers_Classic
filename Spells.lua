@@ -60,6 +60,7 @@ function TotemTimers.GetSpells()
             if rank and string.find(rank, "%d") then
                 SpellIDsMaxRank[spellID] = rankedSpellID
                 RankToSpellID[rankedSpellID] = spellID
+                SpellNames[rankedSpellID] = name
                 --[[local rankedName = name.."("..rank..")"
                 NameToSpellID[rankedName] = spellID
                 SpellNames[spellID] = rankedName
@@ -112,6 +113,10 @@ end]]
 
 function TotemTimers.GetTalents()
     wipe(TotemTimers.AvailableTalents)
+    if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+        TotemTimers.AvailableTalents.TotemicMastery = 0
+        return
+    end
     TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3,8)) * 10
     TotemTimers.AvailableTalents.DualWield = select(5, GetTalentInfo(2, 18)) > 0
 

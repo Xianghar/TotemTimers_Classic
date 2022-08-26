@@ -105,7 +105,7 @@ function SetButtonTooltip:SetText()
         GameTooltip:AddLine(not set.name and "Set " .. self.button.nr or set.name, 1, 1, 1)
 
         for i=1,4 do
-           GameTooltip:AddLine(StripRank(set[i]), ElementColors[i].r, ElementColors[i].g, ElementColors[i].b)
+            GameTooltip:AddLine(SpellNames[set[i]], ElementColors[i].r, ElementColors[i].g, ElementColors[i].b)
         end
         GameTooltip:AddLine(" ")
     end
@@ -134,7 +134,7 @@ function WeaponTimerTooltip:SetText()
 
     local spell = button:GetAttribute("spell1")
     if spell and not button:GetAttribute("doublespell1") then
-        GameTooltip:AddLine(format(L["Leftclick to cast %s"], StripRank(spell)),r,g,b,1)
+        GameTooltip:AddLine(format(L["Leftclick to cast %s"], SpellNames[spell]),r,g,b,1)
     else
         local ds = button:GetAttribute("ds")
         if ds then
@@ -142,14 +142,14 @@ function WeaponTimerTooltip:SetText()
             local ds2 = button:GetAttribute("doublespell2")
             if ds == 2 then ds1, ds2 = ds2, ds1 end
             if ds1 and ds2 then
-                GameTooltip:AddLine(format(L["Leftclick to cast %s"], StripRank(ds1)),r,g,b,1)
-                GameTooltip:AddLine(format(L["Next leftclick casts %s"], StripRank(ds2)),r,g,b,1)
+                GameTooltip:AddLine(format(L["Leftclick to cast %s"], SpellNames[ds1]),r,g,b,1)
+                GameTooltip:AddLine(format(L["Next leftclick casts %s"], SpellNames[ds2]),r,g,b,1)
             end
         end
     end
     local spell2 = button:GetAttribute("spell2")
     if spell2 then
-        GameTooltip:AddLine(format(L["Rightclick to cast %s"], StripRank(spell2)),r,g,b,1)
+        GameTooltip:AddLine(format(L["Rightclick to cast %s"], SpellNames[spell2]),r,g,b,1)
     end
     --[[s = self:GetAttribute("spell2")
     if s then GameTooltip:AddLine(format(L["Rightclick to cast %s"],s),r,g,b,1)
