@@ -60,12 +60,12 @@ GUI\localization.es.lua
 GUI\localization.br.lua
 GUI\localization.it.lua
 GUI\localization.esmx.lua
-vanilla\GUI\General.lua
-vanilla\GUI\Timers.lua
-vanilla\GUI\Trackers.lua
+GUI\General.lua
+GUI\Timers.lua
+GUI\Trackers.lua
 vanilla\GUI\Messages.lua
-vanilla\GUI\Totems.lua
-vanilla\GUI\Sets.lua
-vanilla\GUI\Profiles.lua
+GUI\Totems.lua
+GUI\Sets.lua
+GUI\Profiles.lua
 
 

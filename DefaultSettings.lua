@@ -532,6 +532,8 @@ function TotemTimers.ResetProfilePositions(name)
     TotemTimers_Profiles[name].FramePositions = copy(TotemTimers.DefaultProfile.FramePositions)
     TotemTimers_Profiles[name].TimerPositions = copy(TotemTimers.DefaultProfile.TimerPositions)
     TotemTimers.ProcessSetting("FramePositions")
+    TotemTimers.OrderTimers()
+    TotemTimers.OrderTrackers()
 end
 
 function TotemTimers.CopyProfile(p1,p2)

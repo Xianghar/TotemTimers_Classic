@@ -114,7 +114,7 @@ end]]
 function TotemTimers.GetTalents()
     wipe(TotemTimers.AvailableTalents)
     if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-        TotemTimers.AvailableTalents.TotemicMastery = 0
+        TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3,8)) * 10
         return
     end
     TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3,8)) * 10
@@ -133,20 +133,18 @@ local function UpdateSpellNameRank(spell)
     if not rankedSpellID then
         local spellNameWithoutRank = stripRank(spell)
         rankedSpellID = NameToSpellID[spellNameWithoutRank]
+        if not rankedSpellID then return spell end
     end
     local spellID = RankToSpellID[rankedSpellID]
-    local maxSpellID = SpellIDsMaxRank[spellID]
-    return maxSpellID or rankedSpellID
-    --[[local spellID = NameToSpellID[spellNameWithoutRank]
-    if spellID then
-        if spellID == WindfurySpellID and TotemTimers.ActiveProfile.WindfuryDownrank then
-            return TotemTimers.WindfuryRank1
-        end
-        local newRankName = SpellNames[spellID]
-        if newRankName then return newRankName end
-    end]]
-    --return nil
+    if not spellID then return spell end
+
+    if spellID == WindfurySpellID and TotemTimers.ActiveProfile.WindfuryDownrank then
+        return spellID
+    end
+
+    return SpellIDsMaxRank[spellID] or rankedSpellID
 end
+
 TotemTimers.UpdateSpellNameRank = UpdateSpellNameRank
 
 local function UpdateRank(button)

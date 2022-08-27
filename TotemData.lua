@@ -172,7 +172,7 @@ TotemData = {
     [SpellIDs.ManaTide] = {
         element = WATER_TOTEM_SLOT,
         warningPoint = 2,
-        rangeCheck = 20,
+        buff = 16191,
     },
     [SpellIDs.PoisonCleansing] = {
         element = WATER_TOTEM_SLOT,

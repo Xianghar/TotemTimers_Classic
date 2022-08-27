@@ -178,6 +178,7 @@ function TotemTimers.WeaponUpdate(self, elapsed)
                 self.warningIcons[hand] = texture
                 self.warningSpells[hand] = spell
                 self.expirationMsgs[hand] = "Weapon"
+                self.earlyExpirationMsgs[hand] = "Weapon"
             end
             if checkEnchant[2] == 0 then
                 self:Stop(hand)

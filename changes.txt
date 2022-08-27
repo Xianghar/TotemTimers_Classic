@@ -1,5 +1,9 @@
-2.3.0 Beta 1
-    - Testing one addon for Vanilla and TBC
+2.3.0
+    - One addon for tbc and vanilla
+    - Added tbc features to vanilla like totem range or downranking windfury
+    - Added settings for weapon buff expiration warnings
+    - Fixed resetting frame positions not working for timer arrangement set to "loose"
+    - Fixed changing icons of inactive totem timers on weapon swap
 2.2.2
     - Fixed lua error when showing tooltips
 2.2.1

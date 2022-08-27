@@ -52,8 +52,9 @@ local TotemUpdate
             local spell = self:GetAttribute("*spell1")
             if spell and spell ~= 0 then
                 local _, _, texture = GetSpellInfo(self:GetAttribute("*spell1"))
+                local oldTexture = self.miniIcon:GetTexture()
                 self.miniIcon:SetTexture(texture)
-                if (not self.timer.timersRunning[1]) then
+                if (not self.timer.timersRunning[1] and texture ~= oldTexture) then
                     self.icons[1]:SetTexture(texture)
                 end
                 TotemTimers.TotemEvent(self, "SPELL_UPDATE_COOLDOWN", self.timer.nr)
@@ -109,15 +110,23 @@ local TotemUpdate
 
             local lastTotem = activeProfile.LastTotems[self.nr]
 
-            if not lastTotem or
-                    (not AvailableSpells[lastTotem] and not AvailableSpells[NameToSpellID[lastTotem]]
-                    and not AvailableSpells[NameToSpellID[TotemTimers.StripRank(lastTotem)]]) then
+            -- get rank 1 spell id of totem while spellbook is not loaded
+            -- get name of totem without rank and get spell id from that
+            if not tonumber(lastTotem) then
+                lastTotem = TotemTimers.StripRank(lastTotem)
+            else
+                lastTotem = GetSpellInfo(lastTotem)
+            end
+
+            lastTotem = NameToSpellID[lastTotem]
+
+            if not lastTotem or not AvailableSpells[lastTotem] then
                 --[[when switching specs this part gets executed several times, once for switching and then for each talent (because of events fired)
                     so totems from talents are sometimes not available at this point.
                     lasttotem is saved and restored if not nil so that talent totems aren't replaced when switching specs ]]
                 for k, v in pairs(TotemData) do
                     if AvailableSpells[k] and v.element == self.nr then
-                        self.button:SetAttribute("*spell1", SpellNames[k])
+                        self.button:SetAttribute("*spell1", k)
                         self.button.icon:SetTexture(GetSpellTexture(k))
                         break
                     end
