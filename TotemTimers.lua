@@ -422,6 +422,14 @@ function TotemTimers.UpdateMacro()
             local timer = timers[i]
             if timer.active and TotemTimers.ActiveProfile.IncludeInMacro[timer.nr] then
                 local spell = timer.button:GetAttribute("*spell1")
+
+                if (tonumber(spell)) then
+                    local spellName = GetSpellInfo(spell)
+                    local rank = GetSpellSubtext(spell)
+                    if rank then spellName = spellName .. '('..rank..')' end
+                    spell = spellName
+                end
+
                 if spell then
                     sequence = sequence .. spell..", "
                 end
