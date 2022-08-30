@@ -111,24 +111,30 @@ local IsPlayerSpell = IsPlayerSpell
     return true
 end]]
 
-function TotemTimers.GetTalents()
-    wipe(TotemTimers.AvailableTalents)
-    if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+    function TotemTimers.GetTalents()
+        wipe(TotemTimers.AvailableTalents)
         TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3,8)) * 10
-        return
     end
-    TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3,8)) * 10
-    TotemTimers.AvailableTalents.DualWield = select(5, GetTalentInfo(2, 18)) > 0
-
-    --if select(5, GetTalentInfo(2,17))>0 then TotemTimers.AvailableTalents.Maelstrom = true end
-    --if select(5, GetTalentInfo(1,18))>0 then TotemTimers.AvailableTalents.LavaSurge = true end
-    --if select(5, GetTalentInfo(1,13))>0 then TotemTimers.AvailableTalents.Fulmination = true end
+elseif LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_BURNING_CRUSADE then
+    function TotemTimers.GetTalents()
+        wipe(TotemTimers.AvailableTalents)
+        TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3,8)) * 10
+        TotemTimers.AvailableTalents.DualWield = select(5, GetTalentInfo(2, 18)) > 0
+    end
+elseif LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_WRATH_OF_THE_LICH_KING then
+    function TotemTimers.GetTalents()
+        wipe(TotemTimers.AvailableTalents)
+        TotemTimers.AvailableTalents.TotemicMastery = 0
+        TotemTimers.AvailableTalents.DualWield = select(5, GetTalentInfo(2, 17)) > 0
+    end
 end
+
 
 local stripRank = TotemTimers.StripRank
 local WindfurySpellID = SpellIDs.Windfury
 
-local function UpdateSpellNameRank(spell)
+local function UpdateSpellRank(spell, useName)
     local rankedSpellID = tonumber(spell)
     if not rankedSpellID then
         local spellNameWithoutRank = stripRank(spell)
@@ -142,6 +148,10 @@ local function UpdateSpellNameRank(spell)
         return spellID
     end
 
+    if useName then
+        return SpellNames[spellID].."("..GetSpellSubtext(SpellIDsMaxRank[spellID] or rankedSpellID)..")"
+    end
+
     return SpellIDsMaxRank[spellID] or rankedSpellID
 end
 
@@ -152,7 +162,7 @@ local function UpdateRank(button)
         for _,type in pairs({"*spell", "spell", "doublespell"}) do
             local spell = button:GetAttribute(type..i)
                 if spell then
-                local newRankName = UpdateSpellNameRank(spell)
+                local newRankName = UpdateSpellRank(spell, type == "doublespell")
                 if newRankName then
                     button:SetAttribute(type..i, newRankName)
                 end

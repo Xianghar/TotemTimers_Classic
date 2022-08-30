@@ -140,10 +140,10 @@ function TotemTimers.SetWeaponTrackerSpells()
 
     if AvailableTalents.DualWield then
         if AvailableSpells[SpellIDs.WindfuryWeapon] and AvailableSpells[SpellIDs.FlametongueWeapon] then
-            weapon.actionBar:AddDoubleSpell(SpellNames[SpellIDs.WindfuryWeapon], SpellNames[SpellIDs.FlametongueWeapon])
+            weapon.actionBar:AddDoubleSpell(SpellIDs.WindfuryWeapon, SpellIDs.FlametongueWeapon)
         end
         if AvailableSpells[SpellIDs.WindfuryWeapon] and AvailableSpells[SpellIDs.FrostbrandWeapon] then
-            weapon.actionBar:AddDoubleSpell(SpellNames[SpellIDs.WindfuryWeapon], SpellNames[SpellIDs.FrostbrandWeapon])
+            weapon.actionBar:AddDoubleSpell(SpellIDs.WindfuryWeapon, SpellIDs.FrostbrandWeapon)
         end
     end
 end

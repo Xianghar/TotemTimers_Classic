@@ -1,4 +1,4 @@
-## Interface: 30400
+## Interface: 20504
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@
@@ -26,7 +26,7 @@ localization\localization.esmx.lua
 XiTimers.lua
 XiTimers.xml
 
-wrath\TotemData.lua
+tbc\TotemData.lua
 TotemTimers.xml
 TotemTimers.lua
 
