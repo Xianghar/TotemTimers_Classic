@@ -142,8 +142,8 @@ function WeaponTimerTooltip:SetText()
             local ds2 = button:GetAttribute("doublespell2")
             if ds == 2 then ds1, ds2 = ds2, ds1 end
             if ds1 and ds2 then
-                GameTooltip:AddLine(format(L["Leftclick to cast %s"], SpellNames[ds1]),r,g,b,1)
-                GameTooltip:AddLine(format(L["Next leftclick casts %s"], SpellNames[ds2]),r,g,b,1)
+                GameTooltip:AddLine(format(L["Leftclick to cast %s"], StripRank(ds1)),r,g,b,1)
+                GameTooltip:AddLine(format(L["Next leftclick casts %s"], StripRank(ds2)),r,g,b,1)
             end
         end
     end
