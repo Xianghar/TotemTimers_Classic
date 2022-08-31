@@ -41,6 +41,7 @@ TTActionBars.lua
 DefaultSettings.lua
 Settings.lua
 SetupTimers.lua
+MultiSpell.lua
 SetupTrackers.lua
 Ankh.lua
 Shield.lua

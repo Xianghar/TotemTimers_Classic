@@ -142,7 +142,7 @@ local function UpdateSpellRank(spell, useName)
         if not rankedSpellID then return spell end
     end
     local spellID = RankToSpellID[rankedSpellID]
-    if not spellID then return spell end
+    if not spellID then return rankedSpellID or spell end
 
     if spellID == WindfurySpellID and TotemTimers.ActiveProfile.WindfuryDownrank then
         return spellID

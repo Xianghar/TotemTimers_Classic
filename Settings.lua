@@ -430,7 +430,6 @@ SettingsFunctions = {
 
     WeaponBarDirection = function(value, Timers)
         TotemTimers.WeaponTracker.actionBar:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
-        --if #TTActionBars.bars > 5 then TotemTimers.ProcessSetting("MultiSpellBarDirection") end
     end,
 
     WeaponMenuOnRightclick = function(value, Timers)
@@ -818,4 +817,9 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
     end
 
+    if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+        SettingsFunctions.MultiCast = function(value)
+            if value then TotemTimers.MultiSpellActivate() end
+        end
+    end
 end

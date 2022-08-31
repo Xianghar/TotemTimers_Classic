@@ -76,6 +76,7 @@ TotemTimers.DefaultProfile = {
         IncludeInMacro = {[1] = true, [2] = true, [3] = true, [4] = true,},
         MacroReset = 15,
         TwistingTimer = false,
+        MultiCast = true,
         
     --Trackers
         TrackerArrange = "horizontal",

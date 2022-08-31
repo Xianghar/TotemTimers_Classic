@@ -52,6 +52,10 @@ TotemTimers.SpellIDs = {
     FlameShock = 8050,
     StormStrike = 17364,
 
+    CallOfSpirits = 66844,
+    CallOfElements = 66842,
+    CallOfAncestors = 66843,
+
     Bloodlust = 2825,
     ChainLightning = 421,
     ElementalMastery = 16166,
@@ -66,6 +70,7 @@ TotemTimers.SpellIDs = {
     ShamanisticRage = 30823,
     Thunderstorm = 51490,
     WindShear = 57994,
+
 
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
