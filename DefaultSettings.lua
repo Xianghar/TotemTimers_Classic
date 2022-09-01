@@ -325,6 +325,7 @@ TotemTimers.DefaultProfile = {
             TotemTimers_CastBar4  = {"CENTER", nil, "CENTER", 50, -225}, 
             TotemTimers_CrowdControlFrame = {"CENTER", nil, "CENTER", -50, -50},
 			TotemTimers_LongCooldownsFrame = {"CENTER", nil, "CENTER", 150, -80},
+            TotemTimers_MultiSpellFrame = {"CENTER", nil, "CENTER", -300, -205},
         },
         
         TimerPositions = { 

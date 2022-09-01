@@ -14,7 +14,7 @@ function TotemTimers.CreateMultiCastButtons()
     mb = CreateFrame("Button", "TotemTimers_MultiSpell", UIParent, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerEnterLeaveTemplate, SecureHandlerAttributeTemplate")
     mb:SetWidth(36) mb:SetHeight(36) mb:SetScale(32/36)
     --mb:SetPoint("CENTER", TotemTimers_MultiSpellFrame, "CENTER")
-    mb.bar = TTActionBars:new(3, mb, nil, TotemTimersFrame)
+    mb.actionBar = TTActionBars:new(3, mb, TotemTimers_MultiSpellFrame, TotemTimersFrame)
     mb.icon = _G["TotemTimers_MultiSpellIcon"]
     mb:Show()
     
@@ -64,6 +64,7 @@ function TotemTimers.CreateMultiCastButtons()
     mb:SetScript("OnDragStop", function() 
         TotemTimersFrame:StopMovingOrSizing()
         TotemTimers.SaveFramePositions()
+        TotemTimers.PositionCastButtons()
         --TotemTimers.ProcessSetting("MultiSpellBarDirection")
     end)
     mb:SetAttribute("OpenMenu", "mouseover")
@@ -86,7 +87,6 @@ function TotemTimers.MultiSpellActivate()
         mb:Show()
         TotemTimers.SetMultiCastSpells()
         mb.active = true
-        TotemTimers.OrderTimers()
 		--trigger Childupdate("mspell")
 		mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
     else
@@ -95,20 +95,21 @@ function TotemTimers.MultiSpellActivate()
         end
         mb:Hide()
         mb.active = false
-        TotemTimers.OrderTimers()
     end
+    TotemTimers.ProcessSetting("TimerSize")
+    TotemTimers.OrderTimers()
 end
 
 function TotemTimers.SetMultiCastSpells()
-    mb.bar:ResetSpells()
+    mb.actionBar:ResetSpells()
     if AvailableSpells[SpellIDs.CallOfElements] then
-        mb.bar:AddSpell(SpellIDs.CallOfElements)
+        mb.actionBar:AddSpell(SpellIDs.CallOfElements)
     end
     if AvailableSpells[SpellIDs.CallOfAncestors] then
-        mb.bar:AddSpell(SpellIDs.CallOfAncestors)
+        mb.actionBar:AddSpell(SpellIDs.CallOfAncestors)
     end
     if AvailableSpells[SpellIDs.CallOfSpirits] then
-        mb.bar:AddSpell(SpellIDs.CallOfSpirits)
+        mb.actionBar:AddSpell(SpellIDs.CallOfSpirits)
     end
 end
 

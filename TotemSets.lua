@@ -113,9 +113,14 @@ function TotemTimers.SetButton_OnClick(self, button)
 		popup.data = self.nr
     elseif button == "LeftButton" then
         for i=1,4 do
-            XiTimers.timers[i].button:SetAttribute("*spell1", set[XiTimers.timers[i].nr])
+            local spell = TotemTimers.UpdateSpellRank(set[XiTimers.timers[i].nr])
+            XiTimers.timers[i].button:SetAttribute("*spell1", spell)
+
+            if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+                local mspell = XiTimers.timers[i].button:GetAttribute("mspell")
+                SetMultiCastSpell(XiTimers.timers[i].button:GetAttribute("action"..mspell), spell)
+            end
         end
-        TotemTimers.UpdateSpellRanks()
 	end
 end
 

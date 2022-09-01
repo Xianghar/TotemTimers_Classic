@@ -155,7 +155,7 @@ local function UpdateSpellRank(spell, useName)
     return SpellIDsMaxRank[spellID] or rankedSpellID
 end
 
-TotemTimers.UpdateSpellNameRank = UpdateSpellNameRank
+TotemTimers.UpdateSpellRank = UpdateSpellRank
 
 local function UpdateRank(button)
     for i = 1,3 do

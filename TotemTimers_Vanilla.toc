@@ -63,7 +63,7 @@ GUI\localization.esmx.lua
 GUI\General.lua
 GUI\Timers.lua
 GUI\Trackers.lua
-vanilla\GUI\Messages.lua
+GUI\Messages.lua
 GUI\Totems.lua
 GUI\Sets.lua
 GUI\Profiles.lua

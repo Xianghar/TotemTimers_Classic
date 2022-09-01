@@ -25,20 +25,17 @@ local Cooldowns = TotemTimers.TotemCooldowns
 local UpdatePartyRange
 local TotemUpdate
 
-local MultiCastActions = {
-    [FIRE_TOTEM_SLOT]  = {[SpellIDs.CallOfElements]=133,[SpellIDs.CallOfAncestors]=137,[SpellIDs.CallOfSpirits]=141},
-    [EARTH_TOTEM_SLOT] = {[SpellIDs.CallOfElements]=134,[SpellIDs.CallOfAncestors]=138,[SpellIDs.CallOfSpirits]=142},
-    [WATER_TOTEM_SLOT] = {[SpellIDs.CallOfElements]=135,[SpellIDs.CallOfAncestors]=139,[SpellIDs.CallOfSpirits]=143},
-    [AIR_TOTEM_SLOT]   = {[SpellIDs.CallOfElements]=136,[SpellIDs.CallOfAncestors]=140,[SpellIDs.CallOfSpirits]=144},
-}
---local MultiCastActions = {}
+
+local MultiCastActions = {}
 TotemTimers.MultiCastActions = MultiCastActions
-for i=1,4 do
-    local index = SHAMAN_TOTEM_PRIORITIES[i];
-    MultiCastActions[index] =
-    { [SpellIDs.CallOfElements] = ActionButton_CalculateAction(_G["MultiCastActionButton"..index]),
-      [SpellIDs.CallOfAncestors] = ActionButton_CalculateAction(_G["MultiCastActionButton"..(index + 4)]),
-      [SpellIDs.CallOfSpirits] = ActionButton_CalculateAction(_G["MultiCastActionButton"..(index + 8)]) }
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+    for i=1,4 do
+        local index = SHAMAN_TOTEM_PRIORITIES[i];
+        MultiCastActions[index] =
+        { [SpellIDs.CallOfElements] = ActionButton_CalculateAction(_G["MultiCastActionButton"..index]),
+          [SpellIDs.CallOfAncestors] = ActionButton_CalculateAction(_G["MultiCastActionButton"..(index + 4)]),
+          [SpellIDs.CallOfSpirits] = ActionButton_CalculateAction(_G["MultiCastActionButton"..(index + 8)]) }
+    end
 end
 
 
@@ -387,7 +384,7 @@ local ButtonPositions = {
     ["vertical"] = { { "CENTER", 0, "CENTER" }, { "TOP", 1, "BOTTOM" }, { "TOP", 1, "BOTTOM" }, { "TOP", 1, "BOTTOM" } }
 }
 local MultiCastButtonPositions = {
-    ["box"] = { { "LEFT", 1, "RIGHT" }, { "TOP", 2, "BOTTOM" }, { "LEFT", 1, "RIGHT" } },
+    ["box"] = { { "BOTTOMLEFT", 0, "RIGHT" }, { "LEFT", 1, "RIGHT" }, { "TOP", 2, "BOTTOM" }, { "LEFT", 1, "RIGHT" } },
     ["horizontal"] = { { "LEFT", 1, "RIGHT" }, { "LEFT", 1, "RIGHT" }, { "LEFT", 1, "RIGHT" }, { "LEFT", 1, "RIGHT" } },
     ["vertical"] = { { "TOP", 1, "BOTTOM" }, { "TOP", 1, "BOTTOM" }, { "TOP", 1, "BOTTOM" }, { "TOP", 1, "BOTTOM" } }
 }
@@ -521,9 +518,12 @@ function TotemTimers.PositionCastButtons()
     for i = 1, 4 do
         TTActionBars.bars[i]:SetDirection(Profile.CastBarDirection, Profile.Arrange)
     end
+    if TotemTimers_MultiSpell then
+        TotemTimers_MultiSpell.actionBar:SetDirection(Profile.CastBarDirection, Profile.Arrange)
+    end
 
     -- and position totem cast buttons
-    local pos = Profile.CastButtonPosition
+   --[[ local pos = Profile.CastButtonPosition
     if Profile.Arrange == "horizontal" then
         if pos ~= "TOP" and pos ~= "BOTTOM" then
             local dir = TTActionBars.bars[1]:CalcDirection(Profile.CastBarDirection, Profile.Arrange)
@@ -542,7 +542,7 @@ function TotemTimers.PositionCastButtons()
                 pos = "LEFT"
             end
         end
-    end
+    end]]
 end
 
 function TotemTimers.SetCastButtonSpells()

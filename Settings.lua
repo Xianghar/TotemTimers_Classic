@@ -76,8 +76,15 @@ SettingsFunctions = {
 
     TimerSize = function(value, Timers)
         local v = value
+        local scale = v/36
+        if TotemTimers_MultiSpell and Timers[1].button:GetParent() == TotemTimers_MultiSpell then
+            scale = 1
+        end
         for e = 1, 4 do
-            Timers[e]:SetScale(v / 36)
+            Timers[e]:SetScale(scale)
+        end
+        if TotemTimers_MultiSpell then
+            TotemTimers_MultiSpell:SetScale(v / 36)
         end
     end,
 
@@ -248,6 +255,17 @@ SettingsFunctions = {
                 Timers[i].button:SetAttribute("*spell3", SpellIDs.TotemicCall)
             end
         end
+        if TotemTimers_MultiSpell then
+            if value and not TotemTimers.ActiveProfile.MenusAlwaysVisible then
+                TotemTimers_MultiSpell:SetAttribute("OpenMenu", "RightButton")
+                TotemTimers_MultiSpell:SetAttribute("*type2", nil)
+                TotemTimers_MultiSpell:SetAttribute("*spell2", nil)
+            else
+                TotemTimers_MultiSpell:SetAttribute("OpenMenu", "mouseover")
+                TotemTimers_MultiSpell:SetAttribute("*type2", "spell")
+                TotemTimers_MultiSpell:SetAttribute("*spell2", SpellIDs.TotemicCall)
+            end
+        end
     end,
 
     MenusAlwaysVisible = function(value, Timers)
@@ -258,6 +276,10 @@ SettingsFunctions = {
         end
         for i = 1, 4 do
             TTActionBars.bars[i]:SetAlwaysVisible(value)
+        end
+        if TotemTimers_MultiSpell then
+            if value then TotemTimers_MultiSpell:SetAttribute("OpenMenu", "always") end
+            TotemTimers_MultiSpell.actionBar:SetAlwaysVisible(value)
         end
     end,
 
@@ -815,11 +837,18 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
             TotemFrame:Show()
             TotemFrame:SetScript("OnShow", TotemFrameScript)
         end
+        if MultiCastActionBarFrame then
+            if value and TotemTimers.ActiveProfile.MultiCast then
+                MultiCastActionBarFrame:Hide()
+            else
+                MultiCastActionBarFrame:Show()
+            end
+        end
     end
 
     if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
         SettingsFunctions.MultiCast = function(value)
-            if value then TotemTimers.MultiSpellActivate() end
+            TotemTimers.MultiSpellActivate()
         end
     end
 end
