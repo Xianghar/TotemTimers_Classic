@@ -219,20 +219,6 @@ SettingsFunctions = {
         Timers[8].button:SetAttribute(type, value)
     end,
 
-    ShieldLeftButton = function(value, Timers)
-        Timers[6].button:SetAttribute("*spell1", value)
-        Timers[6].manaCheck = value
-    end,
-
-    ShieldRightButton = function(value, Timers)
-        Timers[6].button:SetAttribute("*spell2", value)
-    end,
-
-    ShieldMiddleButton = function(value, Timers)
-        Timers[6].button:SetAttribute("*spell3", value)
-    end,
-
-
     Order = function(value, Timers)
         for i = 1, 4 do
             Timers[i] = _G["XiTimers_Timer" .. value[i]].timer
@@ -660,6 +646,22 @@ SettingsFunctions = {
 SettingsFunctions.ReverseBarBindings = SettingsFunctions.BarBindings
 
 if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
+
+    SettingsFunctions.ShieldLeftButton = function(value, Timers)
+        value = TotemTimers.UpdateSpellRank(value)
+        Timers[6].button:SetAttribute("*spell1", value)
+        Timers[6].manaCheck = value
+    end
+
+    SettingsFunctions.ShieldRightButton = function(value, Timers)
+        value = TotemTimers.UpdateSpellRank(value)
+        Timers[6].button:SetAttribute("*spell2", value)
+    end
+
+    SettingsFunctions.ShieldMiddleButton = function(value, Timers)
+        value = TotemTimers.UpdateSpellRank(value)
+        Timers[6].button:SetAttribute("*spell3", value)
+    end
 
     SettingsFunctions.EarthShieldTracker = function(value, Timers)
         Timers[7].ActiveWhileHidden = TotemTimers.ActiveProfile.ActivateHiddenTimers and not value

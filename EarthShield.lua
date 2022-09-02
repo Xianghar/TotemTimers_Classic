@@ -227,7 +227,7 @@ function TotemTimers.ChangeEarthShieldTarget()
     end
 end
 
-local EarthShieldSpellName = TotemTimers.StripRank(SpellNames[SpellIDs.EarthShield])
+local EarthShieldSpellName = SpellNames[SpellIDs.EarthShield]
 
 local ESChargesOnly = false
 

@@ -1,7 +1,6 @@
--- Copyright © 2008 Xianghar  <xian@zron.de>
--- All Rights Reserved.
--- This code is not to be modified or distributed without written permission by the author.
--- Current permissions only include curse.com, wowui.worldofwar.net, wowinterface.com and their respective addon updaters
+if select(2, UnitClass("player")) ~= "SHAMAN" then
+    return
+end
 
 local mb  -- abrev for MulticastButton
 

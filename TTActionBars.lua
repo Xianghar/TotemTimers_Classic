@@ -249,10 +249,10 @@ function TTActionBars:AddDoubleSpell(spell1,spell2)
     if self.numspells >= self.numbuttons then return end
     self.numspells = self.numspells+1
     local button = self.buttons[self.numspells]
-    local _,_,texture = GetSpellInfo(spell1)
-    local _,_,texture2 = GetSpellInfo(spell2)
-	button:SetAttribute("doublespell1", spell1)
-    button:SetAttribute("doublespell2", spell2)
+    local spell1Name,_,texture = GetSpellInfo(spell1)
+    local spell2Name,_,texture2 = GetSpellInfo(spell2)
+	button:SetAttribute("doublespell1", spell1Name)
+    button:SetAttribute("doublespell2", spell2Name)
 	button:SetAttribute("inactive", false)
     button.icon:SetTexture(texture)
     button.icon2:SetTexture(texture2)

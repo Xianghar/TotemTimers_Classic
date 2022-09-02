@@ -35,9 +35,8 @@ function TotemTimers.InitSetButtons()
                                                 end]])
 end
 
-local StripRank = TotemTimers.StripRank
+
 local NameToSpellID = TotemTimers.NameToSpellID
-local RankToSpellID = TotemTimers.RankToSpellID
 
 function TotemTimers.ProgramSetButtons()
     local Sets = TotemTimers.ActiveProfile.TotemSets
@@ -59,21 +58,15 @@ function TotemTimers.ProgramSetButtons()
         end
         b:ClearAllPoints()
         b:SetPoint(buttonlocations[i][1], XiTimers.timers[5].button, buttonlocations[i][2])
+
         if Sets[i] then
             for k = 1,4 do
-                local spell = tonumber(Sets[i][k])
-                if not spell then
-                    spell = NameToSpellID[StripRank(Sets[i][k])]
-                    if spell then Sets[i][k] = spell end
+                if Sets[i][k] then
+                    local _, _, texture = GetSpellInfo(Sets[i][k])
+                    if texture then
+                        _G[b:GetName().."Icon"..k]:SetTexture(texture)
+                    end
                 end
-
-                Sets[i][k] = RankToSpellID[Sets[i][k]] or Sets[i][k]
-
-                local icon = _G[b:GetName().."Icon"..k]
-                if type(Sets[i][k]) == "string" or Sets[i][k] > 0 then
-                    local _,_,texture = GetSpellInfo(Sets[i][k])				
-                    icon:SetTexture(texture)
-                end     
             end
             b:SetAttribute("inactive", false)            
         else
@@ -91,7 +84,7 @@ function TotemTimers.SetAnchor_OnClick(self, button)
 		for i=1,4 do
             local nr = XiTimers.timers[i].nr
             local spell = XiTimers.timers[i].button:GetAttribute("*spell1")
-            spell = RankToSpellID[spell] or spell
+            spell = TotemTimers.GetBaseSpellID(spell)
             if not spell then spell = 0 end
 			set[nr] = spell
 		end

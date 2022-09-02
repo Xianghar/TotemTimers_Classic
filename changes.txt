@@ -1,3 +1,7 @@
+3.0.1
+    - Bugfixes for weapon tracker and spell ranks
+    - Added Earthliving Weapon
+    - Added keybinds for multicast spells
 3.0.0
     - Added spell data for WOTLK
     - Added multicast button (Call of Elements etc.)

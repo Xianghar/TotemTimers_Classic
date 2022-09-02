@@ -2,6 +2,8 @@ if select(2, UnitClass("player")) ~= "SHAMAN" then
     return
 end
 
+local _, TotemTimers = ...
+
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers", true)
 
 local HBD = LibStub("HereBeDragons-2.0")
@@ -124,15 +126,7 @@ end
                 end
             end
 
-            local lastTotem = activeProfile.LastTotems[self.nr]
-
-            -- get rank 1 spell id of totem while spellbook is not loaded
-            -- get name of totem without rank and get spell id from that
-            if not tonumber(lastTotem) then
-                lastTotem = TotemTimers.StripRank(lastTotem)
-            else
-                lastTotem = GetSpellInfo(lastTotem)
-            end
+            local lastTotem = TotemTimers.GetBaseSpellID(activeProfile.LastTotems[self.nr])
 
             lastTotem = NameToSpellID[lastTotem]
 
@@ -151,7 +145,7 @@ end
                 activeProfile.LastTotems[self.nr] = lastTotem or activeProfile.LastTotems[self.nr]
             else
                 self.button:SetAttribute("*spell1", lastTotem)
-                self.button.icon:SetTexture(GetSpellTexture(TotemTimers.StripRank(lastTotem)))
+                self.button.icon:SetTexture(GetSpellTexture(lastTotem))
             end
         end
 
