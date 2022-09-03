@@ -174,7 +174,8 @@ function TotemTimers.SetupGlobals()
 	end
 	TotemTimers.UpdateMacro()
 	TotemTimers_IsSetUp = true
-    TotemTimersFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    --TotemTimersFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    --sometimes
 end
 
 function TotemTimers_Slash(msg)

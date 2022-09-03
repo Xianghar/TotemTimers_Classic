@@ -8,6 +8,7 @@
 ## X-LoadOn-Class: Shaman
 ## X-Curse-Project-ID: 339602
 ## X-WoWI-ID: 25223
+## X-Wago-ID: rkGrwANy
 
 embeds.xml
 

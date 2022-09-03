@@ -240,7 +240,6 @@ TotemTimers.TotemCooldowns = {
         SpellIDs.ManaTide,
     },
     [FIRE_TOTEM_SLOT] = {
-        SpellIDs.FireNova,
         SpellIDs.FireElemental,
     },
     [AIR_TOTEM_SLOT] = {

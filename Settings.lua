@@ -841,9 +841,9 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
         if MultiCastActionBarFrame then
             if value and TotemTimers.ActiveProfile.MultiCast then
+                MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+                MultiCastActionBarFrame:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
                 MultiCastActionBarFrame:Hide()
-            else
-                MultiCastActionBarFrame:Show()
             end
         end
     end
