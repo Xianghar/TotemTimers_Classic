@@ -86,7 +86,7 @@ local function UpdateSpellRank(spell, useName)
     return useName and name or select(7, GetSpellInfo(name))
 end
 
-if LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_WRATH_OF_THE_LICH_KING then
+if LE_EXPANSION_LEVEL_CURRENT < 2 then
     UpdateSpellRank = function(spell, useName)
         local name = GetSpellInfo(spell)
 

@@ -50,8 +50,8 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
         b:SetNormalTexture(nil)
         b.icon:Show()
 
-		b:SetAttribute("_childupdate-show", [[if self:GetAttribute("alwaysshow") or self:GetAttribute("inactive") then return end
-                                               if message then 
+		b:SetAttribute("_childupdate-show", [[ if self:GetAttribute("alwaysshow") or self:GetAttribute("inactive") then return end
+                                               if message then
                                                    self:Show()
                                                else
                                                    self:Hide()
@@ -72,7 +72,7 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
                                     control:CallMethod("OnShow")]])
 
         parent:SetAttribute("_onenter", [[ if self:GetAttribute("OpenMenu") == "mouseover" then
-                                                  control:ChildUpdate("show", true)
+                                                  self:ChildUpdate("show", true)
                                               end ]])
 
         parent:SetAttribute("_onleave", [[

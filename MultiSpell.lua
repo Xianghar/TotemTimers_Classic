@@ -27,6 +27,8 @@ function TotemTimers.CreateMultiCastButtons()
     end
     mb.icon:Show()
 
+    for e=1,4 do mb:SetFrameRef("t"..e, XiTimers.timers[e].button) end
+
     
     mb:SetAttribute("*type*", "spell")
     
@@ -45,7 +47,9 @@ function TotemTimers.CreateMultiCastButtons()
 
     mb:SetAttribute("_onattributechanged", [[ if name == "*spell1" then
                                                   self:CallMethod("UpdateTexture")
-                                                  self:ChildUpdate("mspell", value)
+                                                  for e=1,4 do
+												      self:GetFrameRef("t"..e):SetAttribute("mspell", value)
+												  end
                                               elseif name == "state-invehicle" then
                                                  if value == "show" and self:GetAttribute("active") then
                                                     self:Show()
@@ -73,6 +77,7 @@ function TotemTimers.CreateMultiCastButtons()
    -- mb:RegisterForClicks("LeftButton, RightButton")
     mb:RegisterForDrag("LeftButton")
     mb:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4Down")
+    TotemTimers.PositionCastButtons()
 end
 
 table.insert(TotemTimers.Modules, TotemTimers.CreateMultiCastButtons)
@@ -80,18 +85,18 @@ table.insert(TotemTimers.Modules, TotemTimers.CreateMultiCastButtons)
 
 function TotemTimers.MultiSpellActivate()
     if TotemTimers.ActiveProfile.MultiCast and AvailableSpells[SpellIDs.CallOfElements] then
-        for i=1,4 do
+        --[[for i=1,4 do
             XiTimers.timers[i].button:SetParent(mb)
-        end
+        end]]
         mb:Show()
         TotemTimers.SetMultiCastSpells()
         mb.active = true
 		--trigger Childupdate("mspell")
 		mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
     else
-        for i=1,4 do
+        --[[for i=1,4 do
             XiTimers.timers[i].button:SetParent(UIParent)
-        end
+        end]]
         mb:Hide()
         mb.active = false
     end

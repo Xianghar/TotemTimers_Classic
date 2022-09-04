@@ -80,8 +80,14 @@ end
 
         tt.button.tooltip = TotemTimers.Tooltips.Totem:new(tt.button)
 
-        tt.button:SetAttribute("_onattributechanged", [[ if name == "*spell1" then
+        tt.button:SetAttribute("_onattributechanged", [[ if name == "*spell1" then 
                                                             control:CallMethod("UpdateMiniIconAndProfile")
+															local mspell = self:GetAttribute("mspell")
+															if mspell then self:SetAttribute("mspell"..mspell, self:GetAttribute("*spell1")) end
+                                                         elseif name == "mspell" then
+															local mspell = self:GetAttribute("mspell")
+															self:ChildUpdate("mspell", self:GetAttribute("action"..mspell))
+															self:SetAttribute("*spell1", self:GetAttribute("mspell"..mspell) or 0)
                                                          elseif name == "state-invehicle" then
                                                             if value == "show" and self:GetAttribute("active") then
                                                                 self:Show()
@@ -128,7 +134,6 @@ end
 
             local lastTotem = TotemTimers.GetBaseSpellID(activeProfile.LastTotems[self.nr])
 
-            lastTotem = NameToSpellID[lastTotem]
 
             if not lastTotem or not AvailableSpells[lastTotem] then
                 --[[when switching specs this part gets executed several times, once for switching and then for each talent (because of events fired)
@@ -442,7 +447,8 @@ function TotemTimers.ChangeTotemOrder(self, _, _, totem1)
         return
     end
     --_, totem1 = GetSpellBookItemInfo(totem1, BOOKTYPE_SPELL)
-    local totem2 = self:GetAttribute("spellid")
+    totem1 = TotemTimers.GetBaseSpellID(totem1)
+    local totem2 = TotemTimers.GetBaseSpellID(self:GetAttribute("*spell1"))
     local nr = self:GetParent().element
     if nr and totem1 and totem2 and TotemData[totem1].element == TotemData[totem2].element then
         local Order = TotemTimers.ActiveProfile.TotemOrder[nr]
@@ -482,7 +488,7 @@ function TotemTimers.CreateCastButtons()
             button:SetAttribute("SpellIDs", TotemTimers.NameToSpellID)
 
             button:SetAttribute("_ondragstart", [[if IsShiftKeyDown() and self:GetAttribute("*spell1")~=0 then
-                                                                            return "spell", self:GetAttribute("spellid")
+                                                                            return "spell", self:GetAttribute("*spell1")
                                                                        else control:CallMethod("StartBarDrag") end]])
             button:SetAttribute("_onreceivedrag", [[ if kind == "spell" then
                                                                             control:CallMethod("ChangeTotemOrder", value, ...)

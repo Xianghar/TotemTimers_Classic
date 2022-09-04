@@ -54,10 +54,8 @@ function TotemTimers.CreateWeaponTracker()
     weapon.button.SaveLastEnchant = function(self, name)
         if name == "spell1" then
             TotemTimers.ActiveProfile.LastWeaponEnchant = self:GetAttribute("spell1")
-            if not self.timer.timersRunning[1] then self.icons[1]:SetTexture(GetSpellTexture(self:GetAttribute("spell1"))) end
         elseif name == "spell2" or name == "spell3" then
             TotemTimers.ActiveProfile.LastWeaponEnchant2 = self:GetAttribute("spell2") or self:GetAttribute("spell3")
-            if not self.timer.timersRunning[1] then self.icons[2]:SetTexture(GetSpellTexture(self:GetAttribute("spell2") or self:GetAttribute("spell3"))) end
         elseif name == "doublespell2" then
             local ds2 = self:GetAttribute("doublespell2")
             if ds2 then
@@ -68,9 +66,9 @@ function TotemTimers.CreateWeaponTracker()
                 end
             end
         end
-        if name:sub(1,11) == "doublespell" then
-            local index = tonumber(name:sub(12))
-            if not self.timer.timersRunning[index] then self.icons[index]:SetTexture(GetSpellTexture(self:GetAttribute("doublespell"..index))) end
+        local spellType = name:sub(1, -2)
+        for i=1,2 do
+            if not self.timer.timersRunning[i] then self.icons[i]:SetTexture(GetSpellTexture(self:GetAttribute(spellType..i))) end
         end
     end
 

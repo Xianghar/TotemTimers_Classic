@@ -686,7 +686,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
     end
 
     SettingsFunctions.ESMainTankMenuDirection = function(value, Timers)
-        TTActionBars.bars[5]:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
+        TotemTimers.EarthShieldTracker.actionBar:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
     end
 
 
