@@ -1,3 +1,6 @@
+3.0.4
+    - Bugfixes
+    - Enabled Masque support again
 3.0.3
     - Remove Fire Nova from totems
     - Totems in menus can be reordered again

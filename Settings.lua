@@ -203,6 +203,7 @@ SettingsFunctions = {
             Timers[8].button:SetAttribute("doublespell2", SpellNames[SpellIDs.FrostbrandWeapon])
             Timers[8].button:SetAttribute("ds", 1)
         else
+            if not GetSpellInfo(value) then value = SpellIDs.RockbiterWeapon end
             Timers[8].button:SetAttribute("type1", "spell")
             Timers[8].button:SetAttribute("spell1", value)
         end
@@ -216,6 +217,7 @@ SettingsFunctions = {
         if TotemTimers.ActiveProfile.WeaponMenuOnRightclick then
             type = "spell3"
         end
+        if not GetSpellInfo(value) then value = SpellIDs.RockbiterWeapon end
         Timers[8].button:SetAttribute(type, value)
     end,
 
