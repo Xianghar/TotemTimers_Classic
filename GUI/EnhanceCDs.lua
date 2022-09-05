@@ -303,7 +303,7 @@ TotemTimers.options.args.enhancecds = {
 }
 
 for spec=1,3 do
-    for index,spell in pairs(TotemTimers.EnhanceCDsSpells[spec]) do
+    for index,spell in pairs(TotemTimers.CombatCooldownSpells[spec]) do
         TotemTimers.options.args.enhancecds.args[tostring(spec)].args[tostring(index)] = {
             order = index,
             type = "toggle",

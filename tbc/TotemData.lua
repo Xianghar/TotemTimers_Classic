@@ -335,3 +335,23 @@ TotemTimers.ShieldSpells = {
     SpellIDs.LightningShield,
     SpellIDs.WaterShield,
 }
+
+
+TotemTimers.CombatCooldownSpells = {
+    [2] = {
+        [1] = SpellIDs.StormStrike,
+        [2] = SpellIDs.FlameShock,
+        [3] = SpellIDs.EarthShock,
+        [4] = SpellIDs.Searing,
+    },
+    [1] = {
+        [1] = SpellIDs.ChainLightning,
+        [2] = SpellIDs.LightningBolt,
+        [3] = SpellIDs.FlameShock,
+        [4] = SpellIDs.EarthShock,
+    },
+    [3] = {
+        [1] = SpellIDs.FlameShock,
+        [2] = SpellIDs.EarthShock,
+    },
+}

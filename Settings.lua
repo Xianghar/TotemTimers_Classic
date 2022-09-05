@@ -732,6 +732,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         local font = TotemTimers.FlameShockDuration.button.time:GetFont()
         TotemTimers.FlameShockDuration.button.time:SetFont(font, value * 1.2 + 5, "OUTLINE")
         TotemTimers.FlameShockDuration.button:SetSize(value * 1.2, value * 1.2)
+        TotemTimers.FlameShockDuration.button.icons[1]:SetAllPoints(TotemTimers.FlameShockDuration.button)
         TotemTimers.LayoutEnhanceCDs()
         --TotemTimers.LayoutLongCooldowns()
     end
