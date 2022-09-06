@@ -159,19 +159,19 @@ function TotemTimers.ConfigEnhanceCDs()
         cd.events = {"SPELL_UPDATE_COOLDOWN"}
         cd.playerEvents = {}
 
-        if spell == SpellIDs.FlameShock or spell == SpellIDs.EarthShock then
+        --cd.button.bar:SetStatusBarColor(0.6,0.6,1.0,0.5)
+
+        --[[if spell == SpellIDs.FlameShock or spell == SpellIDs.EarthShock then
             cd.button:SetScript("OnEvent", TotemTimers.ShockEvent)
             cd.playerEvents[1] = "UNIT_AURA"
-        elseif spell == SpellIDs.StormStrike then
+        else]]
+        if spell == SpellIDs.StormStrike then
             cd.button:SetScript("OnEvent", TotemTimers.StormStrikeEvent)
             cd.events[2] = "UNIT_AURA"
             cd.events[3] = "PLAYER_TARGET_CHANGED"
-        elseif spell == SpellIDs.Searing then
-            cd.button:SetScript("OnEvent", TotemTimers.SearingTotemEvent)
-            cd.button:SetAttribute("*spell2", SpellIDs.FireElemental)
-            cd.button:SetAttribute("*spell3", SpellIDs.Magma)
+        elseif spell == SpellIDs.Searing or spell == SpellIDs.Magma then
+            cd.button:SetScript("OnEvent", TotemTimers.FireTotemEvent)
             cd.events[2] = "PLAYER_TOTEM_UPDATE"
-            cd.Stop = TotemTimers.SearingTotemStop
         else
             cd.button:SetScript("OnEvent", TotemTimers.EnhanceCDEvents)
         end
@@ -308,12 +308,12 @@ end
 local SearingIcon = SpellTextures[SpellIDs.Searing]
 local MagmaIcon = SpellTextures[SpellIDs.Magma]
 local FireElementalIcon = SpellTextures[SpellIDs.FireElemental]
-function TotemTimers.SearingTotemEvent(self,event,...)
+function TotemTimers.FireTotemEvent(self,event,...)
     local element = ...
     if event == "PLAYER_TOTEM_UPDATE" then
         if element == 1 then
             local _, totem, startTime, duration, icon = GetTotemInfo(1)
-            if (icon == SearingIcon or icon == MagmaIcon or icon == FireElementalIcon) and duration > 0 then
+            if icon == self.icon:GetTexture() and duration > 0 then
 				self.icon:SetTexture(icon)
                 self.timer:Start(1, duration)
             elseif self.timer.timers[1] > 0 then 
@@ -323,11 +323,6 @@ function TotemTimers.SearingTotemEvent(self,event,...)
     else
         -- TotemTimers.EnhanceCDEvents(self,event,...)
     end
-end
-
-function TotemTimers.SearingTotemStop(self, ...)
-	self.button.icon:SetTexture(SpellTextures[SpellIDs.Searing])
-	XiTimers.Stop(self, ...)
 end
 
 
@@ -428,13 +423,14 @@ end
 
 local Focused = 43339
 local ElementalFocus = 16164
+local ClearCasting = 16246
 local ShockBuffActive = {}
 function TotemTimers.ShockEvent(self, event, unit, ...)
     if event == "UNIT_AURA" and unit == "player" then
         for i = 1,40 do
             local name,_,_,_,duration,endtime,_,_,_,spellID = UnitBuff("player", i)
             if spellID then
-                if (spellID == Focused or spellID == ElementalFocus) then
+                if (spellID == Focused or spellID == ElementalFocus or spellID == ClearCasting) then
                     if not ShockBuffActive[self.timer.nr] then
                         ShockBuffActive[self.timer.nr] = true
                         ActionButton_ShowOverlayGlow(self)

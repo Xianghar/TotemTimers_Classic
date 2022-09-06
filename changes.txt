@@ -1,3 +1,7 @@
+3.0.5
+    - Fixed lua error in Earth Shield main tank list
+    - Removed main tank list from Masque
+    - Added more spells to combat cooldowns
 3.0.4
     - Bugfixes
     - Enabled Masque support again

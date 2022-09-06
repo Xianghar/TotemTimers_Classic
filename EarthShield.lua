@@ -200,7 +200,7 @@ function TotemTimers.SetEarthShieldMainTankList()
         local b = 0
         for i = 1, 40 do
             local unit = "raid" .. i
-            if b < 5 and UnitExists(unit) then
+            if b < 4 and UnitExists(unit) then
                 if GetPartyAssignment("MAINTANK", unit)
                         or UnitGroupRolesAssigned(unit) == "TANK" then
                     b = b + 1
