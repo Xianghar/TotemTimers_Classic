@@ -199,6 +199,7 @@ function XiTimers:new(nroftimers, unclickable)
     --self.button.cooldown:SetFrameLevel(self.button.cooldown:GetFrameLevel()-1)
     self.button.cooldown.noCooldownCount = true
     self.button.cooldown.noOCC = true
+    self.button:SetAttribute("num", self.nr)
     self.rangeCheckCount = 0
     self.manaCheckCount = 0
 	self.warningPoint = 10

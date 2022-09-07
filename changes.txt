@@ -1,3 +1,5 @@
+3.0.7 Beta
+    - Ctrl-Rightclick a totem timer to disable it for multicast
 3.0.6
     - Fix combat cooldowns not movable
 3.0.5

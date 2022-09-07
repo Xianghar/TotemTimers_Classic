@@ -58,7 +58,7 @@ end
 
         tt.button.anchorframe = TotemTimersFrame
         tt.button:RegisterForClicks("AnyDown")
-        tt.button:SetAttribute("*type2", "macro")
+        --tt.button:SetAttribute("*type2", "macro")
         tt.button:SetAttribute("*type3", "macro")
         tt.button:SetAttribute("*type1", "spell")
         tt.button.bar:SetStatusBarColor(0.7, 1, 0.7, 0.8)
@@ -82,12 +82,29 @@ end
 
         tt.button:SetAttribute("_onattributechanged", [[ if name == "*spell1" then 
                                                             control:CallMethod("UpdateMiniIconAndProfile")
-															local mspell = self:GetAttribute("mspell")
-															if mspell then self:SetAttribute("mspell"..mspell, self:GetAttribute("*spell1")) end
+															local mspell = self:GetAttribute("mspell")															
+															if mspell then 
+																local mspellDisabled = self:GetAttribute("mspelldisabled"..mspell)
+																if not mspellDisabled then
+																	self:SetAttribute("mspell"..mspell, self:GetAttribute("*spell1"))
+																end
+															end
                                                          elseif name == "mspell" then
 															local mspell = self:GetAttribute("mspell")
-															self:ChildUpdate("mspell", self:GetAttribute("action"..mspell))
-															self:SetAttribute("*spell1", self:GetAttribute("mspell"..mspell) or 0)
+															if mspell then															
+																self:ChildUpdate("mspell", self:GetAttribute("action"..mspell))
+																self:ChildUpdate("mspelldisabled", self:GetAttribute("mspelldisabled"..mspell))	
+																local spell = self:GetAttribute("mspell"..mspell)
+																if spell then self:SetAttribute("*spell1", spell) end
+															end
+														 elseif name:sub(1,14) == "mspelldisabled" then	
+															local mspell = name:sub(15)														 
+															local disabled = self:GetAttribute(name)
+															local activeMspell = self:GetAttribute("mspell")
+															if mspell == activeMspell then
+																self:ChildUpdate("mspelldisabled", disabled)
+															end
+															self:CallMethod("DisableMultiSpell", mspell, disabled)
                                                          elseif name == "state-invehicle" then
                                                             if value == "show" and self:GetAttribute("active") then
                                                                 self:Show()
@@ -99,11 +116,16 @@ end
                                                          end]])
         tt.button:WrapScript(tt.button, "OnClick", [[ if button == "Button4" then
                                                           control:ChildUpdate("toggle")
+													  elseif button == "RightButton" and IsControlKeyDown() then													  
+													      local mspell = self:GetAttribute("mspell")
+														  if mspell then
+															  local disabled = not self:GetAttribute("mspelldisabled"..mspell)
+													          self:SetAttribute("mspelldisabled"..mspell, disabled)
+														  end
                                                       end ]])
-        tt.button:SetAttribute("_childupdate-mspell", [[ self:SetAttribute("mspell", tostring(message))
-                                                         self:ChildUpdate("mspell", self:GetAttribute("action"..message))
-                                                         self:SetAttribute("*spell1", self:GetAttribute("mspell"..message) or 0)
-                                                      ]])
+		
+		--declare empty function here for classic and tbc
+		tt.button.DisableMultiSpell = function(self, multispell, disable) end		
 
         tt.Activate = function(self)
             if self.active then return end
@@ -204,7 +226,17 @@ end
                 tt.button:SetAttribute("action"..mspellID, action)
                 local _,spell,_ = GetActionInfo(action)
                 tt.button:SetAttribute("mspell"..mspellID,spell)
-            end
+            end			
+			
+			tt.button.DisableMultiSpell = function(self, multispell, disable) 	
+				if not multispell then return end
+				if disable and not InCombatLockdown() then
+					local action = self:GetAttribute("action"..multispell)
+					if action then SetMultiCastSpell(action, nil) end
+				end
+				TotemTimers.ActiveProfile.DisabledMultiSpells[multispell.."-"..self.timer.nr] = disable
+                TotemTimers_MultiSpell:UpdateTexture()
+			end
         end
 
 
@@ -496,6 +528,7 @@ function TotemTimers.CreateCastButtons()
                                                                        end]])
             if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
                 button:SetAttribute("_childupdate-mspell", [[ self:SetAttribute("*action*", message) ]])
+                button:SetAttribute("_childupdate-mspelldisabled", [[ if message then self:SetAttribute("*type2", nil) else self:SetAttribute("*type2", "multispell") end]])
                 local multispell = TotemTimers.ActiveProfile.LastMultiCastSpell or SpellIDs.CallOfElements
                 button:SetAttribute("*action*", MultiCastActions[i][multispell])
                 button:SetAttribute("*type2", "multispell")

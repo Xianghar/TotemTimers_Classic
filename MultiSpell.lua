@@ -8,6 +8,7 @@ local SpellNames = TotemTimers.SpellNames
 local AvailableSpells = TotemTimers.AvailableSpells
 
 local SpellIDs = TotemTimers.SpellIDs
+local SpellTextures = TotemTimers.SpellTextures
 
 function TotemTimers.CreateMultiCastButtons()
     mb = CreateFrame("Button", "TotemTimers_MultiSpell", UIParent, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerEnterLeaveTemplate, SecureHandlerAttributeTemplate")
@@ -29,6 +30,18 @@ function TotemTimers.CreateMultiCastButtons()
 
     for e=1,4 do mb:SetFrameRef("t"..e, XiTimers.timers[e].button) end
 
+    local textures = {SpellTextures[SpellIDs.Searing], SpellTextures[SpellIDs.StrengthOfEarth], SpellTextures[SpellIDs.ManaSpring], SpellTextures[SpellIDs.Windfury]}
+
+    mb.totemIcons = {}
+    for e=1,4 do
+        mb.totemIcons[e] = mb:CreateTexture(nil, "OVERLAY", nil, 7)
+        mb.totemIcons[e]:SetTexture(textures[e])
+        mb.totemIcons[e]:SetSize(18, 18)
+        mb.totemIcons[e]:SetPoint("TOPLEFT", mb, "TOPLEFT", (1 - e % 2) * 18, -floor((e-1) / 2) * 18)
+        mb.totemIcons[e]:SetAlpha(0.4)
+        mb.totemIcons[e]:Hide()
+    end
+
     
     mb:SetAttribute("*type*", "spell")
     
@@ -38,9 +51,17 @@ function TotemTimers.CreateMultiCastButtons()
             local _,_,texture = GetSpellInfo(spell)
             if texture then
                 self.icon:SetTexture(texture)
+            end			
+			TotemTimers.ActiveProfile.LastMultiCastSpell = spell
+
+            for i = 1,4 do
+                if TotemTimers.ActiveProfile.DisabledMultiSpells[spell.."-"..i] then
+                    self.totemIcons[i]:Show()
+                else
+                    self.totemIcons[i]:Hide()
+                end
             end
         end
-        TotemTimers.ActiveProfile.LastMultiCastSpell = spell
     end
     
     mb.HideTooltip = function(self) GameTooltip:Hide() end
@@ -58,6 +79,8 @@ function TotemTimers.CreateMultiCastButtons()
                                                 else
                                                     self:Hide()
                                                 end
+											  elseif name:sub(1,8) == "disabled" then
+												self:CallMethod("UpdateTexture")
                                              end]])
     mb:WrapScript(mb, "OnClick", [[ if button == "Button4" then
                                                           control:ChildUpdate("toggle")
@@ -78,6 +101,12 @@ function TotemTimers.CreateMultiCastButtons()
     mb:RegisterForDrag("LeftButton")
     mb:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4Down")
     TotemTimers.PositionCastButtons()
+
+    for _, mspellID in pairs({SpellIDs.CallOfElements, SpellIDs.CallOfSpirits, SpellIDs.CallOfAncestors}) do
+        for i=1,4 do
+            XiTimers.timers[i].button:SetAttribute("mspelldisabled"..mspellID, TotemTimers.ActiveProfile.DisabledMultiSpells[mspellID..'-'..XiTimers.timers[i].nr])
+        end
+    end
 end
 
 table.insert(TotemTimers.Modules, TotemTimers.CreateMultiCastButtons)

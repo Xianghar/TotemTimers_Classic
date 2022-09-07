@@ -77,6 +77,7 @@ TotemTimers.DefaultProfile = {
         MacroReset = 15,
         TwistingTimer = false,
         MultiCast = true,
+        DisabledMultiSpells = {},
         
     --Trackers
         TrackerArrange = "horizontal",

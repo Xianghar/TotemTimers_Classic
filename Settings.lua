@@ -237,10 +237,10 @@ SettingsFunctions = {
                 Timers[i].button:SetAttribute("*macrotext2", "")
             else
                 Timers[i].button:SetAttribute("OpenMenu", "mouseover")
-                Timers[i].button:SetAttribute("*type2", "macro")
-                Timers[i].button:SetAttribute("*macrotext2", "/script XiTimers.timers[" .. i .. "].stopQuiet = true DestroyTotem(" .. Timers[i].nr .. ")")
-                Timers[i].button:SetAttribute("*type3", "spell")
-                Timers[i].button:SetAttribute("*spell3", SpellIDs.TotemicCall)
+                Timers[i].button:SetAttribute("type2", "macro")
+                Timers[i].button:SetAttribute("macrotext2", "/script XiTimers.timers[" .. i .. "].stopQuiet = true DestroyTotem(" .. Timers[i].nr .. ")")
+                Timers[i].button:SetAttribute("type3", "spell")
+                Timers[i].button:SetAttribute("spell3", SpellIDs.TotemicCall)
             end
         end
         if TotemTimers_MultiSpell then
