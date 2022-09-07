@@ -106,10 +106,10 @@ function TotemTimers.CreateEnhanceCDs()
 	
 
     for i=1,#cds do
-        cds[i].button:SetAttribute("_ondragstart",[[if not InCombatLockDown() and IsShiftKeyDown() then
+        cds[i].button:SetAttribute("_ondragstart",[[if IsShiftKeyDown() then
                                                     return "spell", self:GetAttribute("*spell1")
                                               else control:CallMethod("StartMove") end]])
-        cds[i].button:SetAttribute("_onreceivedrag",[[ if not InCombatLockDown() and kind == "spell" then
+        cds[i].button:SetAttribute("_onreceivedrag",[[ if kind == "spell" then
                                                    control:CallMethod("ChangeCDOrder", value, ...)
                                                     return "clear"
                                               end]])
