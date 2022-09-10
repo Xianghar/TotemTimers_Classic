@@ -329,11 +329,13 @@ TotemTimers.ShieldButtons = {
     SpellIDs.LightningShield,
     SpellIDs.WaterShield,
     SpellIDs.TotemicCall,
+    SpellIDs.EarthShield,
 }
 
 TotemTimers.ShieldSpells = {
     SpellIDs.LightningShield,
     SpellIDs.WaterShield,
+    SpellIDs.EarthShield,
 }
 
 

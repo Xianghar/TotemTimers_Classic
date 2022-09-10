@@ -1,5 +1,7 @@
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
+local _, TotemTimers = ...
+
 local SpellIDs = TotemTimers.SpellIDs
 local SpellNames = TotemTimers.SpellNames
 local Version = 11.3
@@ -98,15 +100,17 @@ TotemTimers.DefaultProfile = {
         EarthShieldRightButton = "target",
         EarthShieldMiddleButton = "targettarget",
         EarthShieldButton4 = "player",
-        ShieldLeftButton = TotemTimers.SpellIDs.LightningShield,
-        ShieldRightButton = TotemTimers.SpellIDs.WaterShield,
-        ShieldMiddleButton = TotemTimers.SpellIDs.TotemicCall,
+        ShieldLeftButton = SpellIDs.LightningShield,
+        ShieldRightButton = SpellIDs.WaterShield,
+        ShieldMiddleButton = SpellIDs.TotemicCall,
+        ShieldButton4 = SpellIDs.EarthShield,
         EarthShieldTargetName = true,
         ESMainTankMenu = true,
         ESMainTankMenuDirection = "auto",
         ESChargesOnly = false,
         Tracker_Clickthrough = false,
         ShieldChargesOnly = true,
+        EarthShieldOnSelf = false,
 
         
     --Warnings

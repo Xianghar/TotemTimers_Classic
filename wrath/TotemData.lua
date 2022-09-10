@@ -176,7 +176,7 @@ TotemData = {
     [SpellIDs.HealingStream] = {
 		element = WATER_TOTEM_SLOT,
 		warningPoint = 4,
-        buff = 5672,
+        rangeCheck = 30,
 	},
     [SpellIDs.ManaTide] = {
         element = WATER_TOTEM_SLOT,
@@ -326,11 +326,13 @@ TotemTimers.ShieldButtons = {
     SpellIDs.LightningShield,
     SpellIDs.WaterShield,
     SpellIDs.TotemicCall,
+    SpellIDs.EarthShield,
 }
 
 TotemTimers.ShieldSpells = {
     SpellIDs.LightningShield,
     SpellIDs.WaterShield,
+    SpellIDs.EarthShield,
 }
 
 TotemTimers.CombatCooldownSpells = {

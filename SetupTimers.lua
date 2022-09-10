@@ -106,7 +106,6 @@ end
 															if mspell == activeMspell then
 																self:ChildUpdate("mspelldisabled", disabled)
 															end
-															self:CallMethod("DisableMultiSpell", mspell, disabled)
                                                          elseif name == "state-invehicle" then
                                                             if value == "show" and self:GetAttribute("active") then
                                                                 self:Show()
@@ -118,11 +117,12 @@ end
                                                          end]])
         tt.button:WrapScript(tt.button, "OnClick", [[ if button == "Button4" then
                                                           control:ChildUpdate("toggle")
-													  elseif button == "RightButton" and IsControlKeyDown() then													  
+													  elseif button == "RightButton" and IsControlKeyDown() and not PlayerInCombat() then
 													      local mspell = self:GetAttribute("mspell")
 														  if mspell then
 															  local disabled = not self:GetAttribute("mspelldisabled"..mspell)
 													          self:SetAttribute("mspelldisabled"..mspell, disabled)
+													          self:CallMethod("DisableMultiSpell", mspell, disabled)
 														  end
                                                       end ]])
 		
@@ -225,12 +225,10 @@ end
 
         if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
 
-			tt.button.DisableMultiSpell = function(self, multispell, disable)
-                if not multispell then return end
-                if disable and not InCombatLockdown() then
-                    local action = self:GetAttribute("action"..multispell)
-                    if action then SetMultiCastSpell(action, nil) end
-                end
+			tt.button.DisableMultiSpell = function(self, multispell, disable) print("x")
+                if not multispell or InCombatLockdown() then return end
+                local action = self:GetAttribute("action"..multispell)
+                SetMultiCastSpell(action, not disable and self:GetAttribute("*spell1") or nil)
                 TotemTimers.ActiveProfile.DisabledMultiSpells[TotemTimers.Specialization..multispell..self.timer.nr] = disable
                 TotemTimers_MultiSpell:UpdateTexture()
             end
