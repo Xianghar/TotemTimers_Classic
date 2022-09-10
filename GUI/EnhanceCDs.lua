@@ -136,14 +136,8 @@ TotemTimers.options.args.enhancecds = {
         },
         FlameShockDuration = {
             order = 21,
-            type = "toggle",
-            name = L["Flame Shock duration"],
-            set = function(info, val)
-                TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration = val
-                TotemTimers.ConfigEnhanceCDs()
-                TotemTimers.LayoutEnhanceCDs()
-            end,
-            get = function(info) return TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration end,
+            type = "description",
+            name = "Flame shock duration is now changed for each spec in spells section below",
         },
         FlameShockOnTop = {
             order = 22,
@@ -319,6 +313,17 @@ for spec=1,3 do
             end,
         }
     end
+    TotemTimers.options.args.enhancecds.args[tostring(spec)].args.FlameShockDuration = {
+        order = 0,
+        type = "toggle",
+        name = L["Flame Shock duration"],
+        set = function(info, val)
+            TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration_Specialization[spec] = val
+            TotemTimers.ConfigEnhanceCDs()
+            TotemTimers.LayoutEnhanceCDs()
+        end,
+        get = function(info) return TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration_Specialization[spec] end,
+    }
 end
     
 local ACD = LibStub("AceConfigDialog-3.0")

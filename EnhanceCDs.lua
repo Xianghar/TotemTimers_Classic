@@ -24,20 +24,6 @@ local CDSpells = TotemTimers.CombatCooldownSpells
 local FlameShockDuration = null
 
 
-local function GetSpecialization()
-    local pointsSpent = 0
-    local role = 0
-    for i=1,3 do
-        local _,_,points = GetTalentTabInfo(i)
-        if points > pointsSpent then
-            pointsSpent = points
-            role = i
-        end
-    end
-    return role
-end
-
-   
 local function ChangeCDOrder(self,spell)
 --[[    if InCombatLockdown() then return end
     if not spell then return end
@@ -120,7 +106,7 @@ end
 table.insert(TotemTimers.Modules, TotemTimers.CreateEnhanceCDs)
 
 function TotemTimers.ConfigEnhanceCDs() 
-    role = GetSpecialization()
+    role = TotemTimers.Specialization --GetSpecialization()
     if not role then role = 0 end
     
     for i=1,#cds do
@@ -177,7 +163,7 @@ function TotemTimers.ConfigEnhanceCDs()
         end
     end
 
-    if AvailableSpells[SpellIDs.FlameShock] and TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration then
+    if AvailableSpells[SpellIDs.FlameShock] and TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration_Specialization[role] then
         FlameShockDuration:Activate()
     end
     

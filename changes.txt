@@ -1,5 +1,9 @@
-3.0.7 Beta
+3.0.7
     - Ctrl-Rightclick a totem timer to disable it for multicast
+    - Do not modify totems assigned to multicast spells if multicast button is disabled
+    - If multicast button is enabled selected totems switch when switching specs
+    - Added ft-1/ft button to weapon tracker
+    - Different profiles can be set for different specializations
 3.0.6
     - Fix combat cooldowns not movable
 3.0.5

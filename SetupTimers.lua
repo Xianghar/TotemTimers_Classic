@@ -96,6 +96,8 @@ end
 																self:ChildUpdate("mspelldisabled", self:GetAttribute("mspelldisabled"..mspell))	
 																local spell = self:GetAttribute("mspell"..mspell)
 																if spell then self:SetAttribute("*spell1", spell) end
+															else
+																self:ChildUpdate("mspell", nil)
 															end
 														 elseif name:sub(1,14) == "mspelldisabled" then	
 															local mspell = name:sub(15)														 
@@ -222,21 +224,16 @@ end
         end)
 
         if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
-            for mspellID,action in pairs(MultiCastActions[e]) do
-                tt.button:SetAttribute("action"..mspellID, action)
-                local _,spell,_ = GetActionInfo(action)
-                tt.button:SetAttribute("mspell"..mspellID,spell)
-            end			
-			
-			tt.button.DisableMultiSpell = function(self, multispell, disable) 	
-				if not multispell then return end
-				if disable and not InCombatLockdown() then
-					local action = self:GetAttribute("action"..multispell)
-					if action then SetMultiCastSpell(action, nil) end
-				end
-				TotemTimers.ActiveProfile.DisabledMultiSpells[multispell.."-"..self.timer.nr] = disable
+
+			tt.button.DisableMultiSpell = function(self, multispell, disable)
+                if not multispell then return end
+                if disable and not InCombatLockdown() then
+                    local action = self:GetAttribute("action"..multispell)
+                    if action then SetMultiCastSpell(action, nil) end
+                end
+                TotemTimers.ActiveProfile.DisabledMultiSpells[TotemTimers.Specialization..multispell..self.timer.nr] = disable
                 TotemTimers_MultiSpell:UpdateTexture()
-			end
+            end
         end
 
 

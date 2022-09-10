@@ -92,15 +92,15 @@ TotemTimers.DefaultProfile = {
         WeaponTracker = true,
         WeaponBarDirection = "auto",
         WeaponMenuOnRightclick = false,
-        LastWeaponEnchant = TotemTimers.SpellNames[TotemTimers.SpellIDs.RockbiterWeapon],
+        LastWeaponEnchant = TotemTimers.SpellIDs.RockbiterWeapon,
         EarthShieldTracker = true,
         EarthShieldLeftButton = "recast", 
         EarthShieldRightButton = "target",
         EarthShieldMiddleButton = "targettarget",
         EarthShieldButton4 = "player",
-        ShieldLeftButton = TotemTimers.SpellNames[TotemTimers.SpellIDs.LightningShield],
-        ShieldRightButton = TotemTimers.SpellNames[TotemTimers.SpellIDs.WaterShield],
-        ShieldMiddleButton = TotemTimers.SpellNames[TotemTimers.SpellIDs.TotemicCall],
+        ShieldLeftButton = TotemTimers.SpellIDs.LightningShield,
+        ShieldRightButton = TotemTimers.SpellIDs.WaterShield,
+        ShieldMiddleButton = TotemTimers.SpellIDs.TotemicCall,
         EarthShieldTargetName = true,
         ESMainTankMenu = true,
         ESMainTankMenuDirection = "auto",
@@ -295,6 +295,7 @@ TotemTimers.DefaultProfile = {
         FlameShockDurationOnTop = false,
         EnhanceCDsClickthrough = false,
         EnhanceCDsFlameShockDuration = true,
+        EnhanceCDsFlameShockDuration_Specialization = {true, true, true},
         EnhanceCDsTotemTwisting = true,
 
         WindfuryDownrank = false,
@@ -401,10 +402,10 @@ end
 
 function TotemTimers.SelectActiveProfile()
     local player = UnitName("player")
-    local specialization -- = GetSpecialization()
+    local specialization = TotemTimers.Specialization -- = GetSpecialization()
     if not specialization then specialization = 2 end
     local _,instance = IsInInstance()
-	if not instance then instance = "party" end
+	if not instance then instance = "none" end
     TotemTimers.ActiveProfile = TotemTimers_Profiles[TotemTimers_GlobalSettings.Profiles[player][specialization][instance]] or TotemTimers_Profiles.default
 end
 

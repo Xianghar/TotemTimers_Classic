@@ -85,7 +85,7 @@ function TotemTooltip:SetText()
             local mspellID = TotemTimers_MultiSpell:GetAttribute("*spell1")
             if mspellID then
                 local disabled = TotemTimers.ActiveProfile.DisabledMultiSpells[mspellID.."-"..self.button.timer.nr]
-                local message = L["Ctrl-Rightclick to disable element for %s"]
+                local message = L["Ctrl-Rightclick to disable totem for %s"]
                 if disabled then message = L["Ctrl-Rightclick to enable element for %s"] end
 
                 local mspell = GetSpellInfo(mspellID)
