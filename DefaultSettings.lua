@@ -300,6 +300,7 @@ TotemTimers.DefaultProfile = {
         EnhanceCDsClickthrough = false,
         EnhanceCDsFlameShockDuration = true,
         EnhanceCDsFlameShockDuration_Specialization = {true, true, true},
+        EnhanceCDsMaelstrom = true,
         EnhanceCDsTotemTwisting = true,
 
         WindfuryDownrank = false,

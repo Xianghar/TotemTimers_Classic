@@ -68,7 +68,7 @@ SettingsFunctions = {
 
     TimeStyle = function(value, Timers)
         for k, timer in pairs(Timers) do
-            if ((k < 6 or not TotemTimers.ActiveProfile.ShieldChargesOnly) or k > 7) then
+            if timer ~= TotemTimers.FlameShockDuration and timer ~= TotemTimers.Maelstrom then
                 timer.timeStyle = value
             end
         end
@@ -325,8 +325,11 @@ SettingsFunctions = {
     TimerBarTexture = function(value, Timers)
         local texture = LSM:Fetch("statusbar", value)
         if texture then
+            local maelstrom = TotemTimers.Maelstrom
             for _, timer in pairs(Timers) do
-                timer:SetBarTexture(texture)
+                if not maelstrom or maelstrom ~= timer then
+                    timer:SetBarTexture(texture)
+                end
             end
         end
     end,
@@ -335,7 +338,7 @@ SettingsFunctions = {
         for i = 1, #Timers do
             if value and i < 5 then
                 Timers[i]:SetBarColor(TotemColors[Timers[i].nr].r, TotemColors[Timers[i].nr].g, TotemColors[Timers[i].nr].b, 1)
-            elseif i ~= 21 then
+            elseif Timers[i] ~= TotemTimers.FlameShockDuration and (not TotemTimers.Maelstrom or Timers[i] ~= TotemTimers.Maelstrom) then
                 Timers[i]:SetBarColor(TotemTimers.ActiveProfile.TimerBarColor.r, TotemTimers.ActiveProfile.TimerBarColor.g,
                         TotemTimers.ActiveProfile.TimerBarColor.b, TotemTimers.ActiveProfile.TimerBarColor.a)
 
@@ -711,6 +714,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         --TotemTimers.maelstrombutton:SetWidth(value*3+10)
         --TotemTimers.FlameShockDuration:SetTimeWidth(value*3+10)
         TotemTimers.FlameShockDuration:SetScale(value / 36)
+        if TotemTimers.Maelstrom then TotemTimers.Maelstrom:SetScale(value/36) end
         TotemTimers.LayoutEnhanceCDs()
         --[[for i = 1,#TotemTimers.LongCooldowns do
             TotemTimers.LongCooldowns[i]:SetScale(value/36)
@@ -728,11 +732,15 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
                 timer.button.time:SetFont(font, value + 5, "OUTLINE")
             end
         end
-        TotemTimers.FlameShockDuration:SetTimeHeight(value * 1.2)
-        local font = TotemTimers.FlameShockDuration.button.time:GetFont()
-        TotemTimers.FlameShockDuration.button.time:SetFont(font, value * 1.2 + 5, "OUTLINE")
-        TotemTimers.FlameShockDuration.button:SetSize(value * 1.2, value * 1.2)
-        TotemTimers.FlameShockDuration.button.icons[1]:SetAllPoints(TotemTimers.FlameShockDuration.button)
+
+        local fs = TotemTimers.FlameShockDuration
+
+        fs:SetTimeHeight(value * 1.2)
+        local font = fs.timerBars[1].time:GetFont()
+        fs.timerBars[1].time:SetFont(font, value, "OUTLINE")
+        fs.button:SetSize(value * 1.2, value * 1.2)
+        fs.button.icons[1]:SetAllPoints(fs.button)
+
         TotemTimers.LayoutEnhanceCDs()
         --TotemTimers.LayoutLongCooldowns()
     end

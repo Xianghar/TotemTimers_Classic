@@ -69,6 +69,7 @@ elseif LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_WRATH_OF_THE_LICH_KING then
         wipe(TotemTimers.AvailableTalents)
         TotemTimers.AvailableTalents.TotemicMastery = 0
         TotemTimers.AvailableTalents.DualWield = select(5, GetTalentInfo(2, 17)) > 0
+        TotemTimers.AvailableTalents.Maelstrom = select(5, GetTalentInfo(2,24)) > 0
     end
 
 end

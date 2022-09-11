@@ -299,10 +299,10 @@ TotemTimers.options.args.enhancecds = {
 for spec=1,3 do
     for index,spell in pairs(TotemTimers.CombatCooldownSpells[spec]) do
         TotemTimers.options.args.enhancecds.args[tostring(spec)].args[tostring(index)] = {
-            order = index,
+            order = 10 + index,
             type = "toggle",
             name = SpellNames[spell],
-            width = "full",
+            width = "normal",
             set = function(info, val)
                 TotemTimers.ActiveProfile.EnhanceCDs_Spells[spec][index] = val
                 TotemTimers.ConfigEnhanceCDs()
@@ -317,12 +317,30 @@ for spec=1,3 do
         order = 0,
         type = "toggle",
         name = L["Flame Shock duration"],
+        width = "full",
         set = function(info, val)
             TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration_Specialization[spec] = val
             TotemTimers.ConfigEnhanceCDs()
             TotemTimers.LayoutEnhanceCDs()
         end,
         get = function(info) return TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration_Specialization[spec] end,
+    }
+end
+
+if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+    local MaelstromName = GetTalentInfo(2,24)
+
+    TotemTimers.options.args.enhancecds.args["2"].args.Maelstrom = {
+        order = 1,
+        type = "toggle",
+        name = MaelstromName,
+        width = "full",
+        set = function(info, val)
+            TotemTimers.ActiveProfile.EnhanceCDsMaelstrom = val
+            TotemTimers.ConfigEnhanceCDs()
+            TotemTimers.LayoutEnhanceCDs()
+        end,
+        get = function(info) return TotemTimers.ActiveProfile.EnhanceCDsMaelstrom end,
     }
 end
     

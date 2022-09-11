@@ -22,30 +22,30 @@ local ShieldName = SpellNames[SpellIDs.LightningShield]
 local CDSpells = TotemTimers.CombatCooldownSpells
 
 local FlameShockDuration = null
+local Maelstrom = nil
+local MaelstromButton = nil
 
 
-local function ChangeCDOrder(self,spell)
---[[    if InCombatLockdown() then return end
+local function ChangeCDOrder(self, _, _, spell)
+    if InCombatLockdown() then return end
     if not spell then return end
-    local _,spell1 = GetSpellBookItemInfo(spell, "BOOKTYPE_SPELL")
-    local spell2 = self:GetAttribute("orderspell")    
-    if not spell2 or not spell1 then return end
-    local spellnum1, spellnum2 = nil,nil
-    for local i=1,num_CD_Spells[role] do
-        if CD_Spells[role][i] == spell1 then spellnum1 = i end
-        if CD_Spells[role][i] == spell2 then spellnum2 = i end        
+
+    local spell1 = TotemTimers.GetBaseSpellID(spell)
+    local spell2 = TotemTimers.GetBaseSpellID(self:GetAttribute("*spell1"))
+
+    local orderIndex1, orderIndex2
+
+    for orderIndex, spellIndex in pairs(TotemTimers.ActiveProfile.EnhanceCDs_Order[TotemTimers.Specialization]) do
+        if CDSpells[role][spellIndex] == spell1 then orderIndex1 = orderIndex end
+        if CDSpells[role][spellIndex] == spell2 then orderIndex2 = orderIndex end
     end
-    if not spellnum1 or not spellnum2 then return end
-    local order1, order2 = nil
-    for i=1,#TotemTimers.ActiveProfile.EnhanceCDs_Order[role] do
-        if TotemTimers.ActiveProfile.EnhanceCDs_Order[role][i] == spellnum1 then order1 = i end
-        if TotemTimers.ActiveProfile.EnhanceCDs_Order[role][i] == spellnum2 then order2 = i end
+
+    if orderIndex1 and orderIndex2 then
+        TotemTimers.ActiveProfile.EnhanceCDs_Order[role][orderIndex1], TotemTimers.ActiveProfile.EnhanceCDs_Order[role][orderIndex2] =
+            TotemTimers.ActiveProfile.EnhanceCDs_Order[role][orderIndex2], TotemTimers.ActiveProfile.EnhanceCDs_Order[role][orderIndex1]
     end
-    if not order1 or not order2 then return end
-    TotemTimers.ActiveProfile.EnhanceCDs_Order[role][order1], TotemTimers.ActiveProfile.EnhanceCDs_Order[role][order2] =
-        TotemTimers.ActiveProfile.EnhanceCDs_Order[role][order2], TotemTimers.ActiveProfile.EnhanceCDs_Order[role][order1]
+
     TotemTimers.LayoutEnhanceCDs()
-    ]]
 end
    
 function TotemTimers.CreateEnhanceCDs()
@@ -66,7 +66,6 @@ function TotemTimers.CreateEnhanceCDs()
     TotemTimers.FlameShockDuration = FlameShockDuration
     FlameShockDuration.button:Disable()
     FlameShockDuration.button.icons[1]:SetVertexColor(1,1,1)
-    FlameShockDuration.button.bar:SetStatusBarColor(1,0.2,0.2,0.8)
     FlameShockDuration.button.bar:SetStatusBarColor(1,0.2,0.2,0.8)
 
     FlameShockDuration.button.icons[1]:SetTexture(SpellTextures[SpellIDs.FlameShock])
@@ -101,6 +100,82 @@ function TotemTimers.CreateEnhanceCDs()
                                               end]])
         cds[i].button.ChangeCDOrder = ChangeCDOrder
     end
+
+    if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+        Maelstrom = XiTimers:new(1)
+        TotemTimers.Maelstrom = Maelstrom
+
+        --Maelstrom.button:Disable()
+        Maelstrom.button.icons[1]:SetVertexColor(1,1,1)
+
+        Maelstrom.button.icons[1]:SetTexture(237584)
+        Maelstrom.button.anchorframe = TotemTimers_EnhanceCDsFrame
+        Maelstrom.dontAlpha = true
+        Maelstrom.dontFlash = true
+        Maelstrom.timeStyle = "sec"
+        Maelstrom.button:SetAttribute("*type*", "spell")
+        Maelstrom.button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+        Maelstrom.button:SetAttribute("*spell1", SpellIDs.LightningBolt)
+        Maelstrom.button:SetAttribute("*spell2", SpellIDs.ChainLightning)
+        Maelstrom.button.icons[1]:SetAlpha(1)
+        Maelstrom.rangeCheck = SpellNames[SpellIDs.LightningBolt]
+        Maelstrom.manaCheck = SpellNames[SpellIDs.LightningBolt]
+        Maelstrom.button:SetScript("OnEvent", TotemTimers.MaelstromEvent)
+        Maelstrom.playerEvents[1] = "UNIT_AURA"
+        Maelstrom.forceBar = true
+        Maelstrom:SetTimerBarPos("RIGHT")
+        Maelstrom:SetTimeWidth(100)
+        Maelstrom.timerBars[1]:SetStatusBarAtlas("_Shaman-MaelstromBar")
+        Maelstrom:SetBarColor(0.8,.8,1)
+        Maelstrom.timerBars[1].background:SetStatusBarAtlas("_Shaman-MaelstromBar")
+
+        Maelstrom:SetTimeHeight(20)
+        Maelstrom.timerBars[1].time:Hide()
+        Maelstrom.button:SetSize(20, 20)
+        Maelstrom.button.icons[1]:SetAllPoints(Maelstrom.button)
+
+        Maelstrom.Update = function() end
+        Maelstrom.Activate = function(self)
+            XiTimers.Activate(self)
+            TotemTimers.MaelstromEvent(self.button)
+        end
+
+
+        MaelstromButton = CreateFrame("Button", "TotemTimers_MaelstromBarButton", UIParent, "ActionButtonTemplate, SecureActionButtonTemplate")
+        TotemTimers.MaelstromButton = MaelstromButton
+
+        MaelstromButton:SetFrameLevel(Maelstrom.button:GetFrameLevel() + 10)
+        MaelstromButton:SetPoint("LEFT", Maelstrom.button, "RIGHT")
+        MaelstromButton:SetSize(85, 17)
+        --MaelstromButton:SetAllPoints(Maelstrom.timerBars[1])
+        MaelstromButton:SetNormalTexture(nil)
+        MaelstromButton:SetHighlightTexture("Interface/AddOns/TotemTimers/textures/MaelstromHilight")
+        MaelstromButton:SetPushedTexture("Interface/AddOns/TotemTimers/textures/MaelstromPushed")
+        MaelstromButton:SetAttribute("*type*", "spell")
+        MaelstromButton:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+        MaelstromButton:SetAttribute("*spell1", SpellIDs.LightningBolt)
+        MaelstromButton:SetAttribute("*spell2", SpellIDs.ChainLightning)
+        MaelstromButton.icon = TotemTimers_MaelstromBarButtonIcon
+        local mIcon = MaelstromButton.icon
+
+        mIcon:ClearAllPoints()
+        mIcon:SetWidth(100)
+        mIcon:SetHeight(50)
+        mIcon:SetPoint("CENTER", TotemTimers_MaelstromBarButton, "CENTER", 0, 5)
+
+        mIcon.AnimGroup = mIcon:CreateAnimationGroup()
+        mIcon.AnimGroup:SetLooping("REPEAT")
+        local scale = mIcon.AnimGroup:CreateAnimation("Scale")
+        scale:SetDuration(0.4)
+        scale:SetScale(1.05,1.05)
+        scale:SetOrder(1)
+        scale:SetSmoothing("IN_OUT")
+        scale = mIcon.AnimGroup:CreateAnimation("Scale")
+        scale:SetDuration(0.4)
+        scale:SetScale(0.95,0.95)
+        scale:SetOrder(2)
+        scale:SetSmoothing("IN_OUT")
+    end
 end
 
 table.insert(TotemTimers.Modules, TotemTimers.CreateEnhanceCDs)
@@ -113,6 +188,7 @@ function TotemTimers.ConfigEnhanceCDs()
         cds[i]:Deactivate()
     end
     FlameShockDuration:Deactivate()
+    if Maelstrom then Maelstrom:Deactivate() end
 
     if role == 0 or not TotemTimers.ActiveProfile.EnhanceCDs then return end
 
@@ -166,12 +242,18 @@ function TotemTimers.ConfigEnhanceCDs()
     if AvailableSpells[SpellIDs.FlameShock] and TotemTimers.ActiveProfile.EnhanceCDsFlameShockDuration_Specialization[role] then
         FlameShockDuration:Activate()
     end
-    
+
+    if role == 2 and Maelstrom
+            and TotemTimers.AvailableTalents.Maelstrom and TotemTimers.ActiveProfile.EnhanceCDsMaelstrom
+        then Maelstrom:Activate()
+    end
+
     for i=1,#CDSpells[role] do
         if TotemTimers.ActiveProfile.EnhanceCDs_Spells[role][i] and AvailableSpells[CDSpells[role][TotemTimers.ActiveProfile.EnhanceCDs_Order[role][i]]] then
             cds[i]:Activate()
         end
     end
+
 end
 
 local activeCDs = {}
@@ -195,6 +277,7 @@ function TotemTimers.LayoutEnhanceCDs()
         cds[i].button:ClearAllPoints()
     end
     FlameShockDuration.button:ClearAllPoints()
+    if Maelstrom then Maelstrom.button:ClearAllPoints() end
 
     local numActiveCDs = #activeCDs
 
@@ -252,6 +335,13 @@ function TotemTimers.LayoutEnhanceCDs()
 
     FlameShockDuration.button:SetPoint(fspoints[1], fsrel, fspoints[2], fsx, fsy)
 
+    if Maelstrom then
+        if FlameShockDuration.active then
+            Maelstrom.button:SetPoint( fspoints[1], FlameShockDuration.button, fspoints[2], 0, fsy)
+        else
+            Maelstrom.button:SetPoint( fspoints[1], fsrel, fspoints[2], fsx, fsy)
+        end
+    end
 end
 
 function TotemTimers.ActivateEnhanceCDs()
@@ -291,9 +381,7 @@ function TotemTimers.EnhanceCDEvents(self, event, spell)
 	end
 end
 
-local SearingIcon = SpellTextures[SpellIDs.Searing]
-local MagmaIcon = SpellTextures[SpellIDs.Magma]
-local FireElementalIcon = SpellTextures[SpellIDs.FireElemental]
+
 function TotemTimers.FireTotemEvent(self,event,...)
     local element = ...
     if event == "PLAYER_TOTEM_UPDATE" then
@@ -433,5 +521,25 @@ function TotemTimers.ShockEvent(self, event, unit, ...)
         end
     else
         TotemTimers.EnhanceCDEvents(self, event, unit, ...)
+    end
+end
+
+local MaelstromName = GetSpellInfo(53817)
+
+function TotemTimers.MaelstromEvent(self)
+    local _,_,count = AuraUtil.FindAuraByName(MaelstromName, "player", "HELPFUL")
+    if not count then
+        Maelstrom:Stop(1)
+        MaelstromButton.icon:SetTexture(nil)
+        MaelstromButton.icon.AnimGroup:Stop()
+    else
+        Maelstrom:Start(1, count, 5)
+        Maelstrom:SetBarColor(.6 + count * .04, .6 + count * .04, .8 + count * .04)
+        MaelstromButton.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon"..(count < 5 and "_"..count or ""))
+        if count < 5 then
+            MaelstromButton.icon.AnimGroup:Stop()
+        else
+            MaelstromButton.icon.AnimGroup:Play()
+        end
     end
 end

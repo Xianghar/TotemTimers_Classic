@@ -158,23 +158,24 @@ end
 
             local lastTotem = TotemTimers.GetBaseSpellID(activeProfile.LastTotems[self.nr])
 
-
-            if not lastTotem or not AvailableSpells[lastTotem] then
-                --[[when switching specs this part gets executed several times, once for switching and then for each talent (because of events fired)
-                    so totems from talents are sometimes not available at this point.
-                    lasttotem is saved and restored if not nil so that talent totems aren't replaced when switching specs ]]
-                for k, v in pairs(TotemData) do
-                    if AvailableSpells[k] and v.element == self.nr then
-                        self.button:SetAttribute("*spell1", k)
-                        self.button.icon:SetTexture(GetSpellTexture(k))
-                        break
+            if not self.timersRunning[1] then
+                if not lastTotem or not AvailableSpells[lastTotem] then
+                    --[[when switching specs this part gets executed several times, once for switching and then for each talent (because of events fired)
+                        so totems from talents are sometimes not available at this point.
+                        lasttotem is saved and restored if not nil so that talent totems aren't replaced when switching specs ]]
+                    for k, v in pairs(TotemData) do
+                        if AvailableSpells[k] and v.element == self.nr then
+                            self.button:SetAttribute("*spell1", k)
+                            self.button.icon:SetTexture(GetSpellTexture(k))
+                            break
+                        end
                     end
+                    -- restore saved totem if not nil
+                    activeProfile.LastTotems[self.nr] = lastTotem or activeProfile.LastTotems[self.nr]
+                else
+                    self.button:SetAttribute("*spell1", lastTotem)
+                    self.button.icon:SetTexture(GetSpellTexture(lastTotem))
                 end
-                -- restore saved totem if not nil
-                activeProfile.LastTotems[self.nr] = lastTotem or activeProfile.LastTotems[self.nr]
-            else
-                self.button:SetAttribute("*spell1", lastTotem)
-                self.button.icon:SetTexture(GetSpellTexture(lastTotem))
             end
         end
 
@@ -243,7 +244,7 @@ end
         local playerRange = frame:CreateTexture(nil, "OVERLAY", nil, 7);
         tt.button.playerRange = playerRange;
         --create player and party range dots
-        playerRange:SetTexture("Interface\\AddOns\\TotemTimers\\dot");
+        playerRange:SetTexture("Interface\\AddOns\\TotemTimers\\textures\\dot");
         playerRange:SetSize(7, 7)
         playerRange:SetPoint("TOPLEFT", tt.button, "TOPLEFT", 1, -1);
         playerRange:SetVertexColor(0.68,0.1,0.12)
@@ -253,7 +254,7 @@ end
 
         for i = 1, 4 do
             local partyRange = tt.button:CreateTexture(nil, "OVERLAY")
-            partyRange:SetTexture("Interface\\AddOns\\TotemTimers\\dot");
+            partyRange:SetTexture("Interface\\AddOns\\TotemTimers\\textures\\dot");
             partyRange:SetSize(7, 7)
             if i == 1 then
                 partyRange:SetPoint("TOPRIGHT", tt.button, "TOPLEFT", 0, 0);

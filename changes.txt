@@ -1,3 +1,7 @@
+3.0.9
+    - Added Maelstrom counter
+    - Added Windfury Totem and Flametongue Totem range indicators
+    - Combat Cooldowns order can be changed again by shift-dragging
 3.0.8
     - Fixed reenabling totem for a multicast spell, only works out of combat
     - Removed traing to get Healing Stream Totem range by buff, does not have a buff any more
