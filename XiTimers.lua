@@ -966,3 +966,53 @@ function XiTimers.HookTooltips(button)
         if self.tooltip then self.tooltip:Hide() end
     end)
 end
+
+
+XiTimers.TimerEvent = function(self, event, ...)
+
+    local timer = self.timer
+    if self.timer.customOnEvent then
+        local abort = self.timer.customOnEvent(self, event, ...)
+        if abort then return end
+    end
+
+    if timer.buffIsActive then return end
+
+    if event == "SPELL_UPDATE_COOLDOWN" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
+        local start, duration, enable, charges, maxcharges
+
+        local gcdstart, gcdduration = GetSpellCooldown(61304)
+        start, duration, enable = GetSpellCooldown(timer.spell)
+
+        if (timer.running and timer.endTime and timer.endTime <= gcdstart + gcdduration) or
+                (gcdstart == start and gcdduration == duration) then
+            if timer.timers[1] > 0 then
+                timer:Stop(1)
+            end
+            self.cooldown:SetDrawSwipe(true)
+            self.cooldown:SetCooldown(gcdstart, gcdduration)
+        else
+            if duration == 0 and timer.timers[1] > 0 then
+                self.timer:Stop(1)
+            elseif duration > 0 then
+                self.timer:Start(1, start, start + duration)
+            end
+        end
+
+    elseif self.buff and event == "UNIT_AURA" and ... == "player" then
+        local name, _, _, count, duration, expires
+        local buff = self.buff
+
+        if type(buff) == "number" then
+            name, _, _, count, duration, expires = AuraUtil.FindAura(
+                    function(...) return select(13, ...) == buff end, "player", "HELPFUL")
+        else
+            name, _, _, count, duration, expires = AuraUtil.FindAuraByName(buff, "player", "HELPFUL")
+        end
+        if name and duration and expires then
+            self.timer:StartBarTimer(-1 * GetTime() + expires, duration)
+        else
+            self.timer:StopBarTimer()
+        end
+    end
+end

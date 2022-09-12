@@ -352,12 +352,65 @@ TotemTimers.CombatCooldownSpells = {
         SpellIDs.EarthShock,
         SpellIDs.ChainLightning,
         SpellIDs.LightningBolt,
+        SpellIDs.LavaBurst,
+        SpellIDs.Thunderstorm,
         SpellIDs.WindShear,
+
     },
     [3] = {
         SpellIDs.Riptide,
         SpellIDs.FlameShock,
         SpellIDs.EarthShock,
         SpellIDs.WindShear,
+    },
+}
+
+
+TotemTimers.LongCooldownSpells = {
+    {
+        spell = SpellIDs.FireElemental,
+        totem = SpellIDs.FireElemental,
+        element = FIRE_TOTEM_SLOT,
+        customOnEvent = "CDTotemEvent",
+    },
+    {
+        spell = SpellIDs.EarthElemental,
+        totem = SpellIDs.EarthElemental,
+        element = EARTH_TOTEM_SLOT,
+        customOnEvent = "CDTotemEvent",
+    },
+    {
+        spell = SpellIDs.ElementalMastery,
+        buff = SpellIDs.ElementalMastery,
+    },
+    {
+        spell = SpellIDs.TidalForce,
+        buff = SpellIDs.TidalForce,
+    },
+    {
+        spell = SpellIDs.NaturesSwiftness,
+        buff = SpellIDs.NaturesSwiftness,
+    },
+    {
+        spell = SpellIDs.ManaTide,
+        totem = SpellIDs.ManaTide,
+        element = WATER_TOTEM_SLOT,
+        customOnEvent = "CDTotemEvent",
+    },
+    {
+        spell = SpellIDs.ShamanisticRage,
+        buff = SpellIDs.ShamanisticRage,
+    },
+    {
+        spell = SpellIDs.FeralSpirit,
+        customOnEvent = "FeralSpiritEvent",
+    },
+    {
+        spell = SpellIDs.Bloodlust,
+        buff = SpellIDs.Bloodlust,
+    },
+    {
+        spell = SpellIDs.Heroism,
+        buff = SpellIDs.Heroism,
     },
 }

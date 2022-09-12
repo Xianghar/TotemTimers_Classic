@@ -226,7 +226,7 @@ end
 
         if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
 
-			tt.button.DisableMultiSpell = function(self, multispell, disable) print("x")
+			tt.button.DisableMultiSpell = function(self, multispell, disable)
                 if not multispell or InCombatLockdown() then return end
                 local action = self:GetAttribute("action"..multispell)
                 SetMultiCastSpell(action, not disable and self:GetAttribute("*spell1") or nil)

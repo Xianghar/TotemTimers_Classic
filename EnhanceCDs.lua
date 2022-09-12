@@ -354,6 +354,7 @@ function TotemTimers.DeactivateEnhanceCDs()
         v:Deactivate()
     end
     FlameShockDuration:Deactivate()
+    if Maelstrom then Maelstrom:Deactivate() end
 end
 
 function TotemTimers.EnhanceCDEvents(self, event, spell)

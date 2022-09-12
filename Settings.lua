@@ -76,7 +76,7 @@ SettingsFunctions = {
 
     TimerSize = function(value, Timers)
         local v = value
-        local scale = v/36
+        local scale = v / 36
         if TotemTimers_MultiSpell and Timers[1].button:GetParent() == TotemTimers_MultiSpell then
             scale = 1
         end
@@ -191,7 +191,9 @@ SettingsFunctions = {
     LastWeaponEnchant = function(value, Timers)
         local button = TotemTimers.WeaponTracker.button
 
-        if type(value) ~= "number" then value = select(7, GetSpellInfo(value)) end
+        if type(value) ~= "number" then
+            value = select(7, GetSpellInfo(value))
+        end
 
         if value >= 5 and value <= 7 then
             local ds1 = value == 7 and SpellIDs.FlametongueWeapon or SpellIDs.WindfuryWeapon
@@ -205,7 +207,9 @@ SettingsFunctions = {
             TotemTimers.UpdateRank(button)
             button:SetAttribute("macrotext", "/cast " .. button:GetAttribute("doublespell1")) --.. "\n/use 16")
         else
-            if not GetSpellInfo(value) then value = SpellIDs.RockbiterWeapon end
+            if not GetSpellInfo(value) then
+                value = SpellIDs.RockbiterWeapon
+            end
             button:SetAttribute("type1", "spell")
             button:SetAttribute("spell1", value)
         end
@@ -219,7 +223,9 @@ SettingsFunctions = {
         if TotemTimers.ActiveProfile.WeaponMenuOnRightclick then
             type = "spell3"
         end
-        if not GetSpellInfo(value) then value = SpellIDs.RockbiterWeapon end
+        if not GetSpellInfo(value) then
+            value = SpellIDs.RockbiterWeapon
+        end
         Timers[8].button:SetAttribute(type, value)
     end,
 
@@ -268,7 +274,9 @@ SettingsFunctions = {
             TTActionBars.bars[i]:SetAlwaysVisible(value)
         end
         if TotemTimers_MultiSpell then
-            if value then TotemTimers_MultiSpell:SetAttribute("OpenMenu", "always") end
+            if value then
+                TotemTimers_MultiSpell:SetAttribute("OpenMenu", "always")
+            end
             TotemTimers_MultiSpell.actionBar:SetAlwaysVisible(value)
         end
     end,
@@ -359,8 +367,12 @@ SettingsFunctions = {
 
     BarBindings = function(value, Timers)
         local actionBars = {}
-        for i = 1, 4 do table.insert(actionBars, Timers[i].actionBar) end
-        if TotemTimers_MultiSpell then table.insert(actionBars, TotemTimers_MultiSpell.actionBar) end
+        for i = 1, 4 do
+            table.insert(actionBars, Timers[i].actionBar)
+        end
+        if TotemTimers_MultiSpell then
+            table.insert(actionBars, TotemTimers_MultiSpell.actionBar)
+        end
 
         for index, actionBar in pairs(actionBars) do
             local element = 0
@@ -703,8 +715,6 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         TotemTimers.EarthShieldTracker.actionBar:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
     end
 
-
-
     SettingsFunctions.EnhanceCDs = function(value)
         if value then
             TotemTimers.ActivateEnhanceCDs()
@@ -723,7 +733,9 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         --TotemTimers.maelstrombutton:SetWidth(value*3+10)
         --TotemTimers.FlameShockDuration:SetTimeWidth(value*3+10)
         TotemTimers.FlameShockDuration:SetScale(value / 36)
-        if TotemTimers.Maelstrom then TotemTimers.Maelstrom:SetScale(value/36) end
+        if TotemTimers.Maelstrom then
+            TotemTimers.Maelstrom:SetScale(value / 36)
+        end
         TotemTimers.LayoutEnhanceCDs()
         --[[for i = 1,#TotemTimers.LongCooldowns do
             TotemTimers.LongCooldowns[i]:SetScale(value/36)
@@ -844,7 +856,6 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
     end
 
-
     SettingsFunctions.HideBlizzTimers = function(value)
         if value then
             TotemFrame:UnregisterEvent("PLAYER_TOTEM_UPDATE")
@@ -871,6 +882,14 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
     if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
         SettingsFunctions.MultiCast = function(value)
             TotemTimers.MultiSpellActivate()
+        end
+
+        SettingsFunctions.LongCooldowns = function(value, Timers)
+            TotemTimers.ActivateLongCooldowns(value)
+        end
+
+        SettingsFunctions.LongCooldownsArrange = function(value, Timers)
+            TotemTimers.LayoutLongCooldowns()
         end
     end
 end

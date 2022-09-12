@@ -306,20 +306,10 @@ TotemTimers.DefaultProfile = {
         WindfuryDownrank = false,
 		
 		
-		-- LongCooldowns = true,
-		--[[ LongCooldownSpells = {
-			[SpellIDs.Bloodlust] = true,
-			[SpellIDs.Heroism] = true,
-			[SpellIDs.AstralShift] = true,
-			[SpellIDs.SpiritwalkersGrace] = true,
-			[SpellIDs.AncestralGuidance] = true,
-			[SpellIDs.CallOfElements] = true,
-			[SpellIDs.ElementalMastery] = true,
-			[SpellIDs.AncestralSwiftness] = true,
-			[SpellIDs.Ascendance] = true,
-			[SpellIDs.FeralSpirit] = true,
-		}, ]]
+		LongCooldowns = true,
+        LongCooldownSpells = {},
 		LongCooldownsArrange = "horizontal",
+
 		CooldownSpacing = 5,
     
         FramePositions = {
