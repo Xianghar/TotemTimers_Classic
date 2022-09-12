@@ -111,7 +111,7 @@ function TotemTimers.CreateMultiCastButtons()
     mb:SetAttribute("*spell3", SpellIDs.TotemicCall)
     -- mb:RegisterForClicks("LeftButton, RightButton")
     mb:RegisterForDrag("LeftButton")
-    mb:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4Down")
+    mb:RegisterForClicks("AnyDown")
     TotemTimers.PositionCastButtons()
 end
 

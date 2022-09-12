@@ -198,10 +198,12 @@ SettingsFunctions = {
             local ds2 = value == 6 and SpellIDs.FrostbrandWeapon or SpellIDs.FlametongueWeapon
 
             button:SetAttribute("type1", "macro")
-            button:SetAttribute("macrotext", "/cast " .. SpellNames[ds1] .. "\n/use 16")
             button:SetAttribute("doublespell1", SpellNames[ds1])
             button:SetAttribute("doublespell2", SpellNames[ds2])
             button:SetAttribute("ds", 1)
+            -- update rank and set macro from attribute because of ft-1/ft-button
+            TotemTimers.UpdateRank(button)
+            button:SetAttribute("macrotext", "/cast " .. button:GetAttribute("doublespell1")) --.. "\n/use 16")
         else
             if not GetSpellInfo(value) then value = SpellIDs.RockbiterWeapon end
             button:SetAttribute("type1", "spell")
@@ -356,9 +358,16 @@ SettingsFunctions = {
     end,
 
     BarBindings = function(value, Timers)
-        for i = 1, 4 do
-            local actionBar = Timers[i].actionBar
-            local element = Timers[i].nr
+        local actionBars = {}
+        for i = 1, 4 do table.insert(actionBars, Timers[i].actionBar) end
+        if TotemTimers_MultiSpell then table.insert(actionBars, TotemTimers_MultiSpell.actionBar) end
+
+        for index, actionBar in pairs(actionBars) do
+            local element = 0
+            if index < 5 then
+                element = Timers[index].nr
+            end
+
             for j = 1, #actionBar.buttons do
                 local button = actionBar.buttons[j]
                 local key = GetBindingKey("TOTEMTIMERSCAST" .. element .. j)

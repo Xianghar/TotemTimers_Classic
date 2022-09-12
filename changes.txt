@@ -1,10 +1,14 @@
+3.0.10
+    - Removed buff from Mana Tide range check
+    - Added keybinds for multicast button
+    - Fix for ft-1/ft on weapon tracker on login
 3.0.9
     - Added Maelstrom counter
     - Added Windfury Totem and Flametongue Totem range indicators
     - Combat Cooldowns order can be changed again by shift-dragging
 3.0.8
     - Fixed reenabling totem for a multicast spell, only works out of combat
-    - Removed traing to get Healing Stream Totem range by buff, does not have a buff any more
+    - Removed trying to get Healing Stream Totem range by buff, does not have a buff any more
     - Optionally added Earth Shield on self only to Shield Tracker
 3.0.7
     - Ctrl-Rightclick a totem timer to disable it for multicast

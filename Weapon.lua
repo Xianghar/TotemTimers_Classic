@@ -73,10 +73,10 @@ function TotemTimers.CreateWeaponTracker()
                                                                  if ds1 then
                                                                      if IsControlKeyDown() or self:GetAttribute("ds") ~= 1 then
                                                                          self:SetAttribute("macrotext", "/cast "..ds1)
- 																		self:SetAttribute("ds",1)
+ 																		 self:SetAttribute("ds",1)
                                                                      else
                                                                          self:SetAttribute("macrotext", "/cast "..self:GetAttribute("doublespell2"))
- 																		self:SetAttribute("ds",2)
+ 																		 self:SetAttribute("ds",2)
                                                                      end
                                                                  end
                                                             end]])

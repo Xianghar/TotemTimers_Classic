@@ -1,3 +1,7 @@
+3.0.10
+    - Removed buff from Mana Tide range check
+    - Added keybinds for multicast button
+    - Fix for ft-1/ft on weapon tracker on login
 3.0.9
     - Added Maelstrom counter
     - Added Windfury Totem and Flametongue Totem range indicators

@@ -127,6 +127,8 @@ local function UpdateRank(button)
     end
 end
 
+TotemTimers.UpdateRank = UpdateRank
+
 function TotemTimers.UpdateSpellRanks()
     for _, timer in pairs(XiTimers.timers) do
         UpdateRank(timer.button)
