@@ -328,7 +328,7 @@ for spec=1,3 do
 end
 
 if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
-    local MaelstromName = GetTalentInfo(2,24)
+    local MaelstromName = GetSpellInfo(53817)
 
     TotemTimers.options.args.enhancecds.args["2"].args.Maelstrom = {
         order = 1,
