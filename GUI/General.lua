@@ -157,7 +157,11 @@ TotemTimers.options = {
                     set = function(info, val)
                         TotemTimers.ActiveProfile.TimeStyle = val
                         TotemTimers.ProcessSetting("TimeStyle")
+                        -- SetShieldUpdate sets the correct time style for shield button
                         TotemTimers.SetShieldUpdate()
+                        if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
+                            TotemTimers.SetEarthShieldUpdate()
+                        end
                     end,
                     get = function(info) return TotemTimers.ActiveProfile.TimeStyle end,
                 },
