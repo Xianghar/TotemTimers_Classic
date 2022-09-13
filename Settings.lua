@@ -68,7 +68,11 @@ SettingsFunctions = {
 
     TimeStyle = function(value, Timers)
         for k, timer in pairs(Timers) do
-            if timer ~= TotemTimers.FlameShockDuration and timer ~= TotemTimers.Maelstrom then
+            if timer ~= TotemTimers.ShieldTracker
+                and timer ~= TotemTimers.EarthShieldTracker
+                    and timer ~= TotemTimers.FlameShockDuration
+                    and timer ~= TotemTimers.Maelstrom
+            then
                 timer.timeStyle = value
             end
         end
