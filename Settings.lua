@@ -69,7 +69,7 @@ SettingsFunctions = {
     TimeStyle = function(value, Timers)
         for k, timer in pairs(Timers) do
             if timer ~= TotemTimers.ShieldTracker
-                and timer ~= TotemTimers.EarthShieldTracker
+                    and timer ~= TotemTimers.EarthShieldTracker
                     and timer ~= TotemTimers.FlameShockDuration
                     and timer ~= TotemTimers.Maelstrom
             then
@@ -629,6 +629,18 @@ SettingsFunctions = {
         end
     end,
 
+    CooldownAlpha = function(value, Timers)
+        for i = 1, #Timers do
+            Timers[i].button.cooldown:SetAlpha(value)
+        end
+        for i = 1, #TTActionBars.bars do
+            local bar = TTActionBars.bars[i]
+            for j = 1, #bar.buttons do
+                bar.buttons[j].cooldown:SetAlpha(value)
+            end
+        end
+    end,
+
     --[[ CrowdControlSize =
         function(value, Timers)
     		TotemTimers.CrowdControl[1]:SetScale(value/36)
@@ -660,16 +672,7 @@ SettingsFunctions = {
                 TotemTimers_CrowdControlFrame:Show() 
             end
         end,
-
-	LongCooldowns =
-		function(value, Timers)
-			TotemTimers.ActivateLongCooldowns(value)
-		end,
-		
-	LongCooldownsArrange =
-		function(value, Timers)
-			TotemTimers.LayoutLongCooldowns()
-		end, ]]
+ ]]
 
 }
 
@@ -728,30 +731,22 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
     end
 
     SettingsFunctions.EnhanceCDsSize = function(value)
-        local Timers = TotemTimers.EnhanceCDs
-        for i = 1, #Timers do
-            Timers[i]:SetScale(value / 36)
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for _, timer in pairs(t) do
+                   timer:SetScale(value / 36)
+            end
         end
-        --TotemTimers.maelstrom.background:SetWidth(value*3+10)
-        --TotemTimers.maelstrom:SetWidth(value*3+10)
-        --TotemTimers.maelstrombutton:SetWidth(value*3+10)
-        --TotemTimers.FlameShockDuration:SetTimeWidth(value*3+10)
         TotemTimers.FlameShockDuration:SetScale(value / 36)
         if TotemTimers.Maelstrom then
             TotemTimers.Maelstrom:SetScale(value / 36)
         end
-        TotemTimers.LayoutEnhanceCDs()
-        --[[for i = 1,#TotemTimers.LongCooldowns do
-            TotemTimers.LongCooldowns[i]:SetScale(value/36)
-        end ]]
+        --TotemTimers.LayoutEnhanceCDs()
+        --TotemTimers.LayoutLongCooldowns()
     end
 
     SettingsFunctions.EnhanceCDsTimeHeight = function(value)
-        local AllTimers = { TotemTimers.EnhanceCDs } --TotemTimers.LongCooldowns}
-        for t = 1, #AllTimers do
-            local Timers = AllTimers[t]
-            for e = 1, #Timers do
-                local timer = TotemTimers.EnhanceCDs[e]
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for _, timer in pairs(t) do
                 timer:SetTimeHeight(value)
                 local font = timer.button.time:GetFont()
                 timer.button.time:SetFont(font, value + 5, "OUTLINE")
@@ -766,7 +761,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         fs.button:SetSize(value * 1.2, value * 1.2)
         fs.button.icons[1]:SetAllPoints(fs.button)
 
-        TotemTimers.LayoutEnhanceCDs()
+        --TotemTimers.LayoutEnhanceCDs()
         --TotemTimers.LayoutLongCooldowns()
     end
 
@@ -783,40 +778,45 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
             local font = TotemTimers.maelstrom.text:GetFont()
             local outline
             if Timers[9].timerOnButton then outline = "OUTLINE" end
-    		TotemTimers.maelstrom.text:SetFont(font, value, outline)
+            TotemTimers.maelstrom.text:SetFont(font, value, outline)
             local font, value = _G["XiTimers_TimerBar17_1Time"]:GetFont()
             _G["XiTimers_TimerBar17_1Time"]:SetFont(font, value, outline)
             TotemTimers.LayoutEnhanceCDs()
         end, --]]
 
     SettingsFunctions.CDTimersOnButtons = function(value, Timers)
-        for i = 1, #TotemTimers.EnhanceCDs do
-            local timer = TotemTimers.EnhanceCDs[i]
-            timer.timerOnButton = value
-            if timer.timers[1] > 0 then
-                timer:ShowTimer()
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for _, timer in pairs(t) do
+                timer.timerOnButton = value
+                if timer.timers[1] > 0 then
+                    timer:ShowTimer()
+                end
             end
         end
         --TotemTimers.ProcessSetting("EnhanceCDsMaelstromHeight")
     end
 
     SettingsFunctions.EnhanceCDsOOCAlpha = function(value)
-        local Timers = TotemTimers.EnhanceCDs
-        for i = 1, #Timers do
-            Timers[i].OOCAlpha = value
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for _, timer in pairs(t) do
+                timer.OOCAlpha = value
+            end
         end
-        --TotemTimers.maelstrom:SetAlpha(value)
+        TotemTimers.Maelstrom:SetAlpha(value)
         XiTimers.invokeOOCFader()
     end
 
     SettingsFunctions.HideEnhanceCDsOOC = function(value)
-        local Timers = TotemTimers.EnhanceCDs
-        for i = 1, #Timers do
-            Timers[i].HideOOC = value
-            Timers[i].button:SetAttribute("HideOOC", value)
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for _, timer in pairs(t) do
+                timer.HideOOC = value
+                timer.button:SetAttribute("HideOOC", value)
+            end
         end
         TotemTimers.FlameShockDuration.HideOOC = value
         TotemTimers.FlameShockDuration.button:SetAttribute("HideOOC", value)
+        TotemTimers.Maelstrom.HideOOC = value
+        TotemTimers.Maelstrom.button:SetAttribute("HideOOC", value)
         TotemTimers.ConfigEnhanceCDs()
     end
 
@@ -826,36 +826,26 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
     end
 
-    SettingsFunctions.EnhanceCDs_Clickthrough = function(value)
-        local Timers = TotemTimers.EnhanceCDs
-        for i = 1, #Timers do
-            Timers[i].button:EnableMouse(not value)
+    SettingsFunctions.LongCooldownStopPulse = function(value, Timers)
+        for _, timer in pairs(TotemTimers.LongCooldowns) do
+            timer.StopPulse = value
         end
-        --[[ Timers = TotemTimers.LongCooldowns
-        for i = 1,#Timers do
-            Timers[i].button:EnableMouse(not value)
-        end ]]
-        --TotemTimers.maelstrom:EnableMouse(not value)
-        --TotemTimers.maelstrombutton:EnableMouse(not value)
+    end
+
+    SettingsFunctions.EnhanceCDs_Clickthrough = function(value)
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for _, timer in pairs(t) do
+                timer.button:EnableMouse(not value)
+            end
+        end
+        TotemTimers.Maelstrom:EnableMouse(not value)
+        TotemTimers.MaelstromButton:EnableMouse(not value)
     end
 
     SettingsFunctions.CooldownSpacing = function(value, Timers)
-        --[[for k,v in pairs(TotemTimers.LongCooldowns) do
-            v:SetSpacing(value)
-        end]]
-        for k, v in pairs(TotemTimers.EnhanceCDs) do
-            v:SetSpacing(value)
-        end
-    end
-
-    SettingsFunctions.CooldownAlpha = function(value, Timers)
-        for i = 1, #Timers do
-            Timers[i].button.cooldown:SetAlpha(value)
-        end
-        for i = 1, #TTActionBars.bars do
-            local bar = TTActionBars.bars[i]
-            for j = 1, #bar.buttons do
-                bar.buttons[j].cooldown:SetAlpha(value)
+        for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
+            for k, v in pairs(t) do
+                v:SetSpacing(value)
             end
         end
     end

@@ -57,6 +57,7 @@ function TotemTimers.CreateEnhanceCDs()
         cds[i].button.anchorframe = TotemTimers_EnhanceCDsFrame
         cds[i].button:SetAttribute("*type*", "spell")
         cds[i].reverseAlpha = true
+        cds[i].alpha = 0.7
         cds[i].button.icons[1]:SetAlpha(1)
         cds[i].button:SetScript("OnEvent", TotemTimers.EnhanceCDEvents)
         cds[i].button:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp")

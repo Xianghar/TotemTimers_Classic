@@ -35,8 +35,10 @@ function TotemTimers.CreateLongCooldowns()
 		table.insert(cds, timer)
 
 		timer.button:SetScript("OnEvent", XiTimers.TimerEvent)
-
 		timer.button:RegisterForClicks("LeftButtonDown")
+		timer.button:SetAttribute("*type*", "spell")
+
+		timer.alpha = 0.7
 
 		timer.anchorframe = TotemTimers_LongCooldownsFrame
 

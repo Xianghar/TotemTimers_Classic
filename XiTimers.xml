@@ -40,7 +40,7 @@
           <Anchor point="CENTER" relativePoint="CENTER"/>
         </Anchors>
 		<BarTexture file="Interface\TargetingFrame\UI-StatusBar"/>
-        <BarColor r="0.6" g="0.6" b="1.0" a="0.5"/>
+        <BarColor r="0.6" g="0.6" b="1.0" a="0.7"/>
         <Scripts>
           <OnLoad>
             self:SetMinMaxValues(0,5)

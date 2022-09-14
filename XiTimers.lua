@@ -63,7 +63,7 @@ function XiTimers.UpdateTimers(self,elapsed)
     if nextUpdate >= XiTimers.updateInterval then
         nextUpdate = nextUpdate - XiTimers.updateInterval
         for i=1,XiTimers.nrOfTimers do
-            if Timers[i].active and Timers[i].running > 0 then Timers[i]:Update(elapsed) end
+            if Timers[i].active and Timers[i].running > 0 or Timers[i].barTimer > 0 then Timers[i]:Update(elapsed) end
         end        
     end
 end
@@ -293,9 +293,10 @@ function XiTimers:Update(elapsed)
 		end
 	end
     
-    if self.barTimer > 0 then
+    if self.barTimer > 0 and not self.procFlash then
         self.barTimer = self.barTimer - elapsed
-        button.bar:SetValue(self.barTimer)        
+        button.bar:SetValue(self.barTimer)
+        if self.barTimer <= 0 then self.button.bar:Hide() end
     end 
 end
 
@@ -367,7 +368,7 @@ function XiTimers:Start(timer, time, duration)
     end
 
     if not self.dontAlpha then self:SetIconAlpha(self.button.icons[timer], self.maxAlpha) end
-    if self.reverseAlpha then self:SetIconAlpha(self.button.icons[timer], 0.4) end
+    if self.reverseAlpha then self:SetIconAlpha(self.button.icons[timer],  self.alpha or 0.4) end
 
     self.isAnimating = false
     --self.flashRed = TotemTimers.ActiveProfile.FlashRed
@@ -407,9 +408,9 @@ function XiTimers:Stop(timer)
         self.button.time:Hide()
         self.button.cooldown:Hide()
     end 
-    if not self.dontAlpha then self:SetIconAlpha(self.button.icons[timer], 0.4) end
+    if not self.dontAlpha then self:SetIconAlpha(self.button.icons[timer], self.alpha or 0.4) end
     if self.reverseAlpha then self:SetIconAlpha(self.button.icons[timer],self.maxAlpha) end
-    self.button.bar:Hide()
+    if self.procFlash then self.button.bar:Hide() end
     self:SetTimerBarPos(self.timerBarPos, true)
     if timer == 1 and self.hideInactive then
         self.button:Hide()
@@ -995,13 +996,13 @@ XiTimers.TimerEvent = function(self, event, ...)
             if duration == 0 and timer.timers[1] > 0 then
                 self.timer:Stop(1)
             elseif duration > 0 then
-                self.timer:Start(1, start, start + duration)
+                self.timer:Start(1, start+duration-GetTime(), duration)
             end
         end
 
-    elseif self.buff and event == "UNIT_AURA" and ... == "player" then
+    elseif self.timer.buff and event == "UNIT_AURA" and ... == "player" then
         local name, _, _, count, duration, expires
-        local buff = self.buff
+        local buff = self.timer.buff
 
         if type(buff) == "number" then
             name, _, _, count, duration, expires = AuraUtil.FindAura(
@@ -1010,7 +1011,7 @@ XiTimers.TimerEvent = function(self, event, ...)
             name, _, _, count, duration, expires = AuraUtil.FindAuraByName(buff, "player", "HELPFUL")
         end
         if name and duration and expires then
-            self.timer:StartBarTimer(-1 * GetTime() + expires, duration)
+            self.timer:StartBarTimer(expires - GetTime(), duration)
         else
             self.timer:StopBarTimer()
         end

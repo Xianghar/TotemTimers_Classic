@@ -47,6 +47,7 @@ Shield.lua
 EarthShield.lua
 Weapon.lua
 EnhanceCDs.lua
+LongCooldowns.lua
 Warnings.lua
 Masque.lua
 
