@@ -385,7 +385,7 @@ TotemTimers.LongCooldownSpells = {
     },
     {
         spell = SpellIDs.TidalForce,
-        buff = SpellIDs.TidalForce,
+        buff = 55166,
     },
     {
         spell = SpellIDs.NaturesSwiftness,

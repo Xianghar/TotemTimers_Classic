@@ -2,6 +2,8 @@ if select(2, UnitClass("player")) ~= "SHAMAN" then
     return
 end
 
+local _, TotemTimers = ...
+
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers_GUI", true)
 
 local SpellIDs = TotemTimers.SpellIDs
@@ -263,7 +265,7 @@ TotemTimers.options.args.enhancecds = {
             desc = L["Stop Pulse Desc"],
             set = function(info, val)
                 TotemTimers.ActiveProfile.LongCooldownsStopPulse = val
-                TotemTimers.ProcessSetting("EnhanceCDsStopPulse")
+                TotemTimers.ProcessSetting("LongCooldownsStopPulse")
             end,
             get = function(info)
                 return TotemTimers.ActiveProfile.LongCooldownsStopPulse
@@ -311,76 +313,12 @@ TotemTimers.options.args.enhancecds = {
             args = {
             },
         },
-        --[[ ["4"] = {
+        ["4"] = {
             order = 60,
             type="group",
             name = L["Long Cooldowns"],
-            args = {
-                bloodlust = {
-                    order = 1,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.Bloodlust].."/"..SpellNames[SpellIDs.Heroism],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.Bloodlust] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.Bloodlust] end,
-                },
-                spiritwalkersgrace = {
-                    order = 3,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.SpiritwalkersGrace],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.SpiritwalkersGrace] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.SpiritwalkersGrace] end,
-                },
-                astralshift = {
-                    order = 7,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.AstralShift],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.AstralShift] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.AstralShift] end,
-                },
-                AncestralGuidance = {
-                    order = 4,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.AncestralGuidance],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.AncestralGuidance] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.AncestralGuidance] end,
-                },
-                CallOfElements = {
-                    order = 5,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.CallOfElements],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.CallOfElements] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.CallOfElements] end,
-                },
-                ElementalMastery = {
-                    order = 6,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.ElementalMastery],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.ElementalMastery] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.ElementalMastery] end,
-                },
-                AncestralSwiftness = {
-                    order = 7,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.AncestralSwiftness],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.AncestralSwiftness] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.AncestralSwiftness] end,
-                },
-                Ascendance = {
-                    order = 2,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.Ascendance],
-                    set = function(info, val) TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.Ascendance] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.Ascendance] end,
-                },
-                feralspirit = {
-                    order = 9,
-                    type = "toggle",
-                    name = SpellNames[SpellIDs.FeralSpirit],
-                    set = function(info, val)TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.FeralSpirit] = val  TotemTimers.ProcessSetting("LongCooldowns") end,
-                    get = function(info) return TotemTimers.ActiveProfile.LongCooldownSpells[SpellIDs.FeralSpirit] end,
-                },
-            },
-        }, ]]
+            args = {},
+        },
     },
 }
 
@@ -434,6 +372,23 @@ if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
             return TotemTimers.ActiveProfile.EnhanceCDsMaelstrom
         end,
     }
+
+    for i,lc in pairs(TotemTimers.LongCooldownSpells) do
+        local spellID = lc.spell
+        TotemTimers.options.args.enhancecds.args["4"].args[tostring(spellID)] = {
+            order = i,
+            type = "toggle",
+            name = SpellNames[spellID],
+            set = function(info, val)
+                TotemTimers.ActiveProfile.LongCooldownSpells[spellID] = val
+                TotemTimers.ProcessSetting("LongCooldowns")
+            end,
+            get = function()
+                local val = TotemTimers.ActiveProfile.LongCooldownSpells[spellID]
+                return val == nil or val
+            end
+        }
+    end
 end
 
 local ACD = LibStub("AceConfigDialog-3.0")

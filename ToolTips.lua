@@ -69,6 +69,17 @@ end
 TotemTimers.Tooltips = {}
 
 
+local SpellTooltip = XiTimersTooltip:new()
+TotemTimers.Tooltips.Spell = SpellTooltip
+
+function SpellTooltip:SetText()
+    local spell = self.button:GetAttribute("*spell1")
+    if not spell then return end
+
+    self:SetSpell(spell)
+end
+
+
 local TotemTooltip = XiTimersTooltip:new()
 TotemTimers.Tooltips.Totem = TotemTooltip
 

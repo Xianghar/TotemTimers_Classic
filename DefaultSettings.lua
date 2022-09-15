@@ -309,7 +309,7 @@ TotemTimers.DefaultProfile = {
 		LongCooldowns = true,
         LongCooldownSpells = {},
 		LongCooldownsArrange = "horizontal",
-        LongCooldowStopPulse = false,
+        LongCooldownsStopPulse = false,
 
 		CooldownSpacing = 5,
     

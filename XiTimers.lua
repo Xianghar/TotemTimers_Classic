@@ -503,6 +503,16 @@ function XiTimers:SetAlpha(alpha)
     self.button:SetAlpha(alpha)
 end
 
+function XiTimers:SetReverseAlpha(alpha)
+    self.reverseAlpha = alpha
+    if alpha then
+        for i=1, #self.timers do
+            self.button.icons[i]:SetAlpha(self.maxAlpha)
+        end
+    end
+end
+
+
 function XiTimers:HideTimerBar(nr)
 	self.timerBars[nr].background:Hide()
     self.timerBars[nr].background:SetValue(0)

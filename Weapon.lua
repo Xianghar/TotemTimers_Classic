@@ -66,16 +66,20 @@ function TotemTimers.CreateWeaponTracker()
 
     weapon.button:SetAttribute("_onattributechanged", [[ if name == "spell1" or name == "doublespell1" or name == "doublespell2" or name == "spell2" or name == "spell3" then
                                                              control:CallMethod("SaveLastEnchant", name)
+                                                         end
+                                                         if name == "doublespell1" or name == "doublespell2" then
+                                                            if self:GetAttribute(name) then self:SetAttribute("ds", 1) end
+                                                         elseif name == "ds" then
+                                                            local ds = self:GetAttribute("ds")
+                                                            self:SetAttribute("macrotext", "/cast [@none] "..self:GetAttribute("doublespell"..ds).."\n/use "..(15+ds).."\n/click StaticPopup1Button1")
                                                          end]])
 
     weapon.button:WrapScript(weapon.button, "PostClick", [[ if button == "LeftButton" then
                                                                  local ds1 = self:GetAttribute("doublespell1")
                                                                  if ds1 then
                                                                      if IsControlKeyDown() or self:GetAttribute("ds") ~= 1 then
-                                                                         self:SetAttribute("macrotext", "/cast "..ds1)
  																		 self:SetAttribute("ds",1)
                                                                      else
-                                                                         self:SetAttribute("macrotext", "/cast "..self:GetAttribute("doublespell2"))
  																		 self:SetAttribute("ds",2)
                                                                      end
                                                                  end

@@ -209,7 +209,6 @@ SettingsFunctions = {
             button:SetAttribute("ds", 1)
             -- update rank and set macro from attribute because of ft-1/ft-button
             TotemTimers.UpdateRank(button)
-            button:SetAttribute("macrotext", "/cast " .. button:GetAttribute("doublespell1")) --.. "\n/use 16")
         else
             if not GetSpellInfo(value) then
                 value = SpellIDs.RockbiterWeapon
@@ -417,6 +416,11 @@ SettingsFunctions = {
         end
         for i = 1, TTActionBars.numbars do
             TTActionBars.bars[i]:SetTooltip(value)
+        end
+        if TotemTimers.LongCooldowns then
+            for _, timer in pairs(TotemTimers.LongCooldowns) do
+                timer.button:SetAttribute("tooltip", value)
+            end
         end
     end,
 
@@ -826,7 +830,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
     end
 
-    SettingsFunctions.LongCooldownStopPulse = function(value, Timers)
+    SettingsFunctions.LongCooldownsStopPulse = function(value, Timers)
         for _, timer in pairs(TotemTimers.LongCooldowns) do
             timer.StopPulse = value
         end
@@ -873,17 +877,19 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
     end
 
+    SettingsFunctions.LongCooldowns = function(value, Timers)
+        TotemTimers.ActivateLongCooldowns(value)
+    end
+
+    SettingsFunctions.LongCooldownsArrange = function(value, Timers)
+        TotemTimers.LayoutLongCooldowns()
+    end
+
     if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
         SettingsFunctions.MultiCast = function(value)
             TotemTimers.MultiSpellActivate()
         end
 
-        SettingsFunctions.LongCooldowns = function(value, Timers)
-            TotemTimers.ActivateLongCooldowns(value)
-        end
 
-        SettingsFunctions.LongCooldownsArrange = function(value, Timers)
-            TotemTimers.LayoutLongCooldowns()
-        end
     end
 end
