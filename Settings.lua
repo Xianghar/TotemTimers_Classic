@@ -838,7 +838,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
                 timer.button:EnableMouse(not value)
             end
         end
-        TotemTimers.Maelstrom:EnableMouse(not value)
+        TotemTimers.Maelstrom.button:EnableMouse(not value)
         TotemTimers.MaelstromButton:EnableMouse(not value)
     end
 
