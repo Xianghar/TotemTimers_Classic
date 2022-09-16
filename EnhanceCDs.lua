@@ -142,7 +142,7 @@ function TotemTimers.CreateEnhanceCDs()
         end
 
 
-        MaelstromButton = CreateFrame("Button", "TotemTimers_MaelstromBarButton", UIParent, "ActionButtonTemplate, SecureActionButtonTemplate")
+        MaelstromButton = CreateFrame("Button", "TotemTimers_MaelstromBarButton", Maelstrom.button, "ActionButtonTemplate, SecureActionButtonTemplate")
         TotemTimers.MaelstromButton = MaelstromButton
 
         MaelstromButton:SetFrameLevel(Maelstrom.button:GetFrameLevel() + 10)

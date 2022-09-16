@@ -1,3 +1,5 @@
+3.1.1
+    - Hide lightning bolt cast button when maelstrom counter is hidden
 3.1
     - Added timers for longer cooldowns
     - Fixed weapon tracker double spell buttons, now first click again targets main hand specifically, second click offhand

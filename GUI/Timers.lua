@@ -436,6 +436,11 @@ if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
             TotemTimers.ActiveProfile.MultiCast = val
             TotemTimers.ProcessSetting("MultiCast")
             TotemTimers.ProcessSetting("HideBlizzTimers")
+            if not val and LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+                MultiCastActionBarFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+                MultiCastActionBarFrame:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+                MultiCastActionBarFrame:Show()
+            end
         end,
         get = function(info) return TotemTimers.ActiveProfile.MultiCast end,
     }
