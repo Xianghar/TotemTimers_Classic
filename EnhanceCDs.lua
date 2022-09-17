@@ -31,7 +31,7 @@ local function ChangeCDOrder(self, _, _, spell)
     if not spell then return end
 
     local spell1 = TotemTimers.GetBaseSpellID(spell)
-    local spell2 = TotemTimers.GetBaseSpellID(self:GetAttribute("*spell1"))
+    local spell2 = TotemTimers.GetBaseSpellID(self:GetAttribute("spell1"))
 
     local orderIndex1, orderIndex2
 
@@ -75,7 +75,7 @@ function TotemTimers.CreateEnhanceCDs()
     FlameShockDuration.dontFlash = true
     FlameShockDuration.timeStyle = "sec"
     FlameShockDuration.button:SetAttribute("*type1", "spell")
-    FlameShockDuration.button:SetAttribute("*spell1", SpellNames[SpellIDs.FlameShock])
+    FlameShockDuration.button:SetAttribute("spell1", SpellNames[SpellIDs.FlameShock])
     FlameShockDuration.button.icons[1]:SetAlpha(1)
 	FlameShockDuration.rangeCheck = SpellNames[SpellIDs.FlameShock]
 	FlameShockDuration.manaCheck = SpellNames[SpellIDs.FlameShock]
@@ -93,7 +93,7 @@ function TotemTimers.CreateEnhanceCDs()
 
     for i=1,#cds do
         cds[i].button:SetAttribute("_ondragstart",[[if IsShiftKeyDown() then
-                                                    return "spell", self:GetAttribute("*spell1")
+                                                    return "spell", self:GetAttribute("spell1")
                                               else control:CallMethod("StartMove") end]])
         cds[i].button:SetAttribute("_onreceivedrag",[[ if kind == "spell" then
                                                    control:CallMethod("ChangeCDOrder", value, ...)
@@ -116,8 +116,8 @@ function TotemTimers.CreateEnhanceCDs()
         Maelstrom.timeStyle = "sec"
         Maelstrom.button:SetAttribute("*type*", "spell")
         Maelstrom.button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-        Maelstrom.button:SetAttribute("*spell1", SpellIDs.LightningBolt)
-        Maelstrom.button:SetAttribute("*spell2", SpellIDs.ChainLightning)
+        Maelstrom.button:SetAttribute("spell1", SpellIDs.LightningBolt)
+        Maelstrom.button:SetAttribute("spell2", SpellIDs.ChainLightning)
         Maelstrom.button.icons[1]:SetAlpha(1)
         Maelstrom.rangeCheck = SpellNames[SpellIDs.LightningBolt]
         Maelstrom.manaCheck = SpellNames[SpellIDs.LightningBolt]
@@ -154,8 +154,8 @@ function TotemTimers.CreateEnhanceCDs()
         MaelstromButton:SetPushedTexture("Interface/AddOns/TotemTimers/textures/MaelstromPushed")
         MaelstromButton:SetAttribute("*type*", "spell")
         MaelstromButton:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-        MaelstromButton:SetAttribute("*spell1", SpellIDs.LightningBolt)
-        MaelstromButton:SetAttribute("*spell2", SpellIDs.ChainLightning)
+        MaelstromButton:SetAttribute("spell1", SpellIDs.LightningBolt)
+        MaelstromButton:SetAttribute("spell2", SpellIDs.ChainLightning)
         MaelstromButton.icon = TotemTimers_MaelstromBarButtonIcon
         local mIcon = MaelstromButton.icon
 
@@ -199,17 +199,17 @@ function TotemTimers.ConfigEnhanceCDs()
         local cd = cds[i]
         cd.button.cdspell = spell
         cd.button.icons[1]:SetTexture(SpellTextures[spell])
-        cd.button:SetAttribute("*spell1", spell)
+        cd.button:SetAttribute("spell1", spell)
         if spell == SpellIDs.FlameShock then
-            cd.button:SetAttribute("*spell2", SpellIDs.EarthShock)
-            cd.button:SetAttribute("*spell3", SpellIDs.FrostShock)
+            cd.button:SetAttribute("spell2", SpellIDs.EarthShock)
+            cd.button:SetAttribute("spell3", SpellIDs.FrostShock)
         elseif spell == SpellIDs.EarthShock then
-            cd.button:SetAttribute("*spell2", SpellIDs.FlameShock)
-            cd.button:SetAttribute("*spell2", SpellIDs.FrostShock)
+            cd.button:SetAttribute("spell2", SpellIDs.FlameShock)
+            cd.button:SetAttribute("spell2", SpellIDs.FrostShock)
         else
-		    cd.button:SetAttribute("*spell2", nil)
+		    cd.button:SetAttribute("spell2", nil)
 		end
-		cd.button:SetAttribute("*spell3", nil)
+		cd.button:SetAttribute("spell3", nil)
         cd.rangeCheck = SpellNames[CDSpells[role][i]]
         cd.manaCheck = SpellNames[CDSpells[role][i]]
         cd.Update = nil

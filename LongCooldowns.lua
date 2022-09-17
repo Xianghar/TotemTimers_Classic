@@ -32,7 +32,7 @@ local function ConfigureTimer(timer, data)
     if timer.totem then
         table.insert(timer.events, "PLAYER_TOTEM_UPDATE")
     end
-    timer.button:SetAttribute("*spell1", timer.spell)
+    timer.button:SetAttribute("spell1", timer.spell)
     timer.button.icon:SetTexture(SpellTextures[timer.spell])
 end
 
@@ -46,11 +46,10 @@ function TotemTimers.CreateLongCooldowns()
         timer.button:RegisterForClicks("LeftButtonDown")
         timer.button:SetAttribute("*type*", "spell")
         timer.button.tooltip = TotemTimers.Tooltips.Spell:new(timer.button)
+        timer.button.anchorframe = TotemTimers_LongCooldownsFrame
 
         timer.alpha = 0.7
         timer:SetReverseAlpha(true)
-
-        timer.anchorframe = TotemTimers_LongCooldownsFrame
 
         ConfigureTimer(timer, data)
 

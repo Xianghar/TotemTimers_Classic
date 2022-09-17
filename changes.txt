@@ -1,3 +1,6 @@
+3.1.2
+    - Long cooldowns can be moved, hold modifier (shift/ctrl/alt) to not trigger button
+    - Combat cooldowns can be moved without triggering by holding ctrl/alt
 3.1.1
     - Hide lightning bolt cast button when maelstrom counter is hidden
 3.1
