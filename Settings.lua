@@ -488,6 +488,9 @@ SettingsFunctions = {
             Timers[i].OOCAlpha = value
         end
         XiTimers.invokeOOCFader()
+        if TotemTimers_MultiSpell then
+            TotemTimers_MultiSpell.OOCAlpha = value
+        end
     end,
 
 
@@ -737,7 +740,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
     SettingsFunctions.EnhanceCDsSize = function(value)
         for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do
             for _, timer in pairs(t) do
-                   timer:SetScale(value / 36)
+                timer:SetScale(value / 36)
             end
         end
         TotemTimers.FlameShockDuration:SetScale(value / 36)
@@ -757,16 +760,32 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
             end
         end
 
-        local fs = TotemTimers.FlameShockDuration
+        --[[local fs = TotemTimers.FlameShockDuration
 
         fs:SetTimeHeight(value * 1.2)
         local font = fs.timerBars[1].time:GetFont()
         fs.timerBars[1].time:SetFont(font, value, "OUTLINE")
         fs.button:SetSize(value * 1.2, value * 1.2)
-        fs.button.icons[1]:SetAllPoints(fs.button)
+        fs.button.icons[1]:SetAllPoints(fs.button)]]
 
         --TotemTimers.LayoutEnhanceCDs()
         --TotemTimers.LayoutLongCooldowns()
+    end
+
+    SettingsFunctions.MaelstromSize = function(value)
+        TotemTimers.Maelstrom.size = value
+    end
+
+    SettingsFunctions.FlameShockDurationSize = function(value)
+        TotemTimers.FlameShockDuration.size = value
+    end
+
+    SettingsFunctions.FlameShockDurationStopPulse = function(value)
+        TotemTimers.FlameShockDuration.StopPulse = value
+    end
+
+    SettingsFunctions.MaelstromStopPulse = function(value)
+        TotemTimers.Maelstrom.StopPulseOn5 = value
     end
 
     --[[SettingsFunctions.EnhanceCDsMaelstromHeight =
@@ -806,7 +825,8 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
                 timer.OOCAlpha = value
             end
         end
-        TotemTimers.Maelstrom:SetAlpha(value)
+        TotemTimers.Maelstrom.OOCAlpha = value
+        TotemTimers.FlameShockDuration.OOCAlpha = value
         XiTimers.invokeOOCFader()
     end
 

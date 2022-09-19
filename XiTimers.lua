@@ -529,6 +529,7 @@ end
 -- display functions
 
 function XiTimers:SetTimerBarPos(side, notReanchor)
+    if not side then return end
 	self.timerBarPos = side
 	
 	local TimerBars = self.timerBars
@@ -682,7 +683,7 @@ function XiTimers:GetBorder(side)
         local height = self.timerBars[1]:GetHeight()*self.timerBars[1]:GetEffectiveScale()        
         if self.nr > 5 or TotemTimers.ActiveProfile.Arrange == "horizontal" then
             height = height * self.nrOfTimers
-        end        
+        end
 		return (self.timerOnButton and not self.forceBar) and 0 or self.timeSpacing + height
 	elseif ((side == "LEFT" and timerBarPos == "LEFT" or side == "RIGHT" and timerBarPos == "RIGHT") and ((self.nrOfTimers>1 and TotemTimers.ActiveProfile.ShowCooldowns) or not self.timerOnButton or self.forceBar))
         or (self.nr < 5 and TotemTimers.ActiveProfile.ShowCooldowns and TotemTimers.ActiveProfile.Arrange == "vertical" and self.nrOfTimers > 1 and 
@@ -885,16 +886,22 @@ XiTimers.OOCFaderEvent = function(self, event, arg1, arg2)
             if timer.active and timer.unclickable and timer.HideOOC then
                 timer:Hide()
             end
-            timer.button:SetAlpha(timer.OOCAlpha, false)
+            timer.button:SetAlpha(timer.OOCAlpha)
+        end
+        if TotemTimers_MultiSpell then
+            TotemTimers_MultiSpell:SetAlpha(TotemTimers_MultiSpell.OOCAlpha or 1)
         end
     elseif event == "PLAYER_REGEN_DISABLED" then
         incombat = true
-        for _,timer in pairs(XiTimers.timers, true) do
+        for _,timer in pairs(XiTimers.timers) do
             if timer.active and timer.unclickable and timer.HideOOC and not timer.ActiveWhileHidden and not timer.hideInactive then
                 timer:Show()
             end
             timer.button:SetAlpha(1)
-        end        
+        end
+        if TotemTimers_MultiSpell then
+            TotemTimers_MultiSpell:SetAlpha(1)
+        end
 	end
 end
 oocframe:SetScript("OnEvent", XiTimers.OOCFaderEvent)

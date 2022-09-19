@@ -22,8 +22,8 @@ local ShieldName = SpellNames[SpellIDs.LightningShield]
 local CDSpells = TotemTimers.CombatCooldownSpells
 
 local FlameShockDuration = null
-local Maelstrom = nil
-local MaelstromButton = nil
+local Maelstrom, MaelstromButton, MaelstromIcon
+
 
 
 local function ChangeCDOrder(self, _, _, spell)
@@ -86,8 +86,10 @@ function TotemTimers.CreateEnhanceCDs()
     FlameShockDuration.events[4] = "PLAYER_REGEN_DISABLED"
     FlameShockDuration.events[5] = "PLAYER_TARGET_CHANGED"
 	FlameShockDuration.forceBar = true
-    FlameShockDuration:SetTimerBarPos("RIGHT")
-    FlameShockDuration:SetTimeWidth(100)
+    FlameShockDuration.timerBarPos = nil
+    FlameShockDuration.timerBars[1]:ClearAllPoints()
+    FlameShockDuration.timerBars[1]:SetPoint("LEFT", FlameShockDuration.button, "LEFT")
+    FlameShockDuration.timerBars[1]:SetFrameStrata("LOW")
     FlameShockDuration:SetBarColor(1,0.5,0)
 	
 
@@ -124,16 +126,20 @@ function TotemTimers.CreateEnhanceCDs()
         Maelstrom.button:SetScript("OnEvent", TotemTimers.MaelstromEvent)
         Maelstrom.playerEvents[1] = "UNIT_AURA"
         Maelstrom.forceBar = true
-        Maelstrom:SetTimerBarPos("RIGHT")
+        Maelstrom.timerBarPos = nil
+        Maelstrom.timerBars[1]:ClearAllPoints()
+        Maelstrom.timerBars[1]:SetPoint("LEFT", Maelstrom.button, "LEFT")
+        Maelstrom.timerBars[1]:SetFrameStrata("LOW")
         Maelstrom:SetTimeWidth(100)
         Maelstrom.timerBars[1]:SetStatusBarAtlas("_Shaman-MaelstromBar")
         Maelstrom:SetBarColor(0.8,.8,1)
         Maelstrom.timerBars[1].background:SetStatusBarAtlas("_Shaman-MaelstromBar")
-
-        Maelstrom:SetTimeHeight(20)
         Maelstrom.timerBars[1].time:Hide()
-        Maelstrom.button:SetSize(20, 20)
         Maelstrom.button.icons[1]:SetAllPoints(Maelstrom.button)
+
+        Maelstrom.animation.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon")
+        Maelstrom.animation.button:SetSize(72,36)
+
 
         Maelstrom.Update = function() end
         Maelstrom.Activate = function(self)
@@ -146,8 +152,8 @@ function TotemTimers.CreateEnhanceCDs()
         TotemTimers.MaelstromButton = MaelstromButton
 
         MaelstromButton:SetFrameLevel(Maelstrom.button:GetFrameLevel() + 10)
-        MaelstromButton:SetPoint("LEFT", Maelstrom.button, "RIGHT")
-        MaelstromButton:SetSize(85, 17)
+        MaelstromButton:SetPoint("LEFT", Maelstrom.button, "LEFT")
+        MaelstromButton:SetSize(100, 17)
         --MaelstromButton:SetAllPoints(Maelstrom.timerBars[1])
         MaelstromButton:SetNormalTexture(nil)
         MaelstromButton:SetHighlightTexture("Interface/AddOns/TotemTimers/textures/MaelstromHilight")
@@ -157,25 +163,32 @@ function TotemTimers.CreateEnhanceCDs()
         MaelstromButton:SetAttribute("spell1", SpellIDs.LightningBolt)
         MaelstromButton:SetAttribute("spell2", SpellIDs.ChainLightning)
         MaelstromButton.icon = TotemTimers_MaelstromBarButtonIcon
-        local mIcon = MaelstromButton.icon
 
-        mIcon:ClearAllPoints()
-        mIcon:SetWidth(100)
-        mIcon:SetHeight(50)
-        mIcon:SetPoint("CENTER", TotemTimers_MaelstromBarButton, "CENTER", 0, 5)
+        MaelstromIcon = CreateFrame("Frame", "TotemTimers_MaelstromIcon")
+        TotemTimers.MaelstromIcon = MaelstromIcon
 
-        mIcon.AnimGroup = mIcon:CreateAnimationGroup()
-        mIcon.AnimGroup:SetLooping("REPEAT")
-        local scale = mIcon.AnimGroup:CreateAnimation("Scale")
+        MaelstromIcon.icon = MaelstromIcon:CreateTexture(nil, "ARTWORK")
+        MaelstromIcon.icon:SetAllPoints(MaelstromIcon)
+        MaelstromIcon:SetFrameLevel(Maelstrom.button:GetFrameLevel() + 2)
+
+        MaelstromIcon:ClearAllPoints()
+        MaelstromIcon:SetWidth(100)
+        MaelstromIcon:SetHeight(50)
+
+        MaelstromIcon.icon.AnimGroup = MaelstromIcon.icon:CreateAnimationGroup()
+        MaelstromIcon.icon.AnimGroup:SetLooping("REPEAT")
+        local scale = MaelstromIcon.icon.AnimGroup:CreateAnimation("Scale")
         scale:SetDuration(0.4)
         scale:SetScale(1.05,1.05)
         scale:SetOrder(1)
         scale:SetSmoothing("IN_OUT")
-        scale = mIcon.AnimGroup:CreateAnimation("Scale")
+        scale = MaelstromIcon.icon.AnimGroup:CreateAnimation("Scale")
         scale:SetDuration(0.4)
         scale:SetScale(0.95,0.95)
         scale:SetOrder(2)
         scale:SetSmoothing("IN_OUT")
+
+        Maelstrom.animation.AnchoredButton = MaelstromIcon
     end
 end
 
@@ -190,6 +203,7 @@ function TotemTimers.ConfigEnhanceCDs()
     end
     FlameShockDuration:Deactivate()
     if Maelstrom then Maelstrom:Deactivate() end
+    MaelstromIcon:Hide()
 
     if role == 0 or not TotemTimers.ActiveProfile.EnhanceCDs then return end
 
@@ -264,6 +278,19 @@ local function ConvertCoords(frame1, frame2)
 end
 
 
+local function SizeToWidthHeight(size)
+    size = min(3, size or 1)
+
+    local spacing = TotemTimers.ActiveProfile.CooldownSpacing
+    local height = 19 + (size-1) * 4
+
+    --button + bar = 3 normal buttons + spacing, 4 btn for size 2, 5 btn for size 3
+    local width = 108 + spacing * 2
+    width = width + (size-1) * (36 + spacing)
+
+    return width, height
+end
+
 function TotemTimers.LayoutEnhanceCDs()
     wipe(activeCDs)
     if role == 0 then return end
@@ -321,27 +348,49 @@ function TotemTimers.LayoutEnhanceCDs()
         end
     end
 
-    local fsrel, fspoints, fsx, fsy = nil, {"BOTTOM", "TOP"}, -50, TotemTimers.ActiveProfile.CooldownSpacing
+    local spacing = TotemTimers.ActiveProfile.CooldownSpacing
+
+    local width, height = SizeToWidthHeight(FlameShockDuration.size)
+
+    FlameShockDuration:SetTimeWidth(width)
+    FlameShockDuration:SetTimeHeight(height)
+    FlameShockDuration.button:SetSize(height, height)
+    FlameShockDuration.button.icons[1]:SetAllPoints(FlameShockDuration.button)
+
+    local fspoint, fsy = "BOTTOMLEFT", 0
 
     if TotemTimers.ActiveProfile.FlameShockDurationOnTop then
-        fsrel = activeCDs[split].button
-        if topRow % 2 == 0 then fsx = -30 end
+        fsy = 18 + spacing + activeCDs[1]:GetBorder("TOP")
     else
-        fsrel = activeCDs[bottomRow == 0 and split or bottomSplit].button
-        fspoints[1], fspoints[2] = fspoints[2], fspoints[1]
-        fsy = -fsy
-        local rowCount = bottomRow == 0 and topRow or bottomRow
-        if rowCount % 2 == 0 then fsx = -30 end
+        fspoint = "TOPLEFT"
+        local border = spacing + activeCDs[1]:GetBorder("BOTTOM")
+        fsy = -18 - border
+        if bottomRow > 0 then
+            fsy = fsy - 36 - border
+        end
     end
 
-    FlameShockDuration.button:SetPoint(fspoints[1], fsrel, fspoints[2], fsx, fsy)
+    FlameShockDuration.button:SetPoint(fspoint, TotemTimers_EnhanceCDsFrame, "CENTER", -width / 2, fsy)
+
 
     if Maelstrom then
-        if FlameShockDuration.active then
-            Maelstrom.button:SetPoint( fspoints[1], FlameShockDuration.button, fspoints[2], 0, fsy)
-        else
-            Maelstrom.button:SetPoint( fspoints[1], fsrel, fspoints[2], fsx, fsy)
+        local msWidth, msHeight = SizeToWidthHeight(Maelstrom.size)
+        Maelstrom:SetTimeWidth(msWidth)
+        Maelstrom:SetTimeHeight(msHeight)
+        Maelstrom.button:SetSize(msHeight, msHeight)
+        Maelstrom.button.icons[1]:SetAllPoints(Maelstrom.button)
+        MaelstromButton:SetSize(msWidth, msHeight)
+        MaelstromIcon:SetSize(msWidth * 0.75, msWidth * 0.75 / 2)
+
+        local msy = 18 + spacing + activeCDs[1]:GetBorder("TOP")
+
+        if FlameShockDuration.active and TotemTimers.ActiveProfile.FlameShockDurationOnTop then
+            msy = msy + spacing + height
         end
+
+        Maelstrom.button:SetPoint("BOTTOMLEFT", TotemTimers_EnhanceCDsFrame, "CENTER", -msWidth / 2, msy)
+        MaelstromIcon:SetPoint("CENTER", TotemTimers_EnhanceCDsFrame, "CENTER", 0, msy)
+
     end
 end
 
@@ -527,21 +576,29 @@ function TotemTimers.ShockEvent(self, event, unit, ...)
 end
 
 local MaelstromName = GetSpellInfo(53817)
+local lastMaelstromCount = 0
 
 function TotemTimers.MaelstromEvent(self)
     local _,_,count = AuraUtil.FindAuraByName(MaelstromName, "player", "HELPFUL")
     if not count then
         Maelstrom:Stop(1)
-        MaelstromButton.icon:SetTexture(nil)
-        MaelstromButton.icon.AnimGroup:Stop()
+        MaelstromIcon:Hide()
+        MaelstromIcon.icon:SetTexture(nil)
+        MaelstromIcon.icon.AnimGroup:Stop()
     else
+        MaelstromIcon:Show()
         Maelstrom:Start(1, count, 5)
         Maelstrom:SetBarColor(.6 + count * .04, .6 + count * .04, .8 + count * .04)
-        MaelstromButton.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon"..(count < 5 and "_"..count or ""))
+        MaelstromIcon.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon"..(count < 5 and "_"..count or ""))
+
         if count < 5 then
-            MaelstromButton.icon.AnimGroup:Stop()
+            MaelstromIcon.icon.AnimGroup:Stop()
         else
-            MaelstromButton.icon.AnimGroup:Play()
+            MaelstromIcon.icon.AnimGroup:Play()
+            if lastMaelstromCount < count and Maelstrom.StopPulseOn5 then
+                Maelstrom.animation:Play()
+            end
         end
+        lastMaelstromCount = count
     end
 end
