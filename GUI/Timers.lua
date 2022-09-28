@@ -559,14 +559,9 @@ if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
         name = L["Multicast Button"],
         desc = L["Enables button for Call of Elements etc."],
         set = function(info, val)
+            print("TotemTimers: You might need to relog for the default totem bar to show/hide correctly")
             TotemTimers.ActiveProfile.MultiCast = val
             TotemTimers.ProcessSetting("MultiCast")
-            TotemTimers.ProcessSetting("HideBlizzTimers")
-            if not val and LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
-                MultiCastActionBarFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-                MultiCastActionBarFrame:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
-                MultiCastActionBarFrame:Show()
-            end
         end,
         get = function(info)
             return TotemTimers.ActiveProfile.MultiCast

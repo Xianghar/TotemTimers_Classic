@@ -125,7 +125,18 @@ function TotemTimers.MultiSpellActivate()
         TotemTimers.SetMultiCastConfig()
         --trigger Childupdate("mspell")
         mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
+
+        MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+        MultiCastActionBarFrame:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+        MultiCastActionBarFrame:Hide()
     else
+        if mb.active then
+            MultiCastActionBarFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+            MultiCastActionBarFrame:RegisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
+            MultiCastActionBarFrame:Show()
+            MultiCastActionBarFrame_OnEvent(MultiCastActionBarFrame, "UPDATE_MULTI_CAST_ACTIONBAR")
+        end
+
         for i = 1, 4 do
             XiTimers.timers[i].button:SetAttribute("mspell", nil)
         end

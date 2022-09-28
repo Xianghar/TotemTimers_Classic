@@ -166,6 +166,7 @@ function TotemTimers.CreateEnhanceCDs()
 
         MaelstromIcon = CreateFrame("Frame", "TotemTimers_MaelstromIcon")
         TotemTimers.MaelstromIcon = MaelstromIcon
+        Maelstrom.ChainOOCAlpha = TotemTimers.MaelstromIcon
 
         MaelstromIcon.icon = MaelstromIcon:CreateTexture(nil, "ARTWORK")
         MaelstromIcon.icon:SetAllPoints(MaelstromIcon)
@@ -175,18 +176,21 @@ function TotemTimers.CreateEnhanceCDs()
         MaelstromIcon:SetWidth(100)
         MaelstromIcon:SetHeight(50)
 
-        MaelstromIcon.icon.AnimGroup = MaelstromIcon.icon:CreateAnimationGroup()
-        MaelstromIcon.icon.AnimGroup:SetLooping("REPEAT")
-        local scale = MaelstromIcon.icon.AnimGroup:CreateAnimation("Scale")
-        scale:SetDuration(0.4)
-        scale:SetScale(1.05,1.05)
-        scale:SetOrder(1)
-        scale:SetSmoothing("IN_OUT")
-        scale = MaelstromIcon.icon.AnimGroup:CreateAnimation("Scale")
-        scale:SetDuration(0.4)
-        scale:SetScale(0.95,0.95)
-        scale:SetOrder(2)
-        scale:SetSmoothing("IN_OUT")
+
+        for _, icon in pairs({MaelstromIcon.icon, Maelstrom.timerBars[1].time}) do
+            icon.AnimGroup = icon:CreateAnimationGroup()
+            icon.AnimGroup:SetLooping("REPEAT")
+            local scale = icon.AnimGroup:CreateAnimation("Scale")
+            scale:SetDuration(0.4)
+            scale:SetScale(1.05,1.05)
+            scale:SetOrder(1)
+            scale:SetSmoothing("IN_OUT")
+            scale = icon.AnimGroup:CreateAnimation("Scale")
+            scale:SetDuration(0.4)
+            scale:SetScale(0.95,0.95)
+            scale:SetOrder(2)
+            scale:SetSmoothing("IN_OUT")
+        end
 
         Maelstrom.animation.AnchoredButton = MaelstromIcon
     end
@@ -580,25 +584,47 @@ local lastMaelstromCount = 0
 
 function TotemTimers.MaelstromEvent(self)
     local _,_,count = AuraUtil.FindAuraByName(MaelstromName, "player", "HELPFUL")
+    local numberOnly = Maelstrom.NumberOnly
     if not count then
         Maelstrom:Stop(1)
-        MaelstromIcon:Hide()
-        MaelstromIcon.icon:SetTexture(nil)
-        MaelstromIcon.icon.AnimGroup:Stop()
+        Maelstrom.timerBars[1].time:SetText("")
+        Maelstrom.timerBars[1].time.AnimGroup:Stop()
+        ActionButton_HideOverlayGlow(TotemTimers.MaelstromButton)
+
+        if not numberOnly then
+            MaelstromIcon:Hide()
+            MaelstromIcon.icon:SetTexture(nil)
+            MaelstromIcon.icon.AnimGroup:Stop()
+        end
     else
-        MaelstromIcon:Show()
+        Maelstrom.timerBars[1].time:SetText(count)
         Maelstrom:Start(1, count, 5)
         Maelstrom:SetBarColor(.6 + count * .04, .6 + count * .04, .8 + count * .04)
-        MaelstromIcon.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon"..(count < 5 and "_"..count or ""))
+
+        local animate
+        if numberOnly then
+            MaelstromIcon:Hide()
+            MaelstromIcon.icon.AnimGroup:Stop()
+            animate = Maelstrom.timerBars[1].time
+        else
+            MaelstromIcon:Show()
+            MaelstromIcon.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon"..(count < 5 and "_"..count or ""))
+            animate = MaelstromIcon.icon
+            ActionButton_HideOverlayGlow(TotemTimers.MaelstromButton)
+        end
 
         if count < 5 then
-            MaelstromIcon.icon.AnimGroup:Stop()
+            animate.AnimGroup:Stop()
         else
-            MaelstromIcon.icon.AnimGroup:Play()
+            animate.AnimGroup:Play()
             if lastMaelstromCount < count and Maelstrom.StopPulseOn5 then
                 Maelstrom.animation:Play()
             end
+            if numberOnly then
+                ActionButton_ShowOverlayGlow(TotemTimers.MaelstromButton)
+            end
         end
+
         lastMaelstromCount = count
     end
 end

@@ -403,6 +403,7 @@ SettingsFunctions = {
     end,
 
     TwistingTimer = function(value, Timers)
+        if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then return end
         for i = 1, 4 do
             if XiTimers.timers[i].nr == AIR_TOTEM_SLOT then
                 XiTimers.timers[i].twisting = value
@@ -772,20 +773,12 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         --TotemTimers.LayoutLongCooldowns()
     end
 
-    SettingsFunctions.MaelstromSize = function(value)
-        TotemTimers.Maelstrom.size = value
-    end
-
     SettingsFunctions.FlameShockDurationSize = function(value)
         TotemTimers.FlameShockDuration.size = value
     end
 
     SettingsFunctions.FlameShockDurationStopPulse = function(value)
         TotemTimers.FlameShockDuration.StopPulse = value
-    end
-
-    SettingsFunctions.MaelstromStopPulse = function(value)
-        TotemTimers.Maelstrom.StopPulseOn5 = value
     end
 
     --[[SettingsFunctions.EnhanceCDsMaelstromHeight =
@@ -825,7 +818,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
                 timer.OOCAlpha = value
             end
         end
-        TotemTimers.Maelstrom.OOCAlpha = value
+        if TotemTimers.Maelstrom then TotemTimers.Maelstrom.OOCAlpha = value end
         TotemTimers.FlameShockDuration.OOCAlpha = value
         XiTimers.invokeOOCFader()
     end
@@ -839,8 +832,12 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         end
         TotemTimers.FlameShockDuration.HideOOC = value
         TotemTimers.FlameShockDuration.button:SetAttribute("HideOOC", value)
-        TotemTimers.Maelstrom.HideOOC = value
-        TotemTimers.Maelstrom.button:SetAttribute("HideOOC", value)
+
+        if TotemTimers.Maelstrom then
+            TotemTimers.Maelstrom.HideOOC = value
+            TotemTimers.Maelstrom.button:SetAttribute("HideOOC", value)
+        end
+
         TotemTimers.ConfigEnhanceCDs()
     end
 
@@ -862,8 +859,10 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
                 timer.button:EnableMouse(not value)
             end
         end
-        TotemTimers.Maelstrom.button:EnableMouse(not value)
-        TotemTimers.MaelstromButton:EnableMouse(not value)
+        if TotemTimers.Maelstrom then
+            TotemTimers.Maelstrom.button:EnableMouse(not value)
+            TotemTimers.MaelstromButton:EnableMouse(not value)
+        end
     end
 
     SettingsFunctions.CooldownSpacing = function(value, Timers)
@@ -888,13 +887,6 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
             TotemFrame:Show()
             TotemFrame:SetScript("OnShow", TotemFrameScript)
         end
-        if MultiCastActionBarFrame then
-            if value and TotemTimers.ActiveProfile.MultiCast then
-                MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
-                MultiCastActionBarFrame:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
-                MultiCastActionBarFrame:Hide()
-            end
-        end
     end
 
     SettingsFunctions.LongCooldowns = function(value, Timers)
@@ -910,6 +902,26 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
             TotemTimers.MultiSpellActivate()
         end
 
+        SettingsFunctions.MaelstromSize = function(value)
+            TotemTimers.Maelstrom.size = value
+        end
+
+        SettingsFunctions.MaelstromStopPulse = function(value)
+            TotemTimers.Maelstrom.StopPulseOn5 = value
+        end
+
+        SettingsFunctions.MaelstromStopPulse = function(value)
+            TotemTimers.Maelstrom.StopPulseOn5 = value
+        end
+
+        SettingsFunctions.MaelstromNumberOnly = function(value)
+            if value then
+                TotemTimers.Maelstrom.timerBars[1].time:Show()
+            else
+                TotemTimers.Maelstrom.timerBars[1].time:Hide()
+            end
+            TotemTimers.Maelstrom.NumberOnly = value
+        end
 
     end
 end

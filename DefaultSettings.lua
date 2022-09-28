@@ -305,6 +305,7 @@ TotemTimers.DefaultProfile = {
         EnhanceCDsMaelstrom = true,
         MaelstromSize = 2,
         MaelstromStopPulse = false,
+        MaelstromNumberOnly = false,
         EnhanceCDsTotemTwisting = true,
 
 

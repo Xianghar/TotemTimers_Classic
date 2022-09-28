@@ -181,6 +181,7 @@ L["OOC Opacity"] = true
 L["OOC Opacity Desc"] = "Controls the opacity of the buttons out of combat, 0 = transparent, 1 = opaque"
 L["Show OmniCC counters"] = true
 L["Spells"] = true
+L["MaelstromNumberOnlyDesc"] = "Show number instead of lightning bolts"
 
 L["Arena"] = true
 L["Battleground"] = true

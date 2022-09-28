@@ -100,7 +100,7 @@ end
 																self:ChildUpdate("mspell", nil)
 															end
 														 elseif name:sub(1,14) == "mspelldisabled" then	
-															local mspell = name:sub(15)														 
+															local mspell = tonumber(name:sub(15))
 															local disabled = self:GetAttribute(name)
 															local activeMspell = self:GetAttribute("mspell")
 															if mspell == activeMspell then
@@ -203,7 +203,6 @@ end
             XiTimers.Update(self, elapsed)
             if self.timers[1] > 0 then
                 self:SetOutOfRange(not TotemTimers.GetPlayerRange(self.button.element))
-                --print(TotemTimers.GetPlayerRange(self.button.element))
                 local count = TotemTimers.GetOutOfRange(self.button.element)
                 if count > 0 then
                     self.button.rangeCount:SetText(count)

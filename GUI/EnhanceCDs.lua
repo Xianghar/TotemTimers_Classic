@@ -416,7 +416,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
     }
 
     TotemTimers.options.args.enhancecds.args.options.args.MaelstromSize = {
-        order = 42,
+        order = 44,
         type = "range",
         name = L["Size"],
         min = 1,
@@ -443,6 +443,23 @@ if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
         end,
         get = function(info)
             return TotemTimers.ActiveProfile.MaelstromStopPulse
+        end,
+    }
+
+    TotemTimers.options.args.enhancecds.args.options.args.MaelstromNumberOnly = {
+        order = 42,
+        type = "toggle",
+        name = L["Show Number Only"],
+        desc = L["MaelstromNumberOnlyDesc"],
+        set = function(info, val)
+            TotemTimers.ActiveProfile.MaelstromNumberOnly = val
+            TotemTimers.ProcessSetting("MaelstromNumberOnly")
+            if TotemTimers.Maelstrom.active then
+                TotemTimers.MaelstromEvent(TotemTimers.Maelstrom.button, "UNIT_AURA")
+            end
+        end,
+        get = function(info)
+            return TotemTimers.ActiveProfile.MaelstromNumberOnly
         end,
     }
 

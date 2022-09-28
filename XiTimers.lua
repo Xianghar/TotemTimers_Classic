@@ -887,6 +887,7 @@ XiTimers.OOCFaderEvent = function(self, event, arg1, arg2)
                 timer:Hide()
             end
             timer.button:SetAlpha(timer.OOCAlpha)
+            if timer.ChainOOCAlpha then timer.ChainOOCAlpha:SetAlpha(timer.OOCAlpha) end
         end
         if TotemTimers_MultiSpell then
             TotemTimers_MultiSpell:SetAlpha(TotemTimers_MultiSpell.OOCAlpha or 1)
@@ -898,6 +899,7 @@ XiTimers.OOCFaderEvent = function(self, event, arg1, arg2)
                 timer:Show()
             end
             timer.button:SetAlpha(1)
+            if timer.ChainOOCAlpha then timer.ChainOOCAlpha:SetAlpha(1) end
         end
         if TotemTimers_MultiSpell then
             TotemTimers_MultiSpell:SetAlpha(1)

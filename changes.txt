@@ -1,3 +1,8 @@
+3.1.4
+    - Fix disabling/enabling a slot for the multicast button
+    - Maelstrom timer lightning bolts will fade out of combat if enabled
+    - Added option for Maelstrom timer to show number instead of lightning bolts
+    - Default totem bar always hides when multicast button is enabled
 3.1.3
     - Changed scaling for Flameshock and Maelstrom timers
     - Added stop pulse animations for Flameshock and Maelstrom timers
