@@ -19,8 +19,19 @@ TotemTimers.options = {
                     type ="description",
                     name = L["Version"]..": "..tostring(GetAddOnMetadata("TotemTimers", "Version"))
                 },
-                lock = {
+                info= {
                     order = 1,
+                    type = "description",
+                    name = "If you're missing the default totem bar, you have to disable the multicast button in the Timers section."
+                        .."The default totem bar and the multicast button in TT cannot be used reliably at the same time.",
+                    fontSize = "medium",
+                    image = 310730,
+                    imageWidth = 26,
+                    imageHeight = 26,
+
+                },
+                lock = {
+                    order = 11,
                     type = "toggle",
                     name = L["Lock"],
                     desc = L["Locks the position of TotemTimers"],
@@ -28,7 +39,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.Lock end,
                 },            
                 flashred = {
-                    order = 2,
+                    order = 12,
                     type = "toggle",
                     name = L["Red Flash Color"],
                     desc = L["RedFlash Desc"],
@@ -36,7 +47,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.FlashRed end,
                 }, 
                 timersonbuttons = {
-                    order = 5,
+                    order = 15,
                     type = "toggle",
                     name = L["Timers On Buttons"],
                     desc = L["Timers On Buttons Desc"],
@@ -50,7 +61,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.TimersOnButtons end,
                 },
                 hideblizztimers = {
-                    order = 6,
+                    order = 16,
                     type = "toggle",
                     name = L["Hide Blizzard Timers"],
                     set = function(info, val)
@@ -69,7 +80,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.HideDefaultTotemBar  end,
                 }, ]]
                 tooltips = {
-                    order = 8,
+                    order = 18,
                     type = "toggle",
                     name = L["Show Tooltips"],
                     desc = L["Shows tooltips on timer and totem buttons"],
@@ -77,7 +88,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.Tooltips end,
                 },  
                 tooltipsatbuttons = {
-                    order = 9,
+                    order = 19,
                     type = "toggle",
                     name = L["Tooltips At Buttons"],
                     desc = L["Tooltips At Buttons Desc"],
@@ -85,7 +96,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.TooltipsAtButtons end,
                 },
                 HideInVehicle = {
-                    order = 10,
+                    order = 110,
                     type = "toggle",
                     name = L["Hide In Vehicles"],
                     desc = L["Hide In Vehicles Desc"],
@@ -93,7 +104,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.HideInVehicle end,
                 },
                 Keybinds = {
-                     order = 11,
+                     order = 111,
                    type = "toggle",
                     name = L["Show Key Bindings"],
                     desc = L["Shows key bindings on totem timers"],
@@ -138,12 +149,12 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.FulminationGlow end,
                 },]]
                 h1 = {
-                    order = 20,
+                    order = 120,
                     type = "header",
                     name = "",
                 },
                 time = {
-                    order = 21,
+                    order = 121,
                     type = "select",
                     name = L["Time Style"],
                     desc = L["Sets the format in which times are displayed"],
@@ -160,7 +171,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.TimeStyle end,
                 },
                 TimerBarTexture = {
-                    order = 35,
+                    order = 135,
                     type = "select",
                     name = L["Timer Bar Texture"],
                     values = AceGUIWidgetLSMlists.statusbar,
@@ -169,7 +180,7 @@ TotemTimers.options = {
                     dialogControl = "LSM30_Statusbar",
                 },                
                 TimeFont = {
-                    order = 35,
+                    order = 135,
                     type = "select",
                     name = L["Time Font"] ,
                     values = AceGUIWidgetLSMlists.font,
@@ -178,7 +189,7 @@ TotemTimers.options = {
                     dialogControl = "LSM30_Font",
                 }, 
                 TimeColor = {
-                    order = 36,
+                    order = 136,
                     type = "color",
                     name = L["Time Color"],
                     hasAlpha = true,
@@ -197,7 +208,7 @@ TotemTimers.options = {
                           end,
                 },
                 TimerBarColor = {
-                    order = 37,
+                    order = 137,
                     type = "color",
                     name = L["Timer Bar Color"],
                     hasAlpha = true,
@@ -215,7 +226,7 @@ TotemTimers.options = {
                           end,
                 },
                 CooldownAlpha = {
-                    order = 38,
+                    order = 138,
                     type = "range",
                     name = L["Cooldown Opacity"],
                     desc = L["Opacity of the cooldown swirls"],
@@ -228,7 +239,7 @@ TotemTimers.options = {
                     get = function(info) return TotemTimers.ActiveProfile.CooldownAlpha end,
                 },
                 OOCAlpha = {
-                    order = 39,
+                    order = 139,
                     type="range",
                     min = 0,
                     max = 1,
