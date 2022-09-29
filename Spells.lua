@@ -138,6 +138,9 @@ function TotemTimers.UpdateSpellRanks()
             end
         end
     end
+    if TotemTimers.MaelstromButton then
+        UpdateRank(TotemTimers.MaelstromButton)
+    end
 end
 
 TotemTimers.Specialization = 2
