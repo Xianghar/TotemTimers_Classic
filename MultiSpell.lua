@@ -13,7 +13,8 @@ local SpellIDs = TotemTimers.SpellIDs
 local SpellTextures = TotemTimers.SpellTextures
 
 function TotemTimers.CreateMultiCastButtons()
-    mb = CreateFrame("Button", "TotemTimers_MultiSpell", UIParent, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerEnterLeaveTemplate, SecureHandlerAttributeTemplate")
+    mb = CreateFrame("CheckButton", "TotemTimers_MultiSpell", UIParent, "ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerEnterLeaveTemplate, SecureHandlerAttributeTemplate")
+    XiTimers.AddSpecialActionBarDriver(mb)
     mb:SetWidth(36)
     mb:SetHeight(36)
     mb:SetScale(32 / 36)
@@ -26,11 +27,7 @@ function TotemTimers.CreateMultiCastButtons()
     mb.action = 0
     mb.SetCheckedTexture = function()
     end
-    if not IsAddOnLoaded("rActionButtonStyler") then
-        mb:SetNormalTexture(nil)
-    else
-        ActionButton_Update(mb)
-    end
+    mb:SetNormalTexture(nil)
     mb.icon:Show()
 
     for e = 1, 4 do
@@ -125,6 +122,7 @@ function TotemTimers.MultiSpellActivate()
         TotemTimers.SetMultiCastConfig()
         --trigger Childupdate("mspell")
         mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
+        mb:SetAttribute("active", true)
 
         MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
         MultiCastActionBarFrame:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
@@ -141,7 +139,9 @@ function TotemTimers.MultiSpellActivate()
             XiTimers.timers[i].button:SetAttribute("mspell", nil)
         end
         mb:Hide()
+        mb:SetAttribute("active", false)
         mb.active = false
+
     end
     TotemTimers.ProcessSetting("TimerSize")
     TotemTimers.OrderTimers()

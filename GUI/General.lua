@@ -95,14 +95,14 @@ TotemTimers.options = {
                     set = function(info, val) TotemTimers.ActiveProfile.TooltipsAtButtons = val end,
                     get = function(info) return TotemTimers.ActiveProfile.TooltipsAtButtons end,
                 },
-                HideInVehicle = {
+                --[[HideInVehicle = {
                     order = 110,
                     type = "toggle",
                     name = L["Hide In Vehicles"],
                     desc = L["Hide In Vehicles Desc"],
                     set = function(info, val) TotemTimers.ActiveProfile.HideInVehicle = val TotemTimers.ProcessSetting("HideInVehicle") end,
                     get = function(info) return TotemTimers.ActiveProfile.HideInVehicle end,
-                },
+                },]]
                 Keybinds = {
                      order = 111,
                    type = "toggle",

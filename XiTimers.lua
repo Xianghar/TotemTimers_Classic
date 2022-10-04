@@ -68,24 +68,10 @@ function XiTimers.UpdateTimers(self,elapsed)
     end
 end
 
-
-function XiTimers:new(nroftimers, unclickable)
-	local self = {}
-	setmetatable(self, XiTimers)
-	XiTimers.nrOfTimers = XiTimers.nrOfTimers + 1
-    self.nr = XiTimers.nrOfTimers
-	self.active = false
-	self.running = 0
-	self.timersRunning = {}
-    self.unclickable = unclickable
-	
-	if unclickable then
-        self.button = CreateFrame("CheckButton", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersUnsecureTemplate")
-    else
-        self.button = CreateFrame("CheckButton", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersTemplate")
-		RegisterStateDriver(self.button, "petbattle", "[petbattle][overridebar][possessbar] active; none")
-		RegisterStateDriver(self.button, "combat", "[combat] active; none")
-		self.button:WrapScript(self.button, "OnAttributeChanged", [[
+function XiTimers.AddSpecialActionBarDriver(button)
+    RegisterStateDriver(button, "petbattle", "[petbattle][overridebar][possessbar] active; none")
+    RegisterStateDriver(button, "combat", "[combat] active; none")
+    button:WrapScript(button, "OnAttributeChanged", [[
 			if not self:GetAttribute("active") then return end
 			if name == "state-petbattle" then
 				if value == "active" then
@@ -101,6 +87,24 @@ function XiTimers:new(nroftimers, unclickable)
 				end
 			end
 		]])
+end
+
+
+function XiTimers:new(nroftimers, unclickable)
+	local self = {}
+	setmetatable(self, XiTimers)
+	XiTimers.nrOfTimers = XiTimers.nrOfTimers + 1
+    self.nr = XiTimers.nrOfTimers
+	self.active = false
+	self.running = 0
+	self.timersRunning = {}
+    self.unclickable = unclickable
+	
+	if unclickable then
+        self.button = CreateFrame("CheckButton", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersUnsecureTemplate")
+    else
+        self.button = CreateFrame("CheckButton", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersTemplate")
+		XiTimers.AddSpecialActionBarDriver(self.button)
     end
 	self.button:SetPoint("CENTER", UIParent, "CENTER")
 	self.button.timer = self

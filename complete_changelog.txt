@@ -1,3 +1,7 @@
+3.1.7
+    - Hide multicast button when in vehicle with an override bar
+3.1.6
+    - Added some info about the hidden blizzard totem bar to options
 3.1.5
     - Maelstrom timer button now casts max rank Lightning Bolt and Chain Lightning
 3.1.4
