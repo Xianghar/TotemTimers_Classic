@@ -1,3 +1,6 @@
+3.1.8
+    - Update ranks for totems assigned to multicast spells
+    - When switching/resetting talents, not available totems are replace with first in menu
 3.1.7
     - Hide multicast button when in vehicle with an override bar
 3.1.6
