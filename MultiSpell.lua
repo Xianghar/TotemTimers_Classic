@@ -124,9 +124,9 @@ function TotemTimers.MultiSpellActivate()
         mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
         mb:SetAttribute("active", true)
 
-       --[[ MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+        MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
         MultiCastActionBarFrame:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
-        MultiCastActionBarFrame:Hide()]]
+        MultiCastActionBarFrame:Hide()
     else
         if mb.active then
             MultiCastActionBarFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
