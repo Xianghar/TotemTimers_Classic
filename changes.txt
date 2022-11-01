@@ -1,3 +1,7 @@
+3.1.10
+    - Small fix for weapon tracker
+    - Added Chain Lightning to Enhancement cooldowns
+    - Fixed combat cooldowns layout if more than 8 are active
 3.1.9
     - Fix hiding blizzard totem bar
 3.1.8
