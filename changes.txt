@@ -1,3 +1,5 @@
+3.1.11
+    - Collect more debug info
 3.1.10
     - Small fix for weapon tracker
     - Added Chain Lightning to Enhancement cooldowns
