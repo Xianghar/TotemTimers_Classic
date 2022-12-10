@@ -111,7 +111,7 @@ function XiTimers:new(nroftimers, unclickable)
 	
 	--for rActionButtonStyler
 	self.button.action = 0 
-    self.button:SetCheckedTexture(nil)
+    --self.button:SetCheckedTexture(nil)
 	self.button.SetCheckedTexture = function() end
     self.button.SetChecked = function() end
     self.button.GetChecked = function() return false end

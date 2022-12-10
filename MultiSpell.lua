@@ -27,7 +27,10 @@ function TotemTimers.CreateMultiCastButtons()
     mb.action = 0
     mb.SetCheckedTexture = function()
     end
-    mb:SetNormalTexture(nil)
+
+    --mb:SetNormalTexture(nil)
+    _G["TotemTimers_MultiSpellNormalTexture"]:SetTexture(nil)
+
     mb.icon:Show()
 
     for e = 1, 4 do

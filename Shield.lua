@@ -29,7 +29,7 @@ function TotemTimers.CreateShieldTracker()
     end
     shield.button:SetAttribute("*type*", "spell")
     shield.button:SetAttribute("*unit*", "player")
-    shield.button:RegisterForClicks("LeftButtonUp", "RightButtonUp", "MiddleButtonUp", "Button4")
+    shield.button:RegisterForClicks("AnyDown")
 
     if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
         shield.button:SetAttribute("*spell1", SpellIDs.LightningShield)

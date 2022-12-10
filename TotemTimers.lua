@@ -91,6 +91,7 @@ function TotemTimers.SetupGlobals()
 		return
 	end
 	if select(2,UnitClass("player")) == "SHAMAN" then
+        TotemTimers.GetSpecialization()
 		TotemTimers.GetSpells()
         TotemTimers.GetTalents()
 		TotemTimers.UpdateProfiles()

@@ -1,3 +1,6 @@
+3.1.12
+    - Load correct specialization on startup
+    - Several fixes for Ulduar ptr
 3.1.11
     - Collect more debug info
 3.1.10

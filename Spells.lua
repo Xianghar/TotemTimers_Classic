@@ -147,7 +147,7 @@ TotemTimers.Specialization = 2
 
 -- get specialization, if no points are spent (e.g. talents reset) do not change specialization
 function TotemTimers.GetSpecialization()
-   local pointsSpent = 0
+    local pointsSpent = 0
     for i=1,3 do
         local _,_,points = GetTalentTabInfo(i)
         if points > pointsSpent then
@@ -155,6 +155,7 @@ function TotemTimers.GetSpecialization()
             TotemTimers.Specialization = i
         end
     end
+    TotemTimers.AddDebug("Spec: "..TotemTimers.Specialization)
 end
 
 function TotemTimers.ChangedTalents()

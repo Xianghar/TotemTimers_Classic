@@ -46,8 +46,9 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
 		b:ClearAllPoints()
 		b:SetWidth(36)
 		b:SetHeight(36)
-        
-        b:SetNormalTexture(nil)
+
+        --b:SetNormalTexture(nil)
+        _G[b:GetName().."NormalTexture"]:SetTexture(nil)
         b.icon:Show()
 
 		b:SetAttribute("_childupdate-show", [[ if self:GetAttribute("alwaysshow") or self:GetAttribute("inactive") then return end
