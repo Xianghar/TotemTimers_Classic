@@ -101,9 +101,9 @@ function XiTimers:new(nroftimers, unclickable)
     self.unclickable = unclickable
 	
 	if unclickable then
-        self.button = CreateFrame("CheckButton", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersUnsecureTemplate")
+        self.button = CreateFrame("Button", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersUnsecureTemplate")
     else
-        self.button = CreateFrame("CheckButton", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersTemplate")
+        self.button = CreateFrame("Button", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersTemplate")
 		XiTimers.AddSpecialActionBarDriver(self.button)
     end
 	self.button:SetPoint("CENTER", UIParent, "CENTER")

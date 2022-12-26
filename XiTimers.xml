@@ -2,7 +2,7 @@
 ..\FrameXML\UI.xsd">
 
   <CheckButton name="XiTimersTemplate" clampedToScreen="true" movable="true" enableMouse="true" virtual="true"
-    inherits="ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerEnterLeaveTemplate, SecureHandlerAttributeTemplate,SecureHandlerDragTemplate,SecureHandlerMouseUpDownTemplate">
+    inherits="ActionButtonTemplate, SecureActionButtonTemplate, SecureHandlerEnterLeaveTemplate, SecureHandlerAttributeTemplate,SecureHandlerDragTemplate">
     <Size x="36" y="36"/>
     <Layers>
         <Layer level="BACKGROUND">

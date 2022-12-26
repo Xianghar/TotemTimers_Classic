@@ -1,3 +1,5 @@
+3.1.13
+    - Remove CheckButton border from timer buttons
 3.1.12
     - Load correct specialization on startup
     - Several fixes for Ulduar ptr

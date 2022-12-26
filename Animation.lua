@@ -11,7 +11,7 @@ function XiTimersAnimations:new(AnchoredButton)
 	local self = {}
 	setmetatable(self, XiTimersAnimations)
     NumAnimations = NumAnimations + 1
-    self.button =  CreateFrame("CheckButton", "XiTimers_Animation"..NumAnimations, UIParent, "ActionButtonTemplate")
+    self.button =  CreateFrame("Button", "XiTimers_Animation"..NumAnimations, UIParent, "ActionButtonTemplate")
     self.icon = _G["XiTimers_Animation"..NumAnimations.."Icon"]
 	self.button.normalTexture = _G["XiTimers_Animation"..NumAnimations.."NormalTexture"]
     self.button.normalTexture:SetTexture(nil)
