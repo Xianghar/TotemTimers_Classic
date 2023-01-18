@@ -1,3 +1,5 @@
+3.1.14
+    - Non-Totem spells set to multicast slots are replaced with totems
 3.1.13
     - Remove CheckButton border from timer buttons
 3.1.12

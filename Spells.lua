@@ -79,7 +79,7 @@ function TotemTimers.GetBaseSpellID(spell)
     if not name then
         return spell
     end
-    return NameToSpellID[GetSpellInfo(spell)]
+    return NameToSpellID[GetSpellInfo(spell)] or spell
 end
 
 local function UpdateSpellRank(spell, useName)
