@@ -189,6 +189,7 @@ function XiTimers:new(nroftimers, unclickable)
 	self.button.miniIcon = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."MiniIcon"]
     self.button.miniIconFrame = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."Mini"]
     self.button.bar = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."Bar"]
+    self.button.bar:SetStatusBarColor(0.6, 0.6, 1, 0.7)
     self.button.hotkey = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."HotKey"]
     self.button.rangeCount = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."RangeCount"]
 	self.button.normalTexture = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."NormalTexture"]

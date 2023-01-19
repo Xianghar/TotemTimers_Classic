@@ -1,3 +1,5 @@
+3.1.15
+    - Fixed combat cooldown buff timer transparency
 3.1.14
     - Non-Totem spells set to multicast slots are replaced with totems
 3.1.13
