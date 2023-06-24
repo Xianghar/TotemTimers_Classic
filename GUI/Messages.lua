@@ -22,6 +22,7 @@ TotemTimers.options.args.messages = {
             type = "toggle",
             name = L["Show warnings of disabled trackers"],
             desc = L["disabled warnings desc"],
+            width = 'full',
             set = function(info, val)
                       TotemTimers.ActiveProfile.ActivateHiddenTimers = val
                       TotemTimers.ProcessSetting("ActivateHiddenTimers")

@@ -9,7 +9,9 @@ local Version = 11.3
 TotemTimers.DefaultGlobalSettings = {
 	Version = 11.3,
     Profiles = {},
-    Sink = {}
+    Sink = {
+        sink20OutputSink="Default",
+    },
 }
 
 TotemTimers_Profiles = {

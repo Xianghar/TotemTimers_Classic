@@ -119,7 +119,7 @@ table.insert(TotemTimers.Modules, TotemTimers.CreateMultiCastButtons)
 
 function TotemTimers.MultiSpellActivate()
     if TotemTimers.ActiveProfile.MultiCast and AvailableSpells[SpellIDs.CallOfElements] then
-        mb:Show()
+        if not TotemTimers.ActiveProfile.HideMultiCast then mb:Show() else mb:Hide() end
         TotemTimers.SetMultiCastSpells()
         mb.active = true
         TotemTimers.SetMultiCastConfig()
