@@ -106,6 +106,7 @@ function XiTimers:new(nroftimers, unclickable)
         self.button = CreateFrame("Button", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersTemplate")
 		XiTimers.AddSpecialActionBarDriver(self.button)
     end
+    self.button:ClearAllPoints()
 	self.button:SetPoint("CENTER", UIParent, "CENTER")
 	self.button.timer = self
 	
