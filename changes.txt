@@ -1,3 +1,5 @@
+3.2.2
+    - TOC update for SOD and ICC
 3.2.1
     - Small fix for lua error on load
 3.2
