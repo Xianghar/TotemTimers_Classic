@@ -43,7 +43,7 @@ local function TotemTimers_OnEvent(self, event, ...)
     elseif event == "PLAYER_REGEN_ENABLED" then
         --TotemTimers_ProcessQueue()
 		if updateAfterCombat then
-			TotemTimers.ChangedTalents()
+			TotemTimers.ChangedTalents(true)
 			updateAfterCombat = false
 		end
 		if macroNeedsUpdate then
@@ -67,12 +67,18 @@ local function TotemTimers_OnEvent(self, event, ...)
 		else
 			TotemTimers.ChangedTalents()        
 		end --]]
-    elseif event == "SPELLS_CHANGED" or event == "CHARACTER_POINTS_CHANGED"
-            or event == "PLAYER_TALENT_UPDATE" then
+    --[[elseif event == "SPELLS_CHANGED" then print("SPELLS_CHANGED")
         if InCombatLockdown() then
             updateAfterCombat = true
         else
-            TotemTimers.ChangedTalents()
+            TotemTimers.ChangedTalents(false)
+        end]]
+    elseif event == "CHARACTER_POINTS_CHANGED" or event == "PLAYER_TALENT_UPDATE"
+            or event == "LEARNED_SPELL_IN_TAB" or event == "RUNE_UPDATED" then
+        if InCombatLockdown() then
+            updateAfterCombat = true
+        else
+            TotemTimers.ChangedTalents(true)
         end
     elseif event == "UPDATE_BINDINGS" then
         ClearOverrideBindings(TotemTimersFrame)
@@ -137,16 +143,19 @@ function TotemTimers.SetupGlobals()
         TotemTimers.InitializeBindings()
         -- hooksecurefunc("SaveBindings", function() ClearOverrideBindings(TotemTimersFrame) TotemTimers.InitializeBindings() end)
             
-		
-        TotemTimersFrame:RegisterEvent("SPELLS_CHANGED")
-        TotemTimersFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
-        TotemTimersFrame:RegisterEvent("ADDON_LOADED")
-        TotemTimersFrame:RegisterEvent("CHARACTER_POINTS_CHANGED")
-        TotemTimersFrame:RegisterEvent("PLAYER_LOGOUT")
-        TotemTimersFrame:RegisterEvent("UPDATE_BINDINGS")
-        -- TotemTimersFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-        if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
-            TotemTimersFrame:RegisterEvent("PLAYER_TALENT_UPDATE")
+		local events = {
+            "PLAYER_REGEN_ENABLED",
+            "PLAYER_LOGOUT",
+            "UPDATE_BINDINGS",
+            "LEARNED_SPELL_IN_TAB",
+            "CHARACTER_POINTS_CHANGED",
+            "PLAYER_TALENT_UPDATE",
+            "RUNE_UPDATED",
+            --"SPELLS_CHANGED",
+            --"PLAYER_SPECIALIZATION_CHANGED",
+        }
+        for _, event in pairs(events) do
+            if C_EventUtils.IsEventValid(event) then TotemTimersFrame:RegisterEvent(event) end
         end
 
 		TotemTimers.InitMasque()
@@ -154,8 +163,6 @@ function TotemTimers.SetupGlobals()
         -- TotemTimers.RangeFrame:Show()
         TotemTimers.SetCastButtonSpells()
 
-        
-        TotemTimers_OnEvent("PLAYER_ALIVE") -- simulate PLAYER_ALIVE event in case the ui is reloaded
         XiTimers.invokeOOCFader()
         TotemTimersFrame:SetScript("OnUpdate", XiTimers.UpdateTimers)
 		TotemTimersFrame:EnableMouse(false)

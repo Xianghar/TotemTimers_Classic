@@ -48,6 +48,9 @@ TotemTimers.SpellIDs = {
     FlameShock = 8050,
     StormStrike = 17364,
 
+    LavaLash = 408507,
+    MoltenBlast = 425339,
+
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
     EarthShield = 974,

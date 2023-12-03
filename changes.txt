@@ -1,3 +1,5 @@
+3.2.3
+    - Fix wonky menus when Rockbiter and Way of Earth are both active
 3.2.2
     - TOC update for SOD and ICC
 3.2.1
