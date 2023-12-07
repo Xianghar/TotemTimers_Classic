@@ -69,6 +69,9 @@ local function TotemTimers_OnEvent(self, event, ...)
 		end --]]
     elseif event == "SPELLS_CHANGED" or event == "CHARACTER_POINTS_CHANGED" or event == "PLAYER_TALENT_UPDATE"
             or event == "LEARNED_SPELL_IN_TAB" or event == "RUNE_UPDATED" then
+        if event == "SPELLS_CHANGED" and WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+            TotemTimersFrame:UnregisterEvent("SPELLS_CHANGED")
+        end
         if InCombatLockdown() then
             updateAfterCombat = true
         else
@@ -148,9 +151,9 @@ function TotemTimers.SetupGlobals()
             --"SPELLS_CHANGED",
             --"PLAYER_SPECIALIZATION_CHANGED",
         }
-        if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
+        --if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
             table.insert(events, "SPELLS_CHANGED")
-        end
+        --end
         for _, event in pairs(events) do
             if C_EventUtils.IsEventValid(event) then TotemTimersFrame:RegisterEvent(event) end
         end

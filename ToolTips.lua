@@ -195,10 +195,11 @@ function WeaponBarTooltip:SetText()
     local button = self.button
 
     local spell = button:GetAttribute("*spell1")
+    if not spell then spell = button:GetAttribute("spell1") end
     local doublespell = button:GetAttribute("doublespell1")
 
     if not doublespell then
-        self:SetSpell(spell)
+        if spell then self:SetSpell(spell) end
 
         GameTooltip:AddLine(" ")
         GameTooltip:AddLine(L["Leftclick to cast spell"],r,g,b,1)

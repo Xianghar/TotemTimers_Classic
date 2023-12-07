@@ -1,3 +1,5 @@
+3.2.5
+    - Fix weapon tracker spells not showing and tooltip error in SOD
 3.2.4
     - Revert SOD fix for WOTLK
 3.2.3
