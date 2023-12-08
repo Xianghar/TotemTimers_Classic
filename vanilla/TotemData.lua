@@ -50,6 +50,7 @@ TotemTimers.SpellIDs = {
 
     LavaLash = 408507,
     MoltenBlast = 425339,
+    WaterShield = 408510,
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -308,8 +309,10 @@ TotemTimers.TotemWeaponEnchants = {
 
 TotemTimers.ShieldButtons = {
     SpellIDs.LightningShield,
+    SpellIDs.WaterShield,
 }
 
 TotemTimers.ShieldSpells = {
     SpellIDs.LightningShield,
+    SpellIDs.WaterShield,
 }

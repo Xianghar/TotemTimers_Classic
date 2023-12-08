@@ -31,13 +31,11 @@ function TotemTimers.CreateShieldTracker()
     shield.button:SetAttribute("*unit*", "player")
     shield.button:RegisterForClicks("AnyDown")
 
-    if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-        shield.button:SetAttribute("*spell1", SpellIDs.LightningShield)
-    else
-        for k,v in pairs(TotemTimers.ShieldButtons) do
-            shield.button:SetAttribute("*spell"..k, v)
-        end
+
+    for k,v in pairs(TotemTimers.ShieldButtons) do
+        shield.button:SetAttribute("*spell"..k, v)
     end
+
 
     shield.button:SetScript("OnDragStop", function(self)
         XiTimers.StopMoving(self)

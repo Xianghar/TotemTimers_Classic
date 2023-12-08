@@ -1,3 +1,5 @@
+3.2.6
+    - Add Water Shield for SOD
 3.2.5
     - Fix weapon tracker spells not showing and tooltip error in SOD
 3.2.4

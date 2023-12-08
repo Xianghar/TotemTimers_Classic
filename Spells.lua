@@ -31,7 +31,7 @@ for _, spellID in pairs(SpellIDs) do
         SpellTextures[spellID] = texture
         TextureToSpellID[texture] = spellID
     end
-    AvailableSpells[spellID] = IsPlayerSpell(spellID)
+    AvailableSpells[spellID] = IsPlayerSpell(spellID) or IsSpellKnownOrOverridesKnown(spellID)
 end
 
 if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
