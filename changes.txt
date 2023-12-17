@@ -1,13 +1,15 @@
+3.2.7
+    - Added Earth Shield for SoD
 3.2.6
-    - Add Water Shield for SOD
+    - Added Water Shield for SoD
 3.2.5
-    - Fix weapon tracker spells not showing and tooltip error in SOD
+    - Fixed weapon tracker spells not showing and tooltip error in SoD
 3.2.4
-    - Revert SOD fix for WOTLK
+    - Revert SoD fix for WOTLK
 3.2.3
-    - Fix wonky menus when Rockbiter and Way of Earth are both active
+    - Fixed wonky menus when Rockbiter and Way of Earth are both active
 3.2.2
-    - TOC update for SOD and ICC
+    - TOC update for SoD and ICC
 3.2.1
     - Small fix for lua error on load
 3.2

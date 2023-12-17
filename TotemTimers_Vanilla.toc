@@ -46,6 +46,7 @@ SetupTimers.lua
 SetupTrackers.lua
 Ankh.lua
 Shield.lua
+EarthShield.lua
 Weapon.lua
 Warnings.lua
 Masque.lua

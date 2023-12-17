@@ -686,7 +686,7 @@ SettingsFunctions = {
 
 SettingsFunctions.ReverseBarBindings = SettingsFunctions.BarBindings
 
-if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
+
 
     SettingsFunctions.ShieldLeftButton = function(value, Timers)
         value = TotemTimers.UpdateSpellRank(value)
@@ -702,6 +702,11 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
     SettingsFunctions.ShieldMiddleButton = function(value, Timers)
         value = TotemTimers.UpdateSpellRank(value)
         Timers[6].button:SetAttribute("*spell3", value)
+    end
+
+    SettingsFunctions.ShieldButton4 = function(value, Timers)
+        value = TotemTimers.UpdateSpellRank(value)
+        Timers[6].button:SetAttribute("*spell4", value)
     end
 
     SettingsFunctions.EarthShieldTracker = function(value, Timers)
@@ -729,6 +734,8 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
     SettingsFunctions.ESMainTankMenuDirection = function(value, Timers)
         TotemTimers.EarthShieldTracker.actionBar:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
     end
+
+if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
 
     SettingsFunctions.CooldownSpacing = function(value, Timers)
         for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do

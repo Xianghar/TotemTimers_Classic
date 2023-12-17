@@ -2,6 +2,8 @@ if select(2, UnitClass("player")) ~= "SHAMAN" then
     return
 end
 
+local _, TotemTimers = ...
+
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers_GUI", true)
 
 local ElementValues = {
@@ -603,4 +605,3 @@ frame:HookScript("OnShow", function(self)
     TotemTimers.LastGUIPanel = self
 end)
 frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-TotemTimers.TimersGUIPanel = frame

@@ -27,14 +27,9 @@ TotemTimers.ElementColors = {
 }
 
 
-local warnings = nil
-
-local PlayerName = UnitName("player")
-
-local zoning = false
 local updateAfterCombat = false
-
 local macroNeedsUpdate = false
+local lastSpellsChanged = 0
 
 local function TotemTimers_OnEvent(self, event, ...)
 	if event == "PLAYER_ENTERING_WORLD" then
@@ -69,13 +64,20 @@ local function TotemTimers_OnEvent(self, event, ...)
 		end --]]
     elseif event == "SPELLS_CHANGED" or event == "CHARACTER_POINTS_CHANGED" or event == "PLAYER_TALENT_UPDATE"
             or event == "LEARNED_SPELL_IN_TAB" or event == "RUNE_UPDATED" then
+        local execute = true
         if event == "SPELLS_CHANGED" and WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
-            TotemTimersFrame:UnregisterEvent("SPELLS_CHANGED")
+            local spellsChangedDiff = GetTime() - lastSpellsChanged
+            lastSpellsChanged = GetTime()
+            if spellsChangedDiff > 0.9 and spellsChangedDiff < 1.1 then
+                execute = false
+            end
         end
-        if InCombatLockdown() then
-            updateAfterCombat = true
-        else
-            TotemTimers.ChangedTalents(true)
+        if execute then
+            if InCombatLockdown() then
+                updateAfterCombat = true
+            else
+                TotemTimers.ChangedTalents(true)
+            end
         end
     elseif event == "UPDATE_BINDINGS" then
         ClearOverrideBindings(TotemTimersFrame)
@@ -87,7 +89,6 @@ local function TotemTimers_OnEvent(self, event, ...)
 end
 
 TotemTimersFrame:SetScript("OnEvent", TotemTimers_OnEvent)
-
 
 function TotemTimers.SetupGlobals()
 	if TotemTimers_IsSetUp then
@@ -179,27 +180,14 @@ function TotemTimers.SetupGlobals()
     --TotemTimersFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end
 
-function TotemTimers_Slash(msg)
+function TotemTimers_Slash()
 	if InCombatLockdown() then
 		DEFAULT_CHAT_FRAME:AddMessage("Can't open TT options in combat.")
 		return
 	end
-	--[[if msg == "i" or msg == "inspect" then
-        InterfaceOptionsFrame_OpenToCategory(TotemTimers_GUI_Inspect.name)
-    else
-        InterfaceOptionsFrame_OpenToCategory(TotemTimers_LastGUIPane.name)
-    end]]
 
-    local lastGUIPanel = TotemTimers.LastGUIPanel
-
-    InterfaceOptionsFrame_OpenToCategory("TotemTimers")
-
-    if lastGUIPanel then
-        InterfaceOptionsFrame_OpenToCategory(lastGUIPanel)
-    else
-        InterfaceOptionsFrame_OpenToCategory(TotemTimers.TimersGUIPanel)
-        InterfaceOptionsFrame_OpenToCategory("TotemTimers")
-    end
+    InterfaceAddOnsList_Update()
+    InterfaceOptionsFrame_OpenToCategory(TotemTimers.LastGUIPanel)
 end
 
 

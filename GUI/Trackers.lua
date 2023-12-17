@@ -278,7 +278,20 @@ TotemTimers.options.args.trackers = {
     },
 }
 
-if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
+
+local shieldValues = function()
+    local values = {
+        [SpellIDs.LightningShield] = SpellNames[SpellIDs.LightningShield],
+        [SpellIDs.WaterShield] = SpellNames[SpellIDs.WaterShield],
+        [SpellIDs.EarthShield] = SpellNames[SpellIDs.EarthShield],
+    }
+    if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
+        values[SpellIDs.TotemicCall] = SpellNames[SpellIDs.TotemicCall]
+    end
+    return values
+end
+
+
     TotemTimers.options.args.trackers.args.individual.args.earthshield = {
         order = 3,
         name = L["Earth Shield Tracker"],
@@ -457,13 +470,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         order = 10,
         type = "select",
         name = L["Leftclick"],
-        values = function()
-            return { [SpellIDs.LightningShield] = SpellNames[SpellIDs.LightningShield],
-                     [SpellIDs.WaterShield] = SpellNames[SpellIDs.WaterShield],
-                     [SpellIDs.EarthShield] = SpellNames[SpellIDs.EarthShield],
-                     [SpellIDs.TotemicCall] = SpellNames[SpellIDs.TotemicCall],
-            }
-        end,
+        values = shieldValues,
         set = function(info, val)
             TotemTimers.ActiveProfile.ShieldLeftButton = val
             TotemTimers.ProcessSetting("ShieldLeftButton")
@@ -478,11 +485,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         order = 11,
         type = "select",
         name = L["Rightclick"],
-        values = { [SpellIDs.LightningShield] = SpellNames[SpellIDs.LightningShield],
-                   [SpellIDs.WaterShield] = SpellNames[SpellIDs.WaterShield],
-                   [SpellIDs.EarthShield] = SpellNames[SpellIDs.EarthShield],
-                   [SpellIDs.TotemicCall] = SpellNames[SpellIDs.TotemicCall],
-        },
+        values = shieldValues,
         set = function(info, val)
             TotemTimers.ActiveProfile.ShieldRightButton = val
             TotemTimers.ProcessSetting("ShieldRightButton")
@@ -497,11 +500,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         order = 12,
         type = "select",
         name = L["Middle Button"],
-        values = { [SpellIDs.LightningShield] = SpellNames[SpellIDs.LightningShield],
-                   [SpellIDs.WaterShield] = SpellNames[SpellIDs.WaterShield],
-                   [SpellIDs.EarthShield] = SpellNames[SpellIDs.EarthShield],
-                   [SpellIDs.TotemicCall] = SpellNames[SpellIDs.TotemicCall],
-        },
+        values = shieldValues,
         set = function(info, val)
             TotemTimers.ActiveProfile.ShieldMiddleButton = val
             TotemTimers.ProcessSetting("ShieldMiddleButton")
@@ -516,21 +515,17 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
         order = 13,
         type = "select",
         name = L["Button 4"],
-        values = { [SpellIDs.LightningShield] = SpellNames[SpellIDs.LightningShield],
-                   [SpellIDs.WaterShield] = SpellNames[SpellIDs.WaterShield],
-                   [SpellIDs.EarthShield] = SpellNames[SpellIDs.EarthShield],
-                   [SpellIDs.TotemicCall] = SpellNames[SpellIDs.TotemicCall],
-        },
+        values = shieldValues,
         set = function(info, val)
-            TotemTimers.ActiveProfile.ShieldMiddleButton = val
+            TotemTimers.ActiveProfile.ShieldButton4 = val
             TotemTimers.ProcessSetting("ShieldButton4")
             TotemTimers.UpdateSpellRanks()
         end,
         get = function(info)
-            return TotemTimers.GetBaseSpellID(TotemTimers.ActiveProfile.ShieldMiddleButton)
+            return TotemTimers.GetBaseSpellID(TotemTimers.ActiveProfile.ShieldButton4)
         end,
     }
-end
+
 
 local ACD = LibStub("AceConfigDialog-3.0")
 local frame = ACD:AddToBlizOptions("TotemTimers", L["Trackers"], "TotemTimers", "trackers")

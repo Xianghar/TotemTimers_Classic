@@ -44,9 +44,9 @@ function TotemTimers.CreateShieldTracker()
     TotemTimers.ShieldTracker = shield
 
     -- need empty earthshield timer in vanilla for compatibility
-    if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+    --[[if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
         XiTimers:new(1)
-    end
+    end]]
 end
 
 table.insert(TotemTimers.Modules, TotemTimers.CreateShieldTracker)

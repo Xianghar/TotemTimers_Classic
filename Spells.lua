@@ -11,8 +11,11 @@ TotemTimers.SpellTextures = {}
 TotemTimers.SpellNames = {}
 TotemTimers.NameToSpellID = {}
 TotemTimers.TextureToSpellID = {}
+TotemTimers.ForceSpellNames = {}
 
 local SpellIDs = TotemTimers.SpellIDs
+local SpellIDsForceNames = TotemTimers.SpellIDsForceNames or {}
+local ForceSpellNames = TotemTimers.ForceSpellNames
 local AvailableSpells = TotemTimers.AvailableSpells
 local SpellNames = TotemTimers.SpellNames
 local SpellTextures = TotemTimers.SpellTextures
@@ -30,6 +33,9 @@ for _, spellID in pairs(SpellIDs) do
         SpellNames[spellID] = name
         SpellTextures[spellID] = texture
         TextureToSpellID[texture] = spellID
+        if (SpellIDsForceNames[spellID]) then
+            ForceSpellNames[name] = true
+        end
     end
     AvailableSpells[spellID] = IsPlayerSpell(spellID) or IsSpellKnownOrOverridesKnown(spellID)
 end
@@ -44,7 +50,7 @@ end
 function TotemTimers.GetSpells()
     wipe(AvailableSpells)
     for _, spellID in pairs(SpellIDs) do
-        AvailableSpells[spellID] = IsPlayerSpell(spellID)
+        AvailableSpells[spellID] = IsPlayerSpell(spellID) or IsSpellKnownOrOverridesKnown(spellID)
     end
 end
 
@@ -99,7 +105,7 @@ if LE_EXPANSION_LEVEL_CURRENT < 2 then
                 return SpellIDs.Windfury
             end
         end
-        return useName and name or select(7, GetSpellInfo(name))
+        return (useName or ForceSpellNames[name]) and name or select(7, GetSpellInfo(name))
     end
 end
 
