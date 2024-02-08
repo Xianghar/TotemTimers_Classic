@@ -162,11 +162,11 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
                                                             if self:GetParent():GetAttribute("OpenMenu") == "RightButton" then
                                                                 b = 3
                                                             end
-                                                        end
+                                                        elseif IsAltKeyDown() then b = 4 end
                                                         if b == 1 then
                                                             self:GetParent():SetAttribute("doublespell1", nil)
                                                             self:GetParent():SetAttribute("doublespell2", nil)
-                                                        end
+                                                        end														
                                                         self:GetParent():SetAttribute("type"..b, "spell")
                                                         self:GetParent():SetAttribute("spell"..b, self:GetAttribute("*spell1"))
                                                     elseif not IsShiftKeyDown() then
@@ -228,10 +228,10 @@ function TTActionBars:SetSpell(nr, spell, asname)
 end
 
 
-function TTActionBars:AddSpell(spell)
+function TTActionBars:AddSpell(spell, asname)
     if self.numspells >= self.numbuttons then return end
     self.numspells = self.numspells + 1
-    self:SetSpell(self.numspells, spell)
+    self:SetSpell(self.numspells, spell, asname)
 end
 
 function TTActionBars:SetSpells(spells, asnames)

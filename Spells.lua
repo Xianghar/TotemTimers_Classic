@@ -59,6 +59,7 @@ if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
     function TotemTimers.GetTalents()
         wipe(TotemTimers.AvailableTalents)
         TotemTimers.AvailableTalents.TotemicMastery = select(5, GetTalentInfo(3, 8)) * 10
+        TotemTimers.AvailableTalents.DualWield = AvailableSpells[SpellIDs.DualWield]
     end
 
 elseif LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_BURNING_CRUSADE then
@@ -116,7 +117,7 @@ local function UpdateRank(button)
         for _, type in pairs({ "*spell", "spell", "doublespell" }) do
             local spell = button:GetAttribute(type .. i)
             if spell then
-                local newRank = UpdateSpellRank(spell, type == "doublespell")
+                local newRank = UpdateSpellRank(spell, (type == "doublespell") or button.useSpellNames)
                 -- lower rank for ft for ft/ft-button on weapon tracker
                 if type == "doublespell" and i == 1 and newRank == SpellNames[SpellIDs.FlametongueWeapon] then
                     local rank = GetSpellSubtext(SpellNames[SpellIDs.FlametongueWeapon])

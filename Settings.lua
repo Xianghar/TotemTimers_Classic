@@ -232,6 +232,17 @@ SettingsFunctions = {
         Timers[8].button:SetAttribute(type, value)
     end,
 
+    LastWeaponEnchant3 = function(value, Timers)
+        if not value then
+            return
+        end
+        if not GetSpellInfo(value) then
+            value = SpellIDs.RockbiterWeapon
+        end
+        -- for sod alt-click only, no type4 needed
+        Timers[8].button:SetAttribute("spell4", value)
+    end,
+
     Order = function(value, Timers)
         for i = 1, 4 do
             Timers[i] = _G["XiTimers_Timer" .. value[i]].timer

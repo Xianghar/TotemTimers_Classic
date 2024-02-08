@@ -1,4 +1,4 @@
-## Interface: 11500
+## Interface: 11501
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@
@@ -48,6 +48,7 @@ Ankh.lua
 Shield.lua
 EarthShield.lua
 Weapon.lua
+vanilla\Weapon.lua
 Warnings.lua
 Masque.lua
 GUI\localization.lua
