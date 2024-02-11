@@ -54,6 +54,7 @@ TotemTimers.SpellIDs = {
     WaterShield = 408510,
     EarthShield = 408514,
     DualWield = 674,
+    DecoyTotem = 425874,
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -116,6 +117,7 @@ local SpellIDs = TotemTimers.SpellIDs
 TotemTimers.SpellIDsForceNames = {
     [SpellIDs.WaterShield] = true,
     [SpellIDs.EarthShield] = true,
+    [SpellIDs.DecoyTotem] = true,
 }
 
 
@@ -217,6 +219,10 @@ TotemData = {
     [TotemTimers.SpellIDs.TranquilAir] = {
         element = AIR_TOTEM_SLOT,
         buff = 25909,
+    },
+    [TotemTimers.SpellIDs.DecoyTotem] = {
+        element = EARTH_TOTEM_SLOT,
+        buff = 436391,
     },
 }
 

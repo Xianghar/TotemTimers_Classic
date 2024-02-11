@@ -1,3 +1,5 @@
+3.2.10
+    - Added Decoy Totem
 3.2.9
     - Added WF/RB as option for leftclick on weapon timer in SoD
 3.2.8
