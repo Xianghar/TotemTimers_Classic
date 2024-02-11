@@ -57,7 +57,9 @@ function TotemTimers.CreateWeaponTracker()
                 elseif ds2 == SpellNames[SpellIDs.FlametongueWeapon] then
                     TotemTimers.ActiveProfile.LastWeaponEnchant = 5
                 elseif ds2 == SpellNames[SpellIDs.FrostbrandWeapon] then
-                TotemTimers.ActiveProfile.LastWeaponEnchant = 6
+                    TotemTimers.ActiveProfile.LastWeaponEnchant = 6
+                elseif ds2 == SpellNames[SpellIDs.RockbiterWeapon] then
+                    TotemTimers.ActiveProfile.LastWeaponEnchant = 8
                 end
             end
         end

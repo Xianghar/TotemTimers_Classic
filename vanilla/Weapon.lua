@@ -23,7 +23,7 @@ if C_Seasons.GetActiveSeason() == 2 then
                 control:CallMethod("SaveLastEnchant", name)
             end
 			if string.sub(name, 1, 5) == "spell" then
-			local prefix = ''
+			    local prefix = ''
 				if name == "spell2" or name == "spell3" then
 					prefix = "shift-"
 				elseif name == "spell4" then
@@ -41,7 +41,7 @@ if C_Seasons.GetActiveSeason() == 2 then
                 if self:GetAttribute(name) then self:SetAttribute("ds", 1) end
             elseif name == "ds" then
                 local ds = self:GetAttribute("ds")
-                self:SetAttribute("macrotext", "/cast [@none] "..self:GetAttribute("doublespell"..ds).."\n/use "..(15+ds).."\n/click StaticPopup1Button1")
+                self:SetAttribute("macrotext1", "/cast [@none] "..self:GetAttribute("doublespell"..ds).."\n/use "..(15+ds).."\n/click StaticPopup1Button1")
             end
         ]]);
         weapon.button.useSpellNames = true
@@ -84,6 +84,9 @@ if C_Seasons.GetActiveSeason() == 2 then
             end
             if AvailableSpells[SpellIDs.WindfuryWeapon] and AvailableSpells[SpellIDs.FrostbrandWeapon] then
                 weapon.actionBar:AddDoubleSpell(SpellIDs.WindfuryWeapon, SpellIDs.FrostbrandWeapon)
+            end
+            if AvailableSpells[SpellIDs.WindfuryWeapon] and AvailableSpells[SpellIDs.RockbiterWeapon] then
+                weapon.actionBar:AddDoubleSpell(SpellIDs.WindfuryWeapon, SpellIDs.RockbiterWeapon)
             end
             --[[if AvailableSpells[SpellIDs.FlametongueWeapon]
                     and SpellIDs.FlametongueWeapon  ~= select(7, GetSpellInfo(SpellNames[SpellIDs.FlametongueWeapon])) then
@@ -144,10 +147,13 @@ if C_Seasons.GetActiveSeason() == 2 then
             if ds then
                 local ds1 = button:GetAttribute("doublespell1")
                 local ds2 = button:GetAttribute("doublespell2")
-                if ds == 2 then ds1, ds2 = ds2, ds1 end
-                if ds1 and ds2 then
-                    GameTooltip:AddLine(format(L["Leftclick to cast %s"], ds1),r,g,b,1)
-                    GameTooltip:AddLine(format(L["Next leftclick casts %s"], ds2),r,g,b,1)
+                local t1 = select(3, GetSpellInfo(ds1))
+                local t2 = select(3, GetSpellInfo(ds2))
+                --if ds == 2 then ds1, ds2 = ds2, ds1 end
+                if t1 and t2 then
+                    GameTooltip:AddLine(format(L["LB: %s/%s"], "|T"..t1..":16:16|t", "|T"..t2..":16:16|t"),r,g,b,1)
+                    --GameTooltip:AddLine(format(L["Leftclick to cast %s"], ds1),r,g,b,1)
+                    --GameTooltip:AddLine(format(L["Next leftclick casts %s"], ds2),r,g,b,1)
                 end
             end
         end

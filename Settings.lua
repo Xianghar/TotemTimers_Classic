@@ -199,9 +199,10 @@ SettingsFunctions = {
             value = select(7, GetSpellInfo(value))
         end
 
-        if value and value >= 5 and value <= 7 then
+        if value and value >= 5 and value <= 8 then
             local ds1 = value == 7 and SpellIDs.FlametongueWeapon or SpellIDs.WindfuryWeapon
             local ds2 = value == 6 and SpellIDs.FrostbrandWeapon or SpellIDs.FlametongueWeapon
+            if value == 8 then ds2 = SpellIDs.RockbiterWeapon end
 
             button:SetAttribute("type1", "macro")
             button:SetAttribute("doublespell1", SpellNames[ds1])

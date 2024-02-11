@@ -1,5 +1,7 @@
+3.2.9
+    - Added WF/RB as option for leftclick on weapon timer in SoD
 3.2.8
-    - Added Dual Wield for Weapon Timer in SOD
+    - Added Dual Wield for weapon timer in SOD
 3.2.7
     - Added Earth Shield for SoD
 3.2.6
