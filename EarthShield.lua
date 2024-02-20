@@ -24,12 +24,13 @@ local function splitString(ustring)
     for uchar in string.gmatch(ustring, "([%z\1-\127\194-\244][\128-\191]*)") do
         c = c + 1
         s = s .. uchar
-        if c == 4 then
+        if c == 5 then
             break
         end
     end
     return s
 end
+TotemTimers.splitString = splitString
 
 
 function TotemTimers.CreateEarthShieldTracker()

@@ -1,3 +1,12 @@
+3.2.11
+    - Added combat cooldowns for SOD
+    - Added Maelstrom Weapon and Power Surge to SOD
+    - Added overlay glows for action buttons for Maelstrom and Power Surge
+    - Added longer cooldowns like Shamanistic Rage and Ancestral Guidance to SOD
+    - Added Spirit of the Alpha tracker
+    - Fixed Fire Nova in SOD
+    - Added overlay glow for missing weapon enchants as Enhancement
+    - Fixed Masque for weapon tracker
 3.2.10
     - Added Decoy Totem
 3.2.9

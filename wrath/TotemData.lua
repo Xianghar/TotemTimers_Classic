@@ -71,6 +71,9 @@ TotemTimers.SpellIDs = {
     TidalForce = 55198,
     Thunderstorm = 51490,
     WindShear = 57994,
+    Maelstrom = 53817,
+
+    LightningBolt = 403,
 
 
 
@@ -414,4 +417,14 @@ TotemTimers.LongCooldownSpells = {
         spell = SpellIDs.Heroism,
         buff = SpellIDs.Heroism,
     },
+}
+
+
+TotemTimers.MaelstromSpells = {
+    SpellIDs.LightningBolt,
+    SpellIDs.ChainLightning,
+    SpellIDs.HealingWave,
+    SpellIDs.LesserHealingWave,
+    SpellIDs.ChainHeal,
+    SpellIDs.Hex,
 }

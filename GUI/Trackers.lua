@@ -271,6 +271,18 @@ TotemTimers.options.args.trackers = {
                                 return TotemTimers.ActiveProfile.WeaponBarDirection
                             end,
                         },
+                        overlayglow = {
+                            order = 6,
+                            type = "toggle",
+                            name = L["Glow when missing"],
+                            desc = L["Shows a glow when in combat and weapon buff is missing for Enhancement"],
+                            set = function(info, val)
+                                TotemTimers.ActiveProfile.WeaponGlow = val
+                            end,
+                            get = function(info)
+                                return TotemTimers.ActiveProfile.WeaponGlow
+                            end,
+                        }
                     },
                 },
             },

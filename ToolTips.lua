@@ -13,7 +13,7 @@ local b = 1
 local ElementColors = TotemTimers.ElementColors
 
 
-XiTimersTooltip = {}
+XiTimersTooltip = { r=r, g=g, b=b}
 
 function XiTimersTooltip:new(button)
     local o = {}
@@ -23,7 +23,7 @@ function XiTimersTooltip:new(button)
     return o
 end
 
-function XiTimersTooltip:SetText() GameTooltip:AddLine("test") end
+function XiTimersTooltip:SetText() end
 
 function XiTimersTooltip:Show()
     if not self.button then return end
@@ -144,8 +144,6 @@ end
 
 local WeaponTimerTooltip = XiTimersTooltip:new()
 TotemTimers.Tooltips.WeaponTimer = WeaponTimerTooltip
-
-WeaponTimerTooltip.new = ToolTipConstructor
 
 function WeaponTimerTooltip:SetText()
     local button = self.button

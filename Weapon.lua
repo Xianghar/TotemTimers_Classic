@@ -29,6 +29,8 @@ function TotemTimers.CreateWeaponTracker()
     weapon.button:RegisterForClicks("LeftButtonDown", "RightButtonDown", "MiddleButtonDown")
     weapon.timerBars[1]:SetMinMaxValues(0, 1800)
     weapon.flashall = true
+    weapon.warningPoint = 30
+
     weapon.Activate = function(self)
         XiTimers.Activate(self)
         if not TotemTimers.ActiveProfile.WeaponTracker then
@@ -133,8 +135,8 @@ function TotemTimers.CreateWeaponTracker()
     weapon.events = { "PLAYER_EQUIPMENT_CHANGED" }
 
     weapon.button:SetScript("OnEvent", function(self, event, slot, ...)
-        if (slot == 16) then weapon.slotsChanged[1] = true
-        elseif (slot == 17) then weapon.slotsChanged[2] = true
+        if (slot == 16) then weapon.slotChanged[1] = true
+        elseif (slot == 17) then weapon.slotChanged[2] = true
         end
     end)
 
@@ -193,6 +195,7 @@ function TotemTimers.WeaponUpdate(self, elapsed)
     local enchants = { { enchant, expiration, mainID }, { offenchant, offExpiration, offID } }
 
     local hands = weapon.numtimers or 1
+    local showGlow = false
     for hand = 1,hands do
         local checkEnchant = enchants[hand]
         if checkEnchant[1] then
@@ -222,7 +225,17 @@ function TotemTimers.WeaponUpdate(self, elapsed)
         elseif self.timers[hand] > 0 then
             self:Stop(hand)
         end
+        if InCombatLockdown() and self.timers[hand] < 30 then
+            showGlow = true
+        end
     end
+
+    if showGlow and TotemTimers.Specialization == 2 and TotemTimers.ActiveProfile.WeaponGlow then
+        ActionButton_ShowOverlayGlow(self.button)
+    else
+        ActionButton_HideOverlayGlow(self.button)
+    end
+
     XiTimers.Update(self, 0)
 end
 

@@ -1,6 +1,7 @@
 if select(2, UnitClass("player")) ~= "SHAMAN" then
     return
 end
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and C_Seasons.GetActiveSeason() ~= 2 then return end
 
 local _, TotemTimers = ...
 
@@ -24,7 +25,11 @@ local function ConfigureTimer(timer, data)
     if data.customOnEvent then
         timer.customOnEvent = TotemTimers[data.customOnEvent]
     end
-    timer.events[1] = "SPELL_UPDATE_COOLDOWN"
+
+    timer.events =  { "SPELL_UPDATE_COOLDOWN" }
+    if data.events then
+        for _, event in pairs(data.events) do table.insert(timer.events, event) end
+    end
     timer.playerEvents = {}
     if timer.buff then
         timer.playerEvents[1] = "UNIT_AURA"
@@ -32,6 +37,10 @@ local function ConfigureTimer(timer, data)
     if timer.totem then
         table.insert(timer.events, "PLAYER_TOTEM_UPDATE")
     end
+    if data.playerEvents then
+        for _, event in pairs(data.playerEvents) do table.insert(timer.playerEvents, event) end
+    end
+
     timer.button:SetAttribute("spell1", timer.spell)
     timer.button.icon:SetTexture(SpellTextures[timer.spell])
 end
@@ -50,6 +59,7 @@ function TotemTimers.CreateLongCooldowns()
 
         timer.alpha = 0.7
         timer:SetReverseAlpha(true)
+        timer.dontFlash = true
 
         ConfigureTimer(timer, data)
 

@@ -49,6 +49,11 @@ Shield.lua
 EarthShield.lua
 Weapon.lua
 vanilla\Weapon.lua
+EnhanceCDs.lua
+vanilla\PowerSurge.lua
+LongCooldowns.lua
+vanilla\SpiritAlpha.lua
+
 Warnings.lua
 Masque.lua
 GUI\localization.lua
@@ -65,6 +70,7 @@ GUI\localization.esmx.lua
 GUI\General.lua
 GUI\Timers.lua
 GUI\Trackers.lua
+GUI\EnhanceCDs.lua
 GUI\Messages.lua
 GUI\Totems.lua
 GUI\Sets.lua

@@ -997,15 +997,54 @@ end
 XiTimers.TimerEvent = function(self, event, ...)
 
     local timer = self.timer
-    if self.timer.customOnEvent then
-        local abort = self.timer.customOnEvent(self, event, ...)
+    if timer.customOnEvent then
+        local abort = timer.customOnEvent(self, event, ...)
         if abort then return end
+    end
+
+    local checkCooldown = false
+
+    if timer.buff and event == "UNIT_AURA" and ... == "player" then
+        local name, _, _, count, duration, expires
+        local buff = self.timer.buff
+
+        if type(buff) == "number" then
+            name, _, _, count, duration, expires = AuraUtil.FindAura(
+                    function(...) return select(13, ...) == buff end, "player", "HELPFUL")
+        else
+            name, _, _, count, duration, expires = AuraUtil.FindAuraByName(buff, "player", "HELPFUL")
+        end
+        if name and duration and expires then
+            timer.buffIsActive = true
+            timer.prohibitCooldown = true
+            timer.StopPulse = false
+            timer:StartBarTimer(expires - GetTime(), duration)
+            timer:Start(1, expires - GetTime(), duration)
+        else
+            timer.buffIsActive = false
+            timer.prohibitCooldown = false
+            timer.StopPulse = timer.NoBuffStopPulse
+            timer:StopBarTimer()
+            timer:Stop(1)
+            checkCooldown = true
+        end
     end
 
     if timer.buffIsActive then return end
 
-    if event == "SPELL_UPDATE_COOLDOWN" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
-        local start, duration, enable, charges, maxcharges
+    if checkCooldown or  event == "SPELL_UPDATE_COOLDOWN" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
+        local start, duration, enable = GetSpellCooldown(timer.spell)
+        if (not start and not duration) then --or (duration <= 1.5 and not InCombatLockdown()) then
+            self.timer:Stop(1)
+        else
+            if duration <= 1.5 then
+                self.timer:Stop(1)
+            elseif duration > 1.5 then
+                self.timer:Start(1,start+duration-GetTime(),duration)
+            end
+            CooldownFrame_Set(self.cooldown, start, duration, enable)
+        end
+        --[[local start, duration, enable, charges, maxcharges
 
         local gcdstart, gcdduration = GetSpellCooldown(61304)
         start, duration, enable = GetSpellCooldown(timer.spell)
@@ -1023,22 +1062,6 @@ XiTimers.TimerEvent = function(self, event, ...)
             elseif duration > 0 then
                 self.timer:Start(1, start+duration-GetTime(), duration)
             end
-        end
-
-    elseif self.timer.buff and event == "UNIT_AURA" and ... == "player" then
-        local name, _, _, count, duration, expires
-        local buff = self.timer.buff
-
-        if type(buff) == "number" then
-            name, _, _, count, duration, expires = AuraUtil.FindAura(
-                    function(...) return select(13, ...) == buff end, "player", "HELPFUL")
-        else
-            name, _, _, count, duration, expires = AuraUtil.FindAuraByName(buff, "player", "HELPFUL")
-        end
-        if name and duration and expires then
-            self.timer:StartBarTimer(expires - GetTime(), duration)
-        else
-            self.timer:StopBarTimer()
-        end
+        end]]
     end
 end

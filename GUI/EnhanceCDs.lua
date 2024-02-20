@@ -1,6 +1,5 @@
-if select(2, UnitClass("player")) ~= "SHAMAN" then
-    return
-end
+if select(2, UnitClass("player")) ~= "SHAMAN" then return end
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and C_Seasons.GetActiveSeason() ~= 2 then return end
 
 local _, TotemTimers = ...
 
@@ -110,6 +109,19 @@ TotemTimers.options.args.enhancecds = {
                     end,
                     get = function(info)
                         return TotemTimers.ActiveProfile.HideEnhanceCDsOOC
+                    end,
+                },
+                OneButtonRow = {
+                    order = 7,
+                    type = "toggle",
+                    name = L["One Button Row"],
+                    desc = L["Displays combat cooldowns on one button row instead of two"],
+                    set = function(info, val)
+                        TotemTimers.ActiveProfile.EnhanceCDsOneRow = val
+                        TotemTimers.LayoutEnhanceCDs()
+                    end,
+                    get = function(info)
+                        return TotemTimers.ActiveProfile.EnhanceCDsOneRow
                     end,
                 },
 
@@ -320,8 +332,10 @@ TotemTimers.options.args.enhancecds = {
                                 break
                             end
                         end
-                        timer.animation:SetTexture(timer.button.icons[1]:GetTexture())
-                        timer.animation:Play()
+                        if timer then
+                            timer.animation:SetTexture(timer.button.icons[1]:GetTexture())
+                            timer.animation:Play()
+                        end
                     end
                 },
 
@@ -392,8 +406,23 @@ for spec = 1, 3 do
     }
 end
 
-if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
-    local MaelstromName = GetSpellInfo(53817)
+if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+
+    TotemTimers.options.args.enhancecds.args.options.args.OverlayGlow = {
+        order = 9,
+        type = "toggle",
+        name = L["Overlay Glow"],
+        desc = L["Show an overlay glow for affected spells on your action bars for some procs like Maelstrom Weapon, supports default action bars and Bartender"],
+        set = function(info, val)
+            TotemTimers.ActiveProfile.OverlayGlow = val
+        end,
+        get = function(info)
+            return TotemTimers.ActiveProfile.OverlayGlow
+        end,
+    }
+
+
+    local MaelstromName = GetSpellInfo(SpellIDs.Maelstrom)
 
     TotemTimers.options.args.enhancecds.args.options.args.MaelstromHeader = {
         order = 40,

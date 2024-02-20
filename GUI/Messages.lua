@@ -12,6 +12,7 @@ end]]
 end]]
 
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers_GUI", true)
+local SpellIDs = TotemTimers.SpellIDs
 
 TotemTimers.options.args.messages = {
     type = "group",
@@ -314,7 +315,7 @@ TotemTimers.options.args.messages = {
     },
 }
 
-if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
+if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
     TotemTimers.options.args.messages.args.Messages.args.EarthShieldMsg = {
         order = 5,
         type = "group",
@@ -357,6 +358,111 @@ if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
                 type = "execute",
                 name = L["No Sound"],
                 func = function(info) TotemTimers.ActiveProfile.Warnings.EarthShield.sound = "" end,
+            },
+        },
+    }
+end
+
+
+
+if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+
+    local MaelstromName = GetSpellInfo(SpellIDs.Maelstrom)
+
+    TotemTimers.options.args.messages.args.Messages.args.MaelstromMsg = {
+        order = 8,
+        type = "group",
+        name = MaelstromName,
+        args = {
+            enable = {
+                order = 0,
+                type = "toggle",
+                name = L["Enable"],
+                set = function(info, val) TotemTimers.ActiveProfile.Warnings.Maelstrom.enabled = val end,
+                get = function(info) return TotemTimers.ActiveProfile.Warnings.Maelstrom.enabled end,
+            },
+            --[[color =  {
+                order = 1,
+                type = "color",
+                name = L["Color"],
+                hasAlpha = false,
+                set = function(info, r,g,b)
+                    TotemTimers.ActiveProfile.Warnings.Maelstrom.r = r
+                    TotemTimers.ActiveProfile.Warnings.Maelstrom.g = g
+                    TotemTimers.ActiveProfile.Warnings.Maelstrom.b = b
+                end,
+                get = function(info)
+                    return TotemTimers.ActiveProfile.Warnings.Maelstrom.r,
+                    TotemTimers.ActiveProfile.Warnings.Maelstrom.g,
+                    TotemTimers.ActiveProfile.Warnings.Maelstrom.b, 1
+                end,
+            },]]
+            sound = {
+                order = 2,
+                type = "select",
+                name = L["Sound"],
+                values = AceGUIWidgetLSMlists.sound,
+                set = function(info, val) TotemTimers.ActiveProfile.Warnings.Maelstrom.sound = val end,
+                get = function(info) return TotemTimers.ActiveProfile.Warnings.Maelstrom.sound end,
+                dialogControl = "LSM30_Sound",
+            },
+            nosound = {
+                order = 3,
+                type = "execute",
+                name = L["No Sound"],
+                func = function(info) TotemTimers.ActiveProfile.Warnings.Maelstrom.sound = "" end,
+            },
+        },
+    }
+end
+
+
+if C_Seasons.GetActiveSeason() == 2 then
+
+    local PowerSurgeName = GetSpellInfo(SpellIDs.PowerSurge)
+
+    TotemTimers.options.args.messages.args.Messages.args.PowerSurgeMsg = {
+        order = 9,
+        type = "group",
+        name = PowerSurgeName,
+        args = {
+            enable = {
+                order = 0,
+                type = "toggle",
+                name = L["Enable"],
+                set = function(info, val) TotemTimers.ActiveProfile.Warnings.PowerSurge.enabled = val end,
+                get = function(info) return TotemTimers.ActiveProfile.Warnings.PowerSurge.enabled end,
+            },
+            --[[color =  {
+                order = 1,
+                type = "color",
+                name = L["Color"],
+                hasAlpha = false,
+                set = function(info, r,g,b)
+                    TotemTimers.ActiveProfile.Warnings.PowerSurge.r = r
+                    TotemTimers.ActiveProfile.Warnings.PowerSurge.g = g
+                    TotemTimers.ActiveProfile.Warnings.PowerSurge.b = b
+                end,
+                get = function(info)
+                    return TotemTimers.ActiveProfile.Warnings.PowerSurge.r,
+                    TotemTimers.ActiveProfile.Warnings.PowerSurge.g,
+                    TotemTimers.ActiveProfile.Warnings.PowerSurge.b, 1
+                end,
+            },]]
+            sound = {
+                order = 2,
+                type = "select",
+                name = L["Sound"],
+                values = AceGUIWidgetLSMlists.sound,
+                set = function(info, val) TotemTimers.ActiveProfile.Warnings.PowerSurge.sound = val end,
+                get = function(info) return TotemTimers.ActiveProfile.Warnings.PowerSurge.sound end,
+                dialogControl = "LSM30_Sound",
+            },
+            nosound = {
+                order = 3,
+                type = "execute",
+                name = L["No Sound"],
+                func = function(info) TotemTimers.ActiveProfile.Warnings.PowerSurge.sound = "" end,
             },
         },
     }

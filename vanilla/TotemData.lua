@@ -48,6 +48,15 @@ TotemTimers.SpellIDs = {
     FlameShock = 8050,
     StormStrike = 17364,
 
+    LightningBolt = 403,
+    ChainLightning = 421,
+    HealingWave = 331,
+    LesserHealingWave = 8004,
+    ChainHeal = 1064,
+
+    ElementalMastery = 16166,
+    NaturesSwiftness = 16188,
+
     -- SoD
     LavaLash = 408507,
     MoltenBlast = 425339,
@@ -55,6 +64,14 @@ TotemTimers.SpellIDs = {
     EarthShield = 408514,
     DualWield = 674,
     DecoyTotem = 425874,
+    LavaBurst = 408490,
+    SpiritAlpha = 408696,
+    ShamanisticRage = 425336,
+    AncestralGuidance = 409324,
+    WayOfEarth = 408531,
+    Maelstrom = 408498,
+    PowerSurge = 415100,
+    HealingRain = 415236,
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -114,11 +131,12 @@ TotemTimers.SpellIDs = {
 
 local SpellIDs = TotemTimers.SpellIDs
 
-TotemTimers.SpellIDsForceNames = {
+--[[TotemTimers.SpellIDsForceNames = {
     [SpellIDs.WaterShield] = true,
     [SpellIDs.EarthShield] = true,
     [SpellIDs.DecoyTotem] = true,
-}
+    [SpellIDs.FireNova] = true,
+}]]
 
 
 TotemData = {
@@ -332,4 +350,81 @@ TotemTimers.ShieldSpells = {
     SpellIDs.LightningShield,
     SpellIDs.WaterShield,
     SpellIDs.EarthShield,
+}
+
+TotemTimers.CombatCooldownSpells = {
+    [2] = {
+        SpellIDs.StormStrike,
+        SpellIDs.FlameShock,
+        SpellIDs.EarthShock,
+        SpellIDs.MoltenBlast,
+        SpellIDs.LavaLash,
+        SpellIDs.LavaBurst,
+        SpellIDs.Searing,
+        SpellIDs.Magma,
+        SpellIDs.FireNova,
+
+        --SpellIDs.LavaBurst,
+
+        --SpellIDs.ChainLightning,
+    },
+    [1] = {
+        SpellIDs.FlameShock,
+        SpellIDs.EarthShock,
+        SpellIDs.ChainLightning,
+        SpellIDs.LightningBolt,
+        SpellIDs.LavaBurst,
+    },
+    [3] = {
+        SpellIDs.FlameShock,
+        SpellIDs.ChainHeal,
+        SpellIDs.HealingRain,
+    },
+}
+
+
+TotemTimers.LongCooldownSpells = {
+    {
+        spell = SpellIDs.SpiritAlpha,
+        customOnEvent = "SpiritAlphaEvent",
+        events = { "UNIT_SPELLCAST_SUCCEEDED", "UNIT_SPELLCAST_SENT", "PLAYER_REGEN_ENABLED" }
+    },
+    {
+        spell = SpellIDs.ManaTide,
+        totem = SpellIDs.ManaTide,
+        element = WATER_TOTEM_SLOT,
+        customOnEvent = "CDTotemEvent",
+    },
+    {
+        spell = SpellIDs.ShamanisticRage,
+        buff = SpellIDs.ShamanisticRage,
+    },
+    {
+        spell = SpellIDs.AncestralGuidance,
+        buff = SpellIDs.AncestralGuidance,
+    },
+    {
+        spell = SpellIDs.ElementalMastery,
+        buff = SpellIDs.ElementalMastery,
+    },
+    {
+        spell = SpellIDs.NaturesSwiftness,
+        buff = SpellIDs.NaturesSwiftness,
+    },
+}
+
+
+TotemTimers.MaelstromSpells = {
+    SpellIDs.LightningBolt,
+    SpellIDs.ChainLightning,
+    SpellIDs.LavaBurst,
+    SpellIDs.HealingWave,
+    SpellIDs.LesserHealingWave,
+    SpellIDs.ChainHeal,
+}
+
+TotemTimers.PowerSurgeSpells = {
+    SpellIDs.LavaBurst,
+    SpellIDs.ChainLightning,
+    SpellIDs.ChainHeal,
 }
