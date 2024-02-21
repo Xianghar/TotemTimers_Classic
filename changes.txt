@@ -1,3 +1,7 @@
+3.2.12
+    - Fixed max durations for weapon tracker
+    - Fixed stop pulse animations on long cooldowns triggering too often
+    - Added texture for Power Surge proc to git
 3.2.11
     - Added combat cooldowns for SOD
     - Added Maelstrom Weapon and Power Surge to SOD

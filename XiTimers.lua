@@ -1020,13 +1020,13 @@ XiTimers.TimerEvent = function(self, event, ...)
             timer.StopPulse = false
             timer:StartBarTimer(expires - GetTime(), duration)
             timer:Start(1, expires - GetTime(), duration)
-        else
+        elseif timer.buffIsActive then
             timer.buffIsActive = false
             timer.prohibitCooldown = false
-            timer.StopPulse = timer.NoBuffStopPulse
             timer:StopBarTimer()
             timer:Stop(1)
             checkCooldown = true
+            timer.StopPulse = timer.NoBuffStopPulse
         end
     end
 
@@ -1035,7 +1035,7 @@ XiTimers.TimerEvent = function(self, event, ...)
     if checkCooldown or  event == "SPELL_UPDATE_COOLDOWN" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
         local start, duration, enable = GetSpellCooldown(timer.spell)
         if (not start and not duration) then --or (duration <= 1.5 and not InCombatLockdown()) then
-            self.timer:Stop(1)
+            self.timer:Stop(1) print("s")
         else
             if duration <= 1.5 then
                 self.timer:Stop(1)
