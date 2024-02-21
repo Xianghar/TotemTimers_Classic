@@ -678,15 +678,17 @@ local lastMaelstromCount = 0
 function TotemTimers.MaelstromEvent(self)
     local _,_,count = AuraUtil.FindAuraByName(MaelstromName, "player", "HELPFUL")
     local numberOnly = Maelstrom.NumberOnly
+
+    if (not count or count < 5) and maelstromSpellsButtons and #maelstromSpellsButtons > 0 then
+        HideButtonsOverlayGlow(maelstromSpellsButtons)
+        maelstromSpellsButtons = nil
+        ActionButton_HideOverlayGlow(TotemTimers.MaelstromButton)
+    end
+
     if not count then
         Maelstrom:Stop(1)
         Maelstrom.timerBars[1].time:SetText("")
         Maelstrom.timerBars[1].time.AnimGroup:Stop()
-        ActionButton_HideOverlayGlow(TotemTimers.MaelstromButton)
-        if maelstromSpellsButtons and #maelstromSpellsButtons > 0 then
-            HideButtonsOverlayGlow(maelstromSpellsButtons)
-            maelstromSpellsButtons = nil
-        end
 
         if not numberOnly then
             MaelstromIcon:Hide()
