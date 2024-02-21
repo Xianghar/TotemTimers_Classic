@@ -72,6 +72,7 @@ TotemTimers.SpellIDs = {
     Maelstrom = 408498,
     PowerSurge = 415100,
     HealingRain = 415236,
+    EarthShockTank = 408681,
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -131,12 +132,11 @@ TotemTimers.SpellIDs = {
 
 local SpellIDs = TotemTimers.SpellIDs
 
---[[TotemTimers.SpellIDsForceNames = {
+TotemTimers.SpellIDsForceNames = {
     [SpellIDs.WaterShield] = true,
     [SpellIDs.EarthShield] = true,
-    [SpellIDs.DecoyTotem] = true,
     [SpellIDs.FireNova] = true,
-}]]
+}
 
 
 TotemData = {
@@ -360,13 +360,10 @@ TotemTimers.CombatCooldownSpells = {
         SpellIDs.MoltenBlast,
         SpellIDs.LavaLash,
         SpellIDs.LavaBurst,
+        SpellIDs.ChainLightning,
         SpellIDs.Searing,
         SpellIDs.Magma,
         SpellIDs.FireNova,
-
-        --SpellIDs.LavaBurst,
-
-        --SpellIDs.ChainLightning,
     },
     [1] = {
         SpellIDs.FlameShock,

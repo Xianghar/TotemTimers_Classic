@@ -1,3 +1,5 @@
+3.2.13
+    - Fixed Earth Shock cooldown for Way of Earth
 3.2.12
     - Fixed max durations for weapon tracker
     - Fixed stop pulse animations on long cooldowns triggering too often

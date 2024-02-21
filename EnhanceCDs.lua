@@ -1,6 +1,7 @@
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and C_Seasons.GetActiveSeason() ~= 2 then return end
 
+local isSOD = C_Seasons.GetActiveSeason() == 2
 
 local _, TotemTimers = ...
 
@@ -227,6 +228,9 @@ function TotemTimers.ConfigEnhanceCDs()
             cd.button:SetAttribute("spell2", SpellIDs.EarthShock)
             cd.button:SetAttribute("spell3", SpellIDs.FrostShock)
         elseif spell == SpellIDs.EarthShock then
+            if SpellIDs.WayOfEarth and AvailableSpells[SpellIDs.WayOfEarth] then
+                cd.button.cdspell = SpellIDs.EarthShockTank
+            end
             cd.button:SetAttribute("spell2", SpellIDs.FlameShock)
             cd.button:SetAttribute("spell2", SpellIDs.FrostShock)
         else
@@ -423,10 +427,13 @@ end
 
 function TotemTimers.EnhanceCDEvents(self, event, spell)
     local settings = TotemTimers.ActiveProfile
-    if event == "SPELL_UPDATE_COOLDOWN" and AvailableSpells[self.cdspell] then
-		local start, duration, enable = GetSpellCooldown(self.cdspell)
+
+    if event == "SPELL_UPDATE_COOLDOWN" then
+        local cdspell = self.cdspell
+        if isSOD then cdspell = SpellNames[cdspell] end
+        local start, duration, enable = GetSpellCooldown(cdspell)
         if (not start and not duration) then --or (duration <= 1.5 and not InCombatLockdown()) then 			
-            self.timer:Stop(1)					
+            self.timer:Stop(1)
         else
             if duration <= 1.5 then
                 self.timer:Stop(1)
@@ -434,16 +441,16 @@ function TotemTimers.EnhanceCDEvents(self, event, spell)
                 self.timer:Start(1,start+duration-GetTime(),duration)
             end
             CooldownFrame_Set(self.cooldown, start, duration, enable)
-        end 
-    elseif event == "SPELL_ACTIVATION_OVERLAY_GLOW_SHOW" then 
-		if spell == self.glowSpell then
-			ActionButton_ShowOverlayGlow(self)			
-		end
-	elseif event == "SPELL_ACTIVATION_OVERLAY_GLOW_HIDE" then		
-		if spell == self.glowSpell then
-			ActionButton_HideOverlayGlow(self)
-		end		
-	end
+        end
+    elseif event == "SPELL_ACTIVATION_OVERLAY_GLOW_SHOW" then
+        if spell == self.glowSpell then
+            ActionButton_ShowOverlayGlow(self)
+        end
+    elseif event == "SPELL_ACTIVATION_OVERLAY_GLOW_HIDE" then
+        if spell == self.glowSpell then
+            ActionButton_HideOverlayGlow(self)
+        end
+    end
 end
 
 
