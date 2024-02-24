@@ -273,12 +273,12 @@ TotemTimers.options.args.enhancecds = {
                 },
 
                 lc = {
-                    order = 50,
+                    order = 70,
                     type = "header",
                     name = L["Long Cooldowns"],
                 },
                 lcenable = {
-                    order = 51,
+                    order = 71,
                     type = "toggle",
                     name = L["Enable"],
                     set = function(info, val)
@@ -290,7 +290,7 @@ TotemTimers.options.args.enhancecds = {
                     end
                 },
                 lcarrange = {
-                    order = 52,
+                    order = 72,
                     type = "select",
                     name = L["Arrangement"],
                     values = { vertical = L["vertical"], horizontal = L["horizontal"], },
@@ -303,12 +303,12 @@ TotemTimers.options.args.enhancecds = {
                     end,
                 },
                 lcnewline = {
-                    order = 53,
+                    order = 73,
                     type = "description",
                     name = "",
                 },
                 lcstoppulse = {
-                    order = 54,
+                    order = 74,
                     type = "toggle",
                     name = L["Stop Pulse Animation"],
                     desc = L["Stop Pulse Desc"],
@@ -321,7 +321,7 @@ TotemTimers.options.args.enhancecds = {
                     end,
                 },
                 lcstoppulsedemo = {
-                    order = 55,
+                    order = 75,
                     type = "execute",
                     name = L["Demo"],
                     func = function()
@@ -344,28 +344,28 @@ TotemTimers.options.args.enhancecds = {
 
 
         ["2"] = {
-            order = 71,
+            order = 81,
             type = "group",
             name = GetTalentTabInfo(2) or "Enhancement",
             args = {
             },
         },
         ["1"] = {
-            order = 72,
+            order = 82,
             type = "group",
             name = GetTalentTabInfo(1) or "Elemental",
             args = {
             },
         },
         ["3"] = {
-            order = 73,
+            order = 83,
             type = "group",
             name = GetTalentTabInfo(3) or "Restoration",
             args = {
             },
         },
         ["4"] = {
-            order = 74,
+            order = 84,
             type = "group",
             name = L["Long Cooldowns"],
             args = {},
@@ -508,6 +508,29 @@ if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSe
             end
         }
     end
+end
+
+if C_Seasons.GetActiveSeason() == 2 then
+    local PowerSurgeName = GetSpellInfo(SpellIDs.PowerSurge)
+
+    TotemTimers.options.args.enhancecds.args.options.args.ps = {
+        order = 50,
+        type = "header",
+        name = PowerSurgeName,
+    }
+
+    TotemTimers.options.args.enhancecds.args.options.args.psenable = {
+        order = 51,
+        type = "toggle",
+        name = L["Enable"],
+        set = function(info, val)
+            TotemTimers.ActiveProfile.PowerSurge = val
+            TotemTimers.ProcessSetting("PowerSurge")
+        end,
+        get = function(info)
+            return TotemTimers.ActiveProfile.PowerSurge
+        end,
+    }
 end
 
 local ACD = LibStub("AceConfigDialog-3.0")

@@ -1,3 +1,5 @@
+3.2.15
+    - Added option to toggle Power Surge
 3.2.14
     - Fixed overlay glow for spells affected by Maelstrom Weapon
 3.2.13
