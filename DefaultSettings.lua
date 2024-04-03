@@ -114,6 +114,8 @@ TotemTimers.DefaultProfile = {
         Tracker_Clickthrough = false,
         ShieldChargesOnly = true,
         EarthShieldOnSelf = false,
+        WeaponExpirationWarning = 30,
+        WeaponWarningStopPulse = false,
 
         
     --Warnings

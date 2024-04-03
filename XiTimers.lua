@@ -257,10 +257,18 @@ function XiTimers:Update(elapsed)
 			if timers[i] <= 0 then
 				self:Stop(i) 
 			else
-				if timers[i]<self.warningPoint and self.warningMsgs[i] then
-					self:PlayWarning(self.warningMsgs[i], self.warningSpells[i], self.warningIcons[i])
-					self.warningMsgs[i] = nil
+				if timers[i] < self.warningPoint then
+                    if self.warningMsgs[i] then
+                        self:PlayWarning(self.warningMsgs[i], self.warningSpells[i], self.warningIcons[i])
+                        self.warningMsgs[i] = nil
+                    end
+                    if i == 1 and self.StopPulseAtWarning and not self.playedWarningStopPulse then
+                        self.animation:SetTexture(self.button.icons[1]:GetTexture())
+                        self.animation:Play()
+                        self.playedWarningStopPulse = true
+                    end
 				end
+
                 if not self.hideTime then 
 					if i > 1 or not self.timerOnButton or self.forceBar then
 						if timers[i] >= 600 then
@@ -371,6 +379,7 @@ function XiTimers:Start(timer, time, duration)
         elseif self.barTimer <= 0 then
             self.button.bar:Hide()
         end
+        self.playedWarningStopPulse = false
     end
 
     if not self.dontAlpha then self:SetIconAlpha(self.button.icons[timer], self.maxAlpha) end
@@ -401,7 +410,7 @@ function XiTimers:Stop(timer)
             self:PlayWarning(self.expirationMsgs[timer], self.warningSpells[timer], self.warningIcons[timer])
             self.expirationMsgs[timer] = nil
         end
-        if self.StopPulse and timer == 1 then
+        if self.StopPulse and not self.StopPulseAtWarning and timer == 1 then
             self.animation:SetTexture(self.button.icons[1]:GetTexture())
             self.animation:Play()
         end

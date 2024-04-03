@@ -1,3 +1,7 @@
+3.2.16
+    - Added Riptide to healing combat cooldowns
+    - Added option to change the point of time when the weapon tracker warning starts
+    - Added option for pulse animation on weapon tracker warning
 3.2.15
     - Added option to toggle Power Surge
 3.2.14

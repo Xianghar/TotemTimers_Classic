@@ -230,7 +230,7 @@ function TotemTimers.WeaponUpdate(self, elapsed)
         elseif self.timers[hand] > 0 then
             self:Stop(hand)
         end
-        if InCombatLockdown() and self.timers[hand] < 30 then
+        if InCombatLockdown() and self.timers[hand] < self.warningPoint then
             showGlow = true
         end
     end

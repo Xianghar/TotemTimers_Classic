@@ -73,6 +73,7 @@ TotemTimers.SpellIDs = {
     PowerSurge = 415100,
     HealingRain = 415236,
     EarthShockTank = 408681,
+    Riptide = 408521,
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -376,6 +377,7 @@ TotemTimers.CombatCooldownSpells = {
         SpellIDs.FlameShock,
         SpellIDs.ChainHeal,
         SpellIDs.HealingRain,
+
     },
 }
 
@@ -424,4 +426,5 @@ TotemTimers.PowerSurgeSpells = {
     SpellIDs.LavaBurst,
     SpellIDs.ChainLightning,
     SpellIDs.ChainHeal,
+    SpellIDs.Riptide,
 }

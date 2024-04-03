@@ -192,6 +192,14 @@ SettingsFunctions = {
         TotemTimers.OrderTrackers()
     end,
 
+    WeaponExpirationWarning = function(value, Timers)
+        TotemTimers.WeaponTracker.warningPoint = value
+    end,
+
+    WeaponWarningStopPulse = function(value, Timers)
+        TotemTimers.WeaponTracker.StopPulseAtWarning = value
+    end,
+
     LastWeaponEnchant = function(value, Timers)
         local button = TotemTimers.WeaponTracker.button
 
