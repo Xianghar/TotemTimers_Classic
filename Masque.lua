@@ -62,10 +62,16 @@ end
 local group = nil
 
 function TotemTimers.SkinWeaponTracker()
-    local skinID = group.db.SkinID
+    local skinID = nil
+    if not group.db.Disabled then
+        skinID = group.db.SkinID
+    end
+    local skin = nil
     if skinID then
-        local skin = masque:GetSkin(skinID)
+        skin = masque:GetSkin(skinID)
+    end
 
+    if skinID then
         local buttons = {XiTimers.timers[8].button}
         local actionBarButtons = XiTimers.timers[8].actionBar.buttons
 
@@ -77,22 +83,17 @@ function TotemTimers.SkinWeaponTracker()
             SkinIcon(button.icons[2], button, skin.Icon, xScale, yScale)
         end
     end
-	if not skinID or skinID == "Default" then
-		for k,v in pairs(XiTimers.timers) do
-			--v.animation.button.normalTexture:Hide()
-			v:HideNormalTexture()
-		end
-		TotemTimers.ApplySkin(false)
-	else
-        TotemTimers.ApplySkin(skinID ~= nil)
 
-		--for k,v in pairs(XiTimers.timers) do
-			--v.animation.button.normalTexture:Show()
-		--end
-	end
+    TotemTimers.ApplySkin(skin)
 end
 
 local function SkinHook(self)
+    if self.Addon == "TotemTimers" then
+        TotemTimers.SkinWeaponTracker()
+    end
+end
+
+local function DisableHook(self)
     if self.Addon == "TotemTimers" then
         TotemTimers.SkinWeaponTracker()
     end
@@ -105,6 +106,7 @@ function TotemTimers.InitMasque()
 	if masque then
 		group = masque:Group("TotemTimers", "Buttons")
         hooksecurefunc(getmetatable(group).__index, "ReSkin", SkinHook)
+        hooksecurefunc(getmetatable(group).__index, "__Disable", DisableHook)
 		for k,v in pairs(XiTimers.timers) do
             group:AddButton(v.button)
             group:AddButton(v.animation.button)

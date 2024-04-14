@@ -288,15 +288,15 @@ TotemTimers.options.args.trackers = {
                             type = "range",
                             name = L["Warning Glow at x seconds left"],
                             min = 10,
-                            max = 60,
+                            max =( C_AddOns.GetAddOnMetadata("TotemTimers", "Version") == "@project-version@") and 300 or 60,
                             step = 5,
                             set = function(info, val)
                                 TotemTimers.ActiveProfile.WeaponExpirationWarning = val
                                 TotemTimers.WeaponTracker.isAnimating = false
                                 for i = 1,2 do
-                                    TotemTimers.WeaponTracker.button.flash[i].animation:Stop()
                                     TotemTimers.WeaponTracker.button.icons[i].animation:Stop()
                                 end
+                                TotemTimers.WeaponTracker.button.Flash.animation:Stop()
                                 TotemTimers.ProcessSetting("WeaponExpirationWarning")
                             end,
                             get = function(info)

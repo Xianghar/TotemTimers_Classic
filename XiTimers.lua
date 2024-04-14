@@ -99,6 +99,7 @@ function XiTimers:new(nroftimers, unclickable)
 	self.running = 0
 	self.timersRunning = {}
     self.unclickable = unclickable
+    self.numButtonTimers = 1
 	
 	if unclickable then
         self.button = CreateFrame("Button", "XiTimers_Timer"..XiTimers.nrOfTimers, UIParent, "XiTimersUnsecureTemplate")
@@ -111,7 +112,7 @@ function XiTimers:new(nroftimers, unclickable)
 	self.button.timer = self
 	
 	--for rActionButtonStyler
-	self.button.action = 0 
+	self.button.action = 0
     --self.button:SetCheckedTexture(nil)
 	self.button.SetCheckedTexture = function() end
     self.button.SetChecked = function() end
@@ -130,7 +131,7 @@ function XiTimers:new(nroftimers, unclickable)
     self.barDuration = 0
 	self.timerBars = {}
 	self.button.icons = {}
-	self.button.flash = {}
+
 	for i=1,nroftimers do
 		self.timers[i] = 0
 		self.timerBars[i] = CreateFrame("StatusBar", "XiTimers_TimerBar"..XiTimers.nrOfTimers.."_"..i, self.button, "XiTimersTimerBarTemplate")
@@ -139,22 +140,10 @@ function XiTimers:new(nroftimers, unclickable)
         self.timerBars[i].icon = _G["XiTimers_TimerBar"..XiTimers.nrOfTimers.."_"..i.."Icon"]
         self.timerBars[i]:SetPoint("TOP", self.button, "BOTTOM")
 		self.button.icons[i] = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."Icon"..((i>1) and i or "")]
-		self.button.flash[i] = _G["XiTimers_Timer"..XiTimers.nrOfTimers.."Flash"..((i>1) and i or "")]
-        if self.button.flash[i] then
-            local flash = self.button.flash[i]
-            flash.animation = self.button.flash[i]:CreateAnimationGroup()
-            flash.animation:SetLooping("NONE")
-            flash.flashAnim = flash.animation:CreateAnimation()
-            flash.flashAnim:SetDuration(15)
-            flash.flashAnim.flash = flash
-            flash.flashAnim:SetScript("OnPlay", function(self) self.flash:Show() end)
-            flash.flashAnim:SetScript("OnFinished", function(self) self.flash:Hide() end)
-            flash.flashAnim:SetScript("OnStop", function(self) self.flash:Hide() end)
-            flash.flashAnim:SetScript("OnUpdate", function(self) self.flash:SetAlpha(BuffFrame.BuffAlphaValue) end)
-        end
+
         if self.button.icons[i] then
             local flash = self.button.icons[i]
-            flash.animation = self.button.flash[i]:CreateAnimationGroup()
+            flash.animation = flash:CreateAnimationGroup()
             flash.animation:SetLooping("NONE")
             flash.flashAnim = flash.animation:CreateAnimation()
             flash.flashAnim:SetDuration(15)
@@ -166,6 +155,17 @@ function XiTimers:new(nroftimers, unclickable)
         end
 		self:SetIconAlpha(self.button.icons[i], 0.4)
 	end
+
+    local flash = self.button.Flash
+    flash.animation = flash:CreateAnimationGroup()
+    flash.animation:SetLooping("NONE")
+    flash.flashAnim = flash.animation:CreateAnimation()
+    flash.flashAnim:SetDuration(15)
+    flash.flashAnim.flash = flash
+    flash.flashAnim:SetScript("OnPlay", function(self) self.flash:Show() end)
+    flash.flashAnim:SetScript("OnFinished", function(self) self.flash:Hide() end)
+    flash.flashAnim:SetScript("OnStop", function(self) self.flash:Hide() end)
+    flash.flashAnim:SetScript("OnUpdate", function(self) self.flash:SetAlpha(BuffFrame.BuffAlphaValue) end)
     
     
     self.timeColor = {r=1,g=1,b=1,a=1}
@@ -209,7 +209,7 @@ function XiTimers:new(nroftimers, unclickable)
     self.rangeCheckCount = 0
     self.manaCheckCount = 0
 	self.warningPoint = 10
-	
+
     self:HideNormalTexture()
 
     self.animation = XiTimersAnimations:new(self.button)
@@ -270,42 +270,48 @@ function XiTimers:Update(elapsed)
 				end
 
                 if not self.hideTime then 
-					if i > 1 or not self.timerOnButton or self.forceBar then
-						if timers[i] >= 600 then
-							FormatTime(self.timerBars[i].time, timers[i], "blizz")
-						else
-							FormatTime(self.timerBars[i].time, timers[i], self.timeStyle)
-						end
-					else 
+					if (i > 1 or not self.timerOnButton or self.forceBar) then
+                        if  self.timerBars[i]:IsVisible() then
+                            FormatTime(self.timerBars[i].time, timers[i], self.timers[i] >= 600 and "blizz" or self.timeStyle)
+                        end
+					else
 						SetButtonTime(button.time, timers[1], self.timeStyle)
 					end
 					if not self.timerOnButton or self.forceBar or i>1 then
 						self.timerBars[i]:SetValue(timers[i])
 					end
 				end
-                if i == 1 then
-                    if not self.isAnimating and timers[i] <= self.warningPoint and timers[i] > 0 then
-                        self.isAnimating = true
+                if i <= self.numButtonTimers then
+                    if not self.flashIsAnimating and timers[i] <= self.warningPoint and timers[i] > 0 then
+                        self.flashIisAnimating = true
                         if not self.dontFlash then
-                            if self.flashRed and self.button.flash[i] then
-								self.button.flash[i].flashAnim:SetDuration(self.warningPoint+2)
-                                self.button.flash[i].animation:Play()
+                            if self.flashRed  then
+								self.button.Flash.flashAnim:SetDuration(self.warningPoint+2)
+                                self.button.Flash.animation:Play()
                             elseif self.button.icons[i] then
 								self.button.icons[i].flashAnim:SetDuration(self.warningPoint+2)
                                 self.button.icons[i].animation:Play()
                             end
                         end
                     end
-                    if self.nr < 8 and self.timers[1] <= 10 then button.time:SetTextColor(1,0,0) end
-                    
-                    if self.procFlash and timers[1] > 0 and self.bar then
-                        button.bar:SetValue(self.bar - mod(self.durations[1] - timers[1] + self.barDelay, self.bar))
-                        button.bar:Show()
-                    end
+                    if self.nr < 8 and self.timers[i] <= 10 then button.time:SetTextColor(1,0,0) end
                 end
 			end
 		end
 	end
+
+    if self.numButtonTimers > 1 then
+        local time = timers[1]
+        if time == 0 or (timers[2] < time and timers[2] > 0) then
+            time = timers[2]
+        end
+        SetButtonTime(button.time, time, self.timeStyle)
+    end
+
+    if self.procFlash and timers[1] > 0 and self.bar then
+        button.bar:SetValue(self.bar - mod(self.durations[1] - timers[1] + self.barDelay, self.bar))
+        button.bar:Show()
+    end
     
     if self.barTimer > 0 and not self.procFlash then
         self.barTimer = self.barTimer - elapsed
@@ -346,7 +352,7 @@ function XiTimers:Start(timer, time, duration)
 		self.running = self.running + 1
 		self.timersRunning[timer] = true
 	end
-	if self.button.flash[timer] then self.button.flash[timer].animation:Stop() end
+	self.button.Flash.animation:Stop()
 	if self.button.icons[timer] then self.button.icons[timer].animation:Stop() end
 	duration = duration or time
     self.durations[timer] = duration
@@ -385,7 +391,7 @@ function XiTimers:Start(timer, time, duration)
     if not self.dontAlpha then self:SetIconAlpha(self.button.icons[timer], self.maxAlpha) end
     if self.reverseAlpha then self:SetIconAlpha(self.button.icons[timer],  self.alpha or 0.4) end
 
-    self.isAnimating = false
+    self.flashIsAnimating = false
     --self.flashRed = TotemTimers.ActiveProfile.FlashRed
     --self.button.bar:SetValue(0)
     self:SetTimerBarPos(self.timerBarPos, true)
@@ -1044,7 +1050,7 @@ XiTimers.TimerEvent = function(self, event, ...)
     if checkCooldown or  event == "SPELL_UPDATE_COOLDOWN" or event == "ACTIONBAR_UPDATE_COOLDOWN" then
         local start, duration, enable = GetSpellCooldown(timer.spell)
         if (not start and not duration) then --or (duration <= 1.5 and not InCombatLockdown()) then
-            self.timer:Stop(1) print("s")
+            self.timer:Stop(1)
         else
             if duration <= 1.5 then
                 self.timer:Stop(1)

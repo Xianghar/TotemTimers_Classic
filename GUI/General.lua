@@ -24,12 +24,11 @@ TotemTimers.options = {
                 info= {
                     order = 1,
                     type = "description",
-                    name = "If you're missing the default totem bar, you have to disable the multicast button in the Timers section."
-                        .."The default totem bar and the multicast button in TT cannot be used reliably at the same time.",
+                    name = "|c00a6ffffFor more options click the [-] button in the left column.|r",
                     fontSize = "medium",
-                    image = 310730,
-                    imageWidth = 26,
-                    imageHeight = 26,
+                    image = 136080,
+                    imageWidth = 22,
+                    imageHeight = 22,
 
                 },
                 lock = {

@@ -1,3 +1,6 @@
+3.2.17
+    - Fixed red flash animation of expiring weapon tracker
+    - When dual wielding the weapon tracker shows the lowest timer of both hands on the button
 3.2.16
     - Added Riptide to healing combat cooldowns
     - Added option to change the point of time when the weapon tracker warning starts

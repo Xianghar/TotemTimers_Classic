@@ -310,7 +310,7 @@ local mask = nil
 
 local DoubleIcons = {}
 
-function TotemTimers.SetDoubleTexCoord(button, flash) 
+function TotemTimers.SetDoubleTexCoord(button, flash)
     if DoubleIcons[button] then
         button.icons[1]:ClearAllPoints()
         button.icons[1]:SetPoint("RIGHT", button, "CENTER")
@@ -322,13 +322,17 @@ function TotemTimers.SetDoubleTexCoord(button, flash)
             button.icons[2]:SetHeight(36)
             button.icons[1]:SetTexCoord(0,0.5,0,1)
             button.icons[2]:SetTexCoord(0.5,1,0,1)
-            if flash and button.flash then
+            --[[if flash and button.flash then
                 button.flash[1]:SetTexCoord(0,0.5,0,1)
+                button.flash[1]:SetWidth(18)
+                button.flash[1]:SetHeight(36)
+                button.flash[1]:ClearAllPoints()
+                button.flash[1]:SetPoint("RIGHT", button, "CENTER")
                 button.flash[2]:SetTexCoord(0.5,1,0,1)
-            end
+            end]]
         else
             local icon = XiTimers.timers[1].button.icons[1]
-            local flash = XiTimers.timers[1].button.flash[1]
+            --local flash = XiTimers.timers[1].button.flash[1]
 			local width = icon:GetWidth() / 2
 			--local height = icon:GetHeight() / 2
             button.icons[1]:SetWidth(width)
@@ -339,11 +343,11 @@ function TotemTimers.SetDoubleTexCoord(button, flash)
             button.icons[1]:SetTexCoord(ULx, ULy, LLx, LLy, URx/2, URy, LRx/2, LRy)
             button.icons[2]:SetTexCoord((1-ULx)/2, ULy, (1-LLx)/2, LLy, URx, URy, LRx, LRy)
             button.icons[2]:Show()
-            if flash and button.flash then
+            --[[if flash and button.flash then
                 button.flash[2]:SetTexture(button.flash[1]:GetTexture())
                 button.flash[1]:SetTexCoord(0,0.5,0,1)
                 button.flash[2]:SetTexCoord(0.5,1,0,1)
-            end
+            end]]
         end
     else
         button.icons[1]:ClearAllPoints()
@@ -353,18 +357,18 @@ function TotemTimers.SetDoubleTexCoord(button, flash)
             button.icons[1]:SetWidth(36)
             button.icons[1]:SetHeight(36)
             button.icons[1]:SetTexCoord(0,1,0,1)
-            if flash and button.flash then
+            --[[if flash and button.flash then
                 button.flash[1]:SetTexCoord(0,1,0,1)
-            end           
+            end ]]
         else
             local icon = XiTimers.timers[1].button.icons[1]
             button.icons[1]:SetWidth(icon:GetWidth())
             button.icons[1]:SetHeight(icon:GetHeight())
             local ULx, ULy, LLx, LLy, URx, URy, LRx, LRy = icon:GetTexCoord()
             button.icons[1]:SetTexCoord(ULx, ULy, LLx, LLy, URx, URy, LRx, LRy)
-            if flash and button.flash then
+            --[[if flash and button.flash then
                 button.flash[1]:SetTexCoord(XiTimers.timers[1].button.flash[1]:GetTexCoord())
-            end
+            end]]
         end
     end
 end
@@ -378,10 +382,26 @@ function TotemTimers.SetDoubleTexture(button, isdouble, flash)
     TotemTimers.SetDoubleTexCoord(button, flash)
 end
 
-function TotemTimers.ApplySkin(hasSkin, newMask)
-    skin = hasSkin
+function TotemTimers.ApplySkin(newSkin)
+    skin = newSkin
+
     for k,v in pairs(DoubleIcons) do
         TotemTimers.SetDoubleTexCoord(k, k == XiTimers.timers[8].button)
+    end
+
+    if not skin then
+        for i = 1, #XiTimers.timers do
+            local normal = XiTimers.timers[i].button:GetNormalTexture()
+            normal:SetTexture()
+            normal:Hide()
+        end
+        for i = 1, #TTActionBars.bars do
+            for b = 1, #TTActionBars.bars[i].buttons do
+                local normal = TTActionBars.bars[i].buttons[b]:GetNormalTexture()
+                normal:SetTexture()
+                normal:Hide()
+            end
+        end
     end
 end
 

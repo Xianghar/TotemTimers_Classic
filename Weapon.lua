@@ -30,6 +30,7 @@ function TotemTimers.CreateWeaponTracker()
     weapon.timerBars[1]:SetMinMaxValues(0, 1800)
     weapon.flashall = true
     weapon.warningPoint = 30
+    weapon.numButtonTimers = 2
 
     weapon.Activate = function(self)
         XiTimers.Activate(self)
