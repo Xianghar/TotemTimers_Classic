@@ -74,6 +74,11 @@ TotemTimers.SpellIDs = {
     Maelstrom = 53817,
 
     LightningBolt = 403,
+    HealingWave = 331,
+    LesserHealingWave = 8004,
+    ChainHeal = 1064,
+
+    ClearCasting = 16246,
 
 
 
@@ -427,4 +432,48 @@ TotemTimers.MaelstromSpells = {
     SpellIDs.LesserHealingWave,
     SpellIDs.ChainHeal,
     SpellIDs.Hex,
+}
+
+TotemTimers.ProcData = {
+    maelstrom = {
+        buff = SpellIDs.Maelstrom,
+        textures = {
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_1",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_2",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_3",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_4",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon",
+        },
+        flashSpells = {
+            SpellIDs.LightningBolt,
+            SpellIDs.ChainLightning,
+            SpellIDs.HealingWave,
+            SpellIDs.LesserHealingWave,
+            SpellIDs.ChainHeal,
+            SpellIDs.Hex,
+        },
+        isCenter = true,
+        animateOn = 5,
+        glow = 5,
+    },
+    clearcasting = {
+        buff = SpellIDs.ClearCasting,
+        textures = {
+            "Interface/AddOns/TotemTimers/textures/echo_of_the_elements",
+        },
+        --[[flashSpells = {
+            SpellIDs.LightningBolt,
+            SpellIDs.ChainLightning,
+            SpellIDs.EarthShock,
+            SpellIDs.FlameShock,
+            SpellIDs.FrostShock,
+            SpellIDs.LavaBurst,
+            SpellIDs.LesserHealingWave,
+            SpellIDs.HealingWave,
+            SpellIDs.ChainHeal,
+            SpellIDs.FireNova,
+        },]]
+        isCenter = false,
+        animateOn = 2,
+    },
 }

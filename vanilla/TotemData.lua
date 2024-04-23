@@ -372,12 +372,17 @@ TotemTimers.CombatCooldownSpells = {
         SpellIDs.ChainLightning,
         SpellIDs.LightningBolt,
         SpellIDs.LavaBurst,
+        SpellIDs.LavaLash,
+        SpellIDs.MoltenBlast,
     },
     [3] = {
         SpellIDs.FlameShock,
         SpellIDs.ChainHeal,
         SpellIDs.HealingRain,
-
+        SpellIDs.Riptide,
+        SpellIDs.LavaLash,
+        SpellIDs.LavaBurst,
+        SpellIDs.MoltenBlast,
     },
 }
 

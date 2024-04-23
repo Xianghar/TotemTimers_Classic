@@ -50,6 +50,7 @@ EarthShield.lua
 Weapon.lua
 EnhanceCDs.lua
 LongCooldowns.lua
+Procs.lua
 Warnings.lua
 Masque.lua
 
