@@ -1,0 +1,77 @@
+## Interface: 30403
+## Title: TotemTimers
+## Author:  Xianghar
+## Version: @project-version@
+## SavedVariables: TotemTimers_GlobalSettings, TotemTimers_Profiles
+## OptionalDeps: Masque
+## LoadManagers: AddonLoader
+## X-LoadOn-Class: Shaman
+## X-Curse-Project-ID: 339602
+## X-WoWI-ID: 25223
+## X-Wago-ID: rkGrwANy
+
+embeds.xml
+
+localization\localization.lua
+localization\localization.ge.lua
+localization\localization.fr.lua
+localization\localization.es.lua
+localization\localization.ru.lua
+localization\localization.cn.lua
+localization\localization.tw.lua
+localization\localization.ko.lua
+localization\localization.br.lua
+localization\localization.it.lua
+localization\localization.esmx.lua
+
+XiTimers.lua
+XiTimers.xml
+
+wrath\TotemData.lua
+TotemTimers.xml
+TotemTimers.lua
+
+Spells.lua
+
+Animation.lua
+Bindings.lua
+ToolTips.lua
+TotemSets.xml
+TotemSets.lua
+TTActionBars.lua
+DefaultSettings.lua
+Settings.lua
+SetupTimers.lua
+MultiSpell.lua
+SetupTrackers.lua
+Ankh.lua
+Shield.lua
+EarthShield.lua
+Weapon.lua
+EnhanceCDs.lua
+LongCooldowns.lua
+# Procs.lua
+Warnings.lua
+Masque.lua
+
+GUI\localization.lua
+GUI\localization.ge.lua
+GUI\localization.ru.lua
+GUI\localization.tw.lua
+GUI\localization.cn.lua
+GUI\localization.ko.lua
+GUI\localization.fr.lua
+GUI\localization.es.lua
+GUI\localization.br.lua
+GUI\localization.it.lua
+GUI\localization.esmx.lua
+GUI\General.lua
+GUI\Timers.lua
+GUI\Trackers.lua
+GUI\EnhanceCDs.lua
+GUI\Messages.lua
+GUI\Totems.lua
+GUI\Sets.lua
+GUI\Profiles.lua
+
+

@@ -1,4 +1,4 @@
-## Interface: 30403
+## Interface: 40400
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@
@@ -27,7 +27,7 @@ localization\localization.esmx.lua
 XiTimers.lua
 XiTimers.xml
 
-wrath\TotemData.lua
+cata\TotemData.lua
 TotemTimers.xml
 TotemTimers.lua
 
@@ -50,7 +50,7 @@ EarthShield.lua
 Weapon.lua
 EnhanceCDs.lua
 LongCooldowns.lua
-Procs.lua
+# Procs.lua
 Warnings.lua
 Masque.lua
 

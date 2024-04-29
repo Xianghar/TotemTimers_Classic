@@ -28,6 +28,13 @@ local function changeOrder(spell, dir, role)
     TotemTimers.ProcessSetting("EnhanceCDs")
 end
 
+local specializations = {}
+for i = 1, 3 do
+    local name, name2 = GetTalentTabInfo(i)
+    if type(name) == "number" then name = name2 end
+    specializations[i] = name
+end
+
 TotemTimers.options.args.enhancecds = {
     type = "group",
     name = "Combat Cooldowns",
@@ -346,21 +353,21 @@ TotemTimers.options.args.enhancecds = {
         ["2"] = {
             order = 81,
             type = "group",
-            name = GetTalentTabInfo(2) or "Enhancement",
+            name = specializations[2] or "Enhancement",
             args = {
             },
         },
         ["1"] = {
             order = 82,
             type = "group",
-            name = GetTalentTabInfo(1) or "Elemental",
+            name = specializations[1] or "Elemental",
             args = {
             },
         },
         ["3"] = {
             order = 83,
             type = "group",
-            name = GetTalentTabInfo(3) or "Restoration",
+            name = specializations[3] or "Restoration",
             args = {
             },
         },

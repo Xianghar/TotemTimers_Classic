@@ -32,30 +32,18 @@ TotemTimers.EnhanceCDsCenterProcAnchor = CenterProcAnchor
 CenterProcAnchor:Hide()
 CenterProcAnchor:SetSize(130,65)
 CenterProcAnchor:Show()
---local cpt = CenterProcAnchor:CreateTexture(nil, "BACKGROUND")
---cpt:SetAllPoints(CenterProcAnchor)
---cpt:SetTexture("Interface\\AddOns\\TotemTimers\\textures\\maelstrom_weapon")
---cpt:SetTexture(GetSpellTexture(SpellIDs.Maelstrom))
 
 local LeftProcAnchor = CreateFrame("Frame", "LeftProcAnchor", UIParent)
 TotemTimers.EnhanceCDsLeftProcAnchor = LeftProcAnchor
---LeftProcAnchor:Hide()
+LeftProcAnchor:Hide()
 LeftProcAnchor:SetSize(65, 130)
---local cpt = LeftProcAnchor:CreateTexture(nil, "BACKGROUND")
---cpt:SetAllPoints(LeftProcAnchor)
---cpt:SetTexture("Interface\\AddOns\\TotemTimers\\textures\\maelstrom_weapon")
---cpt:SetTexture(GetSpellTexture(SpellIDs.Maelstrom))
+
 
 
 local RightProcAnchor = CreateFrame("Frame", nil, UIParent)
 TotemTimers.EnhanceCDsRightProcAnchor = RightProcAnchor
---RightProcAnchor:Hide()
+RightProcAnchor:Hide()
 RightProcAnchor:SetSize(65, 130)
---cpt = RightProcAnchor:CreateTexture(nil, "BACKGROUND")
---cpt:SetAllPoints(RightProcAnchor)
---cpt:SetTexture("Interface\\AddOns\\TotemTimers\\textures\\maelstrom_weapon")
---cpt:SetTexture(GetSpellTexture(SpellIDs.Maelstrom))
-
 
 
 local function ChangeCDOrder(self, _, _, spell)
@@ -301,10 +289,10 @@ function TotemTimers.ConfigEnhanceCDs()
         FlameShockDuration:Activate()
     end
 
-    --[[if (role == 2 or C_Seasons.GetActiveSeason() == 2) and Maelstrom
+    if (role == 2 or C_Seasons.GetActiveSeason() == 2) and Maelstrom
             and TotemTimers.AvailableTalents.Maelstrom and TotemTimers.ActiveProfile.EnhanceCDsMaelstrom
         then Maelstrom:Activate()
-    end]]
+    end
 
     for i=1,#CDSpells[role] do
         if TotemTimers.ActiveProfile.EnhanceCDs_Spells[role][i] and AvailableSpells[CDSpells[role][TotemTimers.ActiveProfile.EnhanceCDs_Order[role][i]]] then
@@ -721,7 +709,7 @@ local MaelstromName = GetSpellInfo(SpellIDs.Maelstrom)
 local lastMaelstromCount = 0
 
 function TotemTimers.MaelstromEvent(self)
-    --[[local _,_,count = AuraUtil.FindAuraByName(MaelstromName, "player", "HELPFUL")
+    local _,_,count = AuraUtil.FindAuraByName(MaelstromName, "player", "HELPFUL")
     local numberOnly = Maelstrom.NumberOnly
 
     if (not count or count < 5) and maelstromSpellsButtons and #maelstromSpellsButtons > 0 then
@@ -781,7 +769,7 @@ function TotemTimers.MaelstromEvent(self)
         end
 
         lastMaelstromCount = count
-    end]]
+    end
 end
 
 
