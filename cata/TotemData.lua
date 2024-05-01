@@ -362,6 +362,7 @@ TotemTimers.CombatCooldownSpells = {
         SpellIDs.LightningBolt,
         SpellIDs.LavaBurst,
         SpellIDs.UnleashElements,
+        SpellIDs.FireNova,
         SpellIDs.EarthQuake,
         SpellIDs.WindShear,
 

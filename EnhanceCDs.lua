@@ -295,7 +295,7 @@ function TotemTimers.ConfigEnhanceCDs()
     end
 
     for i=1,#CDSpells[role] do
-        if TotemTimers.ActiveProfile.EnhanceCDs_Spells[role][i] and AvailableSpells[CDSpells[role][TotemTimers.ActiveProfile.EnhanceCDs_Order[role][i]]] then
+        if TotemTimers.ActiveProfile.EnhanceCDs_Spells[role][i] and AvailableSpells[cds[i].button.cdspell] then
             cds[i]:Activate()
         end
     end
