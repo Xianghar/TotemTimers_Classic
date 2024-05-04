@@ -322,12 +322,13 @@ SettingsFunctions = {
 
     Show = function(value, Timers)
         if value then
-            for i = 1, 4 do
-                if (Timers[i].nr == FIRE_TOTEM_SLOT and AvailableSpells[SpellIDs.Searing])
-                        or (Timers[i].nr == EARTH_TOTEM_SLOT and (AvailableSpells[SpellIDs.Stoneskin] or AvailableSpells[SpellIDs.Earthbind] or AvailableSpells[SpellIDs.StoneBulwark]))
-                        or (Timers[i].nr == WATER_TOTEM_SLOT and (AvailableSpells[SpellIDs.HealingStream] or AvailableSpells[SpellIDs.ManaSpring]))
-                        or (Timers[i].nr == AIR_TOTEM_SLOT and (AvailableSpells[SpellIDs.Grounding] or AvailableSpells[SpellIDs.NatureResistance] or AvailableSpells[SpellIDs.Windfury])) then
-                    Timers[i]:Activate()
+            local activeTotems = {}
+            for spell, data in pairs(TotemData) do
+                if TotemTimers.AvailableSpells[spell] then activeTotems[data.element] = true end
+            end
+            for e = 1,4 do
+                if activeTotems[Timers[e].nr] then
+                    Timers[e]:Activate()
                 end
             end
             --TotemTimersFrame:Show()
