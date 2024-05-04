@@ -69,7 +69,7 @@ function XiTimers.UpdateTimers(self,elapsed)
 end
 
 function XiTimers.AddSpecialActionBarDriver(button)
-    RegisterStateDriver(button, "petbattle", "[petbattle][overridebar][possessbar] active; none")
+    RegisterStateDriver(button, "petbattle", "[petbattle][overridebar][possessbar][vehicleui] active; none")
     RegisterStateDriver(button, "combat", "[combat] active; none")
     button:WrapScript(button, "OnAttributeChanged", [[
 			if not self:GetAttribute("active") then return end
