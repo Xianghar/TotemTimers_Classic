@@ -21,7 +21,7 @@ function TotemTimers.CreateMultiCastButtons()
     --mb:SetPoint("CENTER", TotemTimers_MultiSpellFrame, "CENTER")
     mb.actionBar = TTActionBars:new(3, mb, TotemTimers_MultiSpellFrame, TotemTimersFrame)
     mb.icon = _G["TotemTimers_MultiSpellIcon"]
-    mb:Show()
+    mb:Hide()
 
     --for rActionButtonStyler
     mb.action = 0
@@ -118,14 +118,16 @@ end
 table.insert(TotemTimers.Modules, TotemTimers.CreateMultiCastButtons)
 
 function TotemTimers.MultiSpellActivate()
-    if TotemTimers.ActiveProfile.MultiCast and AvailableSpells[SpellIDs.CallOfElements] then
-        if not TotemTimers.ActiveProfile.HideMultiCast then mb:Show() else mb:Hide() end
-        TotemTimers.SetMultiCastSpells()
-        mb.active = true
-        TotemTimers.SetMultiCastConfig()
-        --trigger Childupdate("mspell")
-        mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
-        mb:SetAttribute("active", true)
+    if TotemTimers.ActiveProfile.MultiCast then
+        if AvailableSpells[SpellIDs.CallOfElements] then
+            if not TotemTimers.ActiveProfile.HideMultiCast then mb:Show() else mb:Hide() end
+            TotemTimers.SetMultiCastSpells()
+            mb.active = true
+            TotemTimers.SetMultiCastConfig()
+            --trigger Childupdate("mspell")
+            mb:SetAttribute("*spell1", mb:GetAttribute("*spell1"))
+            mb:SetAttribute("active", true)
+        end
 
         MultiCastActionBarFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
         MultiCastActionBarFrame:UnregisterEvent("UPDATE_MULTI_CAST_ACTIONBAR")
