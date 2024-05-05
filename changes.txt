@@ -1,8 +1,10 @@
 4.0.2
-    - Fix totem buttons not showing for low lvl chars in Cata
     - Fixed TT not hiding in some vehicles
     - Added Greater Healing Wave to Maelstrom proc
-    - Fix blizzard totem bar not hiding for low lvl chars in Cata
+    - Fix totem buttons not showing for low lvl chars
+    - Fix blizzard totem bar not hiding for low lvl chars
+    - Fix weapon tracker not showing for low lvl chars
+    - Show Primal Strike in combat cooldowns instead of Stormstrike for low lvl chars
 4.0.1
     - Bugfix for reodering combat cooldowns and Fire Nova
 4.0.0

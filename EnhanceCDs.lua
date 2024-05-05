@@ -222,7 +222,7 @@ end
 
 table.insert(TotemTimers.Modules, TotemTimers.CreateEnhanceCDs)
 
-function TotemTimers.ConfigEnhanceCDs() 
+function TotemTimers.ConfigEnhanceCDs()
     role = TotemTimers.Specialization --GetSpecialization()
     if not role then role = 0 end
     
@@ -235,7 +235,19 @@ function TotemTimers.ConfigEnhanceCDs()
 
     if role == 0 or not TotemTimers.ActiveProfile.EnhanceCDs then return end
 
-    
+    if WOW_PROJECT_ID > WOW_PROJECT_WRATH_CLASSIC and role == 2 then
+        for id, spell in ipairs(CDSpells[role]) do
+            if spell == SpellIDs.StormStrike or spell == SpellIDs.PrimalStrike then
+                if AvailableSpells[SpellIDs.StormStrike] then
+                    CDSpells[role][id] = SpellIDs.StormStrike
+                else
+                    CDSpells[role][id] = SpellIDs.PrimalStrike
+                end
+                break
+            end
+        end
+    end
+
     for i=1,#CDSpells[role] do
         local spell = CDSpells[role][i]
         local cd = cds[i]

@@ -184,7 +184,9 @@ SettingsFunctions = {
 
     WeaponTracker = function(value, Timers)
         Timers[8].ActiveWhileHidden = TotemTimers.ActiveProfile.ActivateHiddenTimers and not value
-        if (value or TotemTimers.ActiveProfile.ActivateHiddenTimers) and AvailableSpells[SpellIDs.RockbiterWeapon] then
+        if (value or TotemTimers.ActiveProfile.ActivateHiddenTimers) and
+                (AvailableSpells[SpellIDs.RockbiterWeapon] or AvailableSpells[SpellIDs.FlametongueWeapon] or AvailableSpells[SpellIDs.WindfuryWeapon])
+        then
             Timers[8]:Activate()
         else
             Timers[8]:Deactivate()
@@ -219,8 +221,14 @@ SettingsFunctions = {
             -- update rank and set macro from attribute because of ft-1/ft-button
             TotemTimers.UpdateRank(button)
         else
-            if not GetSpellInfo(value) then
-                value = SpellIDs.RockbiterWeapon
+            if not GetSpellInfo(value) or not AvailableSpells[value] then
+                if AvailableSpells[SpellIDs.RockbiterWeapon] then
+                    value = SpellIDs.RockbiterWeapon
+                elseif AvailableSpells[SpellIDs.FlametongueWeapon] then
+                    value = SpellIDs.FlametongueWeapon
+                else
+                    value = SpellIDs.RockbiterWeapon
+                end
             end
             button:SetAttribute("type1", "spell")
             button:SetAttribute("spell1", value)
