@@ -1,3 +1,6 @@
+4.0.3
+    - Fix weapon tracker loading default spell on login
+    - Fix default totems loading on login in SOD
 4.0.2
     - Fixed TT not hiding in some vehicles
     - Added Greater Healing Wave to Maelstrom proc

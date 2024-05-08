@@ -221,7 +221,7 @@ SettingsFunctions = {
             -- update rank and set macro from attribute because of ft-1/ft-button
             TotemTimers.UpdateRank(button)
         else
-            if not GetSpellInfo(value) or not AvailableSpells[value] then
+            if not GetSpellInfo(value) then
                 if AvailableSpells[SpellIDs.RockbiterWeapon] then
                     value = SpellIDs.RockbiterWeapon
                 elseif AvailableSpells[SpellIDs.FlametongueWeapon] then

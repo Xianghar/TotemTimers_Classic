@@ -118,7 +118,8 @@ if LE_EXPANSION_LEVEL_CURRENT < 2 then
                 return SpellIDs.Windfury
             end
         end
-        return (useName or ForceSpellNames[name]) and name or select(7, GetSpellInfo(name))
+        -- ... or spell is a workaround for SOD GetSpellInfo not working immediately on login
+        return (useName or ForceSpellNames[name]) and name or (select(7, GetSpellInfo(name)) or spell)
     end
 end
 
