@@ -60,9 +60,12 @@ for k,v in pairs(TotemTimers.ShieldSpells) do
     ShieldSpellNames[SpellNames[v]] = true
 end
 
-local EarthShieldName = nil
-if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
-    EarthShieldName = SpellNames[SpellIDs.EarthShield]
+local EarthShieldName = SpellNames[SpellIDs.EarthShield]
+local LightningShieldName = SpellNames[SpellIDs.LightningShield]
+local WaterShieldName = SpellNames[SpellIDs.WaterShield]
+
+local function ShieldPredicate(_, _, _, auraName)
+    return auraName == LightningShieldName or auraName == WaterShieldName
 end
 
 function TotemTimers.ShieldEvent(self, event, unit)
@@ -75,41 +78,46 @@ function TotemTimers.ShieldEvent(self, event, unit)
         self.count:SetText("")
         local name, texture, count, duration, endtime
         local hasBuff = false
-        for i = 1, 40 do
-            name, texture, count, _, duration, endtime = UnitBuff("player", i)
-            if not name then break end
-            if ShieldSpellNames[name] and (name ~= EarthShieldName or TotemTimers.ActiveProfile.EarthShieldOnSelf) then
-                hasBuff = true
-                local timeleft = endtime - GetTime()
-                if name ~= self.shield
-                 or (not ShieldChargesOnly and timeleft > self.timer.timers[1])
-                 or ShieldChargesOnly
-                  then
-                    self.icons[1]:SetTexture(texture)
-                    self.timer.expirationMsgs[1] = "Shield"
-                    self.timer.earlyExpirationMsgs[1] = "Shield"
-                    self.timer.warningIcons[1] = texture
-                    self.timer.warningSpells[1] = name
-                    self.shield = name
-                    if not ShieldChargesOnly then
-                        self.timer.warningPoint = 10
-                        self.timer:Start(1, timeleft, duration)
-                    else
-                        self.timer.warningPoint = 0
-                        self.timer:Start(1, count, 3)
-                    end
-                end
+
+        name, texture, count, _, duration, endtime = AuraUtil.FindAura(ShieldPredicate, "player", "HELPFUL")
+        if not name and TotemTimers.ActiveProfile.EarthShieldOnSelf then
+            name, texture, count, _, duration, endtime = AuraUtil.FindAuraByName(EarthShieldName, "player", "HELPFUL")
+        end
+
+        if name then
+            hasBuff = true
+            local timeleft = endtime - GetTime()
+            if name == EarthShieldName and self.name ~= EarthShieldName then
+                self.timer:Stop(1)
+            end
+            if name ~= self.shield
+             or (not ShieldChargesOnly and timeleft > self.timer.timers[1])
+             or ShieldChargesOnly
+              then
+                self.icons[1]:SetTexture(texture)
+                self.timer.expirationMsgs[1] = "Shield"
+                self.timer.earlyExpirationMsgs[1] = "Shield"
+                self.timer.warningIcons[1] = texture
+                self.timer.warningSpells[1] = name
+                self.shield = name
                 if not ShieldChargesOnly then
-                    if count and count > 0 then
-                        self.count:SetText(count)
-                    else
-                        self.count:SetText("")
-                    end
+                    self.timer.warningPoint = 10
+                    self.timer:Start(1, timeleft, duration)
+                else
+                    self.timer.warningPoint = 0
+                    self.timer:Start(1, count, 3)
                 end
-                break
+            end
+            if not ShieldChargesOnly then
+                if count and count > 0 then
+                    self.count:SetText(count)
+                else
+                    self.count:SetText("")
+                end
             end
         end
         if not hasBuff and self.timer.timers[1] > 0 then
+            self.shield = nil
             self.timer:Stop(1)
         end
     end

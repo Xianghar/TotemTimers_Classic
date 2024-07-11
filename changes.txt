@@ -1,3 +1,5 @@
+4.0.4
+    - Shield tracker prefers displaying Lightning/Water Shield over Earth Shield if both are active
 4.0.3
     - Fix weapon tracker loading default spell on login
     - Fix default totems loading on login in SOD
