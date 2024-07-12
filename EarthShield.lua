@@ -58,14 +58,9 @@ function TotemTimers.CreateEarthShieldTracker()
     end
     earthshieldTimer.button:RegisterForClicks("LeftButtonDown", "RightButtonDown", "MiddleButtonDown", "Button4Down")
     earthshieldTimer.manaCheck = SpellNames[SpellIDs.EarthShield]
-    earthshieldTimer.nameframe = CreateFrame("Frame", earthshieldTimer.button)
-    earthshieldTimer.nameframe:SetParent(earthshieldTimer.button)
-    earthshieldTimer.nameframe:SetPoint("TOPLEFT", earthshieldTimer.button)
-    earthshieldTimer.nameframe:SetPoint("BOTTOMRIGHT", earthshieldTimer.button)
-    earthshieldTimer.name = earthshieldTimer.nameframe:CreateFontString("TotemTimers_EarthShieldName")
-    earthshieldTimer.name:SetPoint("TOP", earthshieldTimer.nameframe)
-    earthshieldTimer.name:SetFont(earthshieldTimer.button.hotkey:GetFont())
-    earthshieldTimer.nameframe:SetFrameLevel(10)
+    earthshieldTimer.name = earthshieldTimer.button:CreateFontString("TotemTimers_EarthShieldName")
+    earthshieldTimer.name:SetPoint("TOP", earthshieldTimer.button, 0, 2)
+    earthshieldTimer.name:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 
     earthshieldTimer.expirationMsgs[1] = "EarthShield"
     earthshieldTimer.earlyExpirationMsgs[1] = "EarthShield"
@@ -185,11 +180,11 @@ end)
 
 local function SetUnit(unit, button)
     button:SetAttribute("*unit1", unit)
-    button.hotkey:SetText(splitString(UnitName(unit)))
+    button.name:SetText(splitString(UnitName(unit)))
     local _, class = UnitClass(unit)
     if class then
         if RAID_CLASS_COLORS[class] then
-            button.hotkey:SetTextColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b)
+            button.name:SetTextColor(RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b)
         end
         button.icon:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
         button.icon:SetTexCoord(unpack(CLASS_ICON_TCOORDS[class]))

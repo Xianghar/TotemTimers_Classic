@@ -26,14 +26,9 @@ local function InitSpiritAlpha()
 
     timer.button.tooltip = SpiritAlphaTooltip:new(timer.button)
 
-    timer.nameframe = CreateFrame("Frame", timer.button)
-    timer.nameframe:SetParent(timer.button)
-    timer.nameframe:SetPoint("TOPLEFT", timer.button)
-    timer.nameframe:SetPoint("BOTTOMRIGHT", timer.button)
-    timer.name = timer.nameframe:CreateFontString("TotemTimers_EarthShieldName")
-    timer.name:SetPoint("TOP", timer.nameframe)
-    timer.name:SetFont(timer.button.hotkey:GetFont())
-    timer.nameframe:SetFrameLevel(10)
+    timer.name = timer.button:CreateFontString()
+    timer.name:SetPoint("TOP", timer.button, 0, 2)
+    timer.name:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 
     timer.button:SetAttribute("unit2", "target")
     timer.button:SetAttribute("unit3", "player")

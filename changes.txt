@@ -1,3 +1,6 @@
+4.0.5
+    - Removed Healing Wave and Chain Heal from Maelstrom procs
+    - Changed font for Earth Shield target name and fixed truncating names in main tank list
 4.0.4
     - Shield tracker prefers displaying Lightning/Water Shield over Earth Shield if both are active
 4.0.3

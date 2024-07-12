@@ -36,6 +36,9 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
                        _G["TT_ActionButton"..TTActionBars.numbars..i.."MiniIcon3"],
                        _G["TT_ActionButton"..TTActionBars.numbars..i.."MiniIcon4"]}
         for i=1,4 do b.MiniIcons[i]:Hide() end
+        b.name = b:CreateFontString()
+        b.name:SetPoint("TOP", b, 0, -2)
+        b.name:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
                        
         b.icons = {b.icon, b.icon2}
         b.cooldown = _G["TT_ActionButton"..TTActionBars.numbars..i.."Cooldown"]

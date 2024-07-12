@@ -422,9 +422,7 @@ TotemTimers.MaelstromSpells = {
     SpellIDs.LightningBolt,
     SpellIDs.ChainLightning,
     SpellIDs.LavaBurst,
-    SpellIDs.HealingWave,
     SpellIDs.LesserHealingWave,
-    SpellIDs.ChainHeal,
 }
 
 TotemTimers.PowerSurgeSpells = {

@@ -754,9 +754,9 @@ SettingsFunctions.ReverseBarBindings = SettingsFunctions.BarBindings
 
     SettingsFunctions.EarthShieldTargetName = function(value, Timers)
         if value then
-            Timers[7].nameframe:Show()
+            Timers[7].name:Show()
         else
-            Timers[7].nameframe:Hide()
+            Timers[7].name:Hide()
         end
     end
 
