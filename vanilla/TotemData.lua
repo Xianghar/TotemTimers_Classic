@@ -74,6 +74,8 @@ TotemTimers.SpellIDs = {
     HealingRain = 415236,
     EarthShockTank = 408681,
     Riptide = 408521,
+    FeralSpirit = 440580,
+
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -414,6 +416,10 @@ TotemTimers.LongCooldownSpells = {
     {
         spell = SpellIDs.NaturesSwiftness,
         buff = SpellIDs.NaturesSwiftness,
+    },
+    {
+        spell = SpellIDs.FeralSpirit,
+        customOnEvent = "FeralSpiritEvent",
     },
 }
 
