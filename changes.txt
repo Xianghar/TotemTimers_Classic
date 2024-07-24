@@ -1,3 +1,5 @@
+4.0.7
+    - Fixed specialization detection for SoD
 4.0.6
     - Added support for Feral Spirit, untested for now
     - Added new weapon enchant ranks for SoD

@@ -248,6 +248,7 @@ end
 local DebugText = ""
 
 function TotemTimers.ResetDebug()
+    DebugText = ""
 end
 
 function TotemTimers.AddDebug(text)

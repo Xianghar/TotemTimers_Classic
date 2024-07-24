@@ -167,7 +167,7 @@ TotemTimers.Specialization = 2
 
 -- get specialization, if no points are spent (e.g. talents reset) do not change specialization
 
-if GetPrimaryTalentTree then
+if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
     function TotemTimers.GetSpecialization()
         local spec = GetPrimaryTalentTree()
         if spec and spec > 0 then
@@ -182,7 +182,7 @@ else
     function TotemTimers.GetSpecialization()
         local pointsSpent = 0
         for i=1,3 do
-            local _,_,points = GetTalentTabInfo(i)
+            local _,_,_,_,points = GetTalentTabInfo(i)
             if points > pointsSpent then
                 pointsSpent = points
                 TotemTimers.Specialization = i
