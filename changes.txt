@@ -1,5 +1,6 @@
-4.0.6 Beta
+4.0.6
     - Added support for Feral Spirit, untested for now
+    - Added new weapon enchant ranks for SoD
 4.0.5
     - Removed Healing Wave and Chain Heal from Maelstrom procs
     - Changed font for Earth Shield target name and fixed truncating names in main tank list
