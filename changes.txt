@@ -1,4 +1,4 @@
-4.0.8 beta
+4.0.8
     - Possible fix for specialization detection in WotLK
 4.0.7
     - Fixed specialization detection for SoD
