@@ -541,14 +541,5 @@ if C_Seasons.GetActiveSeason() == 2 then
 end
 
 local ACD = LibStub("AceConfigDialog-3.0")
-local frame = ACD:AddToBlizOptions("TotemTimers", L["Combat Cooldowns"], "TotemTimers", "enhancecds")
-frame:SetScript("OnEvent", function(self)
-    InterfaceOptionsFrame:Hide()
-end)
-frame:HookScript("OnShow", function(self)
-    if InCombatLockdown() then
-        InterfaceOptionsFrame:Hide()
-    end
-    TotemTimers.LastGUIPanel = self
-end)
-frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+local frame, categoryID = ACD:AddToBlizOptions("TotemTimers", L["Combat Cooldowns"], "TotemTimers", "enhancecds")
+TotemTimers.HookGUIFrame(frame, categoryID)

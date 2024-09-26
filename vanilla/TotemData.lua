@@ -76,6 +76,9 @@ TotemTimers.SpellIDs = {
     Riptide = 408521,
     FeralSpirit = 440580,
 
+    PowerSurgeBuffDps = 415105,
+    PowerSurgeBuffHeal = 468526,
+
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[ WaterShield = 52127,
@@ -435,9 +438,11 @@ TotemTimers.MaelstromSpells = {
     SpellIDs.LesserHealingWave,
 }
 
-TotemTimers.PowerSurgeSpells = {
+
+TotemTimers.PowerSurgeSpellsDps = {
     SpellIDs.LavaBurst,
     SpellIDs.ChainLightning,
+}
+TotemTimers.PowerSurgeSpellsHeal = {
     SpellIDs.ChainHeal,
-    SpellIDs.Riptide,
 }

@@ -206,8 +206,14 @@ function TotemTimers_Slash()
 		return
 	end
 
-    InterfaceAddOnsList_Update()
-    InterfaceOptionsFrame_OpenToCategory(TotemTimers.LastGUIPanel)
+    if Settings then
+        -- wow10
+        Settings.OpenToCategory(TotemTimers.LastGUIPanel)
+    else
+        -- wow classic
+        InterfaceAddOnsList_Update()
+        InterfaceOptionsFrame_OpenToCategory(TotemTimers.LastGUIPanel)
+    end
 end
 
 

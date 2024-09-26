@@ -1,4 +1,4 @@
-## Interface: 11503
+## Interface: 11503, 11504
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@

@@ -3,8 +3,6 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers_GUI", true)
 
 local ACD = LibStub("AceConfigDialog-3.0")
-local frame = ACD:AddToBlizOptions("TotemTimers", L["Profiles"], "TotemTimers", "profiles")
-
 local SelectedProfile = "default"
 local NameInput = ""
 local CopyFrom = "default"
@@ -278,7 +276,6 @@ TotemTimers.options.args.profiles = {
         },
     },
 }
-    
-frame:SetScript("OnEvent", function(self) InterfaceOptionsFrame:Hide() end)
-frame:HookScript("OnShow", function(self) if InCombatLockdown() then InterfaceOptionsFrame:Hide() end TotemTimers.LastGUIPanel = self end)
-frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+
+local frame, categoryID = ACD:AddToBlizOptions("TotemTimers", L["Profiles"], "TotemTimers", "profiles")
+TotemTimers.HookGUIFrame(frame, categoryID)

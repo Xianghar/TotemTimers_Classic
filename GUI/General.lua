@@ -289,9 +289,33 @@ TotemTimers.options = {
 local ACR =	LibStub("AceConfigRegistry-3.0")
 ACR:RegisterOptionsTable("TotemTimers", TotemTimers.options)
 local ACD = LibStub("AceConfigDialog-3.0")
-local frame = ACD:AddToBlizOptions("TotemTimers", "TotemTimers", nil, "general")
-frame:SetScript("OnEvent", function(self) InterfaceOptionsFrame:Hide() end)
-frame:HookScript("OnShow", function(self) if InCombatLockdown() then InterfaceOptionsFrame:Hide() end TotemTimers.LastGUIPanel = self end)
-frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+local frame, categoryID = ACD:AddToBlizOptions("TotemTimers", "TotemTimers", nil, "general")
 
-TotemTimers.LastGUIPanel = frame
+function TotemTimers.HookGUIFrame(frame, categoryID)
+    frame:SetScript("OnEvent", function(self)
+        if Settings then
+            SettingsPanel:Hide()
+        elseif InterfaceOptionsFrame then
+            InterfaceOptionsFrame:Hide()
+        end
+    end)
+
+    frame:HookScript("OnShow", function(self)
+        if InCombatLockdown() then
+            if Settings then
+                SettingsPanel:Hide()
+            elseif InterfaceOptionsFrame then
+                InterfaceOptionsFrame:Hide()
+            end
+        end
+        if WOW_PROJECT_ID ~= WOW_PROJECT_CATACLYSM_CLASSIC then
+            TotemTimers.LastGUIPanel = Settings and categoryID or frame
+        end
+    end)
+
+    frame:RegisterEvent("PLAYER_REGEN_DISABLED")
+end
+
+TotemTimers.HookGUIFrame(frame, categoryID)
+TotemTimers.LastGUIPanel = Settings and "TotemTimers" or frame
+

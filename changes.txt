@@ -1,3 +1,6 @@
+4.0.9
+    - Fix error messages in SOD Phase 5
+    - Show different textures highlight appropiate buttons for Dps Power Surge and Heal Power Surge in SOD Phase 5
 4.0.8
     - Possible fix for specialization detection in WotLK
 4.0.7

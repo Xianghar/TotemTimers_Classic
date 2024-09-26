@@ -15,13 +15,10 @@ local SpellNames = TotemTimers.SpellNames
 local ACD = LibStub("AceConfigDialog-3.0")
 local ACR =	LibStub("AceConfigRegistry-3.0")
 
-local frame = ACD:AddToBlizOptions("TotemTimers", "Sets", "TotemTimers", "sets")
-
-frame:SetScript("OnEvent", function(self) InterfaceOptionsFrame:Hide() end)
+local frame, categoryID = ACD:AddToBlizOptions("TotemTimers", "Sets", "TotemTimers", "sets")
+TotemTimers.HookGUIFrame(frame, categoryID)
 
 frame:HookScript("OnShow", function(self)
-    if InCombatLockdown() then InterfaceOptionsFrame:Hide() end
-    TotemTimers.LastGUIPanel = self
     TotemTimers.options.args.sets.args = {}
 
     local args = TotemTimers.options.args.sets.args
@@ -81,7 +78,6 @@ frame:HookScript("OnShow", function(self)
     ACR:NotifyChange("TotemTimers")
 
 end)
-frame:RegisterEvent("PLAYER_REGEN_DISABLED")
 
 local deleteOnAccept = StaticPopupDialogs["TOTEMTIMERS_DELETESET"].OnAccept
 StaticPopupDialogs["TOTEMTIMERS_DELETESET"].OnAccept = function(self, nr)
