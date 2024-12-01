@@ -1,3 +1,7 @@
+4.0.10
+    - Cata Classic: Removed Tidal Force from long cooldowns
+    - Cata Classic: Added Spirit Link Totem to long cooldowns
+    - ToC-Update for Classic
 4.0.9
     - Fix error messages in SOD Phase 5
     - Show different textures highlight appropiate buttons for Dps Power Surge and Heal Power Surge in SOD Phase 5

@@ -402,10 +402,6 @@ TotemTimers.LongCooldownSpells = {
         spell = SpellIDs.Thunderstorm,
     },
     {
-        spell = SpellIDs.TidalForce,
-        buff = 55166,
-    },
-    {
         spell = SpellIDs.NaturesSwiftness,
         buff = SpellIDs.NaturesSwiftness,
     },
@@ -413,6 +409,12 @@ TotemTimers.LongCooldownSpells = {
         spell = SpellIDs.ManaTide,
         totem = SpellIDs.ManaTide,
         element = WATER_TOTEM_SLOT,
+        customOnEvent = "CDTotemEvent",
+    },
+    {
+        spell = SpellIDs.SpiritLink,
+        totem = SpellIDs.SpiritLink,
+        element = AIR_TOTEM_SLOT,
         customOnEvent = "CDTotemEvent",
     },
     {
