@@ -595,7 +595,7 @@ local function SanitizeTotem(spellID, timer)
     else
         local baseSpellID = TotemTimers.GetBaseSpellID(spellID)
         if not AvailableSpells[baseSpellID] or not TotemData[baseSpellID] then
-            TotemTimers.AddDebug("Replace "..spellID.." - "..baseSpellID .. " - "..timer.actionBar.buttons[1]:GetAttribute("*spell1"))
+            TotemTimers.AddDebug("Replace "..(spellID or "").." - "..(baseSpellID or "") .. " - "..(timer.actionBar.buttons[1]:GetAttribute("*spell1") or ""))
             return timer.actionBar.buttons[1]:GetAttribute("*spell1")
         end
         return TotemTimers.UpdateSpellRank(spellID)

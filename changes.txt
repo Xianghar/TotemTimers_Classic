@@ -1,3 +1,5 @@
+4.0.11
+    - Minor Bugfix for debug output
 4.0.10
     - Cata Classic: Removed Tidal Force from long cooldowns
     - Cata Classic: Added Spirit Link Totem to long cooldowns
