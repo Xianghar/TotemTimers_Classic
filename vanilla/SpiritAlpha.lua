@@ -34,6 +34,9 @@ local function InitSpiritAlpha()
     timer.button:SetAttribute("unit3", "player")
     timer.button:SetAttribute("spell*", SpiritAlphaName)
     timer.button:SetAttribute("type*", "spell")
+
+    timer.button:SetAttribute("type3", "macro")
+    timer.button:SetAttribute("macrotext3", "/cancelaura "..SpiritAlphaName.."\n/cast [@player]"..SpiritAlphaName)
     timer.button:RegisterForClicks("AnyDown")
 end
 
