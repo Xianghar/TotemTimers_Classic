@@ -29,8 +29,9 @@ local function changeOrder(spell, dir, role)
 end
 
 local specializations = {}
+local specInfoFunc = GetTalentTabInfo or C_SpecializationInfo.GetSpecializationInfo
 for i = 1, 3 do
-    local name, name2 = GetTalentTabInfo(i)
+    local name, name2 = specInfoFunc(i)
     if type(name) == "number" then name = name2 end
     specializations[i] = name
 end

@@ -444,32 +444,6 @@ TotemTimers.options.args.timers = {
                 return TotemTimers.ActiveProfile.PartyRangePosition
             end,
         },
-        TwistingTimer = {
-            order = 42,
-            type = "toggle",
-            name = L["Twisting Timer"],
-            desc = string.format(L["Shows twisting timer for %s"], SpellNames[SpellIDs.Windfury]),
-            set = function(info, val)
-                TotemTimers.ActiveProfile.TwistingTimer = val
-                TotemTimers.ProcessSetting("TwistingTimer")
-            end,
-            get = function(info)
-                return TotemTimers.ActiveProfile.TwistingTimer
-            end,
-        },
-        WindfuryDownrank = {
-            order = 43,
-            type = "toggle",
-            name = string.format(L["Downrank %s"], SpellNames[SpellIDs.Windfury]),
-            desc = string.format(L["Always use rank 1 for %s"], SpellNames[SpellIDs.Windfury]),
-            set = function(info, val)
-                TotemTimers.ActiveProfile.WindfuryDownrank = val
-                TotemTimers.UpdateSpellRanks()
-            end,
-            get = function(info)
-                return TotemTimers.ActiveProfile.WindfuryDownrank
-            end,
-        },
         --[[ RaidRange = {
             order = 40,
             type = "toggle",
@@ -554,7 +528,36 @@ for i = 1, 4 do
     }
 end
 
-if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+if LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_WRATH_OF_THE_LICH_KING then
+    TotemTimers.options.args.timers.args.TwistingTimer = {
+        order = 42,
+        type = "toggle",
+        name = L["Twisting Timer"],
+        desc = string.format(L["Shows twisting timer for %s"], SpellNames[SpellIDs.Windfury]),
+        set = function(info, val)
+            TotemTimers.ActiveProfile.TwistingTimer = val
+            TotemTimers.ProcessSetting("TwistingTimer")
+        end,
+        get = function(info)
+            return TotemTimers.ActiveProfile.TwistingTimer
+        end,
+    }
+    TotemTimers.options.args.timers.args.WindfuryDownrank = {
+        order = 43,
+        type = "toggle",
+        name = string.format(L["Downrank %s"], SpellNames[SpellIDs.Windfury]),
+        desc = string.format(L["Always use rank 1 for %s"], SpellNames[SpellIDs.Windfury]),
+        set = function(info, val)
+            TotemTimers.ActiveProfile.WindfuryDownrank = val
+            TotemTimers.UpdateSpellRanks()
+        end,
+        get = function(info)
+            return TotemTimers.ActiveProfile.WindfuryDownrank
+        end,
+    }
+end
+
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE and LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_MISTS_OF_PANDARIA then
     TotemTimers.options.args.timers.args.h0 = {
         order = 5,
         type = "header",

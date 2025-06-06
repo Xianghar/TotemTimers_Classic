@@ -91,6 +91,13 @@ elseif LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CATACLYSM then
         TotemTimers.AvailableTalents.DualWield = TotemTimers.Specialization == 2
         TotemTimers.AvailableTalents.Maelstrom = select(5, GetTalentInfo(2,11)) > 0
     end
+elseif LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_MISTS_OF_PANDARIA then
+    TotemTimers.GetTalents = function()
+        wipe(TotemTimers.AvailableTalents)
+        TotemTimers.AvailableTalents.TotemicMastery = 0
+        TotemTimers.AvailableTalents.DualWield = TotemTimers.Specialization == 2
+        TotemTimers.AvailableTalents.Maelstrom = TotemTimers.Specialization == 2
+    end
 end
 
 function TotemTimers.GetBaseSpellID(spell)
@@ -167,9 +174,10 @@ TotemTimers.Specialization = 2
 
 -- get specialization, if no points are spent (e.g. talents reset) do not change specialization
 
-if WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC then
+if WOW_PROJECT_ID >= WOW_PROJECT_CATACLYSM_CLASSIC then
     function TotemTimers.GetSpecialization()
-        local spec = GetPrimaryTalentTree()
+        local specfunc = GetPrimaryTalentTree or C_SpecializationInfo.GetSpecialization
+        local spec = specfunc()
         if spec and spec > 0 then
             TotemTimers.Specialization = spec
         elseif not TotemTimers.Specialization then

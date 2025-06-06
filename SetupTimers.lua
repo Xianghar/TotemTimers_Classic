@@ -30,7 +30,7 @@ local TotemUpdate
 
 local MultiCastActions = {}
 TotemTimers.MultiCastActions = MultiCastActions
-if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE and LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_MISTS_OF_PANDARIA then
     for i=1,4 do
         local index = SHAMAN_TOTEM_PRIORITIES[i];
         MultiCastActions[index] =
@@ -521,7 +521,7 @@ function TotemTimers.CreateCastButtons()
                                                                             control:CallMethod("ChangeTotemOrder", value, ...)
                                                                             return "clear"
                                                                        end]])
-            if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+            if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE and LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_MISTS_OF_PANDARIA then
                 button:SetAttribute("_childupdate-mspell", [[ self:SetAttribute("*action*", message) ]])
                 button:SetAttribute("_childupdate-mspelldisabled", [[ if message then self:SetAttribute("*type2", nil) else self:SetAttribute("*type2", "multispell") end]])
                 local multispell = TotemTimers.ActiveProfile.LastMultiCastSpell or SpellIDs.CallOfElements

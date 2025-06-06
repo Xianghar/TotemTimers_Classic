@@ -160,7 +160,7 @@ function TotemTimers.CreateEnhanceCDs()
         Maelstrom.timerBars[1].time:Hide()
         Maelstrom.button.icons[1]:SetAllPoints(Maelstrom.button)
 
-        Maelstrom.animation.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon")
+        Maelstrom.animation.icon:SetTexture("Interface/AddOns/TotemTimers/textures/mw5")
         Maelstrom.animation.button:SetSize(72,36)
 
 
@@ -753,13 +753,13 @@ function TotemTimers.MaelstromEvent(self)
             animate = Maelstrom.timerBars[1].time
         else
             MaelstromIcon:Show()
-            MaelstromIcon.icon:SetTexture("Interface/AddOns/TotemTimers/textures/maelstrom_weapon"..(count < 5 and "_"..count or ""))
+            MaelstromIcon.icon:SetTexture("Interface/AddOns/TotemTimers/textures/mw"..count) -- ..(count < 5 and "_"..count or ""))
             animate = MaelstromIcon.icon
             ActionButton_HideOverlayGlow(TotemTimers.MaelstromButton)
         end
 
 
-        if count < 5 then
+        if count ~= 5 and count ~= 10 then
             animate.AnimGroup:Stop()
         else
             animate.AnimGroup:Play()
@@ -767,6 +767,7 @@ function TotemTimers.MaelstromEvent(self)
             if lastMaelstromCount < count then
                 XiTimers.PlayWarning(self, "Maelstrom")
                 if Maelstrom.StopPulseOn5 then
+                    Maelstrom.animation.icon:SetTexture("Interface/AddOns/TotemTimers/textures/mw"..count)
                     Maelstrom.animation:Play()
                 end
                 if TotemTimers.ActiveProfile.OverlayGlow then

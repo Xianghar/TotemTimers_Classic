@@ -49,6 +49,7 @@ function TotemTimers.AnkhEvent(self, event)
             self.timer:Start(1, start + duration - floor(GetTime()), duration)
         end
     else
-        self.count:SetText(GetItemCount(AnkhItem))
+        local countfunc = GetItemCount or C_Item.GetItemCount
+        self.count:SetText(countfunc(AnkhItem))
     end
 end
