@@ -294,10 +294,13 @@ function TotemTimers:TotemEvent(event, arg1, arg2, arg3, ...)
     local settings = TotemTimers.ActiveProfile
     if event == "PLAYER_TOTEM_UPDATE" then
         if self.element == arg1 then
-            local _, totemName, startTime, duration, icon = GetTotemInfo(arg1)
-            local totem = TextureToSpellID[icon]
+            local _, totemName, startTime, duration, icon, _, spellID = GetTotemInfo(arg1)
+            local totem = spellID
             if not totem then
-                totemName = string.gsub(totemName, "[IV]*$", "") -- strip spell rank from name
+                totem = TextureToSpellID[icon]
+            end
+            if not totem then
+                totemName = string.gsub(totemName, "%s?[IV]*$", "") -- strip spell rank from name
                 totem = NameToSpellID[totemName]
             end
             if duration > 0 and totem and TotemData[totem] then
@@ -579,7 +582,7 @@ function TotemTimers.SetCastButtonSpells()
         local timer = XiTimers.timers[i]
         local totems = {}
         for k, v in pairs(Profile.TotemOrder[timer.nr]) do
-            if TotemTimers.AvailableSpells[v] and not Profile.HiddenTotems[v] then
+            if TotemTimers.AvailableSpells[v] and not Profile.HiddenTotems[v] and not TotemData[v].isOverride then
                 table.insert(totems, v)
             end
         end

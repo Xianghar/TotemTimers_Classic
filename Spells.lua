@@ -33,6 +33,7 @@ for _, spellID in pairs(SpellIDs) do
         SpellNames[spellID] = name
         SpellTextures[spellID] = texture
         TextureToSpellID[texture] = spellID
+        -- needed for Season of Discovery
         if (spellID > 400000 or SpellIDsForceNames[spellID]) then
             ForceSpellNames[name] = true
         end
@@ -127,6 +128,13 @@ if LE_EXPANSION_LEVEL_CURRENT < 2 then
         end
         -- ... or spell is a workaround for SOD GetSpellInfo not working immediately on login
         return (useName or ForceSpellNames[name]) and name or (select(7, GetSpellInfo(name)) or spell)
+    end
+end
+
+if LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_MISTS_OF_PANDARIA then
+    UpdateSpellRank = function(spell)
+        local name = GetSpellInfo(spell)
+        return name
     end
 end
 

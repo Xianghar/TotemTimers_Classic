@@ -19,6 +19,9 @@ TotemTimers.LongCooldowns = cds
 local function ConfigureTimer(timer, data)
     timer.spell = data.spell
     timer.buff = data.buff
+    if data.buffAsName then
+        timer.buff = SpellNames[data.buff]
+    end
     timer.totem = data.totem
     timer.element = data.element
     timer.customOnEvent = nil

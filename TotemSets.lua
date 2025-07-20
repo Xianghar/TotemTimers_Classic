@@ -109,7 +109,7 @@ function TotemTimers.SetButton_OnClick(self, button)
             local spell = TotemTimers.UpdateSpellRank(set[XiTimers.timers[i].nr])
             XiTimers.timers[i].button:SetAttribute("*spell1", spell)
 
-            if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
+            if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE and LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_MISTS_OF_PANDARIA then
                 if TotemTimers_MultiSpell.active then
                     local mspell = XiTimers.timers[i].button:GetAttribute("mspell")
                     local disabled = XiTimers.timers[i].button:GetAttribute("mspelldisabled"..mspell)
