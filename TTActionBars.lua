@@ -14,6 +14,7 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
 	local self = {}
 	setmetatable(self, TTActionBars)
 	TTActionBars.numbars = TTActionBars.numbars + 1
+    numbuttons = numbuttons + 1 -- To account for the emptytotem
 	
     self.secondanchor = secondanchor
     self.parent = parent
@@ -239,11 +240,22 @@ function TTActionBars:SetSpell(nr, spell, asname)
     if f then f(button) end
 end
 
-
 function TTActionBars:AddSpell(spell, asname)
     if self.numspells >= self.numbuttons then return end
     self.numspells = self.numspells + 1
     self:SetSpell(self.numspells, spell, asname)
+end
+
+function TTActionBars:AddEmptyTotem()
+    if self.numspells >= self.numbuttons then return end
+    self.numspells = self.numspells + 1
+    local button = self.buttons[self.numspells]
+    local texture = "Interface\\ICONS\\Spell_Totem_WardOfDraining"
+    button:SetAttribute("*spell1", "emptytotem")
+    button:SetAttribute("inactive", false)
+    button.icon:SetTexture(texture)
+    local f = button:GetScript("OnEvent")
+    if f then f(button) end
 end
 
 function TTActionBars:SetSpells(spells, asnames)

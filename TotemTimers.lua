@@ -468,7 +468,7 @@ function TotemTimers.UpdateMacro()
                     spell = spellName
                 end
 
-                if spell then
+                if spell and spell ~= "emptytotem" then
                     sequence = sequence .. spell..", "
                 end
             end
