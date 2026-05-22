@@ -60,9 +60,14 @@ function XiTimersTooltip:SetSpell(spell)
 
     spellID = tonumber(spellID)
     if not spellID then return end]]
-    local spellID = select(7, GetSpellInfo(spell))
+    if spell == "emptytotem" then
+        GameTooltip:SetText("No Totem")
+        GameTooltip:AddLine("When assigned to the timer button, no totem will be cast for this totem type.")
+    else
+        local spellID = select(7, GetSpellInfo(spell))
+        GameTooltip:SetSpellByID(spellID)
+    end
 
-    GameTooltip:SetSpellByID(spellID)
 end
 
 

@@ -65,7 +65,13 @@ end
         tt.button.UpdateMiniIconAndProfile = function(self)
             local spell = self:GetAttribute("*spell1")
             if spell and spell ~= 0 then
-                local _, _, texture = GetSpellInfo(self:GetAttribute("*spell1"))
+                local _, texture
+                if spell == "emptytotem" then
+                    texture = "Interface\\ICONS\\Spell_Totem_WardOfDraining"
+                else
+                    _, _, texture = GetSpellInfo(self:GetAttribute("*spell1"))
+                end
+                
                 local oldTexture = self.miniIcon:GetTexture()
                 self.miniIcon:SetTexture(texture)
                 if (not self.timer.timersRunning[1] and texture ~= oldTexture) then
@@ -590,6 +596,7 @@ function TotemTimers.SetCastButtonSpells()
             end
         end
         TTActionBars.bars[timer.nr]:SetSpells(totems)
+        TTActionBars.bars[timer.nr]:AddEmptyTotem(itemlink)
     end
 end
 
