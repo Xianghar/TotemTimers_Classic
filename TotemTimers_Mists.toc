@@ -1,4 +1,4 @@
-## Interface: 50500, 50501
+## Interface: 50504
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@

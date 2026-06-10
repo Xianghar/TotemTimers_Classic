@@ -102,6 +102,7 @@ function TTActionBars:new(numbuttons, parent, secondanchor, directionanchor, bar
 
         b:SetAttribute("_onhide", [[self:ClearBindings() self:GetParent():SetAttribute("open", false)]])
         b:SetAttribute("_onleave", [[ if not self:GetParent():IsUnderMouse(true) then self:GetParent():ChildUpdate("show", false) end]])
+        b:SetAttribute("_onenter", [[ self:GetParent():ChildUpdate("show", true) ]]) -- bugfix mists 5.5.4
         b.OnShow = function(self) end -- override if button should do additional stuff on show
         
 		b:RegisterForClicks("AnyDown")

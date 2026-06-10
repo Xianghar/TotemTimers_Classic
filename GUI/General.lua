@@ -309,14 +309,12 @@ function TotemTimers.HookGUIFrame(frame, categoryID)
                 InterfaceOptionsFrame:Hide()
             end
         end
-        if WOW_PROJECT_ID ~= WOW_PROJECT_CATACLYSM_CLASSIC then
-            TotemTimers.LastGUIPanel = Settings and categoryID or frame
-        end
+        TotemTimers.LastGUIPanel = Settings and frame.name or frame
     end)
 
     frame:RegisterEvent("PLAYER_REGEN_DISABLED")
 end
 
 TotemTimers.HookGUIFrame(frame, categoryID)
-TotemTimers.LastGUIPanel = Settings and "TotemTimers" or frame
+TotemTimers.LastGUIPanel = Settings and frame.name or frame
 

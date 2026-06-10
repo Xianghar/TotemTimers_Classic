@@ -41,7 +41,9 @@ frame:HookScript("OnShow", function(self)
             local totems = {}
             for element = 1,4 do
                 if set[element] then
-                    totems[element] = TotemTimers.ElementColors[element]:WrapTextInColorCode(SpellNames[set[element]])
+                    if SpellNames[set[element]] and  TotemTimers.ElementColors[element] then
+                        table.insert(totems, TotemTimers.ElementColors[element]:WrapTextInColorCode(SpellNames[set[element]]))
+                    end
                 end
             end
 
@@ -84,6 +86,15 @@ StaticPopupDialogs["TOTEMTIMERS_DELETESET"].OnAccept = function(self, nr)
     deleteOnAccept(self, nr)
     if frame:IsVisible() then
         ACR:NotifyChange("TotemTimers")
-        InterfaceOptionsFrame_OpenToCategory(frame)
+        if Settings then
+            SettingsPanel:Hide()
+        elseif InterfaceOptionsFrame then
+            InterfaceOptionsFrame:Hide()
+        end
+        if Settings and Settings.OpenToCategory then
+            Settings.OpenToCategory(frame.name)
+        elseif InterfaceOptionsFrame_OpenToCategory then
+            InterfaceOptionsFrame_OpenToCategory(frame)
+        end
     end
 end
