@@ -1,3 +1,5 @@
+5.0.8
+    - TOC-Update for TBC
 5.0.7
     - Fix totem menus and totem set options for Mists 5.5.4, thx to Road-block
 5.0.6
