@@ -447,33 +447,58 @@ function TotemTimers.ThrowWarning(wtype, object, icon)
     end
 end
 
+
+
+local ElementNames = {
+    [EARTH_TOTEM_SLOT] = "Earth",
+    [FIRE_TOTEM_SLOT] = "Fire",
+    [WATER_TOTEM_SLOT] = "Water",
+    [AIR_TOTEM_SLOT] = "Air",
+}
+
 function TotemTimers.UpdateMacro()
     --if TotemTimers.Settings.Style == "buff" then return end
     if not InCombatLockdown() then
         macroNeedsUpdate = false
-        local _, free = GetNumMacros()
-        local nr = GetMacroIndexByName("TT Cast")
-        if free==18 and nr==0 then return end
+        local _, used = GetNumMacros()
+        local macroIndex = GetMacroIndexByName("TT Cast")
+        --if used == 18 and macroIndex == 0 then return end
         local sequence = "#showtooltips\n/castsequence reset=combat/"..TotemTimers.ActiveProfile.MacroReset.." ";
         local timers = XiTimers.timers
+
         for i=1,4 do
             local timer = timers[i]
-            if timer.active and TotemTimers.ActiveProfile.IncludeInMacro[timer.nr] then
-                local spell = timer.button:GetAttribute("*spell1")
 
-                if (tonumber(spell)) then
-                    local spellName = GetSpellInfo(spell)
-                    local rank = GetSpellSubtext(spell)
-                    if rank then spellName = spellName .. '('..rank..')' end
-                    spell = spellName
+            local spell = timer.button:GetAttribute("*spell1")
+
+            if (tonumber(spell)) then
+                local spellName = GetSpellInfo(spell)
+                local rank = GetSpellSubtext(spell)
+                if rank then spellName = spellName .. '('..rank..')' end
+                spell = spellName
+            end
+
+            if spell then
+                if timer.active and TotemTimers.ActiveProfile.IncludeInMacro[timer.nr] then
+                    sequence = sequence .. spell..", "
                 end
 
-                if spell then
-                    sequence = sequence .. spell..", "
+                local elementMacro = "/cast "..spell
+                local macroName = "TT "..ElementNames[timer.nr]
+                local index = GetMacroIndexByName(macroName)
+
+                if used < 18 or index ~= 0 then
+                    if index == 0 then
+                        CreateMacro(macroName, "INV_MISC_QUESTIONMARK", elementMacro, true)
+                    else
+                        EditMacro(index, macroName, nil, elementMacro)
+                    end
                 end
             end
         end
+
         sequence = strsub(sequence, 1, strlen(sequence)-2)
+
         local nr = GetMacroIndexByName("TT Cast")
         if nr == 0 then
             CreateMacro("TT Cast", "INV_MISC_QUESTIONMARK", sequence, true)

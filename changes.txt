@@ -1,3 +1,6 @@
+5.0.9
+    - Fix hiding Blizz's totem timers for TBC Anniversary
+    - Add 4 Macros for the currently selected totem, similar to the 1 button macro
 5.0.8
     - TOC-Update for TBC
 5.0.7

@@ -764,7 +764,7 @@ SettingsFunctions.ReverseBarBindings = SettingsFunctions.BarBindings
         TotemTimers.EarthShieldTracker.actionBar:SetDirection(value, TotemTimers.ActiveProfile.TrackerArrange)
     end
 
-if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+if TotemFrame then
     SettingsFunctions.HideBlizzTimers = function(value)
         if value then
             TotemFrame:UnregisterEvent("PLAYER_TOTEM_UPDATE")
