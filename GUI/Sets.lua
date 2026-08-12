@@ -18,6 +18,22 @@ local ACR =	LibStub("AceConfigRegistry-3.0")
 local frame, categoryID = ACD:AddToBlizOptions("TotemTimers", "Sets", "TotemTimers", "sets")
 TotemTimers.HookGUIFrame(frame, categoryID)
 
+
+local function reloadFrame()
+    ACR:NotifyChange("TotemTimers")
+    if Settings then
+        SettingsPanel:Hide()
+    elseif InterfaceOptionsFrame then
+        InterfaceOptionsFrame:Hide()
+    end
+    if Settings and Settings.OpenToCategory then
+        Settings.OpenToCategory(frame.name)
+    elseif InterfaceOptionsFrame_OpenToCategory then
+        InterfaceOptionsFrame_OpenToCategory(frame)
+    end
+end
+
+
 frame:HookScript("OnShow", function(self)
     TotemTimers.options.args.sets.args = {}
 
@@ -59,9 +75,7 @@ frame:HookScript("OnShow", function(self)
                 order = i * 10 + 2,
                 set = function(self, value)
                     set.name = value
-
-                    ACR:NotifyChange("TotemTimers")
-                    InterfaceOptionsFrame_OpenToCategory(frame)
+                    reloadFrame()
                 end,
             })
 
@@ -81,20 +95,9 @@ frame:HookScript("OnShow", function(self)
 
 end)
 
+
 local deleteOnAccept = StaticPopupDialogs["TOTEMTIMERS_DELETESET"].OnAccept
 StaticPopupDialogs["TOTEMTIMERS_DELETESET"].OnAccept = function(self, nr)
     deleteOnAccept(self, nr)
-    if frame:IsVisible() then
-        ACR:NotifyChange("TotemTimers")
-        if Settings then
-            SettingsPanel:Hide()
-        elseif InterfaceOptionsFrame then
-            InterfaceOptionsFrame:Hide()
-        end
-        if Settings and Settings.OpenToCategory then
-            Settings.OpenToCategory(frame.name)
-        elseif InterfaceOptionsFrame_OpenToCategory then
-            InterfaceOptionsFrame_OpenToCategory(frame)
-        end
-    end
+    reloadFrame()
 end
