@@ -66,6 +66,7 @@ TotemTimers.options = {
                     order = 16,
                     type = "toggle",
                     name = L["Hide Blizzard Timers"],
+                    desc = L["If you disable this, you need to /reload the UI"],
                     set = function(info, val)
                         TotemTimers.ActiveProfile.HideBlizzTimers = val
                         TotemTimers.ProcessSetting("HideBlizzTimers")

@@ -10,8 +10,6 @@ local SpellIDs = TotemTimers.SpellIDs
 local SpellNames = TotemTimers.SpellNames
 local AvailableSpells = TotemTimers.AvailableSpells
 
--- local TotemFrameScript = TotemFrame:GetScript("OnShow")
-
 local LSM = LibStub:GetLibrary("LibSharedMedia-3.0", true)
 
 --[[local TotemColors = {
@@ -765,6 +763,9 @@ SettingsFunctions.ReverseBarBindings = SettingsFunctions.BarBindings
     end
 
 if TotemFrame then
+
+    --local TotemFrameScript = TotemFrame:GetScript("OnShow")
+
     SettingsFunctions.HideBlizzTimers = function(value)
         if value then
             TotemFrame:UnregisterEvent("PLAYER_TOTEM_UPDATE")
@@ -773,11 +774,11 @@ if TotemFrame then
                 TotemFrame:Hide()
             end)
             TotemFrame:Hide()
-        else
-            TotemFrame:RegisterEvent("PLAYER_TOTEM_UPDATE")
+        --[[ else
+             TotemFrame:RegisterEvent("PLAYER_TOTEM_UPDATE")
             TotemFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
             TotemFrame:Show()
-            TotemFrame:SetScript("OnShow", TotemFrameScript)
+            TotemFrame:SetScript("OnShow", TotemFrameScript) ]]
         end
     end
 end
