@@ -245,6 +245,8 @@ function XiTimers:new(nroftimers, unclickable)
     self.button.StopMove = XiTimers.StopMoving
 	self.button:RegisterForDrag("LeftButton")
 
+    self.button:SetAttribute("useOnKeyDown", 1)
+
 	XiTimers.HookTooltips(self.button)
     
 	table.insert(Timers, self)
