@@ -165,7 +165,10 @@ end
             local lastTotem = TotemTimers.GetBaseSpellID(activeProfile.LastTotems[self.nr])
 
             if not self.timersRunning[1] then
-                if not lastTotem or not AvailableSpells[lastTotem] then
+                if lastTotem == "emptytotem" then
+                    self.button:SetAttribute("*spell1", lastTotem)
+                    self.button.icon:SetTexture("Interface\\ICONS\\Spell_Totem_WardOfDraining")
+                elseif not lastTotem or not AvailableSpells[lastTotem] then
                     --[[when switching specs this part gets executed several times, once for switching and then for each talent (because of events fired)
                         so totems from talents are sometimes not available at this point.
                         lasttotem is saved and restored if not nil so that talent totems aren't replaced when switching specs ]]
@@ -605,6 +608,8 @@ end
 local function SanitizeTotem(spellID, timer)
     if not spellID then
         return timer.actionBar.buttons[1]:GetAttribute("*spell1")
+    elseif spellID == "emptytotem" then
+        return spellID
     else
         local baseSpellID = TotemTimers.GetBaseSpellID(spellID)
         if not AvailableSpells[baseSpellID] or not TotemData[baseSpellID] then
