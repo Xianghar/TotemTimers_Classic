@@ -318,5 +318,5 @@ function TotemTimers.HookGUIFrame(frame, categoryID)
 end
 
 TotemTimers.HookGUIFrame(frame, categoryID)
-TotemTimers.LastGUIPanel = Settings and "TotemTimers" or frame
+TotemTimers.LastGUIPanel = Settings and categoryID or frame
 

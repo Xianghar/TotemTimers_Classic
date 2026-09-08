@@ -271,9 +271,10 @@ SettingsFunctions = {
         for i = 1, 4 do
             if value and not TotemTimers.ActiveProfile.MenusAlwaysVisible then
                 Timers[i].button:SetAttribute("OpenMenu", "RightButton")
-                Timers[i].button:SetAttribute("*type3", "macro")
-                Timers[i].button:SetAttribute("*macrotext3", "/script XiTimers.timers[" .. i .. "].stopQuiet = true DestroyTotem(" .. Timers[i].nr .. ")")
-                Timers[i].button:SetAttribute("*macrotext2", "")
+                Timers[i].button:SetAttribute("type2", nil)
+                Timers[i].button:SetAttribute("macrotext2", nil)
+                Timers[i].button:SetAttribute("type3", "macro")
+                Timers[i].button:SetAttribute("macrotext3", "/script XiTimers.timers[" .. i .. "].stopQuiet = true DestroyTotem(" .. Timers[i].nr .. ")")
             else
                 Timers[i].button:SetAttribute("OpenMenu", "mouseover")
                 Timers[i].button:SetAttribute("type2", "macro")
