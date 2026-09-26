@@ -12,6 +12,8 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local addon, TotemTimers = ...
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 _G["TotemTimers"] = TotemTimers
 
 TotemTimers.timers = XiTimers
@@ -67,7 +69,7 @@ local function TotemTimers_OnEvent(self, event, ...)
     elseif event == "SPELLS_CHANGED" or event == "CHARACTER_POINTS_CHANGED" or event == "PLAYER_TALENT_UPDATE"
             or event == "LEARNED_SPELL_IN_TAB" or event == "RUNE_UPDATED" then
 
-        if event == "SPELLS_CHANGED" and WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+        if event == "SPELLS_CHANGED" and (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
             local spellsChangedDiff = GetTime() - lastSpellsChanged
             lastSpellsChanged = GetTime()
             if spellsChangedDiff > 0.9 and spellsChangedDiff < 1.1 then
@@ -137,7 +139,7 @@ function TotemTimers.SetupGlobals()
 		-- TotemTimers.CreateLongCooldowns()
         
         TotemTimers.ProcessAllSettings()
-        if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+        if LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CLASSIC and (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
             for slot = 1, 17 do
                 local rune = C_Engraving.GetRuneForEquipmentSlot(slot)
                 if rune then runes[slot] = rune.itemEnchantmentID end

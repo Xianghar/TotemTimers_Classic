@@ -4,6 +4,8 @@ end
 
 local _, TotemTimers = ...
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 local SpellNames = TotemTimers.SpellNames
 local SpellIDs = TotemTimers.SpellIDs
 local SpellTextures = TotemTimers.SpellTextures

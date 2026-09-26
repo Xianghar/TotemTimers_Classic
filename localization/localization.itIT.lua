@@ -1,4 +1,3 @@
-if( GetLocale() == "esMX" ) then
 _G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers" -- Requires localization
 _G["BINDING_NAME_TOTEMTIMERSAIR"] = "Cast active air totem" -- Requires localization
 _G["BINDING_NAME_TOTEMTIMERSAIRMENU"] = "Open air totem menu" -- Requires localization
@@ -14,9 +13,8 @@ _G["BINDING_NAME_TOTEMTIMERSWATERMENU"] = "Open water totem menu" -- Requires lo
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF1"] = "Weapon Buff 1" -- Requires localization
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF2"] = "Weapon Buff 2" -- Requires localization
 
-end
 
-local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "esMX")
+local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "itIT")
 if not L then return end
 
 L["Air Button"] = "Air Button" -- Requires localization

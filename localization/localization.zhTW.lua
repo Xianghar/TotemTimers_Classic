@@ -1,4 +1,3 @@
-if GetLocale() == "zhTW" then
 _G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
 _G["BINDING_NAME_TOTEMTIMERSAIR"] = "施放空之圖騰技能"
 _G["BINDING_NAME_TOTEMTIMERSAIRMENU"] = "開啟空之圖騰選單"
@@ -14,7 +13,6 @@ _G["BINDING_NAME_TOTEMTIMERSWATERMENU"] = "開啟水之圖騰選單"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF1"] = "武器增溢1"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF2"] = "武器增溢2"
 
-end 
 
 local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "zhTW")
 if not L then L = {} end

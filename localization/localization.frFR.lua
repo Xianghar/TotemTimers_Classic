@@ -1,5 +1,4 @@
-﻿if( GetLocale() == "frFR" ) then
-_G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
+﻿_G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
 _G["BINDING_NAME_TOTEMTIMERSAIR"] = "Cast totem de l'air activés"
 _G["BINDING_NAME_TOTEMTIMERSAIRMENU"] = "Ouvrir le menu de totem de l'air"
 _G["BINDING_NAME_TOTEMTIMERSEARTH"] = "lance et active totem de terre"
@@ -14,7 +13,7 @@ _G["BINDING_NAME_TOTEMTIMERSWATERMENU"] = "Ouvrir le menu totem de l'eau"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF1"] = "Arme Buff 1"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF2"] = "Arme Buff 2"
 
-end
+
 
 
 local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "frFR")

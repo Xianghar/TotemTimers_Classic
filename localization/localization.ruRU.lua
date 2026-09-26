@@ -1,5 +1,4 @@
-﻿if(GetLocale() == "ruRU") then
-_G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
+﻿_G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
 _G["BINDING_NAME_TOTEMTIMERSAIR"] = "Создать активный тотем воздуха"
 _G["BINDING_NAME_TOTEMTIMERSAIRMENU"] = "Открыть меню тотемов воздуха"
 _G["BINDING_NAME_TOTEMTIMERSEARTH"] = "Создать активный тотем земли"
@@ -13,8 +12,6 @@ _G["BINDING_NAME_TOTEMTIMERSWATER"] = "Создать активный тоте�
 _G["BINDING_NAME_TOTEMTIMERSWATERMENU"] = "Открыть меню тотемов воды"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF1"] = "Усиление оружия 1"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF2"] = "Усиление оружия 2"
-
-end
 
 
 local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "ruRU")

@@ -1,5 +1,7 @@
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers", true)
 
 local SpellNames = TotemTimers.SpellNames

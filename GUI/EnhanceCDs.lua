@@ -1,7 +1,9 @@
 if select(2, UnitClass("player")) ~= "SHAMAN" then return end
-if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and C_Seasons.GetActiveSeason() ~= 2 then return end
+if LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CLASSIC and (not C_Seasons or C_Seasons.GetActiveSeason() ~= 2) then return end
 
 local _, TotemTimers = ...
+
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
 
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers_GUI", true)
 
@@ -433,7 +435,7 @@ if (TotemTimers.LongCooldownSpells) then
     end
 end
 
-if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE or (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
 
     TotemTimers.options.args.enhancecds.args.options.args.OverlayGlow = {
         order = 9,
@@ -520,7 +522,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSe
     }
 end
 
-if C_Seasons.GetActiveSeason() == 2 then
+if C_Seasons and C_Seasons.GetActiveSeason() == 2 then
     local PowerSurgeName = GetSpellInfo(SpellIDs.PowerSurge)
 
     TotemTimers.options.args.enhancecds.args.options.args.ps = {

@@ -1,9 +1,11 @@
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
-if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC and C_Seasons.GetActiveSeason() ~= 2 then return end
+if LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CLASSIC and (not C_Seasons or C_Seasons.GetActiveSeason() ~= 2) then return end
 
-local isSOD = C_Seasons.GetActiveSeason() == 2
+local isSOD = (C_Seasons and C_Seasons.GetActiveSeason() == 2)
 
 local _, TotemTimers = ...
+
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
 
 local SpellIDs = TotemTimers.SpellIDs
 local SpellTextures = TotemTimers.SpellTextures
@@ -125,7 +127,7 @@ function TotemTimers.CreateEnhanceCDs()
     end
 
 
-    if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+    if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_CLASSIC or (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
         Maelstrom = XiTimers:new(1)
         TotemTimers.Maelstrom = Maelstrom
 
@@ -238,7 +240,7 @@ function TotemTimers.ConfigEnhanceCDs()
 
     if role == 0 or not TotemTimers.ActiveProfile.EnhanceCDs then return end
 
-    if WOW_PROJECT_ID > WOW_PROJECT_WRATH_CLASSIC and role == 2 then
+    if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_WRATH_OF_THE_LICH_KING and role == 2 then
         for id, spell in ipairs(CDSpells[role]) do
             if spell == SpellIDs.StormStrike or spell == SpellIDs.PrimalStrike then
                 if AvailableSpells[SpellIDs.StormStrike] then

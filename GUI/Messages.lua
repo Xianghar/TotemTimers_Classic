@@ -1,5 +1,7 @@
 if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 local sink = LibStub("LibSink-2.0")
 --[[if sink then
     TotemTimers.options.args.messages = sink.GetSinkAce3OptionsDataTable(TotemTimers)
@@ -315,7 +317,7 @@ TotemTimers.options.args.messages = {
     },
 }
 
-if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_CLASSIC or (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
     TotemTimers.options.args.messages.args.Messages.args.EarthShieldMsg = {
         order = 5,
         type = "group",
@@ -365,7 +367,7 @@ end
 
 
 
-if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE or (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
 
     local MaelstromName = GetSpellInfo(SpellIDs.Maelstrom)
 
@@ -417,7 +419,7 @@ if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC or C_Seasons.GetActiveSe
 end
 
 
-if C_Seasons.GetActiveSeason() == 2 then
+if (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
 
     local PowerSurgeName = GetSpellInfo(SpellIDs.PowerSurge)
 

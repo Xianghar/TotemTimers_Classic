@@ -167,7 +167,7 @@ TotemTimers.options = {
                         TotemTimers.ProcessSetting("TimeStyle")
                         -- SetShieldUpdate sets the correct time style for shield button
                         TotemTimers.SetShieldUpdate()
-                        if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC then
+                        if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_CLASSIC then
                             TotemTimers.SetEarthShieldUpdate()
                         end
                     end,

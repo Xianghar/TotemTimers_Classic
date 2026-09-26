@@ -2,6 +2,8 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local addon, TotemTimers = ...
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 _G["TotemTimers"] = TotemTimers
 
 
@@ -24,8 +26,7 @@ TotemTimers.SpellIDs = {
     
     HealingStream = 5394, --
     ManaTide = 16190, --
-    PoisonCleansing = 8166, --
-    DiseaseCleansing = 8170, --
+    Cleansing = 8170, --
     ManaSpring = 5675, --
     FireResistance = 8184, --
     
@@ -33,52 +34,77 @@ TotemTimers.SpellIDs = {
     NatureResistance = 10595, --
     Windfury = 8512, --
     Sentry = 6495, --
-    Windwall = 15107, --
-    GraceOfAir = 8835, --
-    TranquilAir = 25908, --
     WrathOfAir = 3738,
+    TranquilMind = 87718,
+    SpiritLink = 98008,
 	
     
-    Ankh = 20608,
+    Ankh = 20608, --Reincarnation
     TotemicCall = 36936,
     LightningShield = 324,
-    WaterShield = 24398,
+    WaterShield = 52127,
     EarthShield = 974,
 
     RockbiterWeapon = 8017,
     FlametongueWeapon = 8024,
     FrostbrandWeapon = 8033,
     WindfuryWeapon = 8232,
+    EarthlivingWeapon = 51730,
 
     EarthShock = 8042,
     FrostShock = 8056,
     FlameShock = 8050,
     StormStrike = 17364,
 
-    LightningBolt = 403,
-    ChainLightning = 421,
+    CallOfSpirits = 66844,
+    CallOfElements = 66842,
+    CallOfAncestors = 66843,
 
     Bloodlust = 2825,
     ChainLightning = 421,
     ElementalMastery = 16166,
+    FeralSpirit = 51533,
     Heroism = 32182,
+    Hex = 51514,
+    LavaBurst = 51505,
+    LavaLash = 60103,
     LightningBolt = 403,
     NaturesSwiftness = 16188,
+    Riptide = 61295,
     ShamanisticRage = 30823,
+    TidalForce = 55198,
+    Thunderstorm = 51490,
+    WindShear = 57994,
+    Maelstrom = 53817,
+
+    LightningBolt = 403,
+    HealingWave = 331,
+    LesserHealingWave = 8004,
+    ChainHeal = 1064,
+    GreaterHealingWave = 77472,
+
+
+    ClearCasting = 16246,
+
+    Earthquake = 61882,
+    SpiritwalkersGrace = 79206,
+    PrimalStrike = 73899,
+    BindElemental = 76780,
+    GreaterHealingWave = 77472,
+    UnleashElements = 73680,
+    HealingRain = 73920,
+
+
 
     --EnamoredWaterSpirit = 24854 -- Water Totem trinket
     --[[
     PrimalStrike = 73899,
-    LavaLash = 60103,
+
     LightningBolt = 403,
 
     LavaBurst = 51505,
     Maelstrom = 51530,
     WindShear = 57994,
-    ShamanisticRage = 30823,
-    FeralSpirit = 51533,
-    ElementalMastery = 16166,
-    Thunderstorm = 51490,
     HealingRain = 73920,
     Riptide = 61295,
     UnleashElements = 73680,
@@ -151,46 +177,25 @@ TotemData = {
 		element = FIRE_TOTEM_SLOT,
         warningPoint = 5,
 	},
-    [SpellIDs.FireNova] = {
-        element = FIRE_TOTEM_SLOT,
-    },
 	[SpellIDs.Magma] = {
 		element = FIRE_TOTEM_SLOT,
 	},
-    [SpellIDs.FrostResistance] = {
-        element = FIRE_TOTEM_SLOT,
-        buff = 8182,
-    },
     [SpellIDs.Flametongue] = {
         element = FIRE_TOTEM_SLOT,
-        --rangeCheck = 20,
+        buff = 52109,
     },
     [SpellIDs.FireElemental] = {
         element = FIRE_TOTEM_SLOT,
     },
-    [SpellIDs.Wrath] = {
-        element = FIRE_TOTEM_SLOT,
-        buff = 30708,
-    },
     [SpellIDs.HealingStream] = {
 		element = WATER_TOTEM_SLOT,
 		warningPoint = 4,
-        buff = 5672,
+        rangeCheck = 30,
 	},
     [SpellIDs.ManaTide] = {
         element = WATER_TOTEM_SLOT,
         warningPoint = 2,
-        buff = 16191,
-    },
-    [SpellIDs.PoisonCleansing] = {
-        element = WATER_TOTEM_SLOT,
-        flashInterval = 5,
-        rangeCheck = 20,
-    },
-    [SpellIDs.DiseaseCleansing] = {
-        element = WATER_TOTEM_SLOT,
-        flashInterval = 5,
-        rangeCheck = 20,
+        rangeCheck = 30,
     },
     [SpellIDs.ManaSpring] = {
         element = WATER_TOTEM_SLOT,
@@ -207,32 +212,22 @@ TotemData = {
 		--flashInterval = 10,
         buff = 8178,
 	},
-    [SpellIDs.NatureResistance] = {
-        element = AIR_TOTEM_SLOT,
-        buff = 10596,
-    },
     [SpellIDs.Windfury] = {
         element = AIR_TOTEM_SLOT,
+        buff = 8515,
         --rangeCheck = 20,
-    },
-    [SpellIDs.Sentry] = {
-        element = AIR_TOTEM_SLOT,
-    },
-    [SpellIDs.Windwall] = {
-        element = AIR_TOTEM_SLOT,
-        buff = 15108,
-    },
-    [SpellIDs.GraceOfAir] = {
-        element = AIR_TOTEM_SLOT,
-        buff = 8836,
-    },
-    [SpellIDs.TranquilAir] = {
-        element = AIR_TOTEM_SLOT,
-        buff = 25909,
     },
     [SpellIDs.WrathOfAir] = {
         element = AIR_TOTEM_SLOT,
         buff = 2895,
+    },
+    [SpellIDs.TranquilMind] = {
+        element = WATER_TOTEM_SLOT,
+        buff = 87717,
+    },
+    [SpellIDs.SpiritLink] = {
+        element = AIR_TOTEM_SLOT,
+        buff = 98008,
     },
 }
 
@@ -256,7 +251,6 @@ TotemTimers.TotemCooldowns = {
         SpellIDs.ManaTide,
     },
     [FIRE_TOTEM_SLOT] = {
-        SpellIDs.FireNova,
         SpellIDs.FireElemental,
     },
     [AIR_TOTEM_SLOT] = {
@@ -315,6 +309,12 @@ TotemTimers.WeaponEnchants = {
     [543] = SpellIDs.Flametongue,
     [1683] = SpellIDs.Flametongue,
     [2637] = SpellIDs.Flametongue,
+    [3345] = SpellIDs.EarthlivingWeapon,
+    [3346] = SpellIDs.EarthlivingWeapon,
+    [3347] = SpellIDs.EarthlivingWeapon,
+    [3348] = SpellIDs.EarthlivingWeapon,
+    [3349] = SpellIDs.EarthlivingWeapon,
+    [3350] = SpellIDs.EarthlivingWeapon,
 }
 
 for i = 3018, 3044 do TotemTimers.WeaponEnchants[i] = SpellIDs.RockbiterWeapon end
@@ -348,22 +348,40 @@ TotemTimers.ShieldSpells = {
 
 TotemTimers.CombatCooldownSpells = {
     [2] = {
-        [1] = SpellIDs.StormStrike,
-        [2] = SpellIDs.FlameShock,
-        [3] = SpellIDs.EarthShock,
-        [4] = SpellIDs.Searing,
+        SpellIDs.StormStrike,
+        SpellIDs.FlameShock,
+        SpellIDs.EarthShock,
+        SpellIDs.UnleashElements,
+        SpellIDs.FireNova,
+        SpellIDs.LavaLash,
+        SpellIDs.WindShear,
+        SpellIDs.Searing,
+        SpellIDs.Magma,
+        SpellIDs.ChainLightning,
     },
     [1] = {
-        [1] = SpellIDs.ChainLightning,
-        [2] = SpellIDs.LightningBolt,
-        [3] = SpellIDs.FlameShock,
-        [4] = SpellIDs.EarthShock,
+        SpellIDs.FlameShock,
+        SpellIDs.EarthShock,
+        SpellIDs.ChainLightning,
+        SpellIDs.LightningBolt,
+        SpellIDs.LavaBurst,
+        SpellIDs.UnleashElements,
+        SpellIDs.FireNova,
+        SpellIDs.EarthQuake,
+        SpellIDs.WindShear,
+
     },
     [3] = {
-        [1] = SpellIDs.FlameShock,
-        [2] = SpellIDs.EarthShock,
+        SpellIDs.Riptide,
+        SpellIDs.HealingRain,
+        SpellIDs.UnleashElements,
+        SpellIDs.FlameShock,
+        SpellIDs.EarthShock,
+        SpellIDs.WindShear,
+
     },
 }
+
 
 TotemTimers.LongCooldownSpells = {
     {
@@ -383,6 +401,9 @@ TotemTimers.LongCooldownSpells = {
         buff = SpellIDs.ElementalMastery,
     },
     {
+        spell = SpellIDs.Thunderstorm,
+    },
+    {
         spell = SpellIDs.NaturesSwiftness,
         buff = SpellIDs.NaturesSwiftness,
     },
@@ -393,8 +414,18 @@ TotemTimers.LongCooldownSpells = {
         customOnEvent = "CDTotemEvent",
     },
     {
+        spell = SpellIDs.SpiritLink,
+        totem = SpellIDs.SpiritLink,
+        element = AIR_TOTEM_SLOT,
+        customOnEvent = "CDTotemEvent",
+    },
+    {
         spell = SpellIDs.ShamanisticRage,
         buff = SpellIDs.ShamanisticRage,
+    },
+    {
+        spell = SpellIDs.FeralSpirit,
+        customOnEvent = "FeralSpiritEvent",
     },
     {
         spell = SpellIDs.Bloodlust,
@@ -403,5 +434,60 @@ TotemTimers.LongCooldownSpells = {
     {
         spell = SpellIDs.Heroism,
         buff = SpellIDs.Heroism,
+    },
+}
+
+
+TotemTimers.MaelstromSpells = {
+    SpellIDs.LightningBolt,
+    SpellIDs.ChainLightning,
+    SpellIDs.HealingWave,
+    SpellIDs.LesserHealingWave,
+    SpellIDs.ChainHeal,
+    SpellIDs.Hex,
+}
+
+TotemTimers.ProcData = {
+    maelstrom = {
+        buff = SpellIDs.Maelstrom,
+        textures = {
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_1",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_2",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_3",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon_4",
+            "Interface/AddOns/TotemTimers/textures/maelstrom_weapon",
+        },
+        flashSpells = {
+            SpellIDs.LightningBolt,
+            SpellIDs.ChainLightning,
+            SpellIDs.HealingWave,
+            SpellIDs.LesserHealingWave,
+            SpellIDs.GreaterHealingWave,
+            SpellIDs.ChainHeal,
+            SpellIDs.Hex,
+        },
+        isCenter = true,
+        animateOn = 5,
+        glow = 5,
+    },
+    clearcasting = {
+        buff = SpellIDs.ClearCasting,
+        textures = {
+            "Interface/AddOns/TotemTimers/textures/echo_of_the_elements",
+        },
+        --[[flashSpells = {
+            SpellIDs.LightningBolt,
+            SpellIDs.ChainLightning,
+            SpellIDs.EarthShock,
+            SpellIDs.FlameShock,
+            SpellIDs.FrostShock,
+            SpellIDs.LavaBurst,
+            SpellIDs.LesserHealingWave,
+            SpellIDs.HealingWave,
+            SpellIDs.ChainHeal,
+            SpellIDs.FireNova,
+        },]]
+        isCenter = false,
+        animateOn = 2,
     },
 }

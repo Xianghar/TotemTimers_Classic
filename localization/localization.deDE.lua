@@ -1,4 +1,3 @@
-if( GetLocale() == "deDE" ) then
 _G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
 _G["BINDING_NAME_TOTEMTIMERSAIR"] = "Lufttoem stellen"
 _G["BINDING_NAME_TOTEMTIMERSAIRMENU"] = "Öffne Lufttotemmenü"
@@ -13,9 +12,6 @@ _G["BINDING_NAME_TOTEMTIMERSWATER"] = "Wassertotem stellen"
 _G["BINDING_NAME_TOTEMTIMERSWATERMENU"] = "Öffne Wassertotemmenü"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF1"] = "Waffen-Buff 1"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF2"] = "Waffen-Buff 2"
-
-end
-
 
 local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "deDE")
 if not L then return end

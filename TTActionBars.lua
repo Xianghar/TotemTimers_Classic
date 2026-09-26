@@ -2,6 +2,8 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local L = LibStub("AceLocale-3.0"):GetLocale("TotemTimers")
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 TTActionBars = {}
 TTActionBars.bars = {}
 TTActionBars.numbars = 0

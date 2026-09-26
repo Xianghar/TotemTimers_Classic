@@ -1,7 +1,9 @@
 if select(2, UnitClass("player")) ~= "SHAMAN" then return end
-if C_Seasons.GetActiveSeason() ~= 2 then return end
+if not C_Seasons or C_Seasons.GetActiveSeason() ~= 2 then return end
 
 local _, TotemTimers = ...
+
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
 
 local SpellIDs = TotemTimers.SpellIDs
 local AvailableSpells = TotemTimers.AvailableSpells

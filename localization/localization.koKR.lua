@@ -1,4 +1,3 @@
-if (GetLocale() == "koKR") then
 _G["BINDING_HEADER_TOTEMTIMERSHEADER"] = "TotemTimers"
 _G["BINDING_NAME_TOTEMTIMERSAIR"] = "바람의 토템 시전"
 _G["BINDING_NAME_TOTEMTIMERSAIRMENU"] = "바람의 토템 메뉴 열기"
@@ -14,7 +13,6 @@ _G["BINDING_NAME_TOTEMTIMERSWATERMENU"] = "물의 토템 메뉴 열기"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF1"] = "무기 버프 1"
 _G["BINDING_NAME_TOTEMTIMERSWEAPONBUFF2"] = "무기 버프 2"
 
-end
 
 
 local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers", "koKR")

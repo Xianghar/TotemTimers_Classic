@@ -533,7 +533,7 @@ if LE_EXPANSION_LEVEL_CURRENT < LE_EXPANSION_WRATH_OF_THE_LICH_KING then
         order = 42,
         type = "toggle",
         name = L["Twisting Timer"],
-        desc = string.format(L["Shows twisting timer for %s"], SpellNames[SpellIDs.Windfury]),
+        desc = string.format(L["Shows twisting timer for %s"], SpellNames[SpellIDs.Windfury] or ""),
         set = function(info, val)
             TotemTimers.ActiveProfile.TwistingTimer = val
             TotemTimers.ProcessSetting("TwistingTimer")

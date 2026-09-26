@@ -4,6 +4,8 @@ end
 
 local _, TotemTimers = ...
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 local mb  -- abrev for MulticastButton
 
 local SpellNames = TotemTimers.SpellNames

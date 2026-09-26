@@ -1,10 +1,11 @@
-## Interface: 11508, 11509
+## Interface: 16001, 30403, 40402, 50504, 20506, 11509
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@
 ## SavedVariables: TotemTimers_GlobalSettings, TotemTimers_Profiles
 ## OptionalDeps: Masque
 ## LoadManagers: AddonLoader
+## IconTexture: Interface\AddOns\TotemTimers\textures\totemtimers
 ## X-LoadOn-Class: Shaman
 ## X-Curse-Project-ID: 339602
 ## X-WoWI-ID: 25223
@@ -13,16 +14,7 @@
 embeds.xml
 
 localization\localization.lua
-localization\localization.ge.lua
-localization\localization.fr.lua
-localization\localization.es.lua
-localization\localization.ru.lua
-localization\localization.cn.lua
-localization\localization.tw.lua
-localization\localization.ko.lua
-localization\localization.br.lua
-localization\localization.it.lua
-localization\localization.esmx.lua
+localization\localization.[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, koKR, ptBR, ruRU, zhCN, zhTW]
 
 XiTimers.lua
 XiTimers.xml
@@ -30,10 +22,9 @@ XiTimers.xml
 TotemTimers.xml
 TotemTimers.lua
 
-vanilla\TotemData.lua
+[Game]\TotemData.lua
 
 Spells.lua
-
 Animation.lua
 Bindings.lua
 ToolTips.lua
@@ -48,25 +39,17 @@ Ankh.lua
 Shield.lua
 EarthShield.lua
 Weapon.lua
-vanilla\Weapon.lua
 EnhanceCDs.lua
-vanilla\PowerSurge.lua
 LongCooldowns.lua
-vanilla\SpiritAlpha.lua
+
+Vanilla\Weapon.lua [AllowLoadGameType Vanilla]
+Vanilla\PowerSurge.lua [AllowLoadGameType Vanilla]
+Vanilla\SpiritAlpha.lua [AllowLoadGameType Vanilla]
 
 Warnings.lua
 Masque.lua
 GUI\localization.lua
-GUI\localization.ge.lua
-GUI\localization.ru.lua
-GUI\localization.tw.lua
-GUI\localization.cn.lua
-GUI\localization.ko.lua
-GUI\localization.fr.lua
-GUI\localization.es.lua
-GUI\localization.br.lua
-GUI\localization.it.lua
-GUI\localization.esmx.lua
+GUI\localization.[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, koKR, ptBR, ruRU, zhCN, zhTW]
 GUI\General.lua
 GUI\Timers.lua
 GUI\Trackers.lua

@@ -2,6 +2,8 @@ if select(2, UnitClass("player")) ~= "SHAMAN" then
     return
 end
 
+local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+
 local TRACKER_START = 5
 local TRACKER_END = 8
 local Timers = XiTimers.timers
@@ -430,7 +432,7 @@ SettingsFunctions = {
     end,
 
     TwistingTimer = function(value, Timers)
-        if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then return end
+        if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then return end
         for i = 1, 4 do
             if XiTimers.timers[i].nr == AIR_TOTEM_SLOT then
                 XiTimers.timers[i].twisting = value
@@ -783,7 +785,7 @@ if TotemFrame then
     end
 end
 
-if WOW_PROJECT_ID > WOW_PROJECT_CLASSIC or C_Seasons.GetActiveSeason() == 2 then
+if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_CLASSIC or (C_Seasons and C_Seasons.GetActiveSeason() == 2) then
 
     SettingsFunctions.CooldownSpacing = function(value, Timers)
         for _, t in pairs({ TotemTimers.EnhanceCDs, TotemTimers.LongCooldowns }) do

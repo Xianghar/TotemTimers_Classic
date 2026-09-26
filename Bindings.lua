@@ -152,13 +152,13 @@ local TotemTimers_Bindings = {
         SetOverrideBindingClick(TotemTimersFrame, false, key, "XiTimers_Timer1", "Button5")
     end,
 	["TOTEMTIMERSMULTICAST"] = function(key)
-		if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+		if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
 			SetOverrideBindingClick(TotemTimersFrame, false, key, "TotemTimers_MultiSpell")
 			TotemTimers_MultiSpellHotKey:SetText(GetBindingText(key, "KEY_", 1))
 		end
 	end,
 	["TOTEMTIMERSMULTICASTMENU"] = function(key)
-		if WOW_PROJECT_ID > WOW_PROJECT_BURNING_CRUSADE_CLASSIC then
+		if LE_EXPANSION_LEVEL_CURRENT > LE_EXPANSION_BURNING_CRUSADE then
 			SetOverrideBindingClick(TotemTimersFrame, false, key, "TotemTimers_MultiSpell", menubutton)
 		end
 	end,
