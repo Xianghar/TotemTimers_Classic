@@ -345,7 +345,7 @@ local shieldValues = function()
         [SpellIDs.WaterShield] = SpellNames[SpellIDs.WaterShield],
         [SpellIDs.EarthShield] = SpellNames[SpellIDs.EarthShield],
     }
-    if LE_EXPANSION_LEVEL_CURRENT ~= LE_EXPANSION_CLASSIC then
+    if WOW_PROJECT_ID ~= WOW_PROJECT_CLASSIC then
         values[SpellIDs.TotemicCall] = SpellNames[SpellIDs.TotemicCall]
     end
     return values
@@ -515,7 +515,7 @@ end
     TotemTimers.options.args.trackers.args.individual.args.shield.args.EarthShieldOnSelf = {
         order = 5,
         type = "toggle",
-        name = format(L["Show %s on self"], SpellNames[SpellIDs.EarthShield] or ""),
+        name = format(L["Show %s on self"], SpellNames[SpellIDs.EarthShield]),
         width = "full",
         set = function(info, val)
             TotemTimers.ActiveProfile.EarthShieldOnSelf = val

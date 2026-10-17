@@ -4,8 +4,6 @@ end
 
 local _, TotemTimers = ...
 
-local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
-
 TotemTimers.AvailableSpells = {}
 TotemTimers.AvailableTalents = {}
 
@@ -61,7 +59,7 @@ function TotemTimers.GetTalents()
     wipe(TotemTimers.AvailableTalents)
 end
 
-if LE_EXPANSION_LEVEL_CURRENT == LE_EXPANSION_CLASSIC then
+if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
 
     TotemTimers.GetTalents = function()
         wipe(TotemTimers.AvailableTalents)
@@ -184,7 +182,7 @@ TotemTimers.Specialization = 2
 
 -- get specialization, if no points are spent (e.g. talents reset) do not change specialization
 
-if LE_EXPANSION_LEVEL_CURRENT >= LE_EXPANSION_CATACLYSM then
+if WOW_PROJECT_ID >= WOW_PROJECT_CATACLYSM_CLASSIC then
     function TotemTimers.GetSpecialization()
         local specfunc = GetPrimaryTalentTree or C_SpecializationInfo.GetSpecialization
         local spec = specfunc()
