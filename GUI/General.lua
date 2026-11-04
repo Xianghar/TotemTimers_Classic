@@ -22,8 +22,31 @@ TotemTimers.options = {
                     type ="description",
                     name = L["Version"]..": "..tostring(metadatafunc("TotemTimers", "Version"))
                 },
-                info= {
+                h0 = {
                     order = 1,
+                    type = "header",
+                    name = "",
+                },
+                ttforeverdesc = {
+                    type = "description",
+                    name = "If you're looking for TotemTimers for WoW Forever, you can find it here:",
+                    order = 2
+                },
+                ttforeverurl = {
+                    order = 3,
+                    type = "input",
+                    name = 'Copy with Ctrl-A, Ctrl-C',
+                    width = "full",
+                    set = function() end,
+                    get = function() return "https://www.curseforge.com/wow/addons/totemtimers" end
+                },
+                h00 = {
+                    order = 9,
+                    type = "header",
+                    name = "",
+                },
+                info= {
+                    order = 10,
                     type = "description",
                     name = "|c00a6ffffFor more options click the [-] button in the left column.|r",
                     fontSize = "medium",

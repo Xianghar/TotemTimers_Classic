@@ -36,6 +36,7 @@ local runes = {}
 local function TotemTimers_OnEvent(self, event, ...)
     if event == "PLAYER_ENTERING_WORLD" then
         TotemTimersFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+        print("If you're looking for TotemTimers for WoW Forever, you can find it here: https://www.curseforge.com/wow/addons/totemtimers")
         TotemTimers.SetupGlobals()
     elseif event == "PLAYER_REGEN_ENABLED" then
         --TotemTimers_ProcessQueue()
