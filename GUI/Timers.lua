@@ -497,7 +497,7 @@ TotemTimers.options.args.timers = {
             type = "range",
             name = L["Reset"],
             desc = L["Reset /castsequence after x seconds"],
-            min = 10,
+            min = 5,
             max = 60,
             step = 5,
             set = function(info, val)
@@ -506,6 +506,19 @@ TotemTimers.options.args.timers = {
             end,
             get = function(info)
                 return TotemTimers.ActiveProfile.MacroReset
+            end,
+        },
+        macroresetcombat = {
+            order = 66,
+            type = "toggle",
+            name = L["Reset on combat end"],
+            desc = L["Reset on combat end desc"],
+            set = function(info, val)
+                TotemTimers.ActiveProfile.MacroResetCombat = val
+                TotemTimers.UpdateMacro()
+            end,
+            get = function(info)
+                return TotemTimers.ActiveProfile.MacroResetCombat ~= false
             end,
         },
     },

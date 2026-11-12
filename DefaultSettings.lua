@@ -79,6 +79,7 @@ TotemTimers.DefaultProfile = {
         Timer_Clickthrough = false,
         IncludeInMacro = {[1] = true, [2] = true, [3] = true, [4] = true,},
         MacroReset = 15,
+        MacroResetCombat = true,
         TwistingTimer = false,
         MultiCast = true,
         DisabledMultiSpells = {},

@@ -1,6 +1,8 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("TotemTimers_GUI", "enUS", true, true)
 
 L["Air"] = true
+L["Reset on combat end"] = true
+L["Reset on combat end desc"] = "Adds \"combat/\" to the reset of the /castsequence, so the sequence also starts over when you leave combat"
 L["Automatic"] = true
 L["Bottom"] = true
 L["Cast Button 1"] = true
