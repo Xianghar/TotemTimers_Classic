@@ -2,7 +2,7 @@ if select(2,UnitClass("player")) ~= "SHAMAN" then return end
 
 local addon, TotemTimers = ...
 
-local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
+--local GetSpellInfo = (C_Spell and C_Spell.GetSpellInfo) or GetSpellInfo
 
 _G["TotemTimers"] = TotemTimers
 

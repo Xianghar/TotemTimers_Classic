@@ -1,3 +1,5 @@
+5.0.15
+    - Fix totem range check
 5.0.14
     - Added option to remove combat reset from castsequence and changed the lower end of the reset timer to 5 seconds
 5.0.13
