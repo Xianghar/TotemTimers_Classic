@@ -1,3 +1,5 @@
+5.0.16
+    - toc fix
 5.0.15
     - Fix totem range check
 5.0.14

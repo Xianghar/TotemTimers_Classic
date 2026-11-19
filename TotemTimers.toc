@@ -1,4 +1,4 @@
-## Interface: 16001, 30403, 40402, 50504, 20506, 11509
+## Interface: 30403, 40402, 50504, 20506, 11509
 ## Title: TotemTimers
 ## Author:  Xianghar
 ## Version: @project-version@
